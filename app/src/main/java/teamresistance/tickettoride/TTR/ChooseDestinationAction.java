@@ -4,6 +4,8 @@ import teamresistance.tickettoride.Game.GamePlayer;
 import teamresistance.tickettoride.Game.actionMsg.GameAction;
 
 /**
+ *  Chooses the destination and sets as the selected GameAction
+ *
  * @author Nick Scacciotti
  * @author Nick Larson
  * @author Jess Mann

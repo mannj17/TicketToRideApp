@@ -3,7 +3,7 @@ package teamresistance.tickettoride.TTR;
 import java.util.ArrayList;
 
 /**
- *
+ *  Deck is a class that represents any type of deck, and implements methods appropriate to decks
  *
  * @author Nick Scacciotti
  * @author Nick Larson

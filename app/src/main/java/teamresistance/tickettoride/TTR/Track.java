@@ -4,7 +4,7 @@ import android.graphics.Path;
 import android.graphics.Rect;
 
 /**
- *
+ *  Track is a class representing the tracks
  *
  * @author Nick Scacciotti
  * @author Nick Larson

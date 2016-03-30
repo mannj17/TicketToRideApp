@@ -4,7 +4,7 @@ import teamresistance.tickettoride.Game.GamePlayer;
 import teamresistance.tickettoride.Game.actionMsg.GameAction;
 
 /**
- *
+ *  Draws a card from a face down deck
  *
  * @author Nick Scacciotti
  * @author Nick Larson
