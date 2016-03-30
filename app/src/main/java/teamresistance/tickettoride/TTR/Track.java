@@ -4,7 +4,7 @@ import android.graphics.Path;
 import android.graphics.Rect;
 
 /**
- * Class which handles all details of each track set
+ *
  *
  * @author Nick Scacciotti
  * @author Nick Larson
@@ -132,5 +132,49 @@ public class Track {
      */
     public void setCovered(Boolean val){
         covered = val;
+    }
+
+    public void setTrainTrackNum(int trainTrackNum) {
+        this.trainTrackNum = trainTrackNum;
+    }
+
+    public String getTrackColor() {
+        return trackColor;
+    }
+
+    public void setTrackColor(String trackColor) {
+        this.trackColor = trackColor;
+    }
+
+    public Rect getTouchArea() {
+        return touchArea;
+    }
+
+    public void setTouchArea(Rect touchArea) {
+        this.touchArea = touchArea;
+    }
+
+    public String getStartCity() {
+        return startCity;
+    }
+
+    public void setStartCity(String startCity) {
+        this.startCity = startCity;
+    }
+
+    public String getEndCity() {
+        return endCity;
+    }
+
+    public void setEndCity(String endCity) {
+        this.endCity = endCity;
+    }
+
+    public boolean isSelectHighlight() {
+        return selectHighlight;
+    }
+
+    public void setSelectHighlight(boolean selectHighlight) {
+        this.selectHighlight = selectHighlight;
     }
 }
