@@ -1,7 +1,7 @@
 package teamresistance.tickettoride.TTR;
 
 /**
- *
+ * A class meant to be inherited from by the other cards
  *
  * @author Nick Scacciotti
  * @author Nick Larson
