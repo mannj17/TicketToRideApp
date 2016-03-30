@@ -43,38 +43,74 @@ public class Deck {
         highlight = orig.getHighlight();
     }
 
+    /**
+     *
+     */
     public final void firstDeck() {
         return;
     }
 
+    /**
+     * Shuffles the deck
+     */
     public void shuffle() {
         return;
     }
 
+    /**
+     * Moves the top cards from one Deck to another
+     * @param targetDeck
+     * @param sourceDeck
+     */
     public void moveTopCardTo(Deck targetDeck, Deck sourceDeck) {
         return;
     }
 
+    /**
+     * Moves all cards from one Deck to another
+     * @param targetDeck
+     * @param sourceDeck
+     */
     public void moveAllCardsTo(Deck targetDeck, Deck sourceDeck) {
         return;
     }
 
+    /**
+     * Adds a card
+     * @param c-new card
+     */
     public void add(Card c) {
         cards.add(c);
     }
 
+    /**
+     * Returns the size of cards ArrayList
+     * @return
+     */
     public int size() {
          return cards.size();
     }
 
+    /**
+     * Removes top card
+     * @return
+     */
     public Card removeTopCard() {
         return null;
     }
 
+    /**
+     * Shows top card of a deck
+     * @return
+     */
     public Card peekAtTopCard() {
         return cards.get(0);
     }
 
+    /**
+     * Returns cards ArrayList
+     * @return
+     */
     public ArrayList<Card> getCards() {
         return cards;
     }
