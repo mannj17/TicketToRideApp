@@ -27,6 +27,13 @@ public class DestinationCards extends Card{
             "Pittsburgh", "Winnipeg", "Little Rock", "Boston", "Vancouver",
             "San Francisco"};
 
+    /**
+     * Constructor for Destination Cards
+     *
+     * @param dest1 an index to the first city
+     * @param dest2 an index to the second city
+     * @param point the value received for completing the track
+     */
     public DestinationCards(int dest1, int dest2, int point){
         if(dest1 > destNames.length-1){
             city1 = "";
