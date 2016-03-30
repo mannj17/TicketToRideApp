@@ -1,7 +1,7 @@
 package teamresistance.tickettoride.TTR;
 
 /**
- *  DestCards is a class representing destination cards and extends Card class
+ *  DestinationCards is a class representing destination cards and extends Card class
  *
  * @author Nick Scacciotti
  * @author Nick Larson
@@ -9,7 +9,7 @@ package teamresistance.tickettoride.TTR;
  * @author Parker Schibel
  * @version March 2016
  */
-public class DestCards extends Card{
+public class DestinationCards extends Card{
     //instance variables for beginning and end destinations, score, and if highlighted/claimed
     /** The first city listed on a destination card */
     private String city1;
@@ -27,7 +27,7 @@ public class DestCards extends Card{
             "Pittsburgh", "Winnipeg", "Little Rock", "Boston", "Vancouver",
             "San Francisco"};
 
-    public DestCards(int dest1, int dest2, int point){
+    public DestinationCards(int dest1, int dest2, int point){
         if(dest1 > destNames.length-1){
             city1 = "";
         }

@@ -12,11 +12,11 @@ import teamresistance.tickettoride.Game.actionMsg.GameAction;
  * @author Parker Schibel
  * @version March 2016
  */
-public class DrawDestCardAction extends GameAction{
+public class DrawDestinationCardAction extends GameAction{
     /*
      * Initializing a new action to change the mode
      */
-    public DrawDestCardAction(GamePlayer player) {
+    public DrawDestinationCardAction(GamePlayer player) {
         super(player);
     }
 }
