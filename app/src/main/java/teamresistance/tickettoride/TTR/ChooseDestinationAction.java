@@ -4,7 +4,7 @@ import teamresistance.tickettoride.Game.GamePlayer;
 import teamresistance.tickettoride.Game.actionMsg.GameAction;
 
 /**
- *  Chooses the destination and sets as the selected GameAction
+ * When selecting new destination cards, this action chooses which of the three to take
  *
  * @author Nick Scacciotti
  * @author Nick Larson
