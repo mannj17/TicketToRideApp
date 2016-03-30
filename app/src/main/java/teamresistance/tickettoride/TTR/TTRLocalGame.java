@@ -1,10 +1,12 @@
 package teamresistance.tickettoride.TTR;
 
 import teamresistance.tickettoride.Game.GamePlayer;
+import teamresistance.tickettoride.Game.LocalGame;
 import teamresistance.tickettoride.Game.actionMsg.GameAction;
 
 /**
- *
+ * Controls the game, allowing actions to be performed by
+ * the player with the matching ID
  *
  * @author Nick Scacciotti
  * @author Nick Larson
@@ -12,80 +14,77 @@ import teamresistance.tickettoride.Game.actionMsg.GameAction;
  * @author Parker Schibel
  * @version March 2016
  */
-class TTRLocalGame {
-
-
-    /*
-     * the current game state of the game
-     */
-
+public class TTRLocalGame extends LocalGame {
+    //instance variables for the TTRLocalGame
     private TTRGameState mainState;
-
-    /*
-     * Says if the game is down to the last turn for each player
-     */
-
     private boolean noMoreTrains;
-
-    /*
-     * Once one of the conditions has been met for a game over, this int keeps track of how many more players need to make their final turn
-     */
-
     private int turnsLeft;
+    private int topScorePlayer = 0;
 
-    /*
-     * Holds the current highest score in the case that the game is over and the winner needs to be found.
+    /**
+     * TTRLocalGame constructor
      */
+    public TTRLocalGame(){
+        noMoreTrains = false;
+        mainState = new TTRGameState();
+        turnsLeft = mainState.getNumPlayers();
+    }
 
-    private int scorePlayer;
-
-
-    /*
-     * Sends the state of the game to a player
-     * @p
+    /**
+     * Sends updated game state
+     * @param p - receiving player
      */
-
+    @Override
     protected void sendUpdatedStateTo(GamePlayer p) {
-    
+        TTRGameState copy = new TTRGameState(mainState);
+        p.sendInfo(copy);
     }
 
-
-    /*
-     * Says if the player can move
-     * @playerIdx
+    /**
+     * Returns if the player can make a move
+     * @param playerIdx
+     * 		the player's player-number (ID)
+     * @return
      */
-
+    @Override
     protected boolean canMove(int playerIdx) {
-     return false;
+        return playerIdx == mainState.getPlayerID();
     }
 
-
-    /*
-     * Checks if the game is over and if it is, returns the result
+    /**
+     * Returns the end game status
+     * @return
      */
-
-    protected final String checkIfGameOver() {
-     return null;
+    @Override
+    protected String checkIfGameOver() {
+        for(int i = 0; i < mainState.getTrainTokens().length; i++){
+            if(mainState.getTrainTokens()[i] <=2){
+                noMoreTrains = true;
+            }
+        }
+        if(noMoreTrains){
+            turnsLeft--;
+        }
+        if(turnsLeft == 0){
+            for(int j = 0; j < mainState.getScores().length; j++){
+                if(mainState.getScores()[j] > mainState.getScores()[topScorePlayer]){
+                    topScorePlayer = j;
+                }
+            }
+            return ("Player Wins");
+        }
+        return null;
     }
 
-
-    /*
-     * Takes a GameAction and makes changes to the GameState depending on what action it is
-     * @action
+    /**
+     * Returns if the player made a move
+     * @param action
+     * 			The move that the player has sent to the game
+     * @return
      */
-
+    @Override
     protected boolean makeMove(GameAction action) {
-     return false;
+
+        return false;
     }
-
-
-    /*
-     * Sets up the local game
-     */
-
-    public TTRLocalGame() {
-    
-    }
-
-
 }
