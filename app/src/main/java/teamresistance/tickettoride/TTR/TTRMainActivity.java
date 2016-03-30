@@ -5,7 +5,7 @@ import android.os.Bundle;
 import teamresistance.tickettoride.R;
 
 /**
- *
+ *  TTRMainActivity sets the Main Activity of the game
  *
  * @author Nick Scacciotti
  * @author Nick Larson
