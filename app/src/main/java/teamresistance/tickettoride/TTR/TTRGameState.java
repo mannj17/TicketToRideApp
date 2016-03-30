@@ -3,7 +3,7 @@ package teamresistance.tickettoride.TTR;
 import teamresistance.tickettoride.TTR.Track;
 
 /**
- *
+ *  TTRGameState creates the GameState
  *
  * @author Nick Scacciotti
  * @author Nick Larson

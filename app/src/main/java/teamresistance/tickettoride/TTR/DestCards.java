@@ -1,7 +1,7 @@
 package teamresistance.tickettoride.TTR;
 
 /**
- *
+ *  DestCards is a class representing destination cards and extends Card class
  *
  * @author Nick Scacciotti
  * @author Nick Larson

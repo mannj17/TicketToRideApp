@@ -6,7 +6,7 @@ import teamresistance.tickettoride.Game.GameMainActivity;
 import teamresistance.tickettoride.Game.infoMsg.GameInfo;
 
 /**
- *
+ *  TTRHumanPlayer implements the human player
  *
  * @author Nick Scacciotti
  * @author Nick Larson

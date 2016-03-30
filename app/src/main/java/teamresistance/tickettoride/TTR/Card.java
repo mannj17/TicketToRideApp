@@ -1,7 +1,7 @@
 package teamresistance.tickettoride.TTR;
 
 /**
- *
+ *  Card class represents any type of card
  *
  * @author Nick Scacciotti
  * @author Nick Larson

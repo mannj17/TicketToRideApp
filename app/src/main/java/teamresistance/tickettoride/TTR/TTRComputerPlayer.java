@@ -3,7 +3,7 @@ package teamresistance.tickettoride.TTR;
 import teamresistance.tickettoride.Game.infoMsg.GameInfo;
 
 /**
- *
+ *  TTRComputerPlayer implements and AI player
  *
  * @author Nick Scacciotti
  * @author Nick Larson
