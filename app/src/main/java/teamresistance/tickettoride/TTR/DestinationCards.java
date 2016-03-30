@@ -27,6 +27,14 @@ public class DestinationCards extends Card{
             "Pittsburgh", "Winnipeg", "Little Rock", "Boston", "Vancouver",
             "San Francisco"};
 
+    //The first locations labeled on the destination cards based on the destNames array
+    private int[] cities1 = {1, 3, 5, 7, 9, 11, 13, 14, 16, 14, 18, 7, 13, 20, 22, 24,
+            1, 27, 27, 29, 30, 9, 16, 12, 31, 22, 30, 12, 12, 18};
+
+    //The second locations labeled on the destination cards based on the destNames array
+    private int[] cities2 = {2, 4, 6, 8, 10, 12, 4, 15, 6, 17, 12, 19, 2, 21, 23, 25,
+            26, 28, 4, 21, 19, 23, 8, 7, 6, 15, 16, 21, 25, 5};
+
     /**
      * Constructor for Destination Cards
      *

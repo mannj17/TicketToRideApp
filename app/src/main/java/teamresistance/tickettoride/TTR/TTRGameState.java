@@ -69,12 +69,62 @@ public class TTRGameState extends GameState {
     private int trackSpot = -1;
     private Boolean isLastRound = false;
     private Boolean isGameOver = false;
-
+    Track[] testTracks;
     /*
      * Initializes a new GameState
      */
     public TTRGameState() {
-    
+        /** initialize train deck */
+        for (int i = 0; i < 9; i++){
+            if(i == 8){ // "Yellow", "Blue", "Orange", "White", "Pink", "Black", "Red", "Green",
+                for(int j = 0; j < 14; j++){
+                    faceDownTrainCards.add(new TrainCards(i));
+                }
+            }
+            else { //"Rainbow"
+                for (int k = 0; k < 12; k++){
+                    faceDownTrainCards.add(new TrainCards(i));
+                }
+            }
+        }
+        //place five train cards 'face up;
+        for(int i = 0; i < 5; i++){
+            faceDownTrainCards.moveTopCardTo(faceUpTrainCards, faceDownTrainCards);
+        }
+
+        /** initialize destination deck */
+        //needs to be corrected later
+        for(int i = 0; i < 30; i++){
+            destinationCards.add(new DestinationCards(i, i, i));
+        }
+
+        /** intialize player array values*/
+        for(int i =0; i < numPlayers; i++){
+            trainTokens[i] = 45;
+            scores[i] = 0;
+            playerTrainDecks[i] = new Deck("Player " + i + " Train Card Deck");
+            playerDestinationDecks[i] = new Deck("Player " + i + " Destination Card Deck");
+        }
+        trainDiscard = new Deck("Train Card Discard");
+        destinationDiscard = new Deck("Destination Card Discard");
+        destinationCardsDrawn = new Deck("Destination Cards Drawn");
+
+        //Booleans set to defaults
+        isSelectDestinationCards = false;
+        trackModeSelected = false;
+        cardModeSelected = false;
+        destinationCardsSelected = false;
+        trainCardsSelected = false;
+
+        testTracks = new Track[8];
+        testTracks[0] = new Track(2, "Blue", "PittsBurgh", "Boston");
+        testTracks[1] = new Track(2, "Yellow", "PittsBurgh", "Boston");
+        testTracks[2] = new Track(2, "Orange", "PittsBurgh", "Boston");
+        testTracks[3] = new Track(2, "Black", "PittsBurgh", "Boston");
+        testTracks[4] = new Track(2, "White", "PittsBurgh", "Boston");
+        testTracks[5] = new Track(2, "Pink", "PittsBurgh", "Boston");
+        testTracks[6] = new Track(2, "Red", "PittsBurgh", "Boston");
+        testTracks[7] = new Track(2, "Green", "PittsBurgh", "Boston");
     }
 
     /*
@@ -82,6 +132,8 @@ public class TTRGameState extends GameState {
      * @original
      */
     public TTRGameState(TTRGameState original) {
+
+
     
     }
 

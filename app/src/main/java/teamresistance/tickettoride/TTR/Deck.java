@@ -43,6 +43,14 @@ public class Deck {
         highlight = orig.getHighlight();
     }
 
+    /**
+     * Creates empty deck
+     */
+    public Deck(String deckName) {
+        deckName = deckName;
+        highlight = false;
+    }
+
     public final void firstDeck() {
         return;
     }
