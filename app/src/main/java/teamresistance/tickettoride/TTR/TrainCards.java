@@ -9,7 +9,7 @@ package teamresistance.tickettoride.TTR;
  * @author Parker Schibel
  * @version March 2016
  */
-public class TrainCards {
+public class TrainCards extends Card{
     //String of names of the different train card colors
     private final String[] trainCarNames = {"Yellow", "Blue", "Orange", "White",
             "Pink", "Black", "Red", "Green",
@@ -17,7 +17,6 @@ public class TrainCards {
 
     //instance variables for what color type and if highlighted
     private String type;
-    private boolean highlight;
 
     /**
      * Constructor for TrainCards class
@@ -27,6 +26,7 @@ public class TrainCards {
      */
     public TrainCards(int typeNum){
         type = trainCarNames[typeNum];
+        setHighlight(false);
     }
 
     /**
@@ -37,25 +37,6 @@ public class TrainCards {
      */
     public String toString(){
         return this.type;
-    }
-
-    /**
-     * Sets the highlight variable to the new variable
-     *
-     * @param highlighted- new boolean value for if highlighted or not
-     */
-    public void setHighlight(boolean highlighted){
-        this.highlight = highlighted;
-    }
-
-    /**
-     * Tells whether the Destination ticket is highlighted or not
-     *
-     * @return
-     *      Returns true or false
-     */
-    public boolean getHighlight(){
-        return highlight;
     }
 
     /**

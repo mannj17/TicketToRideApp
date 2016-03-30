@@ -1,8 +1,7 @@
 package teamresistance.tickettoride.TTR;
 
-
 /**
- *  DestCards is a class of a type of card that extends Card
+ *
  *
  * @author Nick Scacciotti
  * @author Nick Larson
@@ -11,7 +10,7 @@ package teamresistance.tickettoride.TTR;
  * @version March 2016
  */
 public class DestCards extends Card{
-
+    //instance variables for beginning and end destinations, score, and if highlighted/claimed
     /** The first city listed on a destination card */
     private String city1;
     /** The second city listed on a destination card */
@@ -19,34 +18,45 @@ public class DestCards extends Card{
     /** The number of points that can be gained from completing the card */
     private int score;
 
+    //String array containing city names
+    private final String[] destNames = {"Denver", "El Paso", "Kansas City",
+            "Houston", "New York", "Atlanta", "Chicago", "New Orleans", "Calgary",
+            "Salt Lake City", "Helena", "Los Angeles", "Duluth", "Sault Ste Marie",
+            "Nashville", "Montreal", "Oklahoma City", "Seattle", "Santa Fe",
+            "Toronto", "Miami", "Portland", "Phoenix", "Dallas", "New York City",
+            "Pittsburgh", "Winnipeg", "Little Rock", "Boston", "Vancouver",
+            "San Francisco"};
 
-    public DestCards(String dest1, String dest2, int point) {
-        city1 = dest1;
-        city2 = dest2;
+    public DestCards(int dest1, int dest2, int point){
+        if(dest1 > destNames.length-1){
+            city1 = "";
+        }
+        else if (dest2 > destNames.length-1){
+            city2 = "";
+        } else {
+            city1 = destNames[dest1];
+            city2 = destNames[dest2];
+        }
         score = point;
+        setHighlight(false);
     }
 
-    public String getCity1() {
-        return city1;
+    /**
+     * Sets the score of the ticket to a new value
+     *
+     * @param newScore- the new destination tickets score value
+     */
+    public void setScore(int newScore){
+        this.score = newScore;
     }
 
-    public void setCity1(String city1) {
-        this.city1 = city1;
-    }
-
-    public String getCity2() {
-        return city2;
-    }
-
-    public void setCity2(String city2) {
-        this.city2 = city2;
-    }
-
-    public int getScore() {
+    /**
+     * Tells the destination ticket's score
+     *
+     * @return
+     *      returns the score
+     */
+    public int getScore(){
         return score;
-    }
-
-    public void setScore(int score) {
-        this.score = score;
     }
 }
