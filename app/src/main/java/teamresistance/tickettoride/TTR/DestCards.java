@@ -1,7 +1,8 @@
 package teamresistance.tickettoride.TTR;
 
+
 /**
- *
+ *  DestCards is a class of a type of card that extends Card
  *
  * @author Nick Scacciotti
  * @author Nick Larson
@@ -9,7 +10,7 @@ package teamresistance.tickettoride.TTR;
  * @author Parker Schibel
  * @version March 2016
  */
-public class DestCards {
+public class DestCards extends Card{
 
     /** The first city listed on a destination card */
     private String city1;
