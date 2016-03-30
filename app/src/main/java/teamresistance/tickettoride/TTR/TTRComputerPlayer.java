@@ -14,10 +14,9 @@ import teamresistance.tickettoride.Game.infoMsg.GameInfo;
 public class TTRComputerPlayer {
     /*
      * Sets up the ComputerPlayer and its difficulty
-     * @name
-     * @difficulty
+     * @name set by the human player at start
+     * @difficulty used to set how hard the AI will be
      */
-
     public TTRComputerPlayer(String name, boolean difficulty) {
 
     }
