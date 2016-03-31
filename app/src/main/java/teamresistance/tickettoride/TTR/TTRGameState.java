@@ -13,16 +13,17 @@ import teamresistance.tickettoride.TTR.Track;
  * @version March 2016
  */
 public class TTRGameState extends GameState {
+    int MAX_NUM_PLAYERS = 4;
     //The first locations labeled on the destination cards
-    private int[] destinationCities1 = {1, 3, 5, 7, 9, 11, 13, 14, 16, 14, 18, 7, 13, 20, 22, 24,
+    private int[] destinationCities1 = {1, 3, 4, 7, 9, 11, 13, 14, 16, 14, 18, 7, 13, 20, 22, 24,
             1, 27, 27, 29, 30, 9, 16, 12, 31, 22, 30, 12, 12, 18};
 
     //The second locations labeled on the destination cards
-    private int[] destinationCities2 = {2, 4, 6, 8, 10, 12, 4, 15, 6, 17, 12, 19, 2, 21, 23, 25,
-            26, 28, 4, 21, 19, 23, 8, 7, 6, 15, 16, 21, 25, 5};
+    private int[] destinationCities2 = {2, 4, 6, 8, 10, 12, 4, 14, 6, 17, 12, 19, 2, 21, 23, 24,
+            26, 28, 4, 21, 19, 23, 8, 7, 6, 14, 16, 21, 24, 4};
 
     //The score values for each of the destination cards
-    private int[] destinationValues = {4, 5, 6, 7, 7, 8, 8, 8, 9, 9, 9, 9, 10, 10, 11, 11, 11, 11,
+    private int[] destinationValues = {4, 4, 6, 7, 7, 8, 8, 8, 9, 9, 9, 9, 10, 10, 11, 11, 11, 11,
             12, 12, 13, 13, 13, 16, 17, 17, 20, 20, 21, 22};
 
     /** the face down deck */
@@ -63,17 +64,17 @@ public class TTRGameState extends GameState {
 
     //PARALLEL ARRAYS//
     /** All the tracks in the game */
-    private Track[] tracks = new Track[5];
+    private Track[] tracks = new Track[MAX_NUM_PLAYERS];
     /** Number of trainTokens per player */
-    private int[] trainTokens = new int[5];
+    private int[] trainTokens = new int[MAX_NUM_PLAYERS];
     /** The current score of each player */
-    private int[] scores = new int[5];
+    private int[] scores = new int[MAX_NUM_PLAYERS];
     /** The names of each player */
-    private String[] names = new String[5];
+    private String[] names = new String[MAX_NUM_PLAYERS];
     /** All of the hands of each player */
-    private Deck[] playerTrainDecks = new Deck[5];
+    private Deck[] playerTrainDecks = new Deck[MAX_NUM_PLAYERS];
     /** All of the hands of each player */
-    private Deck[] playerDestinationDecks = new Deck[5];
+    private Deck[] playerDestinationDecks = new Deck[MAX_NUM_PLAYERS];
 
 
     /*
@@ -97,7 +98,7 @@ public class TTRGameState extends GameState {
 
         faceUpTrainCards = new Deck("Face up Cards");
         //place five train cards 'face up'
-        for(int i = 0; i < 5; i++){
+        for(int i = 0; i < MAX_NUM_PLAYERS; i++){
             faceDownTrainCards.moveTopCardTo(faceUpTrainCards, faceDownTrainCards);
         }
 
@@ -109,7 +110,7 @@ public class TTRGameState extends GameState {
         }
 
         /** intialize array values to max possible size */
-        for(int i = 0; i < 5; i++){
+        for(int i = 0; i < MAX_NUM_PLAYERS; i++){
             trainTokens[i] = 45;
             scores[i] = 0;
             names[i] = "";
@@ -133,7 +134,7 @@ public class TTRGameState extends GameState {
         testTracks[2] = new Track(2, "Orange", "PittsBurgh", "Boston");
         testTracks[3] = new Track(2, "Black", "PittsBurgh", "Boston");
         testTracks[4] = new Track(2, "White", "PittsBurgh", "Boston");
-        testTracks[5] = new Track(2, "Pink", "PittsBurgh", "Boston");
+        testTracks[MAX_NUM_PLAYERS] = new Track(2, "Pink", "PittsBurgh", "Boston");
         testTracks[6] = new Track(2, "Red", "PittsBurgh", "Boston");
         testTracks[7] = new Track(2, "Green", "PittsBurgh", "Boston");
     }
@@ -216,8 +217,8 @@ public class TTRGameState extends GameState {
     }
 
     public void setNames(String[] names) {
-        String[] temp = new String[5];
-        for(int i = 0; i < 5; i ++){
+        String[] temp = new String[MAX_NUM_PLAYERS];
+        for(int i = 0; i < MAX_NUM_PLAYERS; i ++){
             temp[i] = names[i];
         }
         this.names = temp;
