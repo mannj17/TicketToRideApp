@@ -37,10 +37,6 @@ public class TTRGameState extends GameState {
     private Deck destinationDiscard;
     /** The pool of destination cards for when a player is selecting new destination cards*/
     private Deck destinationCardsDrawn;
-    /** All of the hands of each player */
-    private Deck[] playerTrainDecks;
-    /** All of the hands of each player */
-    private Deck[] playerDestinationDecks;
     /** Which player's turn it is */
     private int playerID;
     /** The number of players playing the game */
@@ -59,19 +55,27 @@ public class TTRGameState extends GameState {
     private Boolean isSelectDestinationCards;
     /** If the down deck was clicked on and no face up card was selected, this boolean will say to just pull two cards from the down deck */
     private Boolean onlyDownDeck;
-    /** All the tracks in the game */
-    private Track[] tracks;
-    /** Number of trainTokens per player */
-    private int[] trainTokens;
-    /** The current score of each player */
-    private int[] scores;
-    /** The names of each player */
-    private String[] names;
     /** The selected track on screen. Set to -1 if no track is selected. */
     private int trackSpot = -1;
     private Boolean isLastRound = false;
     private Boolean isGameOver = false;
     Track[] testTracks;
+
+    //PARALLEL ARRAYS//
+    /** All the tracks in the game */
+    private Track[] tracks = new Track[5];
+    /** Number of trainTokens per player */
+    private int[] trainTokens = new int[5];
+    /** The current score of each player */
+    private int[] scores = new int[5];
+    /** The names of each player */
+    private String[] names = new String[5];
+    /** All of the hands of each player */
+    private Deck[] playerTrainDecks = new Deck[5];
+    /** All of the hands of each player */
+    private Deck[] playerDestinationDecks = new Deck[5];
+
+
     /*
      * Initializes a new GameState
      */
@@ -104,8 +108,8 @@ public class TTRGameState extends GameState {
             destinationCards.add(new DestinationCards(i, i, i));
         }
 
-        /** intialize player array values*/
-        for(int i =0; i < numPlayers; i++){
+        /** intialize array values to max possible size */
+        for(int i = 0; i < 5; i++){
             trainTokens[i] = 45;
             scores[i] = 0;
             names[i] = "";
@@ -142,7 +146,7 @@ public class TTRGameState extends GameState {
         faceDownTrainCards = new Deck(original.faceDownTrainCards);
         faceUpTrainCards = new Deck(original.faceUpTrainCards);
         destinationCards = new Deck(original.destinationCards);
-        for(int i =0; i < original.getNumPlayers(); i++){
+        for(int i = 0; i < original.getNumPlayers(); i++){
             trainTokens[i] = original.getTrainTokens()[i];
             scores[i] = original.getScores()[i];
             names[i] = original.getNames()[i];
