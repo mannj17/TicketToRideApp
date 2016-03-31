@@ -6,7 +6,9 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -36,7 +38,6 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
     private Boolean isTurn;
     private int trainTokens;
 
-
     private Button confirmSelection;
     private Button placeTrain;
     private TextView playerTrainCount = null;
@@ -64,6 +65,10 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
     private TextView cpu1TrainCardTextView;
     private TextView cpu2TrainCardTextView;
     private TextView cpu3TrainCardTextView;
+    /** Widjets to control what player Stats display/Scaling*/
+    private FrameLayout cpu1FrameLayout;
+    private FrameLayout cpu2FrameLayout;
+    private FrameLayout cpu3FrameLayout;
 
     /*
     Variables for all of the buttons on the right side of the screen,
@@ -83,6 +88,8 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
     private CheckBox cardCheck;
     private CheckBox trainCheck;
 
+    private LinearLayout.LayoutParams lp;
+
     /*
      * The human player
      * @name
@@ -101,23 +108,36 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
         //Update all TextViews to Display player details properly
         if(info instanceof TTRGameState) {
             int playerNum = ((TTRGameState) info).getNumPlayers();
-            if(playerNum >= 1) {
+            if(playerNum >= 2) { //2 is the minimum number of players
+                lp = new LinearLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT,1);
+                cpu1FrameLayout.setLayoutParams(lp);
+                cpu2FrameLayout.setVisibility(View.GONE);
+                cpu3FrameLayout.setVisibility(View.GONE);
                 this.humanTextView.setText(""+this.allPlayerNames[0]);
                 this.humanScoreTextview.setText(""+((TTRGameState) info).getScores()[0]);
-            }
-            if(playerNum >= 2) {
                 this.cpu1PlayerTextView.setText(""+this.allPlayerNames[1]);
                 this.cpu1ScoreTextview.setText(""+((TTRGameState) info).getScores()[1]);
                 this.cpu1DestinationCardTextView.setText(""+((TTRGameState) info).getPlayerDestinationDecks()[1].getCards().size());
                 this.cpu1TrainCardTextView.setText(""+((TTRGameState) info).getPlayerTrainDecks()[1].getCards().size());
             }
             if(playerNum >= 3) {
+                lp = new LinearLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT,0.5f);
+                cpu1FrameLayout.setLayoutParams(lp);
+                cpu2FrameLayout.setLayoutParams(lp);
+                cpu2FrameLayout.setVisibility(View.VISIBLE);
+                cpu3FrameLayout.setVisibility(View.GONE);
                 this.cpu2PlayerTextView.setText(""+this.allPlayerNames[2]);
                 this.cpu2ScoreTextview.setText(""+((TTRGameState) info).getScores()[2]);
                 this.cpu2DestinationCardTextView.setText(""+((TTRGameState) info).getPlayerDestinationDecks()[2].getCards().size());
                 this.cpu2TrainCardTextView.setText(""+((TTRGameState) info).getPlayerTrainDecks()[2].getCards().size());
             }
             if(playerNum >= 4) {
+                lp = new LinearLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT,0.33f);
+                cpu1FrameLayout.setLayoutParams(lp);
+                cpu2FrameLayout.setLayoutParams(lp);
+                cpu3FrameLayout.setLayoutParams(lp);
+                cpu2FrameLayout.setVisibility(View.VISIBLE);
+                cpu3FrameLayout.setVisibility(View.VISIBLE);
                 this.cpu3PlayerTextView.setText(""+this.allPlayerNames[3]);
                 this.cpu3ScoreTextview.setText(""+((TTRGameState) info).getScores()[3]);
                 this.cpu3DestinationCardTextView.setText(""+((TTRGameState) info).getPlayerDestinationDecks()[3].getCards().size());
@@ -161,6 +181,9 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
         this.cpu1TrainCardTextView = (TextView)myActivity.findViewById(R.id.CPU1TrainCount);
         this.cpu2TrainCardTextView  = (TextView)myActivity.findViewById(R.id.CPU2TrainCount);
         this.cpu3TrainCardTextView  = (TextView)myActivity.findViewById(R.id.CPU3TrainCount);
+        this.cpu1FrameLayout = (FrameLayout)myActivity.findViewById(R.id.CPU1);
+        this.cpu2FrameLayout = (FrameLayout)myActivity.findViewById(R.id.CPU2);
+        this.cpu3FrameLayout = (FrameLayout)myActivity.findViewById(R.id.CPU3);
     }
 
     /**
