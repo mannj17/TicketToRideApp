@@ -45,8 +45,6 @@ public class TTRGameState extends GameState {
     private int playerID;
     /** The number of players playing the game */
     private int numPlayers;
-    /** The current score of each player */
-    private int[] scores;
     /** Says whether or not the player is in track select mode */
     private Boolean trackModeSelected;
     /** Says whether or not the player is in card select mode */
@@ -65,6 +63,10 @@ public class TTRGameState extends GameState {
     private Track[] tracks;
     /** Number of trainTokens per player */
     private int[] trainTokens;
+    /** The current score of each player */
+    private int[] scores;
+    /** The names of each player */
+    private String[] names;
     /** The selected track on screen. Set to -1 if no track is selected. */
     private int trackSpot = -1;
     private Boolean isLastRound = false;
@@ -106,6 +108,7 @@ public class TTRGameState extends GameState {
         for(int i =0; i < numPlayers; i++){
             trainTokens[i] = 45;
             scores[i] = 0;
+            names[i] = "";
             playerTrainDecks[i] = new Deck("Player " + i + " Train Card Deck");
             playerDestinationDecks[i] = new Deck("Player " + i + " Destination Card Deck");
         }
@@ -139,8 +142,13 @@ public class TTRGameState extends GameState {
         faceDownTrainCards = new Deck(original.faceDownTrainCards);
         faceUpTrainCards = new Deck(original.faceUpTrainCards);
         destinationCards = new Deck(original.destinationCards);
-        //for(int i = 0; i < )
-    
+        for(int i =0; i < original.getNumPlayers(); i++){
+            trainTokens[i] = original.getTrainTokens()[i];
+            scores[i] = original.getScores()[i];
+            names[i] = original.getNames()[i];
+            playerTrainDecks[i] = new Deck(original.getPlayerTrainDecks()[i]);
+            playerDestinationDecks[i] = new Deck(original.getPlayerTrainDecks()[i]);
+        }
     }
 
     public int[] getDestinationCities1() {
@@ -189,6 +197,14 @@ public class TTRGameState extends GameState {
 
     public void setDestinationCards(Deck destinationCards) {
         this.destinationCards = destinationCards;
+    }
+
+    public String[] getNames() {
+        return names;
+    }
+
+    public void setNames(String[] names) {
+        this.names = names;
     }
 
     public Deck getTrainDiscard() {

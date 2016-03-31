@@ -27,8 +27,8 @@ public class TTRLocalGame extends LocalGame {
      * TTRLocalGame constructor
      */
     public TTRLocalGame(){
-        noMoreTrains = false;
         mainState = new TTRGameState();
+        noMoreTrains = false;
         turnsLeft = mainState.getNumPlayers();
     }
 
@@ -78,6 +78,7 @@ public class TTRLocalGame extends LocalGame {
         return null;
     }
 
+
     /**
      * Returns if the player made a move
      * @param action
@@ -86,7 +87,6 @@ public class TTRLocalGame extends LocalGame {
      */
     @Override
     protected boolean makeMove(GameAction action) {
-
         return false;
     }
 
