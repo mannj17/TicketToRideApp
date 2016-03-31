@@ -1,5 +1,7 @@
 package teamresistance.tickettoride.TTR;
 
+import java.util.Random;
+
 import teamresistance.tickettoride.Game.GamePlayer;
 import teamresistance.tickettoride.Game.LocalGame;
 import teamresistance.tickettoride.Game.actionMsg.GameAction;
@@ -86,5 +88,17 @@ public class TTRLocalGame extends LocalGame {
     protected boolean makeMove(GameAction action) {
 
         return false;
+    }
+
+    @Override
+    public void start(GamePlayer[] players)
+    {
+        //Sets gameState's numPlayer and play order
+        mainState.setNumPlayers(players.length);
+        Random rand = new Random();
+        rand.setSeed(System.currentTimeMillis());
+        mainState.setPlayerID(rand.nextInt(players.length));
+
+        super.start(players);
     }
 }

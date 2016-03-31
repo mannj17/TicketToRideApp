@@ -102,7 +102,6 @@ public class TTRGameState extends GameState {
             destinationCards.add(new DestinationCards(i, i, i));
         }
 
-
         /** intialize player array values*/
         for(int i =0; i < numPlayers; i++){
             trainTokens[i] = 45;

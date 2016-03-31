@@ -399,10 +399,11 @@
 
     </GridLayout>
 
-    <!--<FrameLayout
+    <FrameLayout
         android:layout_width="855dp"
         android:layout_height="300dp"
         android:layout_below="@+id/TopBar"
+        android:layout_alignLeft="@+id/TopBar"
         android:layout_alignStart="@+id/TopBar"
         android:layout_above="@+id/BottomBar"
         android:id="@+id/Board">
@@ -410,18 +411,18 @@
                <ImageView
                    android:layout_width="823dp"
                    android:layout_height="480dp"
-                   android:id="@+id/GameBoard"
+                   android:id="@+id/GameBoard2"
                    android:layout_row="1"
                    android:layout_column="0"
                    android:src="@drawable/game_board"
                    android:layout_gravity="bottom|center" />
 
-        <com.example.jess.myapplication.TicketToRideSurfaceView
+        <teamresistance.tickettoride.TTR.TTRSurfaceView
             android:layout_width="880dp"
             android:layout_height="480dp"
             android:background="#ffEAD6B3"
             android:id="@+id/GameBoard"/>
-    </FrameLayout>-->
+    </FrameLayout>
 
     <FrameLayout
         android:layout_width="855dp"

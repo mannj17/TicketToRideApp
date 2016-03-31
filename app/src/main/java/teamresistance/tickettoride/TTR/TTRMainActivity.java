@@ -29,15 +29,13 @@ public class TTRMainActivity extends GameMainActivity {
     public static final int PORT_NUMBER = 4567;
 
     /**
-     * a tic-tac-toe game is for two players. The default is human vs. computer
+     * ticket to ride game can have two, three, four, or five players
      */
     @Override
     public GameConfig createDefaultConfig() {
-
         // Define the allowed player types
         ArrayList<GamePlayerType> playerTypes = new ArrayList<GamePlayerType>();
 
-        // yellow-on-blue GUI
         playerTypes.add(new GamePlayerType("Local Human Player") {
             public GamePlayer createPlayer(String name) {
                 return new TTRHumanPlayer(name);
@@ -58,15 +56,15 @@ public class TTRMainActivity extends GameMainActivity {
             }
         });
 
-        // Create a game configuration class for Tic-tac-toe
+        // Create a game configuration class for TTR
         GameConfig defaultConfig = new GameConfig(playerTypes, 2,5, "Ticket To Ride", PORT_NUMBER);
 
         // Add the default players
-        defaultConfig.addPlayer("Human", 0); // yellow-on-blue GUI
+        defaultConfig.addPlayer("Human", 0);
         defaultConfig.addPlayer("Computer", 1); // dumb computer player
 
         // Set the initial information for the remote player
-        defaultConfig.setRemoteData("Remote Player", "", 0); // red-on-yellow GUI
+        defaultConfig.setRemoteData("Remote Player", "", 0);
 
         //done!
         return defaultConfig;
