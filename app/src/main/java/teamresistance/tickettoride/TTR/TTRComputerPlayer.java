@@ -1,5 +1,6 @@
 package teamresistance.tickettoride.TTR;
 
+import teamresistance.tickettoride.Game.GameComputerPlayer;
 import teamresistance.tickettoride.Game.infoMsg.GameInfo;
 
 /**
@@ -11,13 +12,15 @@ import teamresistance.tickettoride.Game.infoMsg.GameInfo;
  * @author Parker Schibel
  * @version March 2016
  */
-public class TTRComputerPlayer {
+public class TTRComputerPlayer extends GameComputerPlayer{
     /*
      * Sets up the ComputerPlayer and its difficulty
      * @name set by the human player at start
      * @difficulty used to set how hard the AI will be
      */
     public TTRComputerPlayer(String name, boolean difficulty) {
+        super(name);
+        isDifficult = difficulty;
 
     }
 
@@ -53,4 +56,8 @@ public class TTRComputerPlayer {
     
     }
 
+    @Override
+    protected void receiveInfo(GameInfo info) {
+
+    }
 }

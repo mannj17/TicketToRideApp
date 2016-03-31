@@ -6,6 +6,8 @@ import teamresistance.tickettoride.Game.GameHumanPlayer;
 import teamresistance.tickettoride.Game.GameMainActivity;
 import teamresistance.tickettoride.Game.infoMsg.GameInfo;
 import teamresistance.tickettoride.Game.GamePlayer;
+import teamresistance.tickettoride.R;
+
 /**
  *  TTRHumanPlayer implements the human player
  *
@@ -55,6 +57,7 @@ public class TTRHumanPlayer extends GameHumanPlayer{
      * @mainActivity
      */
     public void setAsGui(GameMainActivity mainActivity) {
-    
+        myActivity = mainActivity;
+        myActivity.setContentView(R.layout.activity_ttr_main);
     }
 }

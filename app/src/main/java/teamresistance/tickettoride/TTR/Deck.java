@@ -37,6 +37,7 @@ public class Deck {
      * @orig
      */
     public Deck(Deck orig) {
+        cards = new ArrayList<Card>();
         for (int i =0; i < orig.getCards().size(); i++){
             cards.add(orig.getCards().get(i));
         }
@@ -47,6 +48,7 @@ public class Deck {
      * Creates empty deck
      */
     public Deck(String deckName) {
+        cards = new ArrayList<Card>();
         deckName = deckName;
         highlight = false;
     }

@@ -75,6 +75,7 @@ public class TTRGameState extends GameState {
      */
     public TTRGameState() {
         /** initialize train deck */
+        faceDownTrainCards = new Deck("Face Down Deck");
         for (int i = 0; i < 9; i++){
             if(i == 8){ // "Yellow", "Blue", "Orange", "White", "Pink", "Black", "Red", "Green",
                 for(int j = 0; j < 14; j++){
@@ -87,6 +88,8 @@ public class TTRGameState extends GameState {
                 }
             }
         }
+
+        faceUpTrainCards = new Deck("Face up Cards");
         //place five train cards 'face up'
         for(int i = 0; i < 5; i++){
             faceDownTrainCards.moveTopCardTo(faceUpTrainCards, faceDownTrainCards);
@@ -94,6 +97,7 @@ public class TTRGameState extends GameState {
 
         /** initialize destination deck */
         //needs to be corrected later
+        destinationCards = new Deck("Destination Cards");
         for(int i = 0; i < 30; i++){
             destinationCards.add(new DestinationCards(i, i, i));
         }
@@ -136,7 +140,7 @@ public class TTRGameState extends GameState {
         faceDownTrainCards = new Deck(original.faceDownTrainCards);
         faceUpTrainCards = new Deck(original.faceUpTrainCards);
         destinationCards = new Deck(original.destinationCards);
-        for(int i = 0; i < )
+        //for(int i = 0; i < )
     
     }
 
