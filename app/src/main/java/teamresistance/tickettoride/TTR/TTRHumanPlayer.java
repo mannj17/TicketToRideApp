@@ -1,6 +1,7 @@
 package teamresistance.tickettoride.TTR;
 
 import android.graphics.Color;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
@@ -42,9 +43,10 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
 
     /** TextViews for player's names*/
     private TextView cpu1PlayerTextView;
-    private TextView cpu2Plyaer;
-    private TextView cpu3Player;
-    private TextView humanPlayer;
+    private TextView cpu2PlayerTextView;
+    private TextView cpu3PlayerTextView;
+    private TextView cpu4PlayerTextView;
+    private TextView humanPlayerTextView;
 
     /*
     Variables for all of the buttons on the right side of the screen,
@@ -79,9 +81,24 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
      */
     @Override
     public void receiveInfo(GameInfo info) {
+        //Log.i("TTRHumanPlayer", "" + this.allPlayerNames[0]);
         if(info instanceof TTRGameState) {
-            info = (TTRGameState) info;
-            this.cpu1PlayerTextView.setText(""+((TTRGameState) info).getNumPlayers());
+            int playerNum = ((TTRGameState) info).getNumPlayers();
+            if(playerNum >= 1) {
+                this.humanPlayerTextView.setText(""+this.allPlayerNames[0]);
+            }
+            if(playerNum >= 2) {
+                this.cpu1PlayerTextView.setText(""+this.allPlayerNames[1]);
+            }
+            if(playerNum >= 3) {
+                this.cpu2PlayerTextView.setText(""+this.allPlayerNames[2]);
+            }
+            if(playerNum >= 4) {
+                this.cpu3PlayerTextView.setText(""+this.allPlayerNames[3]);
+            }
+            if(playerNum >= 5) {
+                this.cpu4PlayerTextView.setText(""+this.allPlayerNames[4]);
+            }
         }
     }
 
@@ -103,6 +120,9 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
 
         //Initialize the widget reference member variables
         this.cpu1PlayerTextView = (TextView)myActivity.findViewById(R.id.CPU1Title);
+        this.cpu2PlayerTextView = (TextView)myActivity.findViewById(R.id.CPU2Title);
+        this.cpu3PlayerTextView = (TextView)myActivity.findViewById(R.id.CPU3Title);
+        this.humanPlayerTextView = (TextView)myActivity.findViewById(R.id.playerName);
     }
 
     /**

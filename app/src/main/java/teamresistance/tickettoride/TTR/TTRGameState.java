@@ -143,6 +143,7 @@ public class TTRGameState extends GameState {
      * @original
      */
     public TTRGameState(TTRGameState original) {
+        numPlayers = original.getNumPlayers();
         faceDownTrainCards = new Deck(original.faceDownTrainCards);
         faceUpTrainCards = new Deck(original.faceUpTrainCards);
         destinationCards = new Deck(original.destinationCards);
@@ -153,6 +154,13 @@ public class TTRGameState extends GameState {
             playerTrainDecks[i] = new Deck(original.getPlayerTrainDecks()[i]);
             playerDestinationDecks[i] = new Deck(original.getPlayerTrainDecks()[i]);
         }
+
+        //Booleans
+        isSelectDestinationCards = original.getIsSelectDestinationCards();
+        trackModeSelected = original.getTrackModeSelected();
+        cardModeSelected = original.getCardModeSelected();
+        destinationCardsSelected = original.getDestinationCardsSelected();
+        trainCardsSelected = original.getTrainCardsSelected();
     }
 
     public int[] getDestinationCities1() {
@@ -208,7 +216,11 @@ public class TTRGameState extends GameState {
     }
 
     public void setNames(String[] names) {
-        this.names = names;
+        String[] temp = new String[5];
+        for(int i = 0; i < 5; i ++){
+            temp[i] = names[i];
+        }
+        this.names = temp;
     }
 
     public Deck getTrainDiscard() {

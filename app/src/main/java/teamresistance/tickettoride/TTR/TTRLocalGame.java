@@ -1,5 +1,7 @@
 package teamresistance.tickettoride.TTR;
 
+import android.util.Log;
+
 import java.util.Random;
 
 import teamresistance.tickettoride.Game.GamePlayer;
@@ -98,7 +100,6 @@ public class TTRLocalGame extends LocalGame {
         Random rand = new Random();
         rand.setSeed(System.currentTimeMillis());
         mainState.setPlayerID(rand.nextInt(players.length));
-
         super.start(players);
     }
 }
