@@ -159,10 +159,38 @@ public class TTRLocalGame extends LocalGame {
             }
             return true;
         }
-        //else if(action instanceof TrackPlaceAction){
-        //    return true;
-        //}
+//        else if(action instanceof TrackPlaceAction){
+//            return true;
+//        }
         else if(action instanceof DrawUpCardAction){
+            DrawUpCardAction temp = (DrawUpCardAction)action;
+            int pos = temp.getPos();
+            int numHighlights = 0;
+            for(int i = 0; i < mainState.getFaceUpTrainCards().size(); i++){
+                if(mainState.getFaceUpTrainCards().getCards().get(i).getHighlight()){
+                    numHighlights++;
+                    mainState.setOnlyDownDeck(false);
+                    mainState.setTrainCardsSelected(true);
+                }
+            }
+            if(mainState.getFaceDownTrainCards().getHighlight()){
+                numHighlights++;
+                mainState.setTrainCardsSelected(true);
+            }
+            if(numHighlights < 2){
+                if(mainState.getFaceUpTrainCards().getCards().get(pos).getHighlight()){
+                    mainState.getFaceUpTrainCards().getCards().get(pos).setHighlight(false);
+                    mainState.setTrainCardsSelected(false);
+                }
+                else{
+                    mainState.getFaceUpTrainCards().getCards().get(pos).setHighlight(true);
+                    mainState.setTrainCardsSelected(true);
+                }
+            }
+            else if(mainState.getFaceUpTrainCards().getCards().get(pos).getHighlight()){
+                mainState.getFaceUpTrainCards().getCards().get(pos).setHighlight(false);
+                mainState.setTrainCardsSelected(true);
+            }
             return true;
         }
         else if(action instanceof DrawDownCardAction) {
@@ -216,7 +244,7 @@ public class TTRLocalGame extends LocalGame {
         else if (action instanceof ChooseDestinationAction) {
             return true;
         }
-        return false;
+        return true;
     }
 
     @Override
@@ -224,9 +252,9 @@ public class TTRLocalGame extends LocalGame {
     {
         //Sets gameState's numPlayer and play order
         mainState.setNumPlayers(players.length);
-        Random rand = new Random();
-        rand.setSeed(System.currentTimeMillis());
-        mainState.setPlayerID(rand.nextInt(players.length));
+//        Random rand = new Random();
+//        rand.setSeed(System.currentTimeMillis());
+//        mainState.setPlayerID(rand.nextInt(players.length));
         super.start(players);
     }
 }

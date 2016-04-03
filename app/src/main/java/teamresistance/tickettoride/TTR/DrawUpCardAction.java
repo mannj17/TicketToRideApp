@@ -13,7 +13,13 @@ import teamresistance.tickettoride.Game.actionMsg.GameAction;
  * @version March 2016
  */
 public class DrawUpCardAction extends GameAction {
-    public DrawUpCardAction(GamePlayer player) {
+    private int pos;
+    public DrawUpCardAction(GamePlayer player, int pos) {
         super(player);
+        this.pos = pos;
+    }
+
+    public int getPos(){
+        return pos;
     }
 }
