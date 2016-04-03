@@ -232,13 +232,38 @@ public class TTRSurfaceView extends SurfaceView{
         /* Initilize all track objects */
 
         vancouverToCalgaryTrack = new Track(3, "Gray", "Vancouver", "Calgary");
-
+        //not initialized
         vancouverToSeattleTrack = new Track(1, "Gray", "Vancouver", "Seattle");
         vancouverToSeattle.addRect(102f, 115f, 125f, 165f, Path.Direction.CW);
 
-        //portlandToSanFrancisco.addRect(102f, 115f, 125f, 165f, Path.Direction.CW);
-        //portlandToSanFranciscoTrack = new Track(1, "Red", "City1", "City2");
-        //portlandToSanFranciscoTrack.setTrack(portlandToSanFrancisco);
+
+        portlandToSanFranciscoTrack = new Track(5, "Green", "Portland", "SanFrancisco");
+        portlandToSanFrancisco.moveTo(48, 280);
+        portlandToSanFrancisco.lineTo(27, 326);
+        portlandToSanFrancisco.lineTo(45, 334);
+        portlandToSanFrancisco.lineTo(66, 288);
+        portlandToSanFrancisco.close();
+        portlandToSanFrancisco.moveTo(26, 338);
+        portlandToSanFrancisco.lineTo(16, 390);
+        portlandToSanFrancisco.lineTo(33, 390);
+        portlandToSanFrancisco.lineTo(41, 343);
+        portlandToSanFrancisco.close();
+        portlandToSanFrancisco.moveTo(13, 400);
+        portlandToSanFrancisco.lineTo(31,400);
+        portlandToSanFrancisco.lineTo(30,450);
+        portlandToSanFrancisco.lineTo(12, 450);
+        portlandToSanFrancisco.close();
+        portlandToSanFrancisco.moveTo(12, 460);
+        portlandToSanFrancisco.lineTo(17, 513);
+        portlandToSanFrancisco.lineTo(34, 512);
+        portlandToSanFrancisco.lineTo(29, 460);
+        portlandToSanFrancisco.close();
+        portlandToSanFrancisco.moveTo(18, 523);
+        portlandToSanFrancisco.lineTo(32, 568);
+        portlandToSanFrancisco.lineTo(50, 567);
+        portlandToSanFrancisco.lineTo(37, 518);
+        portlandToSanFrancisco.close();
+
 
         /*
         path2.moveTo(219, 688);
