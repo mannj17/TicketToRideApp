@@ -159,10 +159,13 @@ public class TTRLocalGame extends LocalGame {
             }
             return true;
         }
-        //else if(action instanceof TrackPlaceAction){
-        //    return true;
-        //}
+//        else if(action instanceof TrackPlaceAction){
+//            return true;
+//        }
         else if(action instanceof DrawUpCardAction){
+            DrawUpCardAction temp = (DrawUpCardAction)action;
+            int i = temp.getPos();
+            mainState.getFaceUpTrainCards().getCards().get(i).setHighlight(true);
             return true;
         }
         else if(action instanceof DrawDownCardAction) {

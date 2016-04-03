@@ -107,7 +107,13 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
     public void receiveInfo(GameInfo info) {
         //Update all TextViews to Display player details properly
         if(info instanceof TTRGameState) {
+            TTRGameState myState = (TTRGameState)info;
             int playerNum = ((TTRGameState) info).getNumPlayers();
+            for(int i = 0; i < myState.getFaceUpTrainCards().size(); i++){
+                if(myState.getFaceUpTrainCards().getCards().get(i).getHighlight()){
+                    this.trainCards.get(i).setAlpha(0.0f);
+                }
+            }
             if(playerNum >= 2) { //2 is the minimum number of players
                 lp = new LinearLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT,1);
                 cpu1FrameLayout.setLayoutParams(lp);
@@ -184,6 +190,24 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
         this.cpu1FrameLayout = (FrameLayout)myActivity.findViewById(R.id.CPU1);
         this.cpu2FrameLayout = (FrameLayout)myActivity.findViewById(R.id.CPU2);
         this.cpu3FrameLayout = (FrameLayout)myActivity.findViewById(R.id.CPU3);
+
+        this.trainCard1 = (ImageButton)myActivity.findViewById(R.id.Train1);
+        this.trainCard2 = (ImageButton)myActivity.findViewById(R.id.Train2);
+        this.trainCard3 = (ImageButton)myActivity.findViewById(R.id.Train3);
+        this.trainCard4 = (ImageButton)myActivity.findViewById(R.id.Train4);
+        this.trainCard5 = (ImageButton)myActivity.findViewById(R.id.Train5);
+
+        this.trainCard1.setOnClickListener(this);
+        this.trainCard2.setOnClickListener(this);
+        this.trainCard3.setOnClickListener(this);
+        this.trainCard4.setOnClickListener(this);
+        this.trainCard5.setOnClickListener(this);
+
+        this.trainCards.add(this.trainCard1);
+        this.trainCards.add(this.trainCard2);
+        this.trainCards.add(this.trainCard3);
+        this.trainCards.add(this.trainCard4);
+        this.trainCards.add(this.trainCard5);
     }
 
     /**
@@ -191,7 +215,21 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
      */
     @Override
     public void onClick(View v) {
-
+        if(v.getId() == R.id.Train1){
+            game.sendAction(new DrawUpCardAction(this, 0));
+        }
+        else if(v.getId() == R.id.Train2){
+            game.sendAction(new DrawUpCardAction(this, 1));
+        }
+        else if(v.getId() == R.id.Train3){
+            game.sendAction(new DrawUpCardAction(this, 2));
+        }
+        else if(v.getId() == R.id.Train4){
+            game.sendAction(new DrawUpCardAction(this, 3));
+        }
+        else if(v.getId() == R.id.Train5){
+            game.sendAction(new DrawUpCardAction(this, 4));
+        }
     }
     /**
      * The touch handler for the touches.

@@ -66,7 +66,25 @@ public class Deck {
      * @param sourceDeck
      */
     public void moveTopCardTo(Deck targetDeck, Deck sourceDeck) {
-        return;
+        // will hold the card
+        Card c = null;
+        // size of the first deck
+        int size;
+        // indivisibly check the deck for empty, and remove the card, to
+        // avoid a race condition
+        synchronized(this.cards) {
+            size = sourceDeck.size();
+            if (size > 0) {
+                c = sourceDeck.getCards().get(size-1);
+                sourceDeck.getCards().remove(cards.size()-1);
+            }
+        }
+        // if the original size was non-zero, add the card to the top of the
+        // target deck
+        if (size > 0) {
+            targetDeck.add(c);
+        }
+
     }
 
     /**
