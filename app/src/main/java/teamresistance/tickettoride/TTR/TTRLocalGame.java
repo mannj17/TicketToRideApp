@@ -89,6 +89,133 @@ public class TTRLocalGame extends LocalGame {
      */
     @Override
     protected boolean makeMove(GameAction action) {
+        if(action instanceof ChangeModeAction){
+            if(mainState.getCardModeSelected()){
+                mainState.setCardModeSelected(false);
+                mainState.setTrackModeSelected(true);
+                mainState.getFaceDownTrainCards().setHighlight(false);
+                mainState.getDestinationCards().setHighlight(false);
+                mainState.setDestinationCardsSelected(false);
+                mainState.setTrainCardsSelected(false);
+                for(int i = 0; i < mainState.getFaceUpTrainCards().size(); i++){
+                    mainState.getFaceUpTrainCards().getCards().get(i).setHighlight(false);
+                }
+            }
+            else if(mainState.getTrackModeSelected()){
+                mainState.setCardModeSelected(true);
+                mainState.setTrackModeSelected(false);
+                //implement code to unhighlight any highlighted tracks
+            }
+            return true;
+        }
+        else if(action instanceof ConfirmSelectionAction){
+            if(mainState.getTrainCardsSelected()){
+                if(mainState.getOnlyDownDeck() && mainState.getFaceDownTrainCards().getHighlight()){
+                    mainState.getFaceDownTrainCards().moveTopCardTo(
+                            mainState.getPlayerTrainDecks()[mainState.getPlayerID()],
+                            mainState.getFaceDownTrainCards());
+                    mainState.getFaceDownTrainCards().moveTopCardTo(
+                            mainState.getPlayerTrainDecks()[mainState.getPlayerID()],
+                            mainState.getFaceDownTrainCards());
+                }
+                else if(!mainState.getOnlyDownDeck() && mainState.getFaceDownTrainCards().getHighlight()){
+                    mainState.getFaceDownTrainCards().moveTopCardTo(
+                            mainState.getPlayerTrainDecks()[mainState.getPlayerID()],
+                            mainState.getFaceDownTrainCards());
+                    for(int i = 0; i < mainState.getFaceUpTrainCards().size(); i++) {
+                        if (mainState.getFaceUpTrainCards().getCards().get(i).getHighlight()) {
+                            Card temp = mainState.getFaceUpTrainCards().getCards().get(i);
+                            mainState.getPlayerTrainDecks()[mainState.getPlayerID()].add(temp);
+                            mainState.getFaceUpTrainCards().getCards().remove(i);
+                            mainState.getFaceDownTrainCards().moveTopCardTo(
+                                    mainState.getFaceUpTrainCards(), mainState.getFaceUpTrainCards());
+                            mainState.getFaceUpTrainCards().getCards().get(i).setHighlight(false);
+                        }
+                    }
+                    mainState.getFaceDownTrainCards().setHighlight(false);
+                }
+                else if(!mainState.getOnlyDownDeck() && !mainState.getFaceDownTrainCards().getHighlight()){
+                    for(int i = 0; i < mainState.getFaceUpTrainCards().size(); i++){
+                        if(mainState.getFaceUpTrainCards().getCards().get(i).getHighlight()){
+                            Card temp = mainState.getFaceUpTrainCards().getCards().get(i);
+                            mainState.getPlayerTrainDecks()[mainState.getPlayerID()].add(temp);
+                            mainState.getFaceUpTrainCards().getCards().remove(i);
+                            mainState.getFaceDownTrainCards().moveTopCardTo(
+                                    mainState.getFaceUpTrainCards(), mainState.getFaceUpTrainCards());
+                            mainState.getFaceUpTrainCards().getCards().get(i).setHighlight(false);
+                        }
+                    }
+
+                }
+                mainState.setTrainCardsSelected(false);
+            }
+            else if(mainState.getDestinationCardsSelected()){
+                mainState.setIsSelectDestinationCards(true);
+                for(int i = 0; i < 3; i++){
+                    mainState.getFaceDownTrainCards().moveTopCardTo(
+                            mainState.getDestinationCards(),
+                            mainState.getDestinationPool());
+                }
+            }
+            return true;
+        }
+        //else if(action instanceof TrackPlaceAction){
+        //    return true;
+        //}
+        else if(action instanceof DrawUpCardAction){
+            return true;
+        }
+        else if(action instanceof DrawDownCardAction) {
+            if(mainState.getTrackModeSelected()){
+                return false;
+            }
+            else if(mainState.getTrainCardsSelected() &&
+                    mainState.getFaceDownTrainCards().getHighlight()){
+                if(mainState.getOnlyDownDeck()){
+                    mainState.setTrainCardsSelected(false);
+                }
+                mainState.setOnlyDownDeck(false);
+                mainState.getFaceDownTrainCards().setHighlight(false);
+            }
+            else if(mainState.getTrainCardsSelected()
+                    && !mainState.getFaceDownTrainCards().getHighlight()){
+                int highlightNum = 0;
+                for (int i = 0; i < mainState.getFaceUpTrainCards().size(); i++){
+                    if(mainState.getFaceUpTrainCards().getCards().get(i).getHighlight()){
+                        highlightNum++;
+                    }
+                }
+                if(highlightNum < 2){
+                    mainState.getFaceDownTrainCards().setHighlight(true);
+                }
+                mainState.setOnlyDownDeck(false);
+            }
+            else if(!mainState.getTrainCardsSelected() && !mainState.getOnlyDownDeck()){
+                mainState.setOnlyDownDeck(true);
+                mainState.setTrainCardsSelected(true);
+                mainState.getFaceDownTrainCards().setHighlight(true);
+            }
+            else{
+                return false;
+            }
+            return true;
+        }
+        else if (action instanceof DrawDestinationCardAction) {
+            if(mainState.getTrainCardsSelected()){
+                mainState.setTrainCardsSelected(false);
+                mainState.setOnlyDownDeck(false);
+                mainState.getFaceDownTrainCards().setHighlight(false);
+                for(int i = 0; i < mainState.getFaceUpTrainCards().size(); i++){
+                    mainState.getFaceUpTrainCards().getCards().get(i).setHighlight(false);
+                }
+            }
+            mainState.getDestinationCards().setHighlight(true);
+            mainState.setDestinationCardsSelected(true);
+            return true;
+        }
+        else if (action instanceof ChooseDestinationAction) {
+            return true;
+        }
         return false;
     }
 

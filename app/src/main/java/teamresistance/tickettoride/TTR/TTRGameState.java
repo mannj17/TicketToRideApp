@@ -32,6 +32,8 @@ public class TTRGameState extends GameState {
     private Deck faceUpTrainCards;
     /** The deck of destination cards */
     private Deck destinationCards;
+    /**pool of destination cards for a player to choose from*/
+    private Deck destinationPool;
     /** The pile of discarded train cards */
     private Deck trainDiscard;
     /** The pile of discarded destination cards */
@@ -120,6 +122,7 @@ public class TTRGameState extends GameState {
         trainDiscard = new Deck("Train Card Discard");
         destinationDiscard = new Deck("Destination Card Discard");
         destinationCardsDrawn = new Deck("Destination Cards Drawn");
+        destinationPool = new Deck("Destination Card Pool");
 
         //Booleans set to defaults
         isSelectDestinationCards = false;
@@ -230,6 +233,14 @@ public class TTRGameState extends GameState {
 
     public void setTrainDiscard(Deck trainDiscard) {
         this.trainDiscard = trainDiscard;
+    }
+
+    public Deck getDestinationPool() {
+        return destinationPool;
+    }
+
+    public void setDestinationPool(Deck destinationPool) {
+        this.destinationPool = destinationPool;
     }
 
     public Deck getDestinationDiscard() {
