@@ -227,18 +227,43 @@ public class TTRSurfaceView extends SurfaceView{
     public TTRSurfaceView(Context context, AttributeSet attrs) {
         super(context, attrs);
         setWillNotCacheDrawing(false);
-        //int maxX = getMaxWidth();
-        //int maxY = getMaxHeight();
+        int maxX = getMaxWidth();
+        int maxY = getMaxHeight();
         /* Initilize all track objects */
 
-//        vancouverToCalgaryTrack = new Track(3, "Gray", "Vancouver", "Calgary");
-//
-//        vancouverToSeattleTrack = new Track(1, "Gray", "Vancouver", "Seattle");
-//        vancouverToSeattle.addRect(102f, 115f, 125f, 165f, Path.Direction.CW);
+        vancouverToCalgaryTrack = new Track(3, "Gray", "Vancouver", "Calgary");
+        //not initialized
+        vancouverToSeattleTrack = new Track(1, "Gray", "Vancouver", "Seattle");
+        vancouverToSeattle.addRect(102f, 115f, 125f, 165f, Path.Direction.CW);
 
-        //portlandToSanFrancisco.addRect(102f, 115f, 125f, 165f, Path.Direction.CW);
-        //portlandToSanFranciscoTrack = new Track(1, "Red", "City1", "City2");
-        //portlandToSanFranciscoTrack.setTrack(portlandToSanFrancisco);
+
+        portlandToSanFranciscoTrack = new Track(5, "Green", "Portland", "SanFrancisco");
+        portlandToSanFrancisco.moveTo(48, 280);
+        portlandToSanFrancisco.lineTo(27, 326);
+        portlandToSanFrancisco.lineTo(45, 334);
+        portlandToSanFrancisco.lineTo(66, 288);
+        portlandToSanFrancisco.close();
+        portlandToSanFrancisco.moveTo(26, 338);
+        portlandToSanFrancisco.lineTo(16, 390);
+        portlandToSanFrancisco.lineTo(33, 390);
+        portlandToSanFrancisco.lineTo(41, 343);
+        portlandToSanFrancisco.close();
+        portlandToSanFrancisco.moveTo(13, 400);
+        portlandToSanFrancisco.lineTo(31,400);
+        portlandToSanFrancisco.lineTo(30,450);
+        portlandToSanFrancisco.lineTo(12, 450);
+        portlandToSanFrancisco.close();
+        portlandToSanFrancisco.moveTo(12, 460);
+        portlandToSanFrancisco.lineTo(17, 513);
+        portlandToSanFrancisco.lineTo(34, 512);
+        portlandToSanFrancisco.lineTo(29, 460);
+        portlandToSanFrancisco.close();
+        portlandToSanFrancisco.moveTo(18, 523);
+        portlandToSanFrancisco.lineTo(32, 568);
+        portlandToSanFrancisco.lineTo(50, 567);
+        portlandToSanFrancisco.lineTo(37, 518);
+        portlandToSanFrancisco.close();
+
 
         /*
         path2.moveTo(219, 688);
@@ -273,7 +298,7 @@ public class TTRSurfaceView extends SurfaceView{
         track3 = new Track(3, RED_COLOR, path3, touchArea3);
         */
 
-       // myTracks = new Track[]{portlandToSanFranciscoTrack, vancouverToSeattleTrack};
+        myTracks = new Track[]{portlandToSanFranciscoTrack, vancouverToSeattleTrack};
     }
 
     /*
@@ -283,28 +308,28 @@ public class TTRSurfaceView extends SurfaceView{
     public void onDraw(Canvas canvas){
         super.onDraw(canvas);
         drawBoard(canvas);
-       // maxWidth = canvas.getWidth();
-       // maxHeight = canvas.getHeight();
-//        for(Track track : myTracks){
-//            if(track.getHighlight()){
-//                paint.setColor(HIGHLIGHT_COLOR);
-//                paint.setStrokeWidth(5);
-//                paint.setStyle(Paint.Style.STROKE);
-//                canvas.drawPath(track.getTrack(), paint);
-//            }
-//            if(track.getSelected()) {
-//                paint.setColor(SELECTION_COLOR);
-//                canvas.drawPath(track.getTrack(), paint);
-//            }
-//            if(track.getCovered()) {
-//                paint.setColor(RED_COLOR);
-//                paint.setStyle(Paint.Style.FILL);
-//                canvas.drawPath(track.getTrack(), paint);
-//            }
-//        }
+        maxWidth = canvas.getWidth();
+        maxHeight = canvas.getHeight();
+        for(Track track : myTracks){
+            if(track.getHighlight()){
+                paint.setColor(HIGHLIGHT_COLOR);
+                paint.setStrokeWidth(5);
+                paint.setStyle(Paint.Style.STROKE);
+                canvas.drawPath(track.getTrack(), paint);
+            }
+            if(track.getSelected()) {
+                paint.setColor(SELECTION_COLOR);
+                canvas.drawPath(track.getTrack(), paint);
+            }
+            if(track.getCovered()) {
+                paint.setColor(RED_COLOR);
+                paint.setStyle(Paint.Style.FILL);
+                canvas.drawPath(track.getTrack(), paint);
+            }
+        }
     }
-   // public int getMaxWidth(){return maxWidth;}
-   // public int getMaxHeight(){return maxHeight;}
+    public int getMaxWidth(){return maxWidth;}
+    public int getMaxHeight(){return maxHeight;}
     /*
      * Method which draws the board image onto the canvas
      */
