@@ -140,6 +140,7 @@ public class TTRGameState extends GameState {
         testTracks[MAX_NUM_PLAYERS] = new Track(2, "Pink", "PittsBurgh", "Boston");
         testTracks[6] = new Track(2, "Red", "PittsBurgh", "Boston");
         testTracks[7] = new Track(2, "Green", "PittsBurgh", "Boston");
+
     }
 
     /*

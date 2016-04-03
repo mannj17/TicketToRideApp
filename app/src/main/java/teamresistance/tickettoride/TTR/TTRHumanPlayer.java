@@ -198,6 +198,7 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
      */
     @Override
     public boolean onTouch(View v, MotionEvent event) {
+
         return true;
     }
 }

@@ -3,9 +3,7 @@ package teamresistance.tickettoride.TTR;
 import android.content.Context;
 import android.graphics.*;
 import android.util.AttributeSet;
-import android.view.MotionEvent;
 import android.view.SurfaceView;
-import android.view.View;
 
 import teamresistance.tickettoride.R;
 
@@ -34,7 +32,8 @@ public class TTRSurfaceView extends SurfaceView{
     public Boolean drawTrain = false;
     public Boolean isArea1 = false;
     public Boolean isArea2 = false;
-
+    protected int maxWidth;
+    protected int maxHeight;
     Rect touchArea1 = new Rect(90, 90, 140, 185);
     Rect touchArea2 = new Rect(180, 650, 310, 750);
     Rect touchArea3 = new Rect(410,290,560,460);
@@ -48,29 +47,198 @@ public class TTRSurfaceView extends SurfaceView{
     final int HIGHLIGHT_COLOR = 0xFF00FF00;
     final int SELECTION_COLOR = 0xFF00ffff;
 
-    /*
-     * General variables used by the class in relation to drawing
-     */
-    private Paint paint = new Paint();
-    private Path path1 = new Path();
-    private Path path2 = new Path();
-    Path path3 = new Path();
 
-    //My Tracks
-    Track track1;
-    Track track2;
-    Track track3;
+    private Paint paint = new Paint();
+    //path initializations
+    //THE WEST!
+    private Path vancouverToCalgary = new Path();
+    private Path vancouverToSeattle = new Path();
+    private Path seattleToCalgary = new Path();
+    private Path seattleToHelena = new Path();
+    private Path seattleToPortland= new Path();
+    private Path portlandToSanFrancisco = new Path();
+    private Path portlandToSaltLakeCity = new Path();
+    private Path sanFranciscoToLosAngeles = new Path();
+    private Path sanFranciscoToSaltLakeCity = new Path();
+    private Path losAngelesToLasVegas = new Path();
+    private Path losAngelesToPheonix = new Path();
+    private Path losAngelesToElPaso = new Path();
+    //mid-west paths
+    private Path calgaryToWinnipeg = new Path();
+    private Path calgaryToHelena = new Path();
+    private Path helenaToWinnipeg = new Path();
+    private Path helenaToDuluth = new Path();
+    private Path helenaToOmaha = new Path();
+    private Path helenaToDenver = new Path();
+    private Path helenaToSaltLakeCity = new Path();
+    private Path saltLakeCityToDenver = new Path();
+    private Path saltLakeCityToLasVegas = new Path();
+    private Path phoenixToDenver = new Path();
+    private Path phoenixToSantaFe = new Path();
+    private Path phoeixToElPaso = new Path();
+    private Path denverToOmaha = new Path();
+    private Path denverToKansasCity = new Path();
+    private Path denverToOklahomaCity = new Path();
+    private Path denverToSantaFe = new Path();
+    private Path santaFeToOklahomaCity = new Path();
+    private Path santaFeToElPaso = new Path();
+    private Path elPasoToOklahomaCity = new Path();
+    private Path elPasoToDallas = new Path();
+    private Path elPasoToHouston = new Path();
+    //fly-over state paths
+    private Path winnipegToSaultSteMarie = new Path();
+    private Path winnipegToDuluth = new Path();
+    private Path duluthToSaultSteMarie = new Path();
+    private Path duluthToToronto = new Path();
+    private Path duluthToChicago = new Path();
+    private Path duluthToOmaha = new Path();
+    private Path omahaToChicago = new Path();
+    private Path omahatoKansasCity = new Path();
+    private Path kansasCityToSaintLouise = new Path();
+    private Path kansasCityToOklahomaCity = new Path();
+    private Path oklahomaCityToLittleRock = new Path();
+    private Path oklahomaCityToDallas = new Path();
+    private Path dallasToLittleRock = new Path();
+    private Path dallasToHouston = new Path();
+    private Path houstonToNewOrlean = new Path();
+    //Mississippi
+    private Path saultSteMarieToMontreal = new Path();
+    private Path saultSteMarieToToronto = new Path();
+    private Path chicagoToToronto = new Path();
+    private Path chicagoToPittsburgh = new Path();
+    private Path chicagoToSaintLouis = new Path();
+    private Path saintLouisToPittsburgh = new Path();
+    private Path saintLouisToNashville = new Path();
+    private Path saintLouisToLittleRock = new Path();
+    private Path nashvilleToPittsburgh = new Path();
+    private Path nashvilleToRaleigh = new Path();
+    private Path nashvilleToAtlanta = new Path();
+    private Path littleRockToNashville = new Path();
+    private Path littleRockToNewOrleans = new Path();
+    private Path newOrleansToAtlanta = new Path();
+    private Path newOrleansToMiami = new Path();
+    //Appalachia
+    private Path torontoToMontreal = new Path();
+    private Path torontoToPittsburgh = new Path();
+    private Path pittsburghToNewYork = new Path();
+    private Path pittsburghToWashington = new Path();
+    private Path pittsburghToRaleigh = new Path();
+    private Path raleighToWashington = new Path();
+    private Path raleighToCharleston = new Path();
+    private Path raleighToAtlanta = new Path();
+    private Path atlantaToCharleston = new Path();
+    private Path atlantaToMiami = new Path();
+    private Path miamiToCharleston = new Path();
+    //NorthEast
+    private Path montrealToBoston = new Path();
+    private Path montrealToNewYork = new Path();
+    private Path newYorkToBoston = new Path();
+    private Path newYorkToWashington = new Path();
+
+    //Initializes all the tracks
+    //THE WEST
+    Track vancouverToCalgaryTrack;
+    Track vancouverToSeattleTrack;
+    Track seattleToCalgaryTrack;
+    Track seattleToHelenaTrack;
+    Track seattleToPortlandTrack;
+    Track portlandToSanFranciscoTrack;
+    Track portlandToSaltLakeCityTrack;
+    Track sanFranciscoToLosAngelesTrack;
+    Track sanFranciscoToSaltLakeCityTrack;
+    Track losAngelesToLasVegasTrack;
+    Track losAngelesToPheonixTrack;
+    Track losAngelesToElPasoTrack;
+    //mid-west tracks
+    Track calgaryToWinnipegTrack;
+    Track calgaryToHelenaTrack;
+    Track helenaToWinnipegTrack;
+    Track helenaToDuluthTrack;
+    Track helenaToOmahaTrack;
+    Track helenaToDenverTrack;
+    Track helenaToSaltLakeCityTrack;
+    Track saltLakeCityToDenverTrack;
+    Track saltLakeCityToLasVegasTrack;
+    Track phoenixToDenverTrack;
+    Track phoenixToSantaFeTrack;
+    Track phoeixToElPasoTrack;
+    Track denverToOmahaTrack;
+    Track denverToKansasCityTrack;
+    Track denverToOklahomaCityTrack;
+    Track denverToSantaFeTrack;
+    Track santaFeToOklahomaCityTrack;
+    Track santaFeToElPasoTrack;
+    Track elPasoToOklahomaCityTrack;
+    Track elPasoToDallasTrack;
+    Track elPasoToHoustonTrack;
+    //fly-over state tracks
+    Track winnipegToSaultSteMarieTrack;
+    Track winnipegToDuluthTrack;
+    Track duluthToSaultSteMarieTrack;
+    Track duluthToTorontoTrack;
+    Track duluthToChicagoTrack;
+    Track duluthToOmahaTrack;
+    Track omahaToChicagoTrack;
+    Track omahatoKansasCityTrack;
+    Track kansasCityToSaintLouiseTrack;
+    Track kansasCityToOklahomaCityTrack;
+    Track oklahomaCityToLittleRockTrack;
+    Track oklahomaCityToDallasTrack;
+    Track dallasToLittleRockTrack;
+    Track dallasToHoustonTrack;
+    Track houstonToNewOrleansTrack;
+    //Mississippi
+    Track saultSteMarieToMontrealTrack;
+    Track saultSteMarieToTorontoTrack;
+    Track chicagoToTorontoTrack;
+    Track chicagoToPittsburghTrack;
+    Track chicagoToSaintLouisTrack;
+    Track saintLouisToPittsburghTrack;
+    Track saintLouisToNashvilleTrack;
+    Track saintLouisToLittleRockTrack;
+    Track nashvilleToPittsburghTrack;
+    Track nashvilleToRaleighTrack;
+    Track nashvilleToAtlantaTrack;
+    Track littleRockToNashvilleTrack;
+    Track littleRockToNewOrleansTracks;
+    Track newOrleansToAtlantaTrack;
+    Track newOrleansToMiamiTrack;
+    //Appalachia
+    Track torontoToMontrealTrack;
+    Track torontoToPittsburghTrack;
+    Track pittsburghToNewYorkTrack;
+    Track pittsburghToWashingtonTrack;
+    Track pittsburghToRaleighTrack;
+    Track raleighToWashingtonTrack;
+    Track raleighToCharlestonTrack;
+    Track raleighToAtlantaTrack;
+    Track atlantaToCharlestonTrack;
+    Track atlantaToMiamiTrack;
+    Track miamiToCharlestonTrack;
+    //NorthEast
+    Track montrealToBostonTrack;
+    Track montrealToNewYorkTrack;
+    Track newYorkToBostonTrack;
+    Track newYorkToWashingtonTrack;
+    //array of tracks
     Track myTracks[];
 
     // TicketToRideSurfaceView constructor
     public TTRSurfaceView(Context context, AttributeSet attrs) {
         super(context, attrs);
         setWillNotCacheDrawing(false);
-
+        int maxX = getMaxWidth();
+        int maxY = getMaxHeight();
         /* Initilize all track objects */
-        path1.addRect(102f, 115f, 125f, 165f, Path.Direction.CW);
-        track1 = new Track(1, "Red", "City1", "City2");
-        track1.setTrack(path1);
+
+        vancouverToCalgaryTrack = new Track(3, "Gray", "Vancouver", "Calgary");
+
+        vancouverToSeattleTrack = new Track(1, "Gray", "Vancouver", "Seattle");
+        vancouverToSeattle.addRect(102f, 115f, 125f, 165f, Path.Direction.CW);
+
+        //portlandToSanFrancisco.addRect(102f, 115f, 125f, 165f, Path.Direction.CW);
+        //portlandToSanFranciscoTrack = new Track(1, "Red", "City1", "City2");
+        //portlandToSanFranciscoTrack.setTrack(portlandToSanFrancisco);
 
         /*
         path2.moveTo(219, 688);
@@ -105,7 +273,7 @@ public class TTRSurfaceView extends SurfaceView{
         track3 = new Track(3, RED_COLOR, path3, touchArea3);
         */
 
-        myTracks = new Track[]{track1};
+        myTracks = new Track[]{portlandToSanFranciscoTrack, vancouverToSeattleTrack};
     }
 
     /*
@@ -115,7 +283,8 @@ public class TTRSurfaceView extends SurfaceView{
     public void onDraw(Canvas canvas){
         super.onDraw(canvas);
         drawBoard(canvas);
-
+        maxWidth = canvas.getWidth();
+        maxHeight = canvas.getHeight();
         for(Track track : myTracks){
             if(track.getHighlight()){
                 paint.setColor(HIGHLIGHT_COLOR);
@@ -134,7 +303,8 @@ public class TTRSurfaceView extends SurfaceView{
             }
         }
     }
-
+    public int getMaxWidth(){return maxWidth;}
+    public int getMaxHeight(){return maxHeight;}
     /*
      * Method which draws the board image onto the canvas
      */
