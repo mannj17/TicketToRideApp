@@ -81,6 +81,7 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
     private ImageButton trainCard4;
     private ImageButton trainCard5;
     private ImageButton clickTrain;
+    private ImageButton clickDestination;
     //array that contains booleans that correspond to a button in the ArrayList
     private boolean[] trainPressed;
     private ArrayList<ImageButton> trainCards = new ArrayList<ImageButton>();
@@ -115,8 +116,11 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
                 }
                 else{this.trainCards.get(i).setAlpha(1.0f);}
             }
-            if(myState.getFaceDownTrainCards().getHighlight()){clickTrain.setAlpha(0.5f);}
+            if(myState.getFaceDownTrainCards().getHighlight()){this.clickTrain.setAlpha(0.5f);}
             else{this.clickTrain.setAlpha(1.0f);}
+
+            if(myState.getDestinationCards().getHighlight()){this.clickDestination.setAlpha(0.5f);}
+            else{this.clickDestination.setAlpha(1.0f);}
 
             if(playerNum >= 2) { //2 is the minimum number of players
                 lp = new LinearLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT,1);
@@ -151,7 +155,7 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
                 cpu2FrameLayout.setVisibility(View.VISIBLE);
                 cpu3FrameLayout.setVisibility(View.VISIBLE);
                 this.cpu3PlayerTextView.setText(""+this.allPlayerNames[3]);
-                this.cpu3ScoreTextview.setText(""+((TTRGameState) info).getScores()[3]);
+                this.cpu3ScoreTextview.setText("" + ((TTRGameState) info).getScores()[3]);
                 this.cpu3DestinationCardTextView.setText(""+((TTRGameState) info).getPlayerDestinationDecks()[3].getCards().size());
                 this.cpu3TrainCardTextView.setText(""+((TTRGameState) info).getPlayerTrainDecks()[3].getCards().size());
             }
@@ -203,6 +207,7 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
         this.trainCard4 = (ImageButton)myActivity.findViewById(R.id.Train4);
         this.trainCard5 = (ImageButton)myActivity.findViewById(R.id.Train5);
         this.clickTrain = (ImageButton)myActivity.findViewById(R.id.DrawTrainStack);
+        this.clickDestination = (ImageButton)myActivity.findViewById(R.id.DrawTicketStack);
 
         this.trainCard1.setOnClickListener(this);
         this.trainCard2.setOnClickListener(this);
@@ -210,6 +215,7 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
         this.trainCard4.setOnClickListener(this);
         this.trainCard5.setOnClickListener(this);
         this.clickTrain.setOnClickListener(this);
+        this.clickDestination.setOnClickListener(this);
 
         this.trainCards.add(this.trainCard1);
         this.trainCards.add(this.trainCard2);
@@ -240,6 +246,9 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
         }
         else if(v.getId() == R.id.DrawTrainStack){
             game.sendAction(new DrawDownCardAction(this));
+        }
+        else if(v.getId() == R.id.DrawTicketStack){
+            game.sendAction(new DrawDestinationCardAction(this));
         }
     }
     /**

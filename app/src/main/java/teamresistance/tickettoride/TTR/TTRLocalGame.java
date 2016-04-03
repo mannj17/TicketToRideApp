@@ -163,6 +163,10 @@ public class TTRLocalGame extends LocalGame {
 //            return true;
 //        }
         else if(action instanceof DrawUpCardAction){
+            if(mainState.getDestinationCardsSelected()){
+                mainState.getDestinationCards().setHighlight(false);
+                mainState.setDestinationCardsSelected(false);
+            }
             DrawUpCardAction temp = (DrawUpCardAction)action;
             int pos = temp.getPos();
             int numHighlights = 0;
@@ -196,6 +200,10 @@ public class TTRLocalGame extends LocalGame {
         else if(action instanceof DrawDownCardAction) {
             if(mainState.getTrackModeSelected()){
                 return false;
+            }
+            if(mainState.getDestinationCardsSelected()){
+                mainState.getDestinationCards().setHighlight(false);
+                mainState.setDestinationCardsSelected(false);
             }
             else if(mainState.getTrainCardsSelected() &&
                     mainState.getFaceDownTrainCards().getHighlight()){
@@ -236,9 +244,18 @@ public class TTRLocalGame extends LocalGame {
                 for(int i = 0; i < mainState.getFaceUpTrainCards().size(); i++){
                     mainState.getFaceUpTrainCards().getCards().get(i).setHighlight(false);
                 }
+                mainState.getDestinationCards().setHighlight(true);
+                mainState.setDestinationCardsSelected(true);
             }
-            mainState.getDestinationCards().setHighlight(true);
-            mainState.setDestinationCardsSelected(true);
+            else if(mainState.getDestinationCardsSelected()
+                    && mainState.getDestinationCards().getHighlight()){
+                mainState.getDestinationCards().setHighlight(false);
+                mainState.setDestinationCardsSelected(false);
+            }
+            else{
+                mainState.getDestinationCards().setHighlight(true);
+                mainState.setDestinationCardsSelected(true);
+            }
             return true;
         }
         else if (action instanceof ChooseDestinationAction) {
