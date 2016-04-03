@@ -227,14 +227,14 @@ public class TTRSurfaceView extends SurfaceView{
     public TTRSurfaceView(Context context, AttributeSet attrs) {
         super(context, attrs);
         setWillNotCacheDrawing(false);
-        int maxX = getMaxWidth();
-        int maxY = getMaxHeight();
+        //int maxX = getMaxWidth();
+        //int maxY = getMaxHeight();
         /* Initilize all track objects */
 
-        vancouverToCalgaryTrack = new Track(3, "Gray", "Vancouver", "Calgary");
-
-        vancouverToSeattleTrack = new Track(1, "Gray", "Vancouver", "Seattle");
-        vancouverToSeattle.addRect(102f, 115f, 125f, 165f, Path.Direction.CW);
+//        vancouverToCalgaryTrack = new Track(3, "Gray", "Vancouver", "Calgary");
+//
+//        vancouverToSeattleTrack = new Track(1, "Gray", "Vancouver", "Seattle");
+//        vancouverToSeattle.addRect(102f, 115f, 125f, 165f, Path.Direction.CW);
 
         //portlandToSanFrancisco.addRect(102f, 115f, 125f, 165f, Path.Direction.CW);
         //portlandToSanFranciscoTrack = new Track(1, "Red", "City1", "City2");
@@ -273,7 +273,7 @@ public class TTRSurfaceView extends SurfaceView{
         track3 = new Track(3, RED_COLOR, path3, touchArea3);
         */
 
-        myTracks = new Track[]{portlandToSanFranciscoTrack, vancouverToSeattleTrack};
+       // myTracks = new Track[]{portlandToSanFranciscoTrack, vancouverToSeattleTrack};
     }
 
     /*
@@ -283,28 +283,28 @@ public class TTRSurfaceView extends SurfaceView{
     public void onDraw(Canvas canvas){
         super.onDraw(canvas);
         drawBoard(canvas);
-        maxWidth = canvas.getWidth();
-        maxHeight = canvas.getHeight();
-        for(Track track : myTracks){
-            if(track.getHighlight()){
-                paint.setColor(HIGHLIGHT_COLOR);
-                paint.setStrokeWidth(5);
-                paint.setStyle(Paint.Style.STROKE);
-                canvas.drawPath(track.getTrack(), paint);
-            }
-            if(track.getSelected()) {
-                paint.setColor(SELECTION_COLOR);
-                canvas.drawPath(track.getTrack(), paint);
-            }
-            if(track.getCovered()) {
-                paint.setColor(RED_COLOR);
-                paint.setStyle(Paint.Style.FILL);
-                canvas.drawPath(track.getTrack(), paint);
-            }
-        }
+       // maxWidth = canvas.getWidth();
+       // maxHeight = canvas.getHeight();
+//        for(Track track : myTracks){
+//            if(track.getHighlight()){
+//                paint.setColor(HIGHLIGHT_COLOR);
+//                paint.setStrokeWidth(5);
+//                paint.setStyle(Paint.Style.STROKE);
+//                canvas.drawPath(track.getTrack(), paint);
+//            }
+//            if(track.getSelected()) {
+//                paint.setColor(SELECTION_COLOR);
+//                canvas.drawPath(track.getTrack(), paint);
+//            }
+//            if(track.getCovered()) {
+//                paint.setColor(RED_COLOR);
+//                paint.setStyle(Paint.Style.FILL);
+//                canvas.drawPath(track.getTrack(), paint);
+//            }
+//        }
     }
-    public int getMaxWidth(){return maxWidth;}
-    public int getMaxHeight(){return maxHeight;}
+   // public int getMaxWidth(){return maxWidth;}
+   // public int getMaxHeight(){return maxHeight;}
     /*
      * Method which draws the board image onto the canvas
      */
