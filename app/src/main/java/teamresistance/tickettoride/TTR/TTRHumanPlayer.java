@@ -113,7 +113,11 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
                 if(myState.getFaceUpTrainCards().getCards().get(i).getHighlight()){
                     this.trainCards.get(i).setAlpha(0.5f);
                 }
+                else{this.trainCards.get(i).setAlpha(1.0f);}
             }
+            if(myState.getFaceDownTrainCards().getHighlight()){clickTrain.setAlpha(0.5f);}
+            else{this.clickTrain.setAlpha(1.0f);}
+
             if(playerNum >= 2) { //2 is the minimum number of players
                 lp = new LinearLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT,1);
                 cpu1FrameLayout.setLayoutParams(lp);
@@ -198,12 +202,14 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
         this.trainCard3 = (ImageButton)myActivity.findViewById(R.id.Train3);
         this.trainCard4 = (ImageButton)myActivity.findViewById(R.id.Train4);
         this.trainCard5 = (ImageButton)myActivity.findViewById(R.id.Train5);
+        this.clickTrain = (ImageButton)myActivity.findViewById(R.id.DrawTrainStack);
 
         this.trainCard1.setOnClickListener(this);
         this.trainCard2.setOnClickListener(this);
         this.trainCard3.setOnClickListener(this);
         this.trainCard4.setOnClickListener(this);
         this.trainCard5.setOnClickListener(this);
+        this.clickTrain.setOnClickListener(this);
 
         this.trainCards.add(this.trainCard1);
         this.trainCards.add(this.trainCard2);
@@ -231,6 +237,9 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
         }
         else if(v.getId() == R.id.Train5){
             game.sendAction(new DrawUpCardAction(this, 4));
+        }
+        else if(v.getId() == R.id.DrawTrainStack){
+            game.sendAction(new DrawDownCardAction(this));
         }
     }
     /**

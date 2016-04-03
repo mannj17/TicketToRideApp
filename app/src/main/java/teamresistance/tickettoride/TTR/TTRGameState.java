@@ -140,6 +140,14 @@ public class TTRGameState extends GameState {
         testTracks[5] = new Track(2, "Pink", "PittsBurgh", "Boston");
         testTracks[6] = new Track(2, "Red", "PittsBurgh", "Boston");
         testTracks[7] = new Track(2, "Green", "PittsBurgh", "Boston");
+
+        trackModeSelected = false;
+        cardModeSelected = true;
+        destinationCardsSelected = false;
+        trainCardsSelected = false;
+        placeTrainSelected = false;
+        isSelectDestinationCards = false;
+        onlyDownDeck = false;
     }
 
     /*
