@@ -164,8 +164,23 @@ public class TTRLocalGame extends LocalGame {
 //        }
         else if(action instanceof DrawUpCardAction){
             DrawUpCardAction temp = (DrawUpCardAction)action;
-            int i = temp.getPos();
-            mainState.getFaceUpTrainCards().getCards().get(i).setHighlight(true);
+            int pos = temp.getPos();
+            int numHighlights = 0;
+            for(int i = 0; i < mainState.getFaceUpTrainCards().size(); i++){
+                if(mainState.getFaceUpTrainCards().getCards().get(i).getHighlight()){
+                    numHighlights++;
+                    mainState.setOnlyDownDeck(false);
+                }
+            }
+            if(mainState.getFaceDownTrainCards().getHighlight()){
+                numHighlights++;
+            }
+            if(numHighlights < 2){
+                mainState.getFaceUpTrainCards().getCards().get(pos).setHighlight(true);
+            }
+            else if(mainState.getFaceUpTrainCards().getCards().get(pos).getHighlight()){
+                mainState.getFaceUpTrainCards().getCards().get(pos).setHighlight(false);
+            }
             return true;
         }
         else if(action instanceof DrawDownCardAction) {
@@ -219,7 +234,7 @@ public class TTRLocalGame extends LocalGame {
         else if (action instanceof ChooseDestinationAction) {
             return true;
         }
-        return false;
+        return true;
     }
 
     @Override
