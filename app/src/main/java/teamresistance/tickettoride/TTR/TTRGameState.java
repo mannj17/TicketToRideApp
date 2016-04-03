@@ -43,7 +43,7 @@ public class TTRGameState extends GameState {
     /** Which player's turn it is */
     private int playerID;
     /** The number of players playing the game */
-    private int numPlayers;
+    private int numPlayers = MAX_NUM_PLAYERS;
     /** Says whether or not the player is in track select mode */
     private Boolean trackModeSelected;
     /** Says whether or not the player is in card select mode */
@@ -66,17 +66,17 @@ public class TTRGameState extends GameState {
 
     //PARALLEL ARRAYS//
     /** All the tracks in the game */
-    private Track[] tracks = new Track[MAX_NUM_PLAYERS];
+    private Track[] tracks = new Track[numPlayers];
     /** Number of trainTokens per player */
-    private int[] trainTokens = new int[MAX_NUM_PLAYERS];
+    private int[] trainTokens = new int[numPlayers];
     /** The current score of each player */
-    private int[] scores = new int[MAX_NUM_PLAYERS];
+    private int[] scores = new int[numPlayers];
     /** The names of each player */
-    private String[] names = new String[MAX_NUM_PLAYERS];
+    private String[] names = new String[numPlayers];
     /** All of the hands of each player */
-    private Deck[] playerTrainDecks = new Deck[MAX_NUM_PLAYERS];
+    private Deck[] playerTrainDecks = new Deck[numPlayers];
     /** All of the hands of each player */
-    private Deck[] playerDestinationDecks = new Deck[MAX_NUM_PLAYERS];
+    private Deck[] playerDestinationDecks = new Deck[numPlayers];
 
 
     /*
@@ -100,7 +100,7 @@ public class TTRGameState extends GameState {
 
         faceUpTrainCards = new Deck("Face up Cards");
         //place five train cards 'face up'
-        for(int i = 0; i < MAX_NUM_PLAYERS; i++){
+        for(int i = 0; i < 5; i++){
             faceDownTrainCards.moveTopCardTo(faceUpTrainCards, faceDownTrainCards);
         }
 
@@ -112,7 +112,7 @@ public class TTRGameState extends GameState {
         }
 
         /** intialize array values to max possible size */
-        for(int i = 0; i < MAX_NUM_PLAYERS; i++){
+        for(int i = 0; i < numPlayers; i++){
             trainTokens[i] = 45;
             scores[i] = 0;
             names[i] = "";
@@ -137,7 +137,7 @@ public class TTRGameState extends GameState {
         testTracks[2] = new Track(2, "Orange", "PittsBurgh", "Boston");
         testTracks[3] = new Track(2, "Black", "PittsBurgh", "Boston");
         testTracks[4] = new Track(2, "White", "PittsBurgh", "Boston");
-        testTracks[MAX_NUM_PLAYERS] = new Track(2, "Pink", "PittsBurgh", "Boston");
+        testTracks[5] = new Track(2, "Pink", "PittsBurgh", "Boston");
         testTracks[6] = new Track(2, "Red", "PittsBurgh", "Boston");
         testTracks[7] = new Track(2, "Green", "PittsBurgh", "Boston");
     }

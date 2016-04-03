@@ -111,7 +111,7 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
             int playerNum = ((TTRGameState) info).getNumPlayers();
             for(int i = 0; i < myState.getFaceUpTrainCards().size(); i++){
                 if(myState.getFaceUpTrainCards().getCards().get(i).getHighlight()){
-                    this.trainCards.get(i).setAlpha(0.0f);
+                    this.trainCards.get(i).setAlpha(0.5f);
                 }
             }
             if(playerNum >= 2) { //2 is the minimum number of players
@@ -119,9 +119,11 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
                 cpu1FrameLayout.setLayoutParams(lp);
                 cpu2FrameLayout.setVisibility(View.GONE);
                 cpu3FrameLayout.setVisibility(View.GONE);
-                this.humanTextView.setText(""+this.allPlayerNames[0]);
+                this.humanTextView.setText("" + this.allPlayerNames[0]);
                 this.humanScoreTextview.setText(""+((TTRGameState) info).getScores()[0]);
+                this.humanTrainTokenTextView.setText(""+((TTRGameState) info).getTrainTokens()[0]);
                 this.cpu1PlayerTextView.setText(""+this.allPlayerNames[1]);
+                this.cpu1TrainTokenTextView.setText(""+((TTRGameState) info).getTrainTokens()[1]);
                 this.cpu1ScoreTextview.setText(""+((TTRGameState) info).getScores()[1]);
                 this.cpu1DestinationCardTextView.setText(""+((TTRGameState) info).getPlayerDestinationDecks()[1].getCards().size());
                 this.cpu1TrainCardTextView.setText(""+((TTRGameState) info).getPlayerTrainDecks()[1].getCards().size());
