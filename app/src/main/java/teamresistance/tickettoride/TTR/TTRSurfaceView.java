@@ -32,8 +32,8 @@ public class TTRSurfaceView extends SurfaceView{
     public Boolean drawTrain = false;
     public Boolean isArea1 = false;
     public Boolean isArea2 = false;
-    protected int maxWidth;
-    protected int maxHeight;
+    protected int maxX = 1720;
+    protected int maxY = 980;
     Rect touchArea1 = new Rect(90, 90, 140, 185);
     Rect touchArea2 = new Rect(180, 650, 310, 750);
     Rect touchArea3 = new Rect(410,290,560,460);
@@ -147,7 +147,7 @@ public class TTRSurfaceView extends SurfaceView{
     Track sanFranciscoToLosAngelesTrack;
     Track sanFranciscoToSaltLakeCityTrack;
     Track losAngelesToLasVegasTrack;
-    Track losAngelesToPheonixTrack;
+    Track losAngelesToPhoenixTrack;
     Track losAngelesToElPasoTrack;
     //mid-west tracks
     Track calgaryToWinnipegTrack;
@@ -238,10 +238,10 @@ public class TTRSurfaceView extends SurfaceView{
 
 
         portlandToSanFranciscoTrack = new Track(5, "Green", "Portland", "SanFrancisco");
-        portlandToSanFrancisco.moveTo(48, 280);
-        portlandToSanFrancisco.lineTo(27, 326);
-        portlandToSanFrancisco.lineTo(45, 334);
-        portlandToSanFrancisco.lineTo(66, 288);
+        portlandToSanFrancisco.moveTo(maxX*.028f, maxY*.286f);
+        portlandToSanFrancisco.lineTo(maxX*.016f, maxY*.333f);
+        portlandToSanFrancisco.lineTo(maxX*.026f, maxY*.341f);
+        portlandToSanFrancisco.lineTo(maxX*.038f, maxY*.294f);
         portlandToSanFrancisco.close();
         portlandToSanFrancisco.moveTo(26, 338);
         portlandToSanFrancisco.lineTo(16, 390);
@@ -264,39 +264,18 @@ public class TTRSurfaceView extends SurfaceView{
         portlandToSanFrancisco.lineTo(37, 518);
         portlandToSanFrancisco.close();
 
+        losAngelesToLasVegasTrack = new Track(2, "Gray", "Los Angeles", "Los Vegas");
+        losAngelesToLasVegas.moveTo(maxX * .127f, maxY * .702f);
+        losAngelesToLasVegas.lineTo(maxX * .137f, maxY * .707f);
+        losAngelesToLasVegas.lineTo(maxX * .124f, maxY * .754f);
+        losAngelesToLasVegas.lineTo(maxX * .115f, maxY * .749f);
+        losAngelesToLasVegas.close();
+        losAngelesToLasVegas.moveTo(maxX * .139f, maxY * .704f);
+        losAngelesToLasVegas.lineTo(maxX * .137f, maxY * .685f);
+        losAngelesToLasVegas.lineTo(maxX * .170f, maxY * .673f);
+        losAngelesToLasVegas.lineTo(maxX * .172f, maxY * .694f);
+        losAngelesToLasVegas.close();
 
-        /*
-        path2.moveTo(219, 688);
-        path2.lineTo(235, 693);
-        path2.lineTo(214, 739);
-        path2.lineTo(197, 734);
-        path2.close();
-
-        path2.moveTo(239, 690);
-        path2.lineTo(236, 671);
-        path2.lineTo(292, 660);
-        path2.lineTo(295, 680);
-        path2.close();
-        track2 = new Track(2, RED_COLOR, path2, touchArea2);
-        //path.reset();
-
-        path3.moveTo(430,441);
-        path3.lineTo(450, 456);
-        path3.lineTo(475, 415);
-        path3.lineTo(455,402);
-        path3.close();
-        path3.moveTo(484, 405);
-        path3.lineTo(465, 395);
-        path3.lineTo(490, 355);
-        path3.lineTo(510,364);
-        path3.close();
-        path3.moveTo(495, 340);
-        path3.lineTo(514, 350);
-        path3.lineTo(540, 310);
-        path3.lineTo(520,298);
-        path3.close();
-        track3 = new Track(3, RED_COLOR, path3, touchArea3);
-        */
 
         myTracks = new Track[]{portlandToSanFranciscoTrack, vancouverToSeattleTrack};
     }
@@ -308,8 +287,6 @@ public class TTRSurfaceView extends SurfaceView{
     public void onDraw(Canvas canvas){
         super.onDraw(canvas);
         drawBoard(canvas);
-        maxWidth = canvas.getWidth();
-        maxHeight = canvas.getHeight();
         for(Track track : myTracks){
             if(track.getHighlight()){
                 paint.setColor(HIGHLIGHT_COLOR);
@@ -328,13 +305,13 @@ public class TTRSurfaceView extends SurfaceView{
             }
         }
     }
-    public int getMaxWidth(){return maxWidth;}
-    public int getMaxHeight(){return maxHeight;}
+    public int getMaxWidth(){return maxX;}
+    public int getMaxHeight(){return maxY;}
     /*
      * Method which draws the board image onto the canvas
      */
     protected void drawBoard(Canvas canvas){
-        boardImage = Bitmap.createScaledBitmap(boardImage, 1720, 980, false);
+        boardImage = Bitmap.createScaledBitmap(boardImage, maxX, maxY, false);
         canvas.drawBitmap(boardImage, 0, 0, new Paint());
     }
 

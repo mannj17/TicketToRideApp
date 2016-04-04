@@ -15,6 +15,7 @@ import android.graphics.Rect;
 public class Track {
     //instance variables for tracks
     private int trainTrackNum = 0;
+    private int playerID = -1;
     private String trackColor = null;
     private Boolean selected = false;
     private Boolean highlight = false;
