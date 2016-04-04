@@ -31,6 +31,7 @@ import teamresistance.tickettoride.R;
 public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListener, View.OnTouchListener {
     private TTRSurfaceView myBoard;
     private GameMainActivity myActivity;
+    private TTRGameState myState;
     private Deck trainDeck;
     private Deck destinationDeck;
     private int score;
@@ -108,7 +109,7 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
     public void receiveInfo(GameInfo info) {
         //Update all TextViews to Display player details properly
         if(info instanceof TTRGameState) {
-            TTRGameState myState = (TTRGameState)info;
+            myState = (TTRGameState)info;
             int playerNum = ((TTRGameState) info).getNumPlayers();
             for(int i = 0; i < myState.getFaceUpTrainCards().size(); i++){
                 if(myState.getFaceUpTrainCards().getCards().get(i).getHighlight()){
@@ -121,6 +122,17 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
 
             if(myState.getDestinationCards().getHighlight()){this.clickDestination.setAlpha(0.5f);}
             else{this.clickDestination.setAlpha(1.0f);}
+
+            this.trainCheck.setChecked(myState.getTrackModeSelected());
+            this.cardCheck.setChecked(myState.getCardModeSelected());
+//            if(myState.getCardModeSelected()){
+//                this.cardCheck.setChecked(true);
+//                this.trainCheck.setChecked(false);
+//            }
+//            else{
+//                this.cardCheck.setChecked(false);
+//                this.trainCheck.setChecked(true);
+//            }
 
             if(playerNum >= 2) { //2 is the minimum number of players
                 lp = new LinearLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT,1);
@@ -145,7 +157,7 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
                 this.cpu2PlayerTextView.setText(""+this.allPlayerNames[2]);
                 this.cpu2ScoreTextview.setText(""+((TTRGameState) info).getScores()[2]);
                 this.cpu2DestinationCardTextView.setText(""+((TTRGameState) info).getPlayerDestinationDecks()[2].getCards().size());
-                this.cpu2TrainCardTextView.setText(""+((TTRGameState) info).getPlayerTrainDecks()[2].getCards().size());
+                this.cpu2TrainCardTextView.setText("" + ((TTRGameState) info).getPlayerTrainDecks()[2].getCards().size());
             }
             if(playerNum >= 4) {
                 lp = new LinearLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT,0.33f);
@@ -208,6 +220,8 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
         this.trainCard5 = (ImageButton)myActivity.findViewById(R.id.Train5);
         this.clickTrain = (ImageButton)myActivity.findViewById(R.id.DrawTrainStack);
         this.clickDestination = (ImageButton)myActivity.findViewById(R.id.DrawTicketStack);
+        this.cardCheck = (CheckBox)myActivity.findViewById(R.id.drawCardCheckBox);
+        this.trainCheck = (CheckBox)myActivity.findViewById(R.id.drawTrainCheckBox);
 
         this.trainCard1.setOnClickListener(this);
         this.trainCard2.setOnClickListener(this);
@@ -216,6 +230,8 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
         this.trainCard5.setOnClickListener(this);
         this.clickTrain.setOnClickListener(this);
         this.clickDestination.setOnClickListener(this);
+        this.cardCheck.setOnClickListener(this);
+        this.trainCheck.setOnClickListener(this);
 
         this.trainCards.add(this.trainCard1);
         this.trainCards.add(this.trainCard2);
@@ -249,6 +265,22 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
         }
         else if(v.getId() == R.id.DrawTicketStack){
             game.sendAction(new DrawDestinationCardAction(this));
+        }
+        else if(v.getId() == R.id.drawCardCheckBox){
+            if(myState.getTrackModeSelected() && !myState.getCardModeSelected()){
+                game.sendAction(new ChangeModeAction(this));
+            }
+            else{
+                this.cardCheck.setChecked(true);
+            }
+        }
+        else if(v.getId() == R.id.drawTrainCheckBox){
+            if(myState.getCardModeSelected() && !myState.getTrackModeSelected()){
+                game.sendAction(new ChangeModeAction(this));
+            }
+            else{
+                this.trainCheck.setChecked(true);
+            }
         }
     }
     /**
