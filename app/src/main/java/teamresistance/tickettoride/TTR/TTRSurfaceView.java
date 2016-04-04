@@ -385,4 +385,12 @@ public class TTRSurfaceView extends SurfaceView{
         }
         postInvalidate();
     }
+
+    public int getTracksLength(){
+        int size = myTracks.length;
+        return size;
+    }
+    public Track[] getTracks(){
+        return myTracks;
+    }
 }

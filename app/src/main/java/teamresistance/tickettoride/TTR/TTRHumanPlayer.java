@@ -125,14 +125,14 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
 
             this.trainCheck.setChecked(myState.getTrackModeSelected());
             this.cardCheck.setChecked(myState.getCardModeSelected());
-//            if(myState.getCardModeSelected()){
-//                this.cardCheck.setChecked(true);
-//                this.trainCheck.setChecked(false);
-//            }
-//            else{
-//                this.cardCheck.setChecked(false);
-//                this.trainCheck.setChecked(true);
-//            }
+
+            if(myState.getTrackModeSelected()) {
+                int size = myBoard.getTracksLength();
+                Track[] tempTrack = myBoard.getTracks();
+                for (int i = 0; i < size; i++) {
+                    tempTrack[i].setHighlight(true);
+                }
+            }
 
             if(playerNum >= 2) { //2 is the minimum number of players
                 lp = new LinearLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT,1);

@@ -163,7 +163,10 @@ public class TTRLocalGame extends LocalGame {
 //            return true;
 //        }
         else if(action instanceof DrawUpCardAction){
-            if(mainState.getDestinationCardsSelected()){
+            if(mainState.getTrackModeSelected()){
+                return false;
+            }
+            else if(mainState.getDestinationCardsSelected()){
                 mainState.getDestinationCards().setHighlight(false);
                 mainState.setDestinationCardsSelected(false);
             }
@@ -201,7 +204,7 @@ public class TTRLocalGame extends LocalGame {
             if(mainState.getTrackModeSelected()){
                 return false;
             }
-            if(mainState.getDestinationCardsSelected()){
+            else if(mainState.getDestinationCardsSelected()){
                 mainState.getDestinationCards().setHighlight(false);
                 mainState.setDestinationCardsSelected(false);
             }
@@ -234,10 +237,12 @@ public class TTRLocalGame extends LocalGame {
             else{
                 return false;
             }
-            return true;
         }
         else if (action instanceof DrawDestinationCardAction) {
-            if(mainState.getTrainCardsSelected()){
+            if(mainState.getTrackModeSelected()){
+                return false;
+            }
+            else if(mainState.getTrainCardsSelected()){
                 mainState.setTrainCardsSelected(false);
                 mainState.setOnlyDownDeck(false);
                 mainState.getFaceDownTrainCards().setHighlight(false);
@@ -256,12 +261,11 @@ public class TTRLocalGame extends LocalGame {
                 mainState.getDestinationCards().setHighlight(true);
                 mainState.setDestinationCardsSelected(true);
             }
-            return true;
         }
         else if (action instanceof ChooseDestinationAction) {
             return true;
         }
-        return true;
+        return false;
     }
 
     @Override
