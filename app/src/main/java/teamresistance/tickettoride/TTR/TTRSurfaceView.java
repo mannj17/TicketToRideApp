@@ -231,15 +231,14 @@ public class TTRSurfaceView extends SurfaceView{
         int maxY = getMaxHeight();
         /* Initilize all track objects */
 
-        vancouverToCalgaryTrack = new Track(3, "Gray", "Vancouver", "Calgary");
+    //    vancouverToCalgaryTrack = new Track(3, "Gray", "Vancouver", "Calgary");
         //not initialized
-        vancouverToSeattleTrack = new Track(1, "Gray", "Vancouver", "Seattle");
-        vancouverToSeattle.addRect(102f, 115f, 125f, 165f, Path.Direction.CW);
+      //  vancouverToSeattleTrack = new Track(1, "Gray", "Vancouver", "Seattle");
+      //  vancouverToSeattle.addRect(102f, 115f, 125f, 165f, Path.Direction.CW);
 
 
-        portlandToSanFranciscoTrack = new Track(5, "Green", "Portland", "SanFrancisco");
-        portlandToSanFrancisco.moveTo(maxX*.028f, maxY*.286f);
-        portlandToSanFrancisco.lineTo(maxX*.016f, maxY*.333f);
+        portlandToSanFrancisco.moveTo(maxX * .028f, maxY * .286f);
+        portlandToSanFrancisco.lineTo(maxX * .016f, maxY * .333f);
         portlandToSanFrancisco.lineTo(maxX*.026f, maxY*.341f);
         portlandToSanFrancisco.lineTo(maxX*.038f, maxY*.294f);
         portlandToSanFrancisco.close();
@@ -249,7 +248,7 @@ public class TTRSurfaceView extends SurfaceView{
         portlandToSanFrancisco.lineTo(41, 343);
         portlandToSanFrancisco.close();
         portlandToSanFrancisco.moveTo(13, 400);
-        portlandToSanFrancisco.lineTo(31,400);
+        portlandToSanFrancisco.lineTo(31, 400);
         portlandToSanFrancisco.lineTo(30,450);
         portlandToSanFrancisco.lineTo(12, 450);
         portlandToSanFrancisco.close();
@@ -262,9 +261,9 @@ public class TTRSurfaceView extends SurfaceView{
         portlandToSanFrancisco.lineTo(32, 568);
         portlandToSanFrancisco.lineTo(50, 567);
         portlandToSanFrancisco.lineTo(37, 518);
+        portlandToSanFranciscoTrack = new Track(5, "Green", "Portland", "SanFrancisco", portlandToSanFrancisco);
         portlandToSanFrancisco.close();
 
-        losAngelesToLasVegasTrack = new Track(2, "Gray", "Los Angeles", "Los Vegas");
         losAngelesToLasVegas.moveTo(maxX * .127f, maxY * .702f);
         losAngelesToLasVegas.lineTo(maxX * .137f, maxY * .707f);
         losAngelesToLasVegas.lineTo(maxX * .124f, maxY * .754f);
@@ -274,6 +273,7 @@ public class TTRSurfaceView extends SurfaceView{
         losAngelesToLasVegas.lineTo(maxX * .137f, maxY * .685f);
         losAngelesToLasVegas.lineTo(maxX * .170f, maxY * .673f);
         losAngelesToLasVegas.lineTo(maxX * .172f, maxY * .694f);
+        losAngelesToLasVegasTrack = new Track(2, "Gray", "Los Angeles", "Los Vegas", losAngelesToLasVegas);
         losAngelesToLasVegas.close();
 
 
