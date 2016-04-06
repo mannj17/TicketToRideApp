@@ -272,7 +272,6 @@ public class TTRSurfaceView extends SurfaceView{
         losAngelesToLasVegas.close();
         losAngelesToLasVegasTrack = new Track(2, "Gray", "Los Angeles", "Los Vegas", losAngelesToLasVegas);
 
-
         myTracks = new Track[]{portlandToSanFranciscoTrack, losAngelesToLasVegasTrack, vancouverToSeattleTrack};
     }
 
@@ -321,8 +320,8 @@ public class TTRSurfaceView extends SurfaceView{
         highlightMode = true;
         for(Track track : myTracks) {
             if(!track.getCovered()){
-                track.setSelected(false);
-                track.setHighlight(true);
+                track.setSelected(!highlightMode);
+                track.setHighlight(highlightMode);
             }
         }
         // Refreshes the view by calling onDraw function
