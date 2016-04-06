@@ -292,16 +292,16 @@ public class TTRSurfaceView extends SurfaceView{
                 paint.setColor(HIGHLIGHT_COLOR);
                 paint.setStrokeWidth(5);
                 paint.setStyle(Paint.Style.STROKE);
-                canvas.drawPath(track.getTrack(), paint);
+                canvas.drawPath(track.getPath(), paint);
             }
             if(track.getSelected()) {
                 paint.setColor(SELECTION_COLOR);
-                canvas.drawPath(track.getTrack(), paint);
+                canvas.drawPath(track.getPath(), paint);
             }
             if(track.getCovered()) {
                 paint.setColor(RED_COLOR);
                 paint.setStyle(Paint.Style.FILL);
-                canvas.drawPath(track.getTrack(), paint);
+                canvas.drawPath(track.getPath(), paint);
             }
         }
     }

@@ -132,6 +132,7 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
                 for (int i = 0; i < size; i++) {
                     tempTrack[i].setHighlight(true);
                 }
+                myBoard.postInvalidate();
             }
 
             if(playerNum >= 2) { //2 is the minimum number of players

@@ -91,7 +91,7 @@ public class Track {
      * Retruns the track Path
      * @return
      */
-    public Path getTrack(){
+    public Path getPath(){
         return track;
     }
 
@@ -99,7 +99,7 @@ public class Track {
      * Sets the track path
      * @param path - new Path for graphics
      */
-    public void setTrack(Path path){
+    public void setPath(Path path){
         track = path;
     }
 
