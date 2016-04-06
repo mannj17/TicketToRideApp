@@ -236,7 +236,6 @@ public class TTRSurfaceView extends SurfaceView{
       //  vancouverToSeattleTrack = new Track(1, "Gray", "Vancouver", "Seattle");
       //  vancouverToSeattle.addRect(102f, 115f, 125f, 165f, Path.Direction.CW);
 
-
         portlandToSanFrancisco.moveTo(maxX * .028f, maxY * .286f);
         portlandToSanFrancisco.lineTo(maxX * .016f, maxY * .333f);
         portlandToSanFrancisco.lineTo(maxX*.026f, maxY*.341f);
@@ -288,20 +287,22 @@ public class TTRSurfaceView extends SurfaceView{
         super.onDraw(canvas);
         drawBoard(canvas);
         for(Track track : myTracks){
-            if(track.getHighlight()){
-                paint.setColor(HIGHLIGHT_COLOR);
-                paint.setStrokeWidth(5);
-                paint.setStyle(Paint.Style.STROKE);
-                canvas.drawPath(track.getPath(), paint);
-            }
-            if(track.getSelected()) {
-                paint.setColor(SELECTION_COLOR);
-                canvas.drawPath(track.getPath(), paint);
-            }
-            if(track.getCovered()) {
-                paint.setColor(RED_COLOR);
-                paint.setStyle(Paint.Style.FILL);
-                canvas.drawPath(track.getPath(), paint);
+            if(track != null) {
+                if (track.getHighlight()) {
+                    paint.setColor(HIGHLIGHT_COLOR);
+                    paint.setStrokeWidth(5);
+                    paint.setStyle(Paint.Style.STROKE);
+                    canvas.drawPath(track.getPath(), paint);
+                }
+                if (track.getSelected()) {
+                    paint.setColor(SELECTION_COLOR);
+                    canvas.drawPath(track.getPath(), paint);
+                }
+                if (track.getCovered()) {
+                    paint.setColor(RED_COLOR);
+                    paint.setStyle(Paint.Style.FILL);
+                    canvas.drawPath(track.getPath(), paint);
+                }
             }
         }
     }

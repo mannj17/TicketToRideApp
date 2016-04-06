@@ -20,11 +20,11 @@ public class Track {
     private Boolean selected = false;
     private Boolean highlight = false;
     private Boolean covered = false;
-    private Path trackPath;
-    private Rect touchArea;
-    private String startCity;
-    private String endCity;
-    private boolean selectHighlight;
+    private Path trackPath = new Path();
+    private Rect touchArea = new Rect();
+    private String startCity = "";
+    private String endCity = "";
+    private boolean selectHighlight = false;
 
     /**
      * Constructor for track object
