@@ -57,7 +57,7 @@ public class TTRMainActivity extends GameMainActivity {
         });
 
         // Create a game configuration class for TTR
-        GameConfig defaultConfig = new GameConfig(playerTypes, 2,5, "Ticket To Ride", PORT_NUMBER);
+        GameConfig defaultConfig = new GameConfig(playerTypes, 2,4, "Ticket To Ride", PORT_NUMBER);
 
         // Add the default players
         defaultConfig.addPlayer("Human", 0);
