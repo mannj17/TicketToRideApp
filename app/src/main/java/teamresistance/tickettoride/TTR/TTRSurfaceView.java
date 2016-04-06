@@ -3,6 +3,7 @@ package teamresistance.tickettoride.TTR;
 import android.content.Context;
 import android.graphics.*;
 import android.util.AttributeSet;
+import android.view.MotionEvent;
 import android.view.SurfaceView;
 
 import teamresistance.tickettoride.R;
@@ -238,25 +239,25 @@ public class TTRSurfaceView extends SurfaceView{
         portlandToSanFrancisco.lineTo(maxX*.026f, maxY*.341f);
         portlandToSanFrancisco.lineTo(maxX * .038f, maxY * .294f);
         portlandToSanFrancisco.close();
-        portlandToSanFrancisco.moveTo(26, 338);
-        portlandToSanFrancisco.lineTo(16, 390);
-        portlandToSanFrancisco.lineTo(33, 390);
-        portlandToSanFrancisco.lineTo(41, 343);
+        portlandToSanFrancisco.moveTo(maxX * .015f, maxY * .345f);
+        portlandToSanFrancisco.lineTo(maxX * .009f, maxY * .398f);
+        portlandToSanFrancisco.lineTo(maxX * .019f, maxY * .398f);
+        portlandToSanFrancisco.lineTo(maxX * .024f, maxY * .35f);
         portlandToSanFrancisco.close();
-        portlandToSanFrancisco.moveTo(13, 400);
-        portlandToSanFrancisco.lineTo(31, 400);
-        portlandToSanFrancisco.lineTo(30,450);
-        portlandToSanFrancisco.lineTo(12, 450);
+        portlandToSanFrancisco.moveTo(maxX * .008f, maxY * .408f);
+        portlandToSanFrancisco.lineTo(maxX * .018f, maxY * .408f);
+        portlandToSanFrancisco.lineTo(maxX * .017f, maxY * .459f);
+        portlandToSanFrancisco.lineTo(maxX * .007f, maxY * .459f);
         portlandToSanFrancisco.close();
-        portlandToSanFrancisco.moveTo(12, 460);
-        portlandToSanFrancisco.lineTo(17, 513);
-        portlandToSanFrancisco.lineTo(34, 512);
-        portlandToSanFrancisco.lineTo(29, 460);
+        portlandToSanFrancisco.moveTo(maxX * .007f, maxY * .469f);
+        portlandToSanFrancisco.lineTo(maxX * .0098f, maxY * .523f);
+        portlandToSanFrancisco.lineTo(maxX * .0197f, maxY * .522f);
+        portlandToSanFrancisco.lineTo(maxX * .0168f, maxY * .469f);
         portlandToSanFrancisco.close();
-        portlandToSanFrancisco.moveTo(18, 523);
-        portlandToSanFrancisco.lineTo(32, 568);
-        portlandToSanFrancisco.lineTo(50, 567);
-        portlandToSanFrancisco.lineTo(37, 518);
+        portlandToSanFrancisco.moveTo(maxX * .0105f, maxY * .5336f);
+        portlandToSanFrancisco.lineTo(maxX * .0186f, maxY * .579f);
+        portlandToSanFrancisco.lineTo(maxX * .029f, maxY * .578f);
+        portlandToSanFrancisco.lineTo(maxX * .0215f, maxY * .5285f);
         portlandToSanFrancisco.close();
         portlandToSanFranciscoTrack = new Track(5, "Green", "Portland", "SanFrancisco", portlandToSanFrancisco);
 
@@ -271,7 +272,6 @@ public class TTRSurfaceView extends SurfaceView{
         losAngelesToLasVegas.lineTo(maxX * .172f, maxY * .694f);
         losAngelesToLasVegas.close();
         losAngelesToLasVegasTrack = new Track(2, "Gray", "Los Angeles", "Los Vegas", losAngelesToLasVegas);
-
 
         myTracks = new Track[]{portlandToSanFranciscoTrack, losAngelesToLasVegasTrack, vancouverToSeattleTrack};
     }
@@ -321,8 +321,8 @@ public class TTRSurfaceView extends SurfaceView{
         highlightMode = true;
         for(Track track : myTracks) {
             if(!track.getCovered()){
-                track.setSelected(false);
-                track.setHighlight(true);
+                track.setSelected(!highlightMode);
+                track.setHighlight(highlightMode);
             }
         }
         // Refreshes the view by calling onDraw function
