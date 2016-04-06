@@ -98,6 +98,7 @@ public class TTRGameState extends GameState {
             }
         }
 
+        faceDownTrainCards.shuffle();
         faceUpTrainCards = new Deck("Face up Cards");
         //place five train cards 'face up'
         for(int i = 0; i < 5; i++){

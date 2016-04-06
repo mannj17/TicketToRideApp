@@ -141,7 +141,7 @@ public class TTRLocalGame extends LocalGame {
                             mainState.getPlayerTrainDecks()[mainState.getPlayerID()].add(temp);
                             mainState.getFaceUpTrainCards().getCards().remove(i);
                             mainState.getFaceDownTrainCards().moveTopCardTo(
-                                    mainState.getFaceUpTrainCards(), mainState.getFaceUpTrainCards());
+                                    mainState.getFaceUpTrainCards(), mainState.getFaceDownTrainCards());
                             mainState.getFaceUpTrainCards().getCards().get(i).setHighlight(false);
                         }
                     }
@@ -157,6 +157,7 @@ public class TTRLocalGame extends LocalGame {
                             mainState.getDestinationPool());
                 }
             }
+            mainState.setPlayerID((mainState.getPlayerID()+1)%mainState.getNumPlayers());
             return true;
         }
 //        else if(action instanceof TrackPlaceAction){

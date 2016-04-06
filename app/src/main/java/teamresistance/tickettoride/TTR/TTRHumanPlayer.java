@@ -215,6 +215,7 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
         this.cpu2FrameLayout = (FrameLayout)myActivity.findViewById(R.id.CPU2);
         this.cpu3FrameLayout = (FrameLayout)myActivity.findViewById(R.id.CPU3);
 
+        this.confirmSelection = (Button)myActivity.findViewById(R.id.confirmSelection);
         this.trainCard1 = (ImageButton)myActivity.findViewById(R.id.Train1);
         this.trainCard2 = (ImageButton)myActivity.findViewById(R.id.Train2);
         this.trainCard3 = (ImageButton)myActivity.findViewById(R.id.Train3);
@@ -225,6 +226,7 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
         this.cardCheck = (CheckBox)myActivity.findViewById(R.id.drawCardCheckBox);
         this.trainCheck = (CheckBox)myActivity.findViewById(R.id.drawTrainCheckBox);
 
+        this.confirmSelection.setOnClickListener(this);
         this.trainCard1.setOnClickListener(this);
         this.trainCard2.setOnClickListener(this);
         this.trainCard3.setOnClickListener(this);
@@ -247,7 +249,10 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
      */
     @Override
     public void onClick(View v) {
-        if(v.getId() == R.id.Train1){
+        if(v.getId() == R.id.confirmSelection){
+            game.sendAction(new ConfirmSelectionAction(this));
+        }
+        else if(v.getId() == R.id.Train1){
             game.sendAction(new DrawUpCardAction(this, 0));
         }
         else if(v.getId() == R.id.Train2){

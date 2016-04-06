@@ -55,9 +55,18 @@ public class Deck {
 
     /**
      * Shuffles the deck
+     * Acquired from SlapJack game
      */
     public void shuffle() {
-        return;
+        synchronized (this.cards) {
+            int size = this.cards.size();
+            for (int i = size; i > 1; i--) {
+                int spot = (int) (i * Math.random());
+                Card temp = this.cards.get(spot);
+                this.cards.set(spot, this.cards.get(i - 1));
+                this.cards.set(i - 1, temp);
+            }
+        }
     }
 
     /**
