@@ -82,7 +82,7 @@ public class AnimationSurface extends SurfaceView implements OnTouchListener {
 	 */
 	private void startAnimation() {
 
-		// create and start a thread to generate "ticks" for the animator
+		// create and start a thread to generate "ticks" for the  animator
 		// with the frequency that it desires
 		this.animationThread = new AnimationThread(getHolder());
 		animationThread.start();

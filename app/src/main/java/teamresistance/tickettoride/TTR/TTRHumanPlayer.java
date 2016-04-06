@@ -189,6 +189,7 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
     public void setAsGui(GameMainActivity mainActivity) {
         myActivity = mainActivity;
         myActivity.setContentView(R.layout.activity_ttr_main);
+        this.myBoard = (TTRSurfaceView)mainActivity.findViewById(R.id.GameBoard);
 
         //Initialize the widget reference member variables
         this.cpu1PlayerTextView = (TextView)myActivity.findViewById(R.id.CPU1Title);
