@@ -276,7 +276,7 @@ public class TTRSurfaceView extends SurfaceView{
         losAngelesToLasVegas.close();
 
 
-        myTracks = new Track[]{portlandToSanFranciscoTrack, vancouverToSeattleTrack};
+        myTracks = new Track[]{portlandToSanFranciscoTrack, losAngelesToLasVegasTrack};
     }
 
     /*
