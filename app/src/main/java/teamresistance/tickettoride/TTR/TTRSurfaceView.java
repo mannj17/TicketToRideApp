@@ -230,16 +230,13 @@ public class TTRSurfaceView extends SurfaceView{
         int maxX = getMaxWidth();
         int maxY = getMaxHeight();
         /* Initilize all track objects */
-
-    //    vancouverToCalgaryTrack = new Track(3, "Gray", "Vancouver", "Calgary");
-        //not initialized
-      //  vancouverToSeattleTrack = new Track(1, "Gray", "Vancouver", "Seattle");
-      //  vancouverToSeattle.addRect(102f, 115f, 125f, 165f, Path.Direction.CW);
+        vancouverToSeattle.addRect(102f, 115f, 125f, 165f, Path.Direction.CW);
+        vancouverToSeattleTrack = new Track(1, "Gray", "Vancouver", "Seattle", vancouverToSeattle);
 
         portlandToSanFrancisco.moveTo(maxX * .028f, maxY * .286f);
         portlandToSanFrancisco.lineTo(maxX * .016f, maxY * .333f);
         portlandToSanFrancisco.lineTo(maxX*.026f, maxY*.341f);
-        portlandToSanFrancisco.lineTo(maxX*.038f, maxY*.294f);
+        portlandToSanFrancisco.lineTo(maxX * .038f, maxY * .294f);
         portlandToSanFrancisco.close();
         portlandToSanFrancisco.moveTo(26, 338);
         portlandToSanFrancisco.lineTo(16, 390);
@@ -260,8 +257,8 @@ public class TTRSurfaceView extends SurfaceView{
         portlandToSanFrancisco.lineTo(32, 568);
         portlandToSanFrancisco.lineTo(50, 567);
         portlandToSanFrancisco.lineTo(37, 518);
-        portlandToSanFranciscoTrack = new Track(5, "Green", "Portland", "SanFrancisco", portlandToSanFrancisco);
         portlandToSanFrancisco.close();
+        portlandToSanFranciscoTrack = new Track(5, "Green", "Portland", "SanFrancisco", portlandToSanFrancisco);
 
         losAngelesToLasVegas.moveTo(maxX * .127f, maxY * .702f);
         losAngelesToLasVegas.lineTo(maxX * .137f, maxY * .707f);
@@ -272,11 +269,11 @@ public class TTRSurfaceView extends SurfaceView{
         losAngelesToLasVegas.lineTo(maxX * .137f, maxY * .685f);
         losAngelesToLasVegas.lineTo(maxX * .170f, maxY * .673f);
         losAngelesToLasVegas.lineTo(maxX * .172f, maxY * .694f);
-        losAngelesToLasVegasTrack = new Track(2, "Gray", "Los Angeles", "Los Vegas", losAngelesToLasVegas);
         losAngelesToLasVegas.close();
+        losAngelesToLasVegasTrack = new Track(2, "Gray", "Los Angeles", "Los Vegas", losAngelesToLasVegas);
 
 
-        myTracks = new Track[]{portlandToSanFranciscoTrack, losAngelesToLasVegasTrack};
+        myTracks = new Track[]{portlandToSanFranciscoTrack, losAngelesToLasVegasTrack, vancouverToSeattleTrack};
     }
 
     /*
