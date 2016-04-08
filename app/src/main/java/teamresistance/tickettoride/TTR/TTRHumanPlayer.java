@@ -81,6 +81,8 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
     private ImageButton trainCard3;
     private ImageButton trainCard4;
     private ImageButton trainCard5;
+
+    private ImageButton[] faceUpTrainCards = new ImageButton[5];
     private ImageButton clickTrain;
     private ImageButton clickDestination;
     //array that contains booleans that correspond to a button in the ArrayList
@@ -133,8 +135,6 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
             for (int i = 0; i < size; i++) {
                tempTrack[i].setHighlight(val);
             }
-            myBoard.postInvalidate();
-
             if(playerNum >= 2) { //2 is the minimum number of players
                 lp = new LinearLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT,1);
                 cpu1FrameLayout.setLayoutParams(lp);
@@ -171,7 +171,31 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
                 this.cpu3ScoreTextview.setText("" + ((TTRGameState) info).getScores()[3]);
                 this.cpu3DestinationCardTextView.setText(""+((TTRGameState) info).getPlayerDestinationDecks()[3].getCards().size());
                 this.cpu3TrainCardTextView.setText(""+((TTRGameState) info).getPlayerTrainDecks()[3].getCards().size());
+
+
             }
+            for( int i = 0; i < 5; i++) {
+                if ((myState.getFaceUpTrainCards().getCards().get(i)).toString() == "Black") {
+                    faceUpTrainCards[i].setImageResource(R.drawable.black_train);
+                } else if (((TrainCards) myState.getFaceUpTrainCards().getCards().get(i)).toString() == "Pink") {
+                    faceUpTrainCards[i].setImageResource(R.drawable.pink_train);
+                }else if (((TrainCards) myState.getFaceUpTrainCards().getCards().get(i)).toString() == "Blue") {
+                    this.faceUpTrainCards[i].setImageResource(R.drawable.blue_train);
+                }else if (((TrainCards) myState.getFaceUpTrainCards().getCards().get(i)).toString() == "Green") {
+                    this.faceUpTrainCards[i].setImageResource(R.drawable.green_train);
+                }else if (((TrainCards) myState.getFaceUpTrainCards().getCards().get(i)).toString() == "Orange") {
+                    this.faceUpTrainCards[i].setImageResource(R.drawable.orange_train);
+                }else if (((TrainCards) myState.getFaceUpTrainCards().getCards().get(i)).toString() == "Red") {
+                    this.faceUpTrainCards[i].setImageResource(R.drawable.red_train);
+                }else if (((TrainCards) myState.getFaceUpTrainCards().getCards().get(i)).toString() == "White") {
+                    this.faceUpTrainCards[i].setImageResource(R.drawable.white_train);
+                }else if (((TrainCards) myState.getFaceUpTrainCards().getCards().get(i)).toString() == "Yellow") {
+                    this.faceUpTrainCards[i].setImageResource(R.drawable.yellow_train);
+                } else {
+                    this.faceUpTrainCards[i].setImageResource(R.drawable.rainbow_train);
+                }
+            }
+         //   myBoard.postInvalidate();
         }
     }
 
@@ -221,6 +245,13 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
         this.trainCard3 = (ImageButton)myActivity.findViewById(R.id.Train3);
         this.trainCard4 = (ImageButton)myActivity.findViewById(R.id.Train4);
         this.trainCard5 = (ImageButton)myActivity.findViewById(R.id.Train5);
+
+        faceUpTrainCards[0] = (ImageButton)myActivity.findViewById(R.id.Train1);
+        faceUpTrainCards[1]  = (ImageButton)myActivity.findViewById(R.id.Train2);
+        faceUpTrainCards[2]  = (ImageButton)myActivity.findViewById(R.id.Train3);
+        faceUpTrainCards[3] = (ImageButton)myActivity.findViewById(R.id.Train4);
+        faceUpTrainCards[4]  = (ImageButton)myActivity.findViewById(R.id.Train5);
+
         this.clickTrain = (ImageButton)myActivity.findViewById(R.id.DrawTrainStack);
         this.clickDestination = (ImageButton)myActivity.findViewById(R.id.DrawTicketStack);
         this.cardCheck = (CheckBox)myActivity.findViewById(R.id.drawCardCheckBox);
@@ -233,6 +264,13 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
         this.trainCard4.setOnClickListener(this);
         this.trainCard5.setOnClickListener(this);
         this.clickTrain.setOnClickListener(this);
+
+        faceUpTrainCards[0].setOnClickListener(this);
+        faceUpTrainCards[1].setOnClickListener(this);
+        faceUpTrainCards[2].setOnClickListener(this);
+        faceUpTrainCards[3].setOnClickListener(this);
+        faceUpTrainCards[4].setOnClickListener(this);
+
         this.clickDestination.setOnClickListener(this);
         this.cardCheck.setOnClickListener(this);
         this.trainCheck.setOnClickListener(this);
