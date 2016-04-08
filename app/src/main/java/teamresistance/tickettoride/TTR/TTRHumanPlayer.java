@@ -76,18 +76,11 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
     the place holder variables to eliminate hard coding, and the
     ArrayList for all of the ImageButtons.
      */
-    private ImageButton trainCard1;
-    private ImageButton trainCard2;
-    private ImageButton trainCard3;
-    private ImageButton trainCard4;
-    private ImageButton trainCard5;
-
     private ImageButton[] faceUpTrainCards = new ImageButton[5];
+
     private ImageButton clickTrain;
     private ImageButton clickDestination;
-    //array that contains booleans that correspond to a button in the ArrayList
     private boolean[] trainPressed;
-    private ArrayList<ImageButton> trainCards = new ArrayList<ImageButton>();
 
     private CheckBox cardCheck;
     private CheckBox trainCheck;
@@ -115,9 +108,9 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
             int playerNum = ((TTRGameState) info).getNumPlayers();
             for(int i = 0; i < myState.getFaceUpTrainCards().size(); i++){
                 if(myState.getFaceUpTrainCards().getCards().get(i).getHighlight()){
-                    this.trainCards.get(i).setAlpha(0.5f);
+                    this.faceUpTrainCards[i].setAlpha(0.5f);
                 }
-                else{this.trainCards.get(i).setAlpha(1.0f);}
+                else{this.faceUpTrainCards[i].setAlpha(1.0f);}
             }
             if(myState.getFaceDownTrainCards().getHighlight()){this.clickTrain.setAlpha(0.5f);}
             else{this.clickTrain.setAlpha(1.0f);}
@@ -171,8 +164,6 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
                 this.cpu3ScoreTextview.setText("" + ((TTRGameState) info).getScores()[3]);
                 this.cpu3DestinationCardTextView.setText(""+((TTRGameState) info).getPlayerDestinationDecks()[3].getCards().size());
                 this.cpu3TrainCardTextView.setText(""+((TTRGameState) info).getPlayerTrainDecks()[3].getCards().size());
-
-
             }
             for( int i = 0; i < 5; i++) {
                 if ((myState.getFaceUpTrainCards().getCards().get(i)).toString() == "Black") {
@@ -205,7 +196,6 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
     public View getTopView() {
         return null;
     }
-
 
     /*
      * Sets the GUI for the player
@@ -240,11 +230,6 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
         this.cpu3FrameLayout = (FrameLayout)myActivity.findViewById(R.id.CPU3);
 
         this.confirmSelection = (Button)myActivity.findViewById(R.id.confirmSelection);
-        this.trainCard1 = (ImageButton)myActivity.findViewById(R.id.Train1);
-        this.trainCard2 = (ImageButton)myActivity.findViewById(R.id.Train2);
-        this.trainCard3 = (ImageButton)myActivity.findViewById(R.id.Train3);
-        this.trainCard4 = (ImageButton)myActivity.findViewById(R.id.Train4);
-        this.trainCard5 = (ImageButton)myActivity.findViewById(R.id.Train5);
 
         faceUpTrainCards[0] = (ImageButton)myActivity.findViewById(R.id.Train1);
         faceUpTrainCards[1]  = (ImageButton)myActivity.findViewById(R.id.Train2);
@@ -258,11 +243,6 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
         this.trainCheck = (CheckBox)myActivity.findViewById(R.id.drawTrainCheckBox);
 
         this.confirmSelection.setOnClickListener(this);
-        this.trainCard1.setOnClickListener(this);
-        this.trainCard2.setOnClickListener(this);
-        this.trainCard3.setOnClickListener(this);
-        this.trainCard4.setOnClickListener(this);
-        this.trainCard5.setOnClickListener(this);
         this.clickTrain.setOnClickListener(this);
 
         faceUpTrainCards[0].setOnClickListener(this);
@@ -274,12 +254,6 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
         this.clickDestination.setOnClickListener(this);
         this.cardCheck.setOnClickListener(this);
         this.trainCheck.setOnClickListener(this);
-
-        this.trainCards.add(this.trainCard1);
-        this.trainCards.add(this.trainCard2);
-        this.trainCards.add(this.trainCard3);
-        this.trainCards.add(this.trainCard4);
-        this.trainCards.add(this.trainCard5);
     }
 
     /**
