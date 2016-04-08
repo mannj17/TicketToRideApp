@@ -14,8 +14,6 @@ import teamresistance.tickettoride.Game.GamePlayer;
 public class TrackPlaceAction {
 
     public String choosenColor;
-
-
     /*
      * Initializing a new action to change the mode
      * @player

@@ -254,6 +254,7 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
         this.clickDestination.setOnClickListener(this);
         this.cardCheck.setOnClickListener(this);
         this.trainCheck.setOnClickListener(this);
+        this.myBoard.setOnTouchListener(this);
     }
 
     /**
@@ -308,6 +309,11 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
     @Override
     public boolean onTouch(View v, MotionEvent event) {
 
+        int x = (int)event.getRawX();
+        int y = (int)event.getRawY();
+        if(v.getId() == R.id.GameBoard){
+            myBoard.setSelection(x, y-191);
+        }
         return true;
     }
 }

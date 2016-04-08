@@ -132,6 +132,16 @@ public class TTRGameState extends GameState {
         destinationCardsSelected = false;
         trainCardsSelected = false;
 
+//        testTracks = new Track[8];
+//        testTracks[0] = new Track(2, "Blue", "PittsBurgh", "Boston");
+//        testTracks[1] = new Track(2, "Yellow", "PittsBurgh", "Boston");
+//        testTracks[2] = new Track(2, "Orange", "PittsBurgh", "Boston");
+//        testTracks[3] = new Track(2, "Black", "PittsBurgh", "Boston");
+//        testTracks[4] = new Track(2, "White", "PittsBurgh", "Boston");
+//        testTracks[5] = new Track(2, "Pink", "PittsBurgh", "Boston");
+//        testTracks[6] = new Track(2, "Red", "PittsBurgh", "Boston");
+//        testTracks[7] = new Track(2, "Green", "PittsBurgh", "Boston");
+
         trackModeSelected = false;
         cardModeSelected = true;
         destinationCardsSelected = false;

@@ -33,7 +33,7 @@ public class Track {
      * @param secondCity collection of paths representing the locations for placed train tokens
      * @param firstCity area around path that is selectable by user
      */
-    public Track(int trainTrackNum, String trackColor, String firstCity, String secondCity, Path path){
+    public Track(int trainTrackNum, String trackColor, String firstCity, String secondCity, Path path, Rect passedTouchArea){
         this.trainTrackNum = trainTrackNum;
         this.trackColor = trackColor;
         startCity = firstCity;
@@ -41,6 +41,7 @@ public class Track {
         highlight = false;
         selected = false;
         trackPath.set(path);
+        touchArea = passedTouchArea;
     }
 
     /**

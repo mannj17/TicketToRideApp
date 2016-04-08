@@ -11,15 +11,6 @@ import teamresistance.tickettoride.R;
 /**
  * This is a surface view class that draws the game board/pieces onto the screen.
  *
- * @author Jess Mann
- * A: 15 Points: Select Four Element On Surface View
- *
- *      If Place Train checkbox is not selected, surface view will not offer user any stimulus.
- *      Once Place Train is checked, various "tracks" will appear that the player can interact
- *      with. These availible tracks will be highlighted green, and once tapped by the user the
- *      outline changes to blue. Once/if the user taps confirm, the outline selected by the user
- *      will be replaced with a red fill.
- *
  */
 
 public class TTRSurfaceView extends SurfaceView{
@@ -48,8 +39,11 @@ public class TTRSurfaceView extends SurfaceView{
     final int HIGHLIGHT_COLOR = 0xFF00FF00;
     final int SELECTION_COLOR = 0xFF00ffff;
 
-
     private Paint paint = new Paint();
+
+    //rectangular touch area declarations
+    Rect sanFranciscoToPortlandRect = new Rect((int)(maxX*.0286), (int)(maxY*.28), (int)(maxX*.5), (int)(maxY*.4));
+
     //path initializations
     //THE WEST!
     private Path vancouverToCalgary = new Path();
@@ -232,7 +226,12 @@ public class TTRSurfaceView extends SurfaceView{
         int maxY = getMaxHeight();
         /* Initilize all track objects */
         vancouverToSeattle.addRect(102f, 115f, 125f, 165f, Path.Direction.CW);
-        vancouverToSeattleTrack = new Track(1, "Gray", "Vancouver", "Seattle", vancouverToSeattle);
+        vancouverToSeattleTrack = new Track(1, "Gray", "Vancouver", "Seattle", vancouverToSeattle, touchArea1);
+
+    //    vancouverToCalgaryTrack = new Track(3, "Gray", "Vancouver", "Calgary");
+        //not initialized
+      //  vancouverToSeattleTrack = new Track(1, "Gray", "Vancouver", "Seattle");
+      //  vancouverToSeattle.addRect(102f, 115f, 125f, 165f, Path.Direction.CW);
 
         portlandToSanFrancisco.moveTo(maxX * .028f, maxY * .286f);
         portlandToSanFrancisco.lineTo(maxX * .016f, maxY * .333f);
@@ -259,7 +258,7 @@ public class TTRSurfaceView extends SurfaceView{
         portlandToSanFrancisco.lineTo(maxX * .029f, maxY * .578f);
         portlandToSanFrancisco.lineTo(maxX * .0215f, maxY * .5285f);
         portlandToSanFrancisco.close();
-        portlandToSanFranciscoTrack = new Track(5, "Green", "Portland", "SanFrancisco", portlandToSanFrancisco);
+        portlandToSanFranciscoTrack = new Track(5, "Green", "Portland", "SanFrancisco", portlandToSanFrancisco, sanFranciscoToPortlandRect);
 
         losAngelesToLasVegas.moveTo(maxX * .127f, maxY * .702f);
         losAngelesToLasVegas.lineTo(maxX * .137f, maxY * .707f);
@@ -271,9 +270,10 @@ public class TTRSurfaceView extends SurfaceView{
         losAngelesToLasVegas.lineTo(maxX * .170f, maxY * .673f);
         losAngelesToLasVegas.lineTo(maxX * .172f, maxY * .694f);
         losAngelesToLasVegas.close();
-        losAngelesToLasVegasTrack = new Track(2, "Gray", "Los Angeles", "Los Vegas", losAngelesToLasVegas);
+        losAngelesToLasVegasTrack = new Track(2, "Gray", "Los Angeles", "Las Vegas", losAngelesToLasVegas, touchArea2);
 
-        myTracks = new Track[]{portlandToSanFranciscoTrack, losAngelesToLasVegasTrack, vancouverToSeattleTrack};
+
+        myTracks = new Track[]{portlandToSanFranciscoTrack, vancouverToSeattleTrack, losAngelesToLasVegasTrack};
     }
 
     /*
@@ -348,7 +348,6 @@ public class TTRSurfaceView extends SurfaceView{
     /*
      * Method which changes from green highlight to blue highlight to indicate selection
      */
-    Boolean previous = false;
     public void setSelection(int x, int y) {
         for(Track track : myTracks){
             if(track.isTouched(x, y) && !track.getSelected() && !track.getCovered()){
