@@ -30,7 +30,7 @@ public class TTRSurfaceView extends SurfaceView{
     Rect touchArea2 = new Rect(180, 650, 310, 750);
     Rect touchArea3 = new Rect(410,290,560,460);
     Rect touchArea4 = new Rect(970,470,1120,540);
-    Rect touchArea5 = new Rect(1400,200,1460,340);
+    Rect touchArea5 = new Rect(0,0,1,1);
 
     /*
      * These ints correspond to hex colors used by this class
@@ -42,9 +42,10 @@ public class TTRSurfaceView extends SurfaceView{
     private Paint paint = new Paint();
 
     //rectangular touch area declarations
-    Rect sanFranciscoToPortlandRect = new Rect((int)(maxX*.0286), (int)(maxY*.28), (int)(maxX*.5), (int)(maxY*.4));
+    Rect sanFranciscoToPortlandRect = new Rect((int)(maxX*.0286), (int)(maxY*.28), (int)(maxX*.05), (int)(maxY*.4));
 
     //path initializations
+    private Path GRID = new Path();
     //THE WEST!
     private Path vancouverToCalgary = new Path();
     private Path vancouverToSeattle = new Path();
@@ -131,6 +132,7 @@ public class TTRSurfaceView extends SurfaceView{
     private Path newYorkToWashington = new Path();
 
     //Initializes all the tracks
+    Track GRID_TRACK;
     //THE WEST
     Track vancouverToCalgaryTrack;
     Track vancouverToSeattleTrack;
@@ -228,6 +230,45 @@ public class TTRSurfaceView extends SurfaceView{
         vancouverToSeattle.addRect(102f, 115f, 125f, 165f, Path.Direction.CW);
         vancouverToSeattleTrack = new Track(1, "Gray", "Vancouver", "Seattle", vancouverToSeattle, touchArea1);
 
+        GRID.moveTo(0, maxY * .1f);
+        GRID.lineTo(maxX, maxY * .1f);
+        GRID.moveTo(0, maxY * .2f);
+        GRID.lineTo(maxX, maxY * .2f);
+        GRID.moveTo(0, maxY * .3f);
+        GRID.lineTo(maxX, maxY*.3f);
+        GRID.moveTo(0, maxY*.4f);
+        GRID.lineTo(maxX, maxY*.4f);
+        GRID.moveTo(0, maxY*.5f);
+        GRID.lineTo(maxX, maxY*.5f);
+        GRID.moveTo(0, maxY*.6f);
+        GRID.lineTo(maxX, maxY*.6f);
+        GRID.moveTo(0, maxY*.7f);
+        GRID.lineTo(maxX, maxY*.7f);
+        GRID.moveTo(0, maxY*.8f);
+        GRID.lineTo(maxX, maxY*.8f);
+        GRID.moveTo(0, maxY*.9f);
+        GRID.lineTo(maxX, maxY*.9f);
+
+        //
+        GRID.moveTo(maxX * .1f, 0);
+        GRID.lineTo(maxX * .1f, maxY);
+        GRID.moveTo(maxX * .2f, 0);
+        GRID.lineTo(maxX * .2f, maxY);
+        GRID.moveTo(maxX * .3f, 0);
+        GRID.lineTo(maxX * .3f, maxY);
+        GRID.moveTo(maxX * .4f, 0);
+        GRID.lineTo(maxX * .4f, maxY);
+        GRID.moveTo(maxX * .5f, 0);
+        GRID.lineTo(maxX * .5f, maxY);
+        GRID.moveTo(maxX * .6f, 0);
+        GRID.lineTo(maxX * .6f, maxY);
+        GRID.moveTo(maxX * .7f, 0);
+        GRID.lineTo(maxX*.7f, maxY);
+        GRID.moveTo(maxX*.8f, 0);
+        GRID.lineTo(maxX*.8f, maxY);
+        GRID.moveTo(maxX*.9f, 0);
+        GRID.lineTo(maxX*.9f, maxY);
+        GRID_TRACK = new Track(0, "GRID", "NOWHERE", "NOWHERE", GRID, touchArea5);
     //    vancouverToCalgaryTrack = new Track(3, "Gray", "Vancouver", "Calgary");
         //not initialized
       //  vancouverToSeattleTrack = new Track(1, "Gray", "Vancouver", "Seattle");
@@ -273,7 +314,7 @@ public class TTRSurfaceView extends SurfaceView{
         losAngelesToLasVegasTrack = new Track(2, "Gray", "Los Angeles", "Las Vegas", losAngelesToLasVegas, touchArea2);
 
 
-        myTracks = new Track[]{portlandToSanFranciscoTrack, vancouverToSeattleTrack, losAngelesToLasVegasTrack};
+        myTracks = new Track[]{portlandToSanFranciscoTrack, vancouverToSeattleTrack, losAngelesToLasVegasTrack, GRID_TRACK};
     }
 
     /*
