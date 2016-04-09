@@ -104,7 +104,7 @@ public class TTRLocalGame extends LocalGame {
             else if(mainState.getTrackModeSelected()){
                 mainState.setCardModeSelected(true);
                 mainState.setTrackModeSelected(false);
-                //implement code to unhighlight any highlighted tracks
+                //TODO
             }
             return true;
         }
@@ -266,7 +266,7 @@ public class TTRLocalGame extends LocalGame {
         else if (action instanceof ChooseDestinationAction) {
             return true;
         }
-        return false;
+        return true;
     }
 
     @Override
