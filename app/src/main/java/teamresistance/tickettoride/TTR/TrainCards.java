@@ -35,6 +35,7 @@ public class TrainCards extends Card{
      * @return
      *      Returns the type of card
      */
+    @Override
     public String toString(){
         return this.type;
     }

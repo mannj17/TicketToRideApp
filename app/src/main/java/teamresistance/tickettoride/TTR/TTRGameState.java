@@ -78,6 +78,8 @@ public class TTRGameState extends GameState {
     /** All of the hands of each player */
     private Deck[] playerDestinationDecks = new Deck[numPlayers];
 
+    private TTRSurfaceView myBoard;
+
 
     /*
      * Initializes a new GameState

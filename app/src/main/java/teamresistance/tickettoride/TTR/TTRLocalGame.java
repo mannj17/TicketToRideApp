@@ -160,9 +160,10 @@ public class TTRLocalGame extends LocalGame {
             mainState.setPlayerID((mainState.getPlayerID()+1)%mainState.getNumPlayers());
             return true;
         }
-//        else if(action instanceof TrackPlaceAction){
-//            return true;
-//        }
+        else if(action instanceof TrackPlaceAction){
+
+            return true;
+        }
         else if(action instanceof DrawUpCardAction){
             if(mainState.getTrackModeSelected()){
                 return false;
@@ -176,9 +177,14 @@ public class TTRLocalGame extends LocalGame {
             int numHighlights = 0;
             for(int i = 0; i < mainState.getFaceUpTrainCards().size(); i++){
                 if(mainState.getFaceUpTrainCards().getCards().get(i).getHighlight()){
-                    numHighlights++;
-                    mainState.setOnlyDownDeck(false);
-                    mainState.setTrainCardsSelected(true);
+                    if(mainState.getFaceUpTrainCards().getCards().get(i).toString().equals("Rainbow")){
+                        numHighlights = numHighlights+2;
+                    }
+                    else {
+                        numHighlights++;
+                        mainState.setOnlyDownDeck(false);
+                        mainState.setTrainCardsSelected(true);
+                    }
                 }
             }
             if(mainState.getFaceDownTrainCards().getHighlight()){
@@ -186,7 +192,16 @@ public class TTRLocalGame extends LocalGame {
                 mainState.setTrainCardsSelected(true);
             }
             if(numHighlights < 2){
-                if(mainState.getFaceUpTrainCards().getCards().get(pos).getHighlight()){
+                if(mainState.getFaceUpTrainCards().getCards().get(pos).toString().equals("Rainbow")){
+                    if(numHighlights == 0){
+                        mainState.getFaceUpTrainCards().getCards().get(pos).setHighlight(true);
+                        mainState.setTrainCardsSelected(true);
+                    }
+                    else{
+                        mainState.getFaceUpTrainCards().getCards().get(pos).setHighlight(false);
+                    }
+                }
+                else if(mainState.getFaceUpTrainCards().getCards().get(pos).getHighlight()){
                     mainState.getFaceUpTrainCards().getCards().get(pos).setHighlight(false);
                     mainState.setTrainCardsSelected(false);
                 }
@@ -222,7 +237,14 @@ public class TTRLocalGame extends LocalGame {
                 int highlightNum = 0;
                 for (int i = 0; i < mainState.getFaceUpTrainCards().size(); i++){
                     if(mainState.getFaceUpTrainCards().getCards().get(i).getHighlight()){
-                        highlightNum++;
+                        if(mainState.getFaceUpTrainCards().getCards().get(i).toString().equals("Rainbow")){
+                            highlightNum = highlightNum+2;
+                        }
+                        else {
+                            highlightNum++;
+                            mainState.setOnlyDownDeck(false);
+                            mainState.setTrainCardsSelected(true);
+                        }
                     }
                 }
                 if(highlightNum < 2){

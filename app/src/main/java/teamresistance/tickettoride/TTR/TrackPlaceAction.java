@@ -51,7 +51,5 @@ public class TrackPlaceAction extends GameAction{
         return this.xPos;
     }
 
-    public int getYPos(){
-        return this.yPos;
-    }
+    public int getYPos(){ return this.yPos; }
 }

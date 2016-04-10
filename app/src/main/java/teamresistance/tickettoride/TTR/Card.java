@@ -29,4 +29,8 @@ public class Card {
     public boolean getHighlight(){
         return highlight;
     }
+
+    public String toString(){
+        return "Card";
+    }
 }
