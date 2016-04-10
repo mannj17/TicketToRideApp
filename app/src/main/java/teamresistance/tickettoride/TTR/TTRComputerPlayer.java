@@ -68,7 +68,12 @@ public class TTRComputerPlayer extends GameComputerPlayer{
                 int selectedCards = 0;
                 for(int i = 0; i < compState.getFaceUpTrainCards().size(); i++){
                     if(compState.getFaceUpTrainCards().getCards().get(i).getHighlight()){
-                        selectedCards++;
+                        if(compState.getFaceUpTrainCards().getCards().get(i).toString().equals("Rainbow")){
+                            selectedCards = selectedCards+2;
+                        }
+                        else {
+                            selectedCards++;
+                        }
                     }
                 }
                 if(selectedCards < 2){
