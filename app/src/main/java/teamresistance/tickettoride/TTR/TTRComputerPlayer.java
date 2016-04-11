@@ -39,6 +39,8 @@ public class TTRComputerPlayer extends GameComputerPlayer{
     private int trainTokens;
     private Boolean isTurn;
     private Random rand;
+    private int makeMove;
+    private boolean startedMove = false;
 
 //    /*
 //     * recieves and interprets info from the local game
@@ -64,22 +66,49 @@ public class TTRComputerPlayer extends GameComputerPlayer{
             TTRGameState compState = (TTRGameState) info;
             if(compState.getPlayerID() == this.playerNum){
                 this.sleep(1000);
-                int selectedCards = 0;
-                for(int i = 0; i < compState.getFaceUpTrainCards().size(); i++){
-                    if(compState.getFaceUpTrainCards().getCards().get(i).getHighlight()){
-                        if(compState.getFaceUpTrainCards().getCards().get(i).toString().equals("Rainbow")){
-                            selectedCards = selectedCards+2;
+                if(!startedMove){
+                    makeMove = rand.nextInt(100);
+                }
+                if(makeMove < 50) {
+                    startedMove = true;
+                    int selectedCards = 0;
+                    for (int i = 0; i < compState.getFaceUpTrainCards().size(); i++) {
+                        if (compState.getFaceUpTrainCards().getCards().get(i).getHighlight()) {
+                            if (compState.getFaceUpTrainCards().getCards().get(i).toString().equals("Rainbow")) {
+                                selectedCards = 2;
+                            } else {
+                                selectedCards++;
+                            }
                         }
-                        else {
+                        if(compState.getOnlyDownDeck()){
+                            selectedCards = 2;
+                        }
+                        else if(compState.getFaceDownTrainCards().getHighlight()){
                             selectedCards++;
                         }
                     }
+                    if (selectedCards < 2) {
+                        if(Math.random() < .75) {
+                            game.sendAction(new DrawUpCardAction(this, rand.nextInt(5)));
+                        } else{
+                            if(!compState.getOnlyDownDeck()){
+                                game.sendAction(new DrawDownCardAction(this));
+                            }
+                        }
+                    } else {
+                        startedMove = false;
+                        game.sendAction(new ConfirmSelectionAction(this));
+                    }
                 }
-                if(selectedCards < 2){
-                    game.sendAction(new DrawUpCardAction(this, rand.nextInt(5)));
-                }
-                else {
-                    game.sendAction(new ConfirmSelectionAction(this));
+                else{
+                    startedMove = true;
+                    if(!compState.getOnlyDownDeck()){
+                        game.sendAction(new DrawDownCardAction(this));
+                    }
+                    else{
+                        startedMove = false;
+                        game.sendAction(new ConfirmSelectionAction(this));
+                    }
                 }
             }
         }

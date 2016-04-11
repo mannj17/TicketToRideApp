@@ -105,6 +105,7 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
         //Update all TextViews to Display player details properly
         if(info instanceof TTRGameState) {
             myState = (TTRGameState)info;
+            myBoard.setTracks(myState.getTracks());
             int playerNum = ((TTRGameState) info).getNumPlayers();
             for(int i = 0; i < myState.getFaceUpTrainCards().size(); i++){
                 if(myState.getFaceUpTrainCards().getCards().get(i).getHighlight()){
@@ -124,9 +125,8 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
             boolean val = myState.getTrackModeSelected();
 
             int size = myBoard.getTracksLength();
-            Track[] tempTrack = myBoard.getTracks();
             for (int i = 0; i < size; i++) {
-               tempTrack[i].setHighlight(val);
+               myBoard.getTracks()[i].setHighlight(val);
             }
             if(playerNum >= 2) { //2 is the minimum number of players
                 lp = new LinearLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT,1);

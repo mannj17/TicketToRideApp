@@ -117,6 +117,8 @@ public class TTRLocalGame extends LocalGame {
                     mainState.getFaceDownTrainCards().moveTopCardTo(
                             mainState.getPlayerTrainDecks()[mainState.getPlayerID()],
                             mainState.getFaceDownTrainCards());
+                    mainState.getFaceDownTrainCards().setHighlight(false);
+                    mainState.setOnlyDownDeck(false);
                 }
                 else if(!mainState.getOnlyDownDeck() && mainState.getFaceDownTrainCards().getHighlight()){
                     mainState.getFaceDownTrainCards().moveTopCardTo(
