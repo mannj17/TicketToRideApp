@@ -54,7 +54,6 @@ public class TTRComputerPlayer extends GameComputerPlayer{
      * Finds the best move for the computer player and makes that move based on what it finds
      * @info
      */
-
     protected final void findBestMove(GameInfo info) {
     
     }

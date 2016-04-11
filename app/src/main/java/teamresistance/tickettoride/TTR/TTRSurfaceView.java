@@ -45,6 +45,25 @@ public class TTRSurfaceView extends SurfaceView{
     Rect sanFranciscoToPortlandRect = new Rect((int)(maxX*.0), (int)(maxY*.28), (int)(maxX*.05), (int)(maxY*.5));
     Rect sanFranciscoToLosAngelesRect = new Rect((int)(maxX*0),(int)(maxY*.6), (int)(maxX*.1), (int)(maxY*.2));
     Rect losAngelesToPhoenixRect = new Rect((int)(maxX*.11), (int)(maxY*.65), (int)(maxX*.12), (int)(maxY*.05));
+    Rect montrealtoBostonRect = new Rect((int)(maxX * .91), (int)(maxY * .06), (int)(maxX * .99), (int)(maxY * .18));
+    Rect montrealtoNewYorkRect = new Rect((int)(maxX * .895), (int)(maxY * .08), (int)(maxX * .93), (int)(maxY * .27));
+    Rect losAngelesToLasVegasRect = new Rect((int)(maxX * .11), (int)(maxY * .67), (int)(maxX * .175), (int)(maxY * .755));
+    Rect newYorkToBostonRect = new Rect((int)(maxX * .95), (int)(maxY * .18), (int)(maxX * 1), (int)(maxY * .29));
+    Rect newYorkToWashingtonRect = new Rect((int)(maxX * .93), (int)(maxY * .298), (int)(maxX * .96), (int)(maxY * .42));
+    Rect raleighToWashingtonRect = new Rect((int)(maxX * .87), (int)(maxY * .43), (int)(maxX * .95), (int)(maxY * .55));
+    Rect raleighToCharlestonRect = new Rect((int)(maxX * .875), (int)(maxY * .55), (int)(maxX * .94), (int)(maxY * .655));
+    Rect miamiToChaelestonRect = new Rect((int)(maxX * .89), (int)(maxY * .655), (int)(maxX * .955), (int)(maxY * .91));
+    Rect atlantaToMiamiRect = new Rect((int)(maxX * .8), (int)(maxY * .7), (int)(maxX * .9), (int)(maxY * .8));
+    Rect atlantaToCharlestonRect = new Rect((int)(maxX * .81), (int)(maxY * .64), (int)(maxX * .9), (int)(maxY * .685));
+    Rect raleighToAtlantaRect = new Rect((int)(maxX * .8), (int)(maxY * .54), (int)(maxX * .88), (int)(maxY * .65));
+    Rect pittsburghToRaleighRect = new Rect((int)(maxX * .845), (int)(maxY * .39), (int)(maxX * .865), (int)(maxY * .51));
+    Rect pittsburghToWashingtonRect = new Rect((int)(maxX * .85), (int)(maxY * .35), (int)(maxX * .93), (int)(maxY * .43));
+    Rect pittsburghToNewYorkRect = new Rect((int)(maxX * .845), (int)(maxY * .26), (int)(maxX * .925), (int)(maxY * .35));
+    Rect torontoToPittsburghRect = new Rect((int)(maxX * .815), (int)(maxY * .2), (int)(maxX * .835), (int)(maxY * .35));
+    Rect torontoToMontrealRect = new Rect((int)(maxX * .805), (int)(maxY * .06), (int)(maxX * .905), (int)(maxY * .2));
+    Rect saultSteMarieToMontrealRect = new Rect((int)(maxX * .7), (int)(maxY * .04), (int)(maxX * .9), (int)(maxY * .15));
+    Rect newOrleansToMiamiRect = new Rect((int)(maxX * .725), (int)(maxY * .8), (int)(maxX * .88), (int)(maxY * .88));
+
     //path initializations
     private Path GRID = new Path();
     //THE WEST!
@@ -316,7 +335,8 @@ public class TTRSurfaceView extends SurfaceView{
         sanFranciscoToLosAngeles.lineTo(maxX * .098f, maxY * .770f);
         sanFranciscoToLosAngeles.lineTo(maxX * .076f, maxY * .732f);
         sanFranciscoToLosAngeles.close();
-        sanFranciscoToLosAngelesTrack = new Track(3, "Yellow", "SanFrancisco", "LosAngeles", sanFranciscoToLosAngeles, sanFranciscoToLosAngelesRect);
+        sanFranciscoToLosAngelesTrack = new Track(3, "Yellow", "SanFrancisco", "LosAngeles",
+                sanFranciscoToLosAngeles, sanFranciscoToLosAngelesRect);
 
         losAngelesToLasVegas.moveTo(maxX * .127f, maxY * .702f);
         losAngelesToLasVegas.lineTo(maxX * .137f, maxY * .707f);
@@ -328,11 +348,294 @@ public class TTRSurfaceView extends SurfaceView{
         losAngelesToLasVegas.lineTo(maxX * .170f, maxY * .673f);
         losAngelesToLasVegas.lineTo(maxX * .172f, maxY * .694f);
         losAngelesToLasVegas.close();
-        losAngelesToLasVegasTrack = new Track(2, "Gray", "LosAngeles", "LasVegas", losAngelesToLasVegas, touchArea2);
+        losAngelesToLasVegasTrack = new Track(2, "Gray", "Los Angeles", "Los Vegas",
+                losAngelesToLasVegas, losAngelesToLasVegasRect);
 
+        montrealToBoston.moveTo(maxX * .929f, maxY * .0583f);
+        montrealToBoston.lineTo(maxX * .9537f, maxY * .0951f);
+        montrealToBoston.lineTo(maxX * .9456f, maxY * .10f);
+        montrealToBoston.lineTo(maxX * .9235f, maxY * .0678f);
+        montrealToBoston.close();
+        montrealToBoston.moveTo(maxX * .95f, maxY * .11f);
+        montrealToBoston.lineTo(maxX * .9573f, maxY * .097f);
+        montrealToBoston.lineTo(maxX * .9826f, maxY * .1298f);
+        montrealToBoston.lineTo(maxX * .9762f, maxY * .1405f);
+        montrealToBoston.close();
+        montrealToBostonTrack = new Track(2, "Gray", "Montreal", "Boston", montrealToBoston, montrealtoBostonRect);
+
+        montrealToNewYork.moveTo(maxX * .899f, maxY * .089f);
+        montrealToNewYork.lineTo(maxX * .91f, maxY * .087f);
+        montrealToNewYork.lineTo(maxX * .915f, maxY * .145f);
+        montrealToNewYork.lineTo(maxX * .904f, maxY * .146f);
+        montrealToNewYork.close();
+        montrealToNewYork.moveTo(maxX * .9055f, maxY * .148f);
+        montrealToNewYork.lineTo(maxX * .916f, maxY * .146f);
+        montrealToNewYork.lineTo(maxX * .921f, maxY * .2f);
+        montrealToNewYork.lineTo(maxX * .911f, maxY * .2002f);
+        montrealToNewYork.close();
+        montrealToNewYork.moveTo(maxX * .91f, maxY * .207f);
+        montrealToNewYork.lineTo(maxX * .921f, maxY * .2073f);
+        montrealToNewYork.lineTo(maxX * .927f, maxY * .26f);
+        montrealToNewYork.lineTo(maxX * .916f, maxY * .26f);
+        montrealToNewYork.close();
+        montrealToNewYorkTrack = new Track(3, "Blue", "Montreal", "New York", montrealToNewYork,
+                montrealtoNewYorkRect);
+
+        newYorkToBoston.moveTo(maxX * .97f, maxY * .17f);
+        newYorkToBoston.lineTo(maxX * .98f, maxY * .175f);
+        newYorkToBoston.lineTo(maxX * .965f, maxY * .218f);
+        newYorkToBoston.lineTo(maxX * .952f, maxY * .21f);
+        newYorkToBoston.close();
+        newYorkToBoston.moveTo(maxX * .95f, maxY * .218f);
+        newYorkToBoston.lineTo(maxX * .959f, maxY * .228f);
+        newYorkToBoston.lineTo(maxX * .943f, maxY * .272f);
+        newYorkToBoston.lineTo(maxX * .934f, maxY * .263f);
+        newYorkToBoston.close();
+        newYorkToBostonTrack = new Track(2, "Yellow", "New York", "Boston", newYorkToBoston, newYorkToBostonRect);
+
+        newYorkToWashington.moveTo(maxX * .922f, maxY * .3f);
+        newYorkToWashington.lineTo(maxX * .935f, maxY * .3f);
+        newYorkToWashington.lineTo(maxX * .937f, maxY * .357f);
+        newYorkToWashington.lineTo(maxX * .923f, maxY * .354f);
+        newYorkToWashington.close();
+        newYorkToWashington.moveTo(maxX * .925f, maxY * .36f);
+        newYorkToWashington.lineTo(maxX * .935f, maxY * .36f);
+        newYorkToWashington.lineTo(maxX * .939f, maxY * .417f);
+        newYorkToWashington.lineTo(maxX * .928f, maxY * .417f);
+        newYorkToWashington.close();
+        newYorkToWashingtonTrack = new Track(2, "Orange", "New York", "Washington", newYorkToWashington, newYorkToWashingtonRect);
+
+        raleighToWashington.moveTo(maxX * .923f, maxY * .436f);
+        raleighToWashington.lineTo(maxX * .934f, maxY * .448f);
+        raleighToWashington.lineTo(maxX * .91f, maxY * .49f);
+        raleighToWashington.lineTo(maxX * .9f, maxY * .48f);
+        raleighToWashington.close();
+        raleighToWashington.moveTo(maxX * .897f, maxY * .487f);
+        raleighToWashington.lineTo(maxX * .904f, maxY * .497f);
+        raleighToWashington.lineTo(maxX * .887f, maxY * .534f);
+        raleighToWashington.lineTo(maxX * .877f, maxY * .525f);
+        raleighToWashington.close();
+        raleighToWashingtonTrack = new Track(2, "Gray", "Raleigh", "Washington", raleighToWashington, raleighToWashingtonRect);
+
+        raleighToCharleston.moveTo(maxX * .882f, maxY * .566f);
+        raleighToCharleston.lineTo(maxX * .889f, maxY * .551f);
+        raleighToCharleston.lineTo(maxX * .915f, maxY * .586f);
+        raleighToCharleston.lineTo(maxX * .91f, maxY * .6f);
+        raleighToCharleston.close();
+        raleighToCharleston.moveTo(maxX * .918f, maxY * .59f);
+        raleighToCharleston.lineTo(maxX * .928f, maxY * .595f);
+        raleighToCharleston.lineTo(maxX * .915f, maxY * .65f);
+        raleighToCharleston.lineTo(maxX * .902f, maxY * .64f);
+        raleighToCharleston.close();
+        raleighToCharlestonTrack = new Track(2, "Gray", "Raleigh", "Charleston", raleighToCharleston, raleighToCharlestonRect);
+
+        miamiToCharleston.moveTo(maxX * .9f, maxY * .675f);
+        miamiToCharleston.lineTo(maxX * .912f, maxY * .675f);
+        miamiToCharleston.lineTo(maxX * .915f, maxY * .72f);
+        miamiToCharleston.lineTo(maxX * .9f, maxY * .72f);
+        miamiToCharleston.close();
+        miamiToCharleston.moveTo(maxX * .902f, maxY * .73f);
+        miamiToCharleston.lineTo(maxX * .916f, maxY * .73f);
+        miamiToCharleston.lineTo(maxX * .92f, maxY * .79f);
+        miamiToCharleston.lineTo(maxX * .909f, maxY * .79f);
+        miamiToCharleston.close();
+        miamiToCharleston.moveTo(maxX * .91f, maxY * .798f);
+        miamiToCharleston.lineTo(maxX * .922f, maxY * .796f);
+        miamiToCharleston.lineTo(maxX * .93f, maxY * .845f);
+        miamiToCharleston.lineTo(maxX * .92f, maxY * .848f);
+        miamiToCharleston.close();
+        miamiToCharleston.moveTo(maxX * .92f, maxY * .852f);
+        miamiToCharleston.lineTo(maxX * .933f, maxY * .846f);
+        miamiToCharleston.lineTo(maxX * .951f, maxY * .9f);
+        miamiToCharleston.lineTo(maxX * .94f, maxY * .905f);
+        miamiToCharleston.close();
+        miamiToCharlestonTrack = new Track(4, "Pink", "Miami", "Charleston", miamiToCharleston, miamiToChaelestonRect);
+
+        atlantaToMiami.moveTo(maxX * .807f, maxY * .677f);
+        atlantaToMiami.lineTo(maxX * .817f, maxY * .67f);
+        atlantaToMiami.lineTo(maxX * .84f, maxY * .715f);
+        atlantaToMiami.lineTo(maxX * .828f, maxY * .725f);
+        atlantaToMiami.close();
+        atlantaToMiami.moveTo(maxX * .832f, maxY * .73f);
+        atlantaToMiami.lineTo(maxX * .843f, maxY * .723f);
+        atlantaToMiami.lineTo(maxX * .86f, maxY * .76f);
+        atlantaToMiami.lineTo(maxX * .85f, maxY * .765f);
+        atlantaToMiami.close();
+        atlantaToMiami.moveTo(maxX * .856f, maxY * .772f);
+        atlantaToMiami.lineTo(maxX * .867f, maxY * .7645f);
+        atlantaToMiami.lineTo(maxX * .8875f, maxY * .813f);
+        atlantaToMiami.lineTo(maxX * .875f, maxY * .818f);
+        atlantaToMiami.close();
+        atlantaToMiami.moveTo(maxX * .88f, maxY * .82f);
+        atlantaToMiami.lineTo(maxX * .89f, maxY * .812f);
+        atlantaToMiami.lineTo(maxX * .912f, maxY * .853f);
+        atlantaToMiami.lineTo(maxX * .899f, maxY * .86f);
+        atlantaToMiami.close();
+        atlantaToMiami.moveTo(maxX * .902f, maxY * .865f);
+        atlantaToMiami.lineTo(maxX * .91f, maxY * .856f);
+        atlantaToMiami.lineTo(maxX * .935f, maxY * .905f);
+        atlantaToMiami.lineTo(maxX * .925f, maxY * .91f);
+        atlantaToMiami.close();
+        atlantaToMiamiTrack = new Track(5, "Blue", "Atlanta", "Miami", atlantaToMiami, atlantaToMiamiRect);
+
+        atlantaToCharleston.moveTo(maxX * .82f, maxY * .65f);
+        atlantaToCharleston.lineTo(maxX * .855f, maxY * .652f);
+        atlantaToCharleston.lineTo(maxX * .855f, maxY * .671f);
+        atlantaToCharleston.lineTo(maxX * .82f, maxY * .671f);
+        atlantaToCharleston.close();
+        atlantaToCharleston.moveTo(maxX * .862f, maxY * .652f);
+        atlantaToCharleston.lineTo(maxX * .895f, maxY * .653f);
+        atlantaToCharleston.lineTo(maxX * .895f, maxY * .673f);
+        atlantaToCharleston.lineTo(maxX * .862f, maxY * .673f);
+        atlantaToCharleston.close();
+        atlantaToCharlestonTrack = new Track(2, "Gray", "Atlanta", "Charleston", atlantaToCharleston, atlantaToCharlestonRect);
+
+        raleighToAtlanta.moveTo(maxX * .862f, maxY * .545f);
+        raleighToAtlanta.lineTo(maxX * .871f, maxY * .556f);
+        raleighToAtlanta.lineTo(maxX * .844f, maxY * .6f);
+        raleighToAtlanta.lineTo(maxX * .834f, maxY * .581f);
+        raleighToAtlanta.close();
+        raleighToAtlanta.moveTo(maxX * .834f, maxY * .589f);
+        raleighToAtlanta.lineTo(maxX * .843f, maxY * .6f);
+        raleighToAtlanta.lineTo(maxX * .815f, maxY * .633f);
+        raleighToAtlanta.lineTo(maxX * .808f, maxY * .619f);
+        raleighToAtlanta.close();
+        raleighToAtlantaTrack = new Track(2, "Gray", "Raleigh", "Atlanta", raleighToAtlanta, raleighToAtlantaRect);
+
+        pittsburghToRaleigh.moveTo(maxX * .843f, maxY * .393f);
+        pittsburghToRaleigh.lineTo(maxX * .855f, maxY * .39f);
+        pittsburghToRaleigh.lineTo(maxX * .864f, maxY * .448f);
+        pittsburghToRaleigh.lineTo(maxX * .85f, maxY * .452f);
+        pittsburghToRaleigh.close();
+        pittsburghToRaleigh.moveTo(maxX * .85f, maxY * .454f);
+        pittsburghToRaleigh.lineTo(maxX * .864f, maxY * .45f);
+        pittsburghToRaleigh.lineTo(maxX * .873f, maxY * .508f);
+        pittsburghToRaleigh.lineTo(maxX * .86f, maxY * .51f);
+        pittsburghToRaleigh.close();
+        pittsburghToRaleighTrack = new Track(2, "Gray", "Pittsburgh", "Raleigh", pittsburghToRaleigh, pittsburghToRaleighRect);
+
+        pittsburghToWashington.moveTo(maxX * .855f, maxY * .38f);
+        pittsburghToWashington.lineTo(maxX * .858f, maxY * .365f);
+        pittsburghToWashington.lineTo(maxX * .892f, maxY * .393f);
+        pittsburghToWashington.lineTo(maxX * .885f, maxY * .405f);
+        pittsburghToWashington.close();
+        pittsburghToWashington.moveTo(maxX * .89f, maxY * .408f);
+        pittsburghToWashington.lineTo(maxX * .895f, maxY * .396f);
+        pittsburghToWashington.lineTo(maxX * .928f, maxY * .418f);
+        pittsburghToWashington.lineTo(maxX * .919f, maxY * .434f);
+        pittsburghToWashington.close();
+        pittsburghToWashingtonTrack = new Track(2, "Gray", "Pittsburgh", "Washington", pittsburghToWashington, pittsburghToWashingtonRect);
+
+        pittsburghToNewYork.moveTo(maxX * .845f, maxY * .33f);
+        pittsburghToNewYork.lineTo(maxX * .875f, maxY * .3f);
+        pittsburghToNewYork.lineTo(maxX * .883f, maxY * .313f);
+        pittsburghToNewYork.lineTo(maxX * .853f, maxY * .34f);
+        pittsburghToNewYork.close();
+        pittsburghToNewYork.moveTo(maxX * .879f, maxY * .295f);
+        pittsburghToNewYork.lineTo(maxX * .91f, maxY * .27f);
+        pittsburghToNewYork.lineTo(maxX * .915f, maxY * .285f);
+        pittsburghToNewYork.lineTo(maxX * .884f, maxY * .31f);
+        pittsburghToNewYork.close();
+        pittsburghToNewYorkTrack = new Track(2, "White", "Pittsburgh", "New York", pittsburghToNewYork, pittsburghToNewYorkRect);
+
+        torontoToPittsburgh.moveTo(maxX * .824f, maxY * .216f);
+        torontoToPittsburgh.lineTo(maxX * .835f, maxY * .215f);
+        torontoToPittsburgh.lineTo(maxX * .838f, maxY * .278f);
+        torontoToPittsburgh.lineTo(maxX * .826f, maxY * .279f);
+        torontoToPittsburgh.close();
+        torontoToPittsburgh.moveTo(maxX * .827f, maxY * .283f);
+        torontoToPittsburgh.lineTo(maxX * .838f, maxY * .282f);
+        torontoToPittsburgh.lineTo(maxX * .84f, maxY * .335f);
+        torontoToPittsburgh.lineTo(maxX * .829f, maxY * .336f);
+        torontoToPittsburgh.close();
+        torontoToPittsburghTrack = new Track(2, "Gray", "Toronto", "Pittsburgh", torontoToPittsburgh, torontoToPittsburghRect);
+
+        torontoToMontreal.moveTo(maxX * .83f, maxY * .127f);
+        torontoToMontreal.lineTo(maxX * .841f, maxY * .137f);
+        torontoToMontreal.lineTo(maxX * .821f, maxY * .189f);
+        torontoToMontreal.lineTo(maxX * .812f, maxY * .182f);
+        torontoToMontreal.close();
+        torontoToMontreal.moveTo(maxX * .86f, maxY * .09f);
+        torontoToMontreal.lineTo(maxX * .867f, maxY * .1f);
+        torontoToMontreal.lineTo(maxX * .842f, maxY * .14f);
+        torontoToMontreal.lineTo(maxX * .832f, maxY * .125f);
+        torontoToMontreal.close();
+        torontoToMontreal.moveTo(maxX * .895f, maxY * .06f);
+        torontoToMontreal.lineTo(maxX * .901f, maxY * .075f);
+        torontoToMontreal.lineTo(maxX * .87f, maxY * .0999f);
+        torontoToMontreal.lineTo(maxX * .865f, maxY * .083f);
+        torontoToMontreal.close();
+        torontoToMontrealTrack = new Track(3, "Gray", "Toronto", "Montreal", torontoToMontreal, torontoToMontrealRect);
+
+        saultSteMarieToMontreal.moveTo(maxX * .737f, maxY * .108f);
+        saultSteMarieToMontreal.lineTo(maxX * .747f, maxY * .12f);
+        saultSteMarieToMontreal.lineTo(maxX * .723f, maxY * .16f);
+        saultSteMarieToMontreal.lineTo(maxX * .713f, maxY * .15f);
+        saultSteMarieToMontreal.close();
+        saultSteMarieToMontreal.moveTo(maxX * .775f, maxY * .075f);
+        saultSteMarieToMontreal.lineTo(maxX * .78f, maxY * .093f);
+        saultSteMarieToMontreal.lineTo(maxX * .75f, maxY * .12f);
+        saultSteMarieToMontreal.lineTo(maxX * .74f, maxY * .105f);
+        saultSteMarieToMontreal.close();
+        saultSteMarieToMontreal.moveTo(maxX * .81f, maxY * .055f);
+        saultSteMarieToMontreal.lineTo(maxX * .815f, maxY * .075f);
+        saultSteMarieToMontreal.lineTo(maxX * .782f, maxY * .095f);
+        saultSteMarieToMontreal.lineTo(maxX * .778f, maxY * .075f);
+        saultSteMarieToMontreal.close();
+        saultSteMarieToMontreal.moveTo(maxX * .85f, maxY * .045f);
+        saultSteMarieToMontreal.lineTo(maxX * .852f, maxY * .062f);
+        saultSteMarieToMontreal.lineTo(maxX * .82f, maxY * .075f);
+        saultSteMarieToMontreal.lineTo(maxX * .815f, maxY * .056f);
+        saultSteMarieToMontreal.close();
+        saultSteMarieToMontreal.moveTo(maxX * .89f, maxY * .043f);
+        saultSteMarieToMontreal.lineTo(maxX * .89f, maxY * .06f);
+        saultSteMarieToMontreal.lineTo(maxX * .855f, maxY * .06f);
+        saultSteMarieToMontreal.lineTo(maxX * .855f, maxY * .043f);
+        saultSteMarieToMontreal.close();
+        saultSteMarieToMontrealTrack = new Track(5, "Black", "Sault St. Marie", "Montreal",
+                saultSteMarieToMontreal, saultSteMarieToMontrealRect);
+
+        newOrleansToMiami.moveTo(maxX * .755f, maxY * .83f);
+        newOrleansToMiami.lineTo(maxX * .76f, maxY * .843f);
+        newOrleansToMiami.lineTo(maxX * .73f, maxY * .87f);
+        newOrleansToMiami.lineTo(maxX * .725f, maxY * .86f);
+        newOrleansToMiami.close();
+        newOrleansToMiami.moveTo(maxX * .795f, maxY * .81f);
+        newOrleansToMiami.lineTo(maxX * .799f, maxY * .825f);
+        newOrleansToMiami.lineTo(maxX * .763f, maxY * .84f);
+        newOrleansToMiami.lineTo(maxX * .76f, maxY * .825f);
+        newOrleansToMiami.close();
+        newOrleansToMiami.moveTo(maxX * .799f, maxY * .81f);
+        newOrleansToMiami.lineTo(maxX * .835f, maxY * .81f);
+        newOrleansToMiami.lineTo(maxX * .835f, maxY * .825f);
+        newOrleansToMiami.lineTo(maxX * .799f, maxY * .825f);
+        newOrleansToMiami.close();
+        newOrleansToMiami.moveTo(maxX * .84f, maxY * .811f);
+        newOrleansToMiami.lineTo(maxX * .872f, maxY * .838f);
+        newOrleansToMiami.lineTo(maxX * .867f, maxY * .853f);
+        newOrleansToMiami.lineTo(maxX * .835f, maxY * .83f);
+        newOrleansToMiami.close();
+        newOrleansToMiami.moveTo(maxX * .876f, maxY * .845f);
+        newOrleansToMiami.lineTo(maxX * .903f, maxY * .875f);
+        newOrleansToMiami.lineTo(maxX * .895f, maxY * .89f);
+        newOrleansToMiami.lineTo(maxX * .87f, maxY * .86f);
+        newOrleansToMiami.close();
+        newOrleansToMiami.moveTo(maxX * .905f, maxY * .886f);
+        newOrleansToMiami.lineTo(maxX * .93f, maxY * .926f);
+        newOrleansToMiami.lineTo(maxX * .92f, maxY * .94f);
+        newOrleansToMiami.lineTo(maxX * .899f, maxY * .899f);
+        newOrleansToMiami.close();
+        newOrleansToMiamiTrack = new Track(6, "Red", "New Orleans", "Miami", newOrleansToMiami, newOrleansToMiamiRect);
 
         losAngelesToPhoenixTrack = new Track(3, "Gray", "LosAngeles", "LasVegas", losAngelesToPheonix, losAngelesToPhoenixRect);
-        myTracks = new Track[]{portlandToSanFranciscoTrack, vancouverToSeattleTrack, losAngelesToLasVegasTrack, GRID_TRACK, sanFranciscoToLosAngelesTrack, losAngelesToPhoenixTrack};
+        myTracks = new Track[]{portlandToSanFranciscoTrack, vancouverToSeattleTrack,
+                losAngelesToLasVegasTrack, GRID_TRACK, sanFranciscoToLosAngelesTrack,
+                montrealToBostonTrack, losAngelesToPhoenixTrack, montrealToNewYorkTrack,
+                newYorkToBostonTrack, newYorkToWashingtonTrack, raleighToWashingtonTrack,
+                raleighToCharlestonTrack, miamiToCharlestonTrack, atlantaToMiamiTrack,
+                atlantaToCharlestonTrack, raleighToAtlantaTrack, pittsburghToRaleighTrack,
+                pittsburghToWashingtonTrack, pittsburghToNewYorkTrack, torontoToPittsburghTrack,
+                torontoToMontrealTrack, saultSteMarieToMontrealTrack, newOrleansToMiamiTrack};
     }
 
     /*
