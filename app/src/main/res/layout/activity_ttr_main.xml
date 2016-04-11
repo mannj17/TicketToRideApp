@@ -459,22 +459,6 @@
             android:layout_marginLeft="65dp"
             android:textColor="#ff651B18"/>
 
-        <ImageView
-            android:layout_width="186dp"
-            android:layout_height="125dp"
-            android:id="@+id/playerDestinationCard"
-            android:layout_gravity="center"
-            android:src="@drawable/destination_ticket"
-            android:layout_marginLeft="-100dp" />
-
-        <ImageView
-            android:layout_width="186dp"
-            android:layout_height="125dp"
-            android:id="@+id/playerTrainCards"
-            android:layout_gravity="right|center_vertical"
-            android:src="@drawable/rainbow_train"
-            android:layout_marginRight="175dp" />
-
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -506,6 +490,305 @@
             android:text="Draw Card"
             android:id="@+id/drawCardCheckBox"
             android:layout_gravity="bottom|right" />
+
+        <FrameLayout
+            android:layout_width="299dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="left|center"
+            android:id="@+id/playerTrainCardDeck"
+            android:layout_marginLeft="150dp"
+            android:paddingLeft="50dp">
+
+            <FrameLayout
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="60dp"
+                android:layout_gravity="top|left"
+                android:id="@+id/redCard">
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="20dp"
+                    android:id="@+id/cardCardImg"
+                    android:src="@drawable/red_train"
+                    android:layout_row="1"
+                    android:layout_column="60"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="3dp"
+                    android:layout_gravity="left|center_vertical" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="0"
+                    android:id="@+id/redCardCount"
+                    android:layout_gravity="center|right" />
+            </FrameLayout>
+
+            <FrameLayout
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="60dp"
+                android:layout_gravity="top|center_horizontal"
+                android:id="@+id/orangeCard" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="0"
+                    android:id="@+id/orangeCardCount"
+                    android:layout_gravity="center|right" />
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="20dp"
+                    android:id="@+id/orangeCardImg"
+                    android:src="@drawable/orange_train"
+                    android:layout_row="1"
+                    android:layout_column="60"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="3dp"
+                    android:layout_gravity="center" />
+            </FrameLayout>
+
+            <FrameLayout
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="60dp"
+                android:layout_gravity="center"
+                android:id="@+id/blueCard" >
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="20dp"
+                    android:id="@+id/blueCardImg"
+                    android:src="@drawable/blue_train"
+                    android:layout_row="1"
+                    android:layout_column="60"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="3dp"
+                    android:layout_gravity="left|center_vertical" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="0"
+                    android:id="@+id/blueCardCount"
+                    android:layout_gravity="center|right" />
+            </FrameLayout>
+
+            <FrameLayout
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="60dp"
+                android:layout_gravity="left|bottom"
+                android:id="@+id/whiteCard" >
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="20dp"
+                    android:id="@+id/whiteCardImg"
+                    android:src="@drawable/white_train"
+                    android:layout_row="1"
+                    android:layout_column="60"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="3dp"
+                    android:layout_gravity="left|center_vertical" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="0"
+                    android:id="@+id/whiteCardCount"
+                    android:layout_gravity="center|right" />
+            </FrameLayout>
+
+            <FrameLayout
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="60dp"
+                android:layout_gravity="center_horizontal|bottom"
+                android:id="@+id/blackCard" >
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="20dp"
+                    android:id="@+id/blackCardImg"
+                    android:src="@drawable/black_train"
+                    android:layout_row="1"
+                    android:layout_column="60"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="3dp"
+                    android:layout_gravity="left|center_vertical" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="0"
+                    android:id="@+id/blackCardCount"
+                    android:layout_gravity="center|right" />
+            </FrameLayout>
+
+            <FrameLayout
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="60dp"
+                android:layout_gravity="right|top"
+                android:id="@+id/yellowCard" >
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="20dp"
+                    android:id="@+id/yellowCardImg"
+                    android:src="@drawable/yellow_train"
+                    android:layout_row="1"
+                    android:layout_column="60"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="3dp"
+                    android:layout_gravity="left|center_vertical" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="0"
+                    android:id="@+id/yellowCardCount"
+                    android:layout_gravity="center|right" />
+            </FrameLayout>
+
+            <FrameLayout
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="60dp"
+                android:layout_gravity="left|center_vertical"
+                android:id="@+id/greenCard" >
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="20dp"
+                    android:id="@+id/greenCardImg"
+                    android:src="@drawable/green_train"
+                    android:layout_row="1"
+                    android:layout_column="60"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="3dp"
+                    android:layout_gravity="left|center_vertical" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="0"
+                    android:id="@+id/greenCardCount"
+                    android:layout_gravity="center|right" />
+            </FrameLayout>
+
+            <FrameLayout
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="60dp"
+                android:layout_gravity="right|center_vertical"
+                android:id="@+id/pinkCard" >
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="20dp"
+                    android:id="@+id/pinkCardImg"
+                    android:src="@drawable/pink_train"
+                    android:layout_row="1"
+                    android:layout_column="60"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="3dp"
+                    android:layout_gravity="left|center_vertical" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="0"
+                    android:id="@+id/pinkCardCount"
+                    android:layout_gravity="center|right" />
+            </FrameLayout>
+
+            <FrameLayout
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="60dp"
+                android:layout_gravity="right|bottom"
+                android:id="@+id/locomotioveCard" >
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="20dp"
+                    android:id="@+id/locomotiveCardImg"
+                    android:src="@drawable/rainbow_train"
+                    android:layout_row="1"
+                    android:layout_column="60"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="3dp"
+                    android:layout_gravity="left|center_vertical" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="0"
+                    android:id="@+id/locomotiveCardCount"
+                    android:layout_gravity="center|right" />
+            </FrameLayout>
+
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="235dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="right|center_vertical"
+            android:id="@+id/playerDestinationDeck"
+            android:layout_marginRight="150dp">
+
+            <FrameLayout
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="60dp"
+                android:layout_gravity="center"
+                android:id="@+id/frameLayout" >
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="20dp"
+                    android:id="@+id/imageView9"
+                    android:src="@drawable/ticket_back"
+                    android:layout_row="1"
+                    android:layout_column="60"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="3dp"
+                    android:layout_gravity="left|center_vertical" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="0"
+                    android:id="@+id/textView10"
+                    android:layout_gravity="center|right" />
+            </FrameLayout>
+        </FrameLayout>
 
     </FrameLayout>
 
