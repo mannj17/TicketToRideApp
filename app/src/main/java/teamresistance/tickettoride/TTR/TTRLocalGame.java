@@ -166,9 +166,13 @@ public class TTRLocalGame extends LocalGame {
             if(mainState.getCardModeSelected()){
                 return false;
             }
+            boolean alreadySelected = false;
+            for(int i = 0; i < mainState.getTracks().length; i++){
+                if(mainState.getTracks()[i].getSelected()){alreadySelected = true;}
+            }
             TrackPlaceAction temp = (TrackPlaceAction)action;
             int index = temp.getIndex();
-            if(!mainState.getTracks()[index].getSelected()) {
+            if(!mainState.getTracks()[index].getSelected() && !alreadySelected) {
                 mainState.getTracks()[index].setSelected(true);
             }
             else{

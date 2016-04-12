@@ -315,14 +315,13 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
         if(v.getId() == R.id.GameBoard && event.getAction() == MotionEvent.ACTION_DOWN){
             int index = -1;
             for(int i = 0; i < myBoard.getTracks().length; i++){
-                if(myBoard.getTracks()[i].isTouched(x, y)){
+                if(myBoard.getTracks()[i].isTouched(x, y-191)){
                     index = i;
                 }
             }
             if (index != -1) {
                 game.sendAction(new TrackPlaceAction(this,
                         myState.getTracks()[index].getTrackColor(), index));
-                //myBoard.setSelection(x, y - 191);
             }
             else{
                 return false;
