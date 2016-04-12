@@ -1,6 +1,7 @@
 package teamresistance.tickettoride.TTR;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.graphics.Color;
 import android.util.Log;
@@ -11,6 +12,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -379,7 +381,8 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
                             }
                         });
                 AlertDialog alert11 = builder1.create();
-                alert11.show();}
+                alert11.show();
+            }
         }
         else if(v.getId() == R.id.Train1){
             game.sendAction(new DrawUpCardAction(this, 0));
@@ -400,7 +403,9 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
             game.sendAction(new DrawDownCardAction(this));
         }
         else if(v.getId() == R.id.DrawTicketStack){
-            game.sendAction(new DrawDestinationCardAction(this));
+            DestinationSelectionDialog dsd = new DestinationSelectionDialog(myActivity, false);
+            dsd.show();
+            //game.sendAction(new DrawDestinationCardAction(this));
         }
         else if(v.getId() == R.id.drawCardCheckBox){
             if(myState.getTrackModeSelected() && !myState.getCardModeSelected()){

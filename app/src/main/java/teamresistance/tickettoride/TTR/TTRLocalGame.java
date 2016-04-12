@@ -158,6 +158,7 @@ public class TTRLocalGame extends LocalGame {
                             mainState.getDestinationCards(),
                             mainState.getDestinationPool());
                 }
+
             }
             else if(mainState.getTrackModeSelected()){
                 for(int i = 0; i < mainState.getTracks().length; i++){
