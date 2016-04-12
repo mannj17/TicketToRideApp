@@ -186,7 +186,7 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
                     this.faceUpTrainCards[i].setImageResource(R.drawable.rainbow_train);
                 }
             }
-         //   myBoard.postInvalidate();
+            myBoard.postInvalidate();
         }
     }
 
