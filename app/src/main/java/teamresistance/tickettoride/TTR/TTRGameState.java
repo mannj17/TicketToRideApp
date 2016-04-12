@@ -52,6 +52,7 @@ public class TTRGameState extends GameState {
     Rect saltLakeCityToLasVegasRect = new Rect((int)(maxX * .19), (int)(maxY * .51), (int)(maxX * .4), (int)(maxY * .73));
     Rect calgaryToWinnipegRect = new Rect((int)(maxX * .22), (int)(maxY * .0), (int)(maxX * .45), (int)(maxY * .1));
     Rect calgaryToHelenaRect = new Rect((int)(maxX * .2), (int)(maxY * .09), (int)(maxX * .33), (int)(maxY * .27));
+    Rect helenaToSaltLakeCityRect = new Rect((int)(maxX * .25), (int)(maxY * .3), (int)(maxX * .32), (int)(maxY * .46));
 
     private Path GRID = new Path();
     //THE WEST!
@@ -980,6 +981,23 @@ public class TTRGameState extends GameState {
         calgaryToHelena.close();
         calgaryToHelenaTrack = new Track(4, "Gray", "Calgary", "Helena", calgaryToHelena, calgaryToHelenaRect);
 
+        helenaToSaltLakeCity.moveTo(maxX * .251f, maxY * .458f);
+        helenaToSaltLakeCity.lineTo(maxX * .259f, maxY * .464f);
+        helenaToSaltLakeCity.lineTo(maxX * .275f, maxY * .421f);
+        helenaToSaltLakeCity.lineTo(maxX * .268f, maxY * .415f);
+        helenaToSaltLakeCity.close();
+        helenaToSaltLakeCity.moveTo(maxX * .270f, maxY * .408f);
+        helenaToSaltLakeCity.lineTo(maxX * .277f, maxY * .412f);
+        helenaToSaltLakeCity.lineTo(maxX * .292f, maxY * .369f);
+        helenaToSaltLakeCity.lineTo(maxX * .285f, maxY * .360f);
+        helenaToSaltLakeCity.close();
+        helenaToSaltLakeCity.moveTo(maxX * .287f, maxY * .354f);
+        helenaToSaltLakeCity.lineTo(maxX * .298f, maxY * .360f);
+        helenaToSaltLakeCity.lineTo(maxX * .318f, maxY * .312f);
+        helenaToSaltLakeCity.lineTo(maxX * .308f, maxY * .304f);
+        helenaToSaltLakeCity.close();
+        helenaToSaltLakeCityTrack = new Track(3, "PINK", "Helena", "SaltLakeCity", helenaToSaltLakeCity, helenaToSaltLakeCityRect);
+
         myTracks = new Track[]{portlandToSanFranciscoTrack, GRID_TRACK, seattleToHelenaTrack,
                 losAngelesToLasVegasTrack, sanFranciscoToLosAngelesTrack,
                 montrealToBostonTrack, losAngelesToPhoenixTrack, montrealToNewYorkTrack,
@@ -990,7 +1008,8 @@ public class TTRGameState extends GameState {
                 torontoToMontrealTrack, saultSteMarieToMontrealTrack, newOrleansToMiamiTrack,
                 losAngelesToElPasoTrack, vancouverToSeattleTrack, seattleToPortlandTrack, vancouverToCalgaryTrack,
                 seattleToCalgaryTrack, portlandToSaltLakeCityTrack, sanFranciscoToSaltLakeCityTrack,
-                saltLakeCityToLasVegasTrack, calgaryToWinnipegTrack, calgaryToHelenaTrack
+                saltLakeCityToLasVegasTrack, calgaryToWinnipegTrack, calgaryToHelenaTrack,
+                helenaToSaltLakeCityTrack
         };
 
         //Booleans set to defaults
