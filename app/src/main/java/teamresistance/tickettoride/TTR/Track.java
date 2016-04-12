@@ -121,6 +121,10 @@ public class Track {
         return covered;
     }
 
+    public int getPlayerID(){return playerID;}
+
+    public void setPlayerID(int val){this.playerID = val;}
+
     /**
      * Sets whether the track is/isn't selected
      * @param val - new boolean for if covered

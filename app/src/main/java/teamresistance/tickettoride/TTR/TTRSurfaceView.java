@@ -29,7 +29,10 @@ public class TTRSurfaceView extends SurfaceView{
     /*
      * These ints correspond to hex colors used by this class
      */
-    final int RED_COLOR = 0xFFFF0000;
+    final int PLAYER1_COLOR = 0xFFFF0000;
+    final int PLAYER2_COLOR = 0xFF0000FF;
+    final int PLAYER3_COLOR = 0xFF00FF00;
+    final int PLAYER4_COLOR = 0xFFFFFF00;
     final int HIGHLIGHT_COLOR = 0xFF00FF00;
     final int SELECTION_COLOR = 0xFF00ffff;
 
@@ -75,7 +78,10 @@ public class TTRSurfaceView extends SurfaceView{
                     canvas.drawPath(track.getPath(), paint);
                 }
                 if (track.getCovered()) {
-                    paint.setColor(RED_COLOR);
+                    if(track.getPlayerID() == 1){paint.setColor(PLAYER1_COLOR);}
+                    if(track.getPlayerID() == 2){paint.setColor(PLAYER2_COLOR);}
+                    if(track.getPlayerID() == 3){paint.setColor(PLAYER3_COLOR);}
+                    if(track.getPlayerID() == 4){paint.setColor(PLAYER4_COLOR);}
                     paint.setStyle(Paint.Style.FILL);
                     canvas.drawPath(track.getPath(), paint);
                 }

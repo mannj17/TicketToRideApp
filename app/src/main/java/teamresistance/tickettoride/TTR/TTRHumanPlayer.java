@@ -219,21 +219,54 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
     }
 
     public boolean canChoose(Track track){
+        if(track.getCovered()){return false;}
         String tempColor = track.getTrackColor();
         int trackLength = track.getTrainTrackNum();
         Deck tempDeck = this.trainDeck;
         int numberOfCards = 0;
         if(!tempColor.equals("Gray")) {
             for (int i = 0; i < tempDeck.size(); i++) {
-                if (tempDeck.getCards().get(i).toString().equals(tempColor)) {
+                if (tempDeck.getCards().get(i).toString().equals(tempColor) ||
+                        tempDeck.getCards().get(i).toString().equals("Rainbow")) {
                     numberOfCards++;
                 }
             }
         }
         else if(tempColor.equals("Gray")){
-            return true;
+            return chooseGray(track);
         }
         if(numberOfCards >= trackLength){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
+    public boolean chooseGray(Track track){
+        int rainbowCount = myState.getTrainColorCount("Rainbow", 0);
+        if((myState.getTrainColorCount("Black", 0)+ rainbowCount) >= track.getTrainTrackNum()){
+            return true;
+        }
+        else if((myState.getTrainColorCount("White", 0)+ rainbowCount) >= track.getTrainTrackNum()){
+            return true;
+        }
+        else if((myState.getTrainColorCount("Blue", 0)+ rainbowCount) >= track.getTrainTrackNum()){
+            return true;
+        }
+        else if((myState.getTrainColorCount("Red", 0)+ rainbowCount) >= track.getTrainTrackNum()){
+            return true;
+        }
+        else if((myState.getTrainColorCount("Orange", 0)+ rainbowCount) >= track.getTrainTrackNum()){
+            return true;
+        }
+        else if((myState.getTrainColorCount("Yellow", 0)+ rainbowCount) >= track.getTrainTrackNum()){
+            return true;
+        }
+        else if((myState.getTrainColorCount("Pink", 0)+ rainbowCount) >= track.getTrainTrackNum()){
+            return true;
+        }
+        else if((myState.getTrainColorCount("Green", 0)+ rainbowCount) >= track.getTrainTrackNum()){
             return true;
         }
         else{

@@ -159,6 +159,18 @@ public class TTRLocalGame extends LocalGame {
                             mainState.getDestinationPool());
                 }
             }
+            else if(mainState.getTrackModeSelected()){
+                for(int i = 0; i < mainState.getTracks().length; i++){
+                    if(mainState.getTracks()[i].getSelected()){
+                        mainState.getTracks()[i].setCovered(true);
+                        mainState.setPlayerID(this.getPlayerIdx(action.getPlayer()));
+                    }
+                }
+                mainState.setTrackModeSelected(false);
+                mainState.setPlaceTrainSelected(false);
+            }
+            mainState.setCardModeSelected(true);
+            mainState.setTrackModeSelected(false);
             mainState.setPlayerID((mainState.getPlayerID()+1)%mainState.getNumPlayers());
             return true;
         }
@@ -175,9 +187,11 @@ public class TTRLocalGame extends LocalGame {
             if(mainState.getTracks()[index].getHighlight() &&
                     !mainState.getTracks()[index].getSelected() && !alreadySelected) {
                 mainState.getTracks()[index].setSelected(true);
+                mainState.setPlaceTrainSelected(true);
             }
             else{
                 mainState.getTracks()[index].setSelected(false);
+                mainState.setPlaceTrainSelected(false);
             }
             return true;
         }
