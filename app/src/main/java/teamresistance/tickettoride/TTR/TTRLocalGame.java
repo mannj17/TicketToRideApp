@@ -130,14 +130,14 @@ public class TTRLocalGame extends LocalGame {
                             mainState.getPlayerTrainDecks()[mainState.getPlayerID()].add(temp);
                             mainState.getFaceUpTrainCards().getCards().remove(i);
                             mainState.getFaceDownTrainCards().moveTopCardTo(
-                                    mainState.getFaceUpTrainCards(), mainState.getFaceUpTrainCards());
+                                    mainState.getFaceUpTrainCards(), mainState.getFaceDownTrainCards());
                             mainState.getFaceUpTrainCards().getCards().get(i).setHighlight(false);
                         }
                     }
                     mainState.getFaceDownTrainCards().setHighlight(false);
                 }
                 else if(!mainState.getOnlyDownDeck() && !mainState.getFaceDownTrainCards().getHighlight()){
-                    for(int i = 0; i < mainState.getFaceUpTrainCards().size(); i++){
+                    for(int i = mainState.getFaceUpTrainCards().size()-1; i >= 0; i--){
                         if(mainState.getFaceUpTrainCards().getCards().get(i).getHighlight()){
                             Card temp = mainState.getFaceUpTrainCards().getCards().get(i);
                             mainState.getPlayerTrainDecks()[mainState.getPlayerID()].add(temp);
@@ -172,7 +172,8 @@ public class TTRLocalGame extends LocalGame {
             }
             TrackPlaceAction temp = (TrackPlaceAction)action;
             int index = temp.getIndex();
-            if(!mainState.getTracks()[index].getSelected() && !alreadySelected) {
+            if(mainState.getTracks()[index].getHighlight() &&
+                    !mainState.getTracks()[index].getSelected() && !alreadySelected) {
                 mainState.getTracks()[index].setSelected(true);
             }
             else{

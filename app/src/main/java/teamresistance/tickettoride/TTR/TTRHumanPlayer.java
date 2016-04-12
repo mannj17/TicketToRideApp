@@ -117,6 +117,7 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
         if(info instanceof TTRGameState) {
             myState = (TTRGameState)info;
             myBoard.setTracks(myState.getTracks());
+            trainDeck = myState.getPlayerTrainDecks()[playerNum];
             int playerNum = ((TTRGameState) info).getNumPlayers();
             for(int i = 0; i < myState.getFaceUpTrainCards().size(); i++){
                 if(myState.getFaceUpTrainCards().getCards().get(i).getHighlight()){
@@ -137,7 +138,9 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
 
             int size = myBoard.getTracksLength();
             for (int i = 0; i < size; i++) {
-               myBoard.getTracks()[i].setHighlight(val);
+                //if(canChoose(myBoard.getTracks()[i])) {
+                    myBoard.getTracks()[i].setHighlight(val);
+                //}
             }
             if(playerNum >= 2) { //2 is the minimum number of players
                 lp = new LinearLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT,1);
@@ -210,6 +213,29 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
 
 
             myBoard.postInvalidate();
+        }
+    }
+
+    public boolean canChoose(Track track){
+        String tempColor = track.getTrackColor();
+        int trackLength = track.getTrainTrackNum();
+        Deck tempDeck = this.trainDeck;
+        int numberOfCards = 0;
+        if(!tempColor.equals("Gray")) {
+            for (int i = 0; i < tempDeck.size(); i++) {
+                if (tempDeck.getCards().get(i).toString().equals(tempColor)) {
+                    numberOfCards++;
+                }
+            }
+        }
+        else if(tempColor.equals("Gray")){
+            return true;
+        }
+        if(numberOfCards >= trackLength){
+            return true;
+        }
+        else{
+            return false;
         }
     }
 
