@@ -163,7 +163,17 @@ public class TTRLocalGame extends LocalGame {
             return true;
         }
         else if(action instanceof TrackPlaceAction){
-
+            if(mainState.getCardModeSelected()){
+                return false;
+            }
+            TrackPlaceAction temp = (TrackPlaceAction)action;
+            int index = temp.getIndex();
+            if(!mainState.getTracks()[index].getSelected()) {
+                mainState.getTracks()[index].setSelected(true);
+            }
+            else{
+                mainState.getTracks()[index].setSelected(false);
+            }
             return true;
         }
         else if(action instanceof DrawUpCardAction){

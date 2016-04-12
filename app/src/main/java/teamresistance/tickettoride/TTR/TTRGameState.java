@@ -738,7 +738,7 @@ public class TTRGameState extends GameState {
         losAngelesToElPasoTrack = new Track(6, "Black", "LosAngeles", "ElPaso", losAngelesToElPaso,losAngelesToElPasoRect);
 
         losAngelesToPhoenixTrack = new Track(3, "Gray", "LosAngeles", "Phoenix", losAngelesToPheonix, losAngelesToPhoenixRect);
-        myTracks = new Track[]{portlandToSanFranciscoTrack, GRID_TRACK,//vancouverToSeattleTrack,
+        myTracks = new Track[]{portlandToSanFranciscoTrack, //GRID_TRACK,//vancouverToSeattleTrack,
                 losAngelesToLasVegasTrack, sanFranciscoToLosAngelesTrack,
                 montrealToBostonTrack, losAngelesToPhoenixTrack, montrealToNewYorkTrack,
                 newYorkToBostonTrack, newYorkToWashingtonTrack, raleighToWashingtonTrack,
