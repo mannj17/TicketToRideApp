@@ -866,6 +866,15 @@ public class TTRGameState extends GameState {
         this.playerDestinationDecks = playerDestinationDecks;
     }
 
+    public int getTrainColorCount(String color, int index){
+        int count = 0;
+        for(int i = 0; i< playerTrainDecks[index].size(); i++){
+            if (playerTrainDecks[index].getCards().get(i).toString().equals(color)){
+                count++;
+            }
+        }
+        return count;
+    }
     public int getPlayerID() {
         return playerID;
     }

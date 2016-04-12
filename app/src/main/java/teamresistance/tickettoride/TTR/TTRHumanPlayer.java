@@ -3,6 +3,7 @@ package teamresistance.tickettoride.TTR;
 import android.graphics.Color;
 import android.util.Log;
 import android.view.MotionEvent;
+import android.view.TextureView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -66,6 +67,16 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
     private TextView cpu1TrainCardTextView;
     private TextView cpu2TrainCardTextView;
     private TextView cpu3TrainCardTextView;
+    /** TextViews for the plaer deck card colors */
+    private TextView redColorCount;
+    private TextView orangeColorCount;
+    private TextView yellowColorCount;
+    private TextView greenColorCount;
+    private TextView blueColorCount;
+    private TextView pinkColorCount;
+    private TextView blackColorCount;
+    private TextView whiteColorCount;
+    private TextView rainbowColorCount;
     /** Widjets to control what player Stats display/Scaling*/
     private FrameLayout cpu1FrameLayout;
     private FrameLayout cpu2FrameLayout;
@@ -186,6 +197,18 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
                     this.faceUpTrainCards[i].setImageResource(R.drawable.rainbow_train);
                 }
             }
+
+            blackColorCount.setText("" + myState.getTrainColorCount("Black", 0));
+            whiteColorCount.setText("" + myState.getTrainColorCount("White", 0));
+            blueColorCount.setText("" + myState.getTrainColorCount("Blue", 0));
+            redColorCount.setText("" + myState.getTrainColorCount("Red", 0));
+            orangeColorCount.setText("" + myState.getTrainColorCount("Orange", 0));
+            yellowColorCount.setText("" + myState.getTrainColorCount("Yellow", 0));
+            pinkColorCount.setText("" + myState.getTrainColorCount("Pink", 0));
+            greenColorCount.setText("" + myState.getTrainColorCount("Green", 0));
+            rainbowColorCount.setText("" + myState.getTrainColorCount("Rainbow", 0));
+
+
             myBoard.postInvalidate();
         }
     }
@@ -222,12 +245,23 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
         this.cpu1DestinationCardTextView = (TextView)myActivity.findViewById(R.id.CPU1DestinationCardCount);
         this.cpu2DestinationCardTextView = (TextView)myActivity.findViewById(R.id.CPU2DestinationCardCount);
         this.cpu3DestinationCardTextView = (TextView)myActivity.findViewById(R.id.CPU3DestinationCardCount);
-        this.cpu1TrainCardTextView = (TextView)myActivity.findViewById(R.id.CPU1TrainCount);
-        this.cpu2TrainCardTextView  = (TextView)myActivity.findViewById(R.id.CPU2TrainCount);
-        this.cpu3TrainCardTextView  = (TextView)myActivity.findViewById(R.id.CPU3TrainCount);
+        this.cpu1TrainCardTextView = (TextView)myActivity.findViewById(R.id.CPU1TrainCardCount);
+        this.cpu2TrainCardTextView  = (TextView)myActivity.findViewById(R.id.CPU2TrainCardCount);
+        this.cpu3TrainCardTextView  = (TextView)myActivity.findViewById(R.id.CPU3TrainCardCount);
         this.cpu1FrameLayout = (FrameLayout)myActivity.findViewById(R.id.CPU1);
         this.cpu2FrameLayout = (FrameLayout)myActivity.findViewById(R.id.CPU2);
         this.cpu3FrameLayout = (FrameLayout)myActivity.findViewById(R.id.CPU3);
+
+        this.redColorCount = (TextView)myActivity.findViewById(R.id.redCardCount);
+        this.orangeColorCount = (TextView)myActivity.findViewById(R.id.orangeCardCount);
+        this.yellowColorCount = (TextView)myActivity.findViewById(R.id.yellowCardCount);
+        this.greenColorCount = (TextView)myActivity.findViewById(R.id.greenCardCount);
+        this.blueColorCount = (TextView)myActivity.findViewById(R.id.blueCardCount);
+        this.greenColorCount = (TextView)myActivity.findViewById(R.id.greenCardCount);
+        this.pinkColorCount = (TextView)myActivity.findViewById(R.id.pinkCardCount);
+        this.blackColorCount = (TextView)myActivity.findViewById(R.id.blackCardCount);
+        this.whiteColorCount = (TextView)myActivity.findViewById(R.id.whiteCardCount);
+        this.rainbowColorCount = (TextView)myActivity.findViewById(R.id.locomotiveCardCount);
 
         this.confirmSelection = (Button)myActivity.findViewById(R.id.confirmSelection);
 
