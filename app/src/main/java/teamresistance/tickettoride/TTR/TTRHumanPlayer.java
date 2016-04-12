@@ -345,8 +345,20 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
 
         int x = (int)event.getRawX();
         int y = (int)event.getRawY();
-        if(v.getId() == R.id.GameBoard){
-            myBoard.setSelection(x, y-191);
+        if(v.getId() == R.id.GameBoard && event.getAction() == MotionEvent.ACTION_DOWN){
+            int index = -1;
+            for(int i = 0; i < myBoard.getTracks().length; i++){
+                if(myBoard.getTracks()[i].isTouched(x, y-191)){
+                    index = i;
+                }
+            }
+            if (index != -1) {
+                game.sendAction(new TrackPlaceAction(this,
+                        myState.getTracks()[index].getTrackColor(), index));
+            }
+            else{
+                return false;
+            }
         }
         return true;
     }

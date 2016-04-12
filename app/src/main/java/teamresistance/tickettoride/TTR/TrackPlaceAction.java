@@ -14,9 +14,8 @@ import teamresistance.tickettoride.Game.actionMsg.GameAction;
  */
 public class TrackPlaceAction extends GameAction{
 
-    private String chosenColor;
-    private int xPos;
-    private int yPos;
+    private String trackColor;
+    private int index;
 
 
     /*
@@ -24,32 +23,25 @@ public class TrackPlaceAction extends GameAction{
      * @player
      */
 
-    public TrackPlaceAction(GamePlayer player, String chosenColor, int x, int y) {
+    public TrackPlaceAction(GamePlayer player, String trackColor, int index) {
         super(player);
-        this.chosenColor = chosenColor;
-        this.xPos = x;
-        this.yPos = y;
+        this.trackColor = trackColor;
+        this.index = index;
     }
 
     public void setChosenColor(String value){
-        this.chosenColor = value;
+        this.trackColor = value;
     }
 
-    public void setXPos(int value){
-        this.xPos = value;
-    }
-
-    public void setYPos(int value){
-        this.yPos = value;
+    public void setIndex(int value){
+        this.index = value;
     }
 
     public String getChosenColor(){
-        return this.chosenColor;
+        return this.trackColor;
     }
 
-    public int getXPos(){
-        return this.xPos;
+    public int getIndex(){
+        return this.index;
     }
-
-    public int getYPos(){ return this.yPos; }
 }

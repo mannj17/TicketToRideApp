@@ -82,14 +82,6 @@ public class Track {
     }
 
     /**
-     * Returns the track color
-     * @return
-     */
-    public String getTrainColor(){
-        return trackColor;
-    }
-
-    /**
      * Retruns the track Path
      * @return
      */
