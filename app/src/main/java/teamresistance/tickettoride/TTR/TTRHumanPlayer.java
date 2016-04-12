@@ -1,5 +1,7 @@
 package teamresistance.tickettoride.TTR;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -323,7 +325,28 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
     @Override
     public void onClick(View v) {
         if(v.getId() == R.id.confirmSelection){
-            game.sendAction(new ConfirmSelectionAction(this));
+            if(myState.getPlayerID() == 0){
+                final TTRHumanPlayer me = this;
+                //Popup to display
+                AlertDialog.Builder builder1 = new AlertDialog.Builder(myActivity);
+                builder1.setTitle("Are you sure you want to make this move?");
+                builder1.setMessage("Click to confirm");
+                builder1.setCancelable(false);
+                builder1.setNegativeButton("Cancel",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.dismiss();
+                            }
+                        });
+                builder1.setPositiveButton("Okay",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                game.sendAction(new ConfirmSelectionAction(me));
+                                dialog.cancel();
+                            }
+                        });
+                AlertDialog alert11 = builder1.create();
+                alert11.show();}
         }
         else if(v.getId() == R.id.Train1){
             game.sendAction(new DrawUpCardAction(this, 0));
