@@ -59,8 +59,8 @@ public class DestinationSelectionDialog extends Dialog implements android.view.V
         switch (v.getId()) {
             case R.id.btn_select:
                 if(selected > min){
-                c.finish();
-                break;
+                    dismiss();
+                    break;
                 } else {
                     text.setText("Please select at least the minimum number of ticket cards.");
                 }
@@ -73,6 +73,5 @@ public class DestinationSelectionDialog extends Dialog implements android.view.V
             default:
                 break;
         }
-        dismiss();
     }
 }
