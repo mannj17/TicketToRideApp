@@ -20,14 +20,14 @@ public class TTRGameState extends GameState {
     protected int maxY = 980;
 
     Rect touchArea5 = new Rect(0,0,1,1);
-
+    Rect vancouverToSeattleRect = new Rect((int)(maxX*.0), (int)(maxY*.1), (int)(maxX*.1), (int)(maxY*.2));
     Rect sanFranciscoToPortlandRect = new Rect((int)(maxX*.0), (int)(maxY*.290), (int)(maxX*.05), (int)(maxY*.8));
-    Rect sanFranciscoToLosAngelesRect = new Rect((int)(maxX*0),(int)(maxY*.6), (int)(maxX*.1), (int)(maxY*.8));
+    Rect sanFranciscoToLosAngelesRect = new Rect((int)(maxX*.0),(int)(maxY*.6), (int)(maxX*.1), (int)(maxY*.8));
     Rect losAngelesToPhoenixRect = new Rect((int)(maxX*.11), (int)(maxY*.65), (int)(maxX*.12), (int)(maxY*.05));
     Rect montrealtoBostonRect = new Rect((int)(maxX * .91), (int)(maxY * .06), (int)(maxX * .99), (int)(maxY * .18));
     Rect montrealtoNewYorkRect = new Rect((int)(maxX * .895), (int)(maxY * .08), (int)(maxX * .93), (int)(maxY * .27));
     Rect losAngelesToLasVegasRect = new Rect((int)(maxX * .11), (int)(maxY * .67), (int)(maxX * .175), (int)(maxY * .755));
-    Rect newYorkToBostonRect = new Rect((int)(maxX * .95), (int)(maxY * .18), (int)(maxX * 1), (int)(maxY * .29));
+    Rect newYorkToBostonRect = new Rect((int)(maxX * .95), (int)(maxY * .18), (int)(maxX * 1.0), (int)(maxY * .29));
     Rect newYorkToWashingtonRect = new Rect((int)(maxX * .93), (int)(maxY * .298), (int)(maxX * .96), (int)(maxY * .42));
     Rect raleighToWashingtonRect = new Rect((int)(maxX * .87), (int)(maxY * .43), (int)(maxX * .95), (int)(maxY * .55));
     Rect raleighToCharlestonRect = new Rect((int)(maxX * .875), (int)(maxY * .55), (int)(maxX * .94), (int)(maxY * .655));
@@ -43,6 +43,7 @@ public class TTRGameState extends GameState {
     Rect saultSteMarieToMontrealRect = new Rect((int)(maxX * .7), (int)(maxY * .04), (int)(maxX * .9), (int)(maxY * .15));
     Rect newOrleansToMiamiRect = new Rect((int)(maxX * .725), (int)(maxY * .8), (int)(maxX * .88), (int)(maxY * .88));
     Rect losAngelesToElPasoRect = new Rect((int)(maxX * .12), (int)(maxY * .79), (int)(maxX * .33), (int)(maxY * .9));
+    Rect seattleToPortlandRect = new Rect((int)(maxX * .0), (int)(maxY * .19), (int)(maxX * .075), (int)(maxY * .279));
     private Path GRID = new Path();
     //THE WEST!
     private Path vancouverToCalgary = new Path();
@@ -214,8 +215,6 @@ public class TTRGameState extends GameState {
     Track montrealToNewYorkTrack;
     Track newYorkToBostonTrack;
     Track newYorkToWashingtonTrack;
-
-
 
     int MAX_NUM_PLAYERS = 4;
     //The first locations labeled on the destination cards
@@ -737,8 +736,22 @@ public class TTRGameState extends GameState {
         losAngelesToElPaso.close();
         losAngelesToElPasoTrack = new Track(6, "Black", "LosAngeles", "ElPaso", losAngelesToElPaso,losAngelesToElPasoRect);
 
+        vancouverToSeattle.moveTo(maxX * .070f, maxY * .110f);
+        vancouverToSeattle.lineTo(maxX * .070f, maxY * .165f);
+        vancouverToSeattle.lineTo(maxX * .085f, maxY * .165f);
+        vancouverToSeattle.lineTo(maxX * .085f, maxY * .110f);
+        vancouverToSeattle.close();
+        vancouverToSeattleTrack = new Track(1, "Gray", "Vancouver", "Seattle", vancouverToSeattle, vancouverToSeattleRect);
+
+        seattleToPortland.moveTo(maxX * .053f, maxY * .200f);
+        seattleToPortland.lineTo(maxX * .040f, maxY * .252f);
+        seattleToPortland.lineTo(maxX * .050f, maxY * .257f);
+        seattleToPortland.lineTo(maxX * .060f, maxY * .205f);
+        seattleToPortland.close();
+        seattleToPortlandTrack = new Track(1, "Gray", "Seattle", "Portland", seattleToPortland, seattleToPortlandRect);
         losAngelesToPhoenixTrack = new Track(3, "Gray", "LosAngeles", "Phoenix", losAngelesToPheonix, losAngelesToPhoenixRect);
-        myTracks = new Track[]{portlandToSanFranciscoTrack, //GRID_TRACK,//vancouverToSeattleTrack,
+
+        myTracks = new Track[]{portlandToSanFranciscoTrack, GRID_TRACK,//vancouverToSeattleTrack,
                 losAngelesToLasVegasTrack, sanFranciscoToLosAngelesTrack,
                 montrealToBostonTrack, losAngelesToPhoenixTrack, montrealToNewYorkTrack,
                 newYorkToBostonTrack, newYorkToWashingtonTrack, raleighToWashingtonTrack,
@@ -746,7 +759,7 @@ public class TTRGameState extends GameState {
                 atlantaToCharlestonTrack, raleighToAtlantaTrack, pittsburghToRaleighTrack,
                 pittsburghToWashingtonTrack, pittsburghToNewYorkTrack, torontoToPittsburghTrack,
                 torontoToMontrealTrack, saultSteMarieToMontrealTrack, newOrleansToMiamiTrack,
-                losAngelesToElPasoTrack
+                losAngelesToElPasoTrack, vancouverToSeattleTrack, seattleToPortlandTrack
         };
 
         //Booleans set to defaults
