@@ -726,6 +726,16 @@ public class TTRSurfaceView extends SurfaceView{
         int size = myTracks.length;
         return size;
     }
+
+    public int clickedTrack(int xPos, int yPos){
+        int pos = -1;
+        for(int i = 0; i < myTracks.length; i++){
+            if(myTracks[i].isTouched(xPos, yPos)){
+                pos = i;
+            }
+        }
+        return pos;
+    }
     public Track[] getTracks(){
         return myTracks;
     }
