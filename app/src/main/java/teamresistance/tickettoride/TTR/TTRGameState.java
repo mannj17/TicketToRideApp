@@ -812,7 +812,7 @@ public class TTRGameState extends GameState {
             scores[i] = original.getScores()[i];
             names[i] = original.getNames()[i];
             playerTrainDecks[i] = new Deck(original.getPlayerTrainDecks()[i]);
-            playerDestinationDecks[i] = new Deck(original.getPlayerTrainDecks()[i]);
+            playerDestinationDecks[i] = new Deck(original.getPlayerDestinationDecks()[i]);
         }
 
         myTracks = original.getTracks();
