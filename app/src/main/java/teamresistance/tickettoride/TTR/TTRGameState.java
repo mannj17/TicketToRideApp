@@ -49,6 +49,11 @@ public class TTRGameState extends GameState {
     Rect seattleToHelenaRect = new Rect((int)(maxX * .08), (int)(maxY * .2), (int)(maxX * .31), (int)(maxY * .3));
     Rect portlandToSaltLakeCityRect = new Rect((int)(maxX * .09), (int)(maxY * .28), (int)(maxX * .33), (int)(maxY * .43));
     Rect sanFranciscoToSaltLakeCityRect = new Rect((int)(maxX * .05), (int)(maxY * .48), (int)(maxX * .25), (int)(maxY * .61));
+    Rect saltLakeCityToLasVegasRect = new Rect((int)(maxX * .19), (int)(maxY * .51), (int)(maxX * .4), (int)(maxY * .73));
+    Rect calgaryToWinnipegRect = new Rect((int)(maxX * .22), (int)(maxY * .0), (int)(maxX * .45), (int)(maxY * .1));
+    Rect calgaryToHelenaRect = new Rect((int)(maxX * .2), (int)(maxY * .09), (int)(maxX * .33), (int)(maxY * .27));
+    Rect helenaToSaltLakeCityRect = new Rect((int)(maxX * .25), (int)(maxY * .3), (int)(maxX * .32), (int)(maxY * .46));
+    Rect saltLakeCityToDenverRect = new Rect((int)(maxX * .26), (int)(maxY * .48), (int)(maxX * .37), (int)(maxY * .54));
 
     private Path GRID = new Path();
     //THE WEST!
@@ -905,6 +910,112 @@ public class TTRGameState extends GameState {
         sanFranciscoToSaltLakeCity.close();
         sanFranciscoToSaltLakeCityTrack = new Track(5, "Orange", "SanFrancisco", "SaltLakeCity", sanFranciscoToSaltLakeCity, sanFranciscoToSaltLakeCityRect);
 
+        saltLakeCityToLasVegas.moveTo(maxX * .194f, maxY * .670f);
+        saltLakeCityToLasVegas.lineTo(maxX * .201f, maxY * .680f);
+        saltLakeCityToLasVegas.lineTo(maxX * .224f, maxY * .641f);
+        saltLakeCityToLasVegas.lineTo(maxX * .217f, maxY * .631f);
+        saltLakeCityToLasVegas.close();
+        saltLakeCityToLasVegas.moveTo(maxX * .219f, maxY * .626f);
+        saltLakeCityToLasVegas.lineTo(maxX * .229f, maxY * .629f);
+        saltLakeCityToLasVegas.lineTo(maxX * .239f, maxY * .585f);
+        saltLakeCityToLasVegas.lineTo(maxX * .230f, maxY * .581f);
+        saltLakeCityToLasVegas.close();
+        saltLakeCityToLasVegas.moveTo(maxX * .232f, maxY * .578f);
+        saltLakeCityToLasVegas.lineTo(maxX * .241f, maxY * .579f);
+        saltLakeCityToLasVegas.lineTo(maxX * .246f, maxY * .523f);
+        saltLakeCityToLasVegas.lineTo(maxX * .237f, maxY * .521f);
+        saltLakeCityToLasVegas.close();
+        saltLakeCityToLasVegasTrack = new Track(3, "Orange", "LasVegas", "SaltLakeCity", saltLakeCityToLasVegas, saltLakeCityToLasVegasRect);
+
+        calgaryToWinnipeg.moveTo(maxX * .224f, maxY * .05f);
+        calgaryToWinnipeg.lineTo(maxX * .227f, maxY * .063f);
+        calgaryToWinnipeg.lineTo(maxX * .258f, maxY * .045f);
+        calgaryToWinnipeg.lineTo(maxX * .255f, maxY * .032f);
+        calgaryToWinnipeg.close();
+        calgaryToWinnipeg.moveTo(maxX * .261f, maxY * .031f);
+        calgaryToWinnipeg.lineTo(maxX * .263f, maxY * .044f);
+        calgaryToWinnipeg.lineTo(maxX * .294f, maxY * .036f);
+        calgaryToWinnipeg.lineTo(maxX * .291f, maxY * .021f);
+        calgaryToWinnipeg.close();
+        calgaryToWinnipeg.moveTo(maxX * .297f, maxY * .019f);
+        calgaryToWinnipeg.lineTo(maxX * .298f, maxY * .032f);
+        calgaryToWinnipeg.lineTo(maxX * .332f, maxY * .032f);
+        calgaryToWinnipeg.lineTo(maxX * .332f, maxY * .019f);
+        calgaryToWinnipeg.close();
+        calgaryToWinnipeg.moveTo(maxX * .338f, maxY * .018f);
+        calgaryToWinnipeg.lineTo(maxX * .337f, maxY * .031f);
+        calgaryToWinnipeg.lineTo(maxX * .366f, maxY * .033f);
+        calgaryToWinnipeg.lineTo(maxX * .367f, maxY * .021f);
+        calgaryToWinnipeg.close();
+        calgaryToWinnipeg.moveTo(maxX * .376f, maxY * .022f);
+        calgaryToWinnipeg.lineTo(maxX * .374f, maxY * .034f);
+        calgaryToWinnipeg.lineTo(maxX * .405f, maxY * .048f);
+        calgaryToWinnipeg.lineTo(maxX * .408f, maxY * .034f);
+        calgaryToWinnipeg.close();
+        calgaryToWinnipeg.moveTo(maxX * .416f, maxY * .037f);
+        calgaryToWinnipeg.lineTo(maxX * .414f, maxY * .052f);
+        calgaryToWinnipeg.lineTo(maxX * .443f, maxY * .072f);
+        calgaryToWinnipeg.lineTo(maxX * .445f, maxY * .063f);
+        calgaryToWinnipeg.close();
+        calgaryToWinnipegTrack  = new Track(6, "White", "Calgary", "Winnipeg", calgaryToWinnipeg, calgaryToWinnipegRect);
+
+
+        calgaryToHelena.moveTo(maxX * .228f, maxY * .082f);
+        calgaryToHelena.lineTo(maxX * .220f, maxY * .093f);
+        calgaryToHelena.lineTo(maxX * .241f, maxY * .132f);
+        calgaryToHelena.lineTo(maxX * .246f, maxY * .126f);
+        calgaryToHelena.close();
+        calgaryToHelena.moveTo(maxX * .251f, maxY * .129f);
+        calgaryToHelena.lineTo(maxX * .243f, maxY * .135f);
+        calgaryToHelena.lineTo(maxX * .264f, maxY * .174f);
+        calgaryToHelena.lineTo(maxX * .271f, maxY * .168f);
+        calgaryToHelena.close();
+        calgaryToHelena.moveTo(maxX * .276f, maxY * .171f);
+        calgaryToHelena.lineTo(maxX * .268f, maxY * .179f);
+        calgaryToHelena.lineTo(maxX * .289f, maxY * .221f);
+        calgaryToHelena.lineTo(maxX * .299f, maxY * .208f);
+        calgaryToHelena.close();
+        calgaryToHelena.moveTo(maxX * .301f, maxY * .223f);
+        calgaryToHelena.lineTo(maxX * .295f, maxY * .231f);
+        calgaryToHelena.lineTo(maxX * .313f, maxY * .269f);
+        calgaryToHelena.lineTo(maxX * .323f, maxY * .263f);
+        calgaryToHelena.close();
+        calgaryToHelenaTrack = new Track(4, "Gray", "Calgary", "Helena", calgaryToHelena, calgaryToHelenaRect);
+
+        helenaToSaltLakeCity.moveTo(maxX * .251f, maxY * .458f);
+        helenaToSaltLakeCity.lineTo(maxX * .259f, maxY * .464f);
+        helenaToSaltLakeCity.lineTo(maxX * .275f, maxY * .421f);
+        helenaToSaltLakeCity.lineTo(maxX * .268f, maxY * .415f);
+        helenaToSaltLakeCity.close();
+        helenaToSaltLakeCity.moveTo(maxX * .270f, maxY * .408f);
+        helenaToSaltLakeCity.lineTo(maxX * .277f, maxY * .412f);
+        helenaToSaltLakeCity.lineTo(maxX * .292f, maxY * .369f);
+        helenaToSaltLakeCity.lineTo(maxX * .285f, maxY * .360f);
+        helenaToSaltLakeCity.close();
+        helenaToSaltLakeCity.moveTo(maxX * .287f, maxY * .354f);
+        helenaToSaltLakeCity.lineTo(maxX * .298f, maxY * .360f);
+        helenaToSaltLakeCity.lineTo(maxX * .318f, maxY * .312f);
+        helenaToSaltLakeCity.lineTo(maxX * .308f, maxY * .304f);
+        helenaToSaltLakeCity.close();
+        helenaToSaltLakeCityTrack = new Track(3, "Pin", "Helena", "SaltLakeCity", helenaToSaltLakeCity, helenaToSaltLakeCityRect);
+
+        saltLakeCityToDenver.moveTo(maxX * .259f, maxY * .483f);
+        saltLakeCityToDenver.lineTo(maxX * .258f, maxY * .497f);
+        saltLakeCityToDenver.lineTo(maxX * .288f, maxY * .504f);
+        saltLakeCityToDenver.lineTo(maxX * .291f, maxY * .491f);
+        saltLakeCityToDenver.close();
+        saltLakeCityToDenver.moveTo(maxX * .294f, maxY * .491f);
+        saltLakeCityToDenver.lineTo(maxX * .293f, maxY * .506f);
+        saltLakeCityToDenver.lineTo(maxX * .325f, maxY * .519f);
+        saltLakeCityToDenver.lineTo(maxX * .326f, maxY * .502f);
+        saltLakeCityToDenver.close();
+        saltLakeCityToDenver.moveTo(maxX * .330f, maxY * .503f);
+        saltLakeCityToDenver.lineTo(maxX * .329f, maxY * .518f);
+        saltLakeCityToDenver.lineTo(maxX * .361f, maxY * .531f);
+        saltLakeCityToDenver.lineTo(maxX * .362f, maxY * .514f);
+        saltLakeCityToDenver.close();
+        saltLakeCityToDenverTrack = new Track(3, "Red", "SaltLakeCity", "Denver", saltLakeCityToDenver, saltLakeCityToDenverRect);
+
 
         myTracks = new Track[]{portlandToSanFranciscoTrack, GRID_TRACK, seattleToHelenaTrack,
                 losAngelesToLasVegasTrack, sanFranciscoToLosAngelesTrack,
@@ -915,7 +1026,9 @@ public class TTRGameState extends GameState {
                 pittsburghToWashingtonTrack, pittsburghToNewYorkTrack, torontoToPittsburghTrack,
                 torontoToMontrealTrack, saultSteMarieToMontrealTrack, newOrleansToMiamiTrack,
                 losAngelesToElPasoTrack, vancouverToSeattleTrack, seattleToPortlandTrack, vancouverToCalgaryTrack,
-                seattleToCalgaryTrack, portlandToSaltLakeCityTrack, sanFranciscoToSaltLakeCityTrack
+                seattleToCalgaryTrack, portlandToSaltLakeCityTrack, sanFranciscoToSaltLakeCityTrack,
+                saltLakeCityToLasVegasTrack, calgaryToWinnipegTrack, calgaryToHelenaTrack,
+                helenaToSaltLakeCityTrack, saltLakeCityToDenverTrack
         };
 
         //Booleans set to defaults
