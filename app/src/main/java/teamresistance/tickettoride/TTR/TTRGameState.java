@@ -792,21 +792,20 @@ public class TTRGameState extends GameState {
         seattleToCalgary.close();
         seattleToCalgaryTrack = new Track(4, "Gray", "Seattle", "Calgary", seattleToCalgary, seattleToCalgaryRect);
 
-
-        losAngelesToPheonix.moveTo(maxX * .186f, maxY * .135f);
-        losAngelesToPheonix.lineTo(maxX * .200f, maxY * .140f);
-        losAngelesToPheonix.lineTo(maxX * .215f, maxY * .091f);
-        losAngelesToPheonix.lineTo(maxX * .203f, maxY * .085f);
+        losAngelesToPheonix.moveTo(maxX * .126f, maxY * .760f);
+        losAngelesToPheonix.lineTo(maxX * .128f, maxY * .779f);
+        losAngelesToPheonix.lineTo(maxX * .161f, maxY * .774f);
+        losAngelesToPheonix.lineTo(maxX * .159f, maxY * .756f);
         losAngelesToPheonix.close();
-        losAngelesToPheonix.moveTo(maxX * .186f, maxY * .135f);
-        losAngelesToPheonix.lineTo(maxX * .200f, maxY * .140f);
-        losAngelesToPheonix.lineTo(maxX * .215f, maxY * .091f);
-        losAngelesToPheonix.lineTo(maxX * .203f, maxY * .085f);
+        losAngelesToPheonix.moveTo(maxX * .165f, maxY * .753f);
+        losAngelesToPheonix.lineTo(maxX * .166f, maxY * .772f);
+        losAngelesToPheonix.lineTo(maxX * .198f, maxY * .772f);
+        losAngelesToPheonix.lineTo(maxX * .198f, maxY * .753f);
         losAngelesToPheonix.close();
-        losAngelesToPheonix.moveTo(maxX * .186f, maxY * .135f);
-        losAngelesToPheonix.lineTo(maxX * .200f, maxY * .140f);
-        losAngelesToPheonix.lineTo(maxX * .215f, maxY * .091f);
-        losAngelesToPheonix.lineTo(maxX * .203f, maxY * .085f);
+        losAngelesToPheonix.moveTo(maxX * .200f, maxY * .758f);
+        losAngelesToPheonix.lineTo(maxX * .200f, maxY * .773f);
+        losAngelesToPheonix.lineTo(maxX * .235f, maxY * .783f);
+        losAngelesToPheonix.lineTo(maxX * .238f, maxY * .770f);
         losAngelesToPheonix.close();
         losAngelesToPhoenixTrack = new Track(3, "Gray", "LosAngeles", "Phoenix", losAngelesToPheonix, losAngelesToPhoenixRect);
 
