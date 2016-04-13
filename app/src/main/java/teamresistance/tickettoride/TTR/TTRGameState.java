@@ -89,6 +89,8 @@ public class TTRGameState extends GameState {
     Rect omahaToChicagoRect = new Rect((int)(maxX * .545), (int)(maxY * .35), (int)(maxX * .7), (int)(maxY * .435));
     Rect duluthToChicagoRect = new Rect((int)(maxX * .575), (int)(maxY * .285), (int)(maxX * .69), (int)(maxY * .38));
     Rect duluthToTorontoRect = new Rect((int)(maxX * .625), (int)(maxY * .21), (int)(maxX * .755), (int)(maxY * .275));
+    Rect duluthToSaultSteMarieRect = new Rect((int)(maxX * .59), (int)(maxY * .155), (int)(maxX * .7), (int)(maxY * .23));
+    Rect winnipegToSaultSteMarieRect = new Rect((int)(maxX * .51), (int)(maxY * .08), (int)(maxX * .67), (int)(maxY * .15));
 
     Rect winnipegToDuluthRect = new Rect((int)(maxX * .45), (int)(maxY * .09), (int)(maxX * .56), (int)(maxY * .27));
     Rect elPasoToDallasRect = new Rect((int)(maxX * .4), (int)(maxY * .82), (int)(maxX * .55), (int)(maxY * .86));
@@ -1797,6 +1799,58 @@ public class TTRGameState extends GameState {
         duluthToTorontoTrack = new Track(6, "Purple", "Duluth", "Toronto", duluthToToronto,
                 duluthToTorontoRect);
 
+        duluthToSaultSteMarie.moveTo(maxX * .59f, maxY * .245f);
+        duluthToSaultSteMarie.lineTo(maxX * .62f, maxY * .22f);
+        duluthToSaultSteMarie.lineTo(maxX * .625f, maxY * .233f);
+        duluthToSaultSteMarie.lineTo(maxX * .592f, maxY * .26f);
+        duluthToSaultSteMarie.close();
+        duluthToSaultSteMarie.moveTo(maxX * .625f, maxY * .218f);
+        duluthToSaultSteMarie.lineTo(maxX * .656f, maxY * .196f);
+        duluthToSaultSteMarie.lineTo(maxX * .66f, maxY * .21f);
+        duluthToSaultSteMarie.lineTo(maxX * .633f, maxY * .23f);
+        duluthToSaultSteMarie.close();
+        duluthToSaultSteMarie.moveTo(maxX * .66f, maxY * .195f);
+        duluthToSaultSteMarie.lineTo(maxX * .693f, maxY * .174f);
+        duluthToSaultSteMarie.lineTo(maxX * .698f, maxY * .191f);
+        duluthToSaultSteMarie.lineTo(maxX * .663f, maxY * .21f);
+        duluthToSaultSteMarie.close();
+        duluthToSaultSteMarieTrack = new Track(3, "Gray", "Duluth", "Sault St Marie",
+                duluthToSaultSteMarie, duluthToSaultSteMarieRect);
+
+
+        winnipegToSaultSteMarie.moveTo(maxX * .475f, maxY * .075f);
+        winnipegToSaultSteMarie.lineTo(maxX * .508f, maxY * .087f);
+        winnipegToSaultSteMarie.lineTo(maxX * .506f, maxY * .102f);
+        winnipegToSaultSteMarie.lineTo(maxX * .471f, maxY * .087f);
+        winnipegToSaultSteMarie.close();
+        winnipegToSaultSteMarie.moveTo(maxX * .514f, maxY * .088f);
+        winnipegToSaultSteMarie.lineTo(maxX * .547f, maxY * .098f);
+        winnipegToSaultSteMarie.lineTo(maxX * .545f, maxY * .112f);
+        winnipegToSaultSteMarie.lineTo(maxX * .509f, maxY * .104f);
+        winnipegToSaultSteMarie.close();
+        winnipegToSaultSteMarie.moveTo(maxX * .552f, maxY * .098f);
+        winnipegToSaultSteMarie.lineTo(maxX * .58f, maxY * .108f);
+        winnipegToSaultSteMarie.lineTo(maxX * .58f, maxY * .125f);
+        winnipegToSaultSteMarie.lineTo(maxX * .55f, maxY * .114f);
+        winnipegToSaultSteMarie.close();
+        winnipegToSaultSteMarie.moveTo(maxX * .587f, maxY * .106f);
+        winnipegToSaultSteMarie.lineTo(maxX * .622f, maxY * .12f);
+        winnipegToSaultSteMarie.lineTo(maxX * .618f, maxY * .132f);
+        winnipegToSaultSteMarie.lineTo(maxX * .585f, maxY * .124f);
+        winnipegToSaultSteMarie.close();
+        winnipegToSaultSteMarie.moveTo(maxX * .623f, maxY * .12f);
+        winnipegToSaultSteMarie.lineTo(maxX * .66f, maxY * .13f);
+        winnipegToSaultSteMarie.lineTo(maxX * .655f, maxY * .15f);
+        winnipegToSaultSteMarie.lineTo(maxX * .62f, maxY * .138f);
+        winnipegToSaultSteMarie.close();
+        winnipegToSaultSteMarie.moveTo(maxX * .66f, maxY * .135f);
+        winnipegToSaultSteMarie.lineTo(maxX * .697f, maxY * .143f);
+        winnipegToSaultSteMarie.lineTo(maxX * .692f, maxY * .162f);
+        winnipegToSaultSteMarie.lineTo(maxX * .659f, maxY * .15f);
+        winnipegToSaultSteMarie.close();
+        winnipegToSaultSteMarieTrack = new Track(6, "Gray", "Winnipeg", "Sault St Marie",
+                winnipegToSaultSteMarie, winnipegToSaultSteMarieRect);
+
         myTracks = new Track[]{portlandToSanFranciscoTrack, GRID_TRACK, seattleToHelenaTrack,
                 losAngelesToLasVegasTrack, sanFranciscoToLosAngelesTrack,
                 montrealToBostonTrack, losAngelesToPhoenixTrack, montrealToNewYorkTrack,
@@ -1821,8 +1875,8 @@ public class TTRGameState extends GameState {
                 saintLouisToLittleRockTrack, dallasToLittleRockTrack, oklahomaCityToLittleRockTrack,
                 saintLouisToNashvilleTrack, kansasCityToSaintLouiseTrack, chicagoToSaintLouisTrack,
                 elPasoToOklahomaCityTrack, elPasoToDallasTrack, elPasoToHoustonTrack, winnipegToDuluthTrack,
-                dallasToHoustonTrack,
-                omahaToChicagoTrack, duluthToChicagoTrack, duluthToTorontoTrack
+                dallasToHoustonTrack,winnipegToSaultSteMarieTrack,
+                omahaToChicagoTrack, duluthToChicagoTrack, duluthToTorontoTrack, duluthToSaultSteMarieTrack
         };
 
         //Booleans set to defaults
