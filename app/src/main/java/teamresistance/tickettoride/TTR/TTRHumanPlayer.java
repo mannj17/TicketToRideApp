@@ -123,7 +123,7 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
         if(info instanceof TTRGameState) {
             myState = (TTRGameState)info;
             myBoard.setTracks(myState.getTracks());
-            trainDeck = myState.getPlayerTrainDecks()[playerNum];
+            trainDeck = myState.getPlayerTrainDecks()[this.playerNum];
             int playerNum = ((TTRGameState) info).getNumPlayers();
             for(int i = 0; i < myState.getFaceUpTrainCards().size(); i++){
                 if(myState.getFaceUpTrainCards().getCards().get(i).getHighlight()){
@@ -144,9 +144,9 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
 
             int size = myBoard.getTracksLength();
             for (int i = 0; i < size; i++) {
-                if(canChoose(myBoard.getTracks()[i]) || !val) {
+                //if(canChoose(myBoard.getTracks()[i]) || !val) {
                     myBoard.getTracks()[i].setHighlight(val);
-                }
+                //}
             }
             if(playerNum >= 2) { //2 is the minimum number of players
                 lp = new LinearLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT,1);
