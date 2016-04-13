@@ -9,6 +9,8 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 import teamresistance.tickettoride.Game.Game;
 import teamresistance.tickettoride.Game.GameHumanPlayer;
 import teamresistance.tickettoride.R;
@@ -17,7 +19,7 @@ import teamresistance.tickettoride.TTR.Actions.ConfirmSelectionAction;
 /**
  * Created by Jess on 4/12/2016.
  */
-public class DestinationSelectionDialog extends Dialog implements android.view.View.OnClickListener {
+public class DestinationSelectionDialog extends  Dialog implements android.view.View.OnClickListener {
     private Activity c;
     private Dialog d;
     private TTRGameState myState;
@@ -72,14 +74,19 @@ public class DestinationSelectionDialog extends Dialog implements android.view.V
     public void onClick(View v) {
         if(v.getId() == R.id.btn_select){
             if(selected >= min){
+                Card[] tempCards = new Card[selected];
+                int count = 0;
                 for(int i = 0; i < 3; i++){
                     if(destinationCards[i].getHighlight()){
+                        //tempCards[count] = destinationCards[i];
                         myState.getPlayerDestinationDecks()[0].add(destinationCards[i]);
+                        count++;
                     } else {
                         myState.getDestinationDiscard().add(destinationCards[i]);
                     }
                 }
-                game.sendAction(new ConfirmSelectionAction(player));
+                Deck tempDeck = new Deck("temporary", tempCards);
+                game.sendAction(new ConfirmSelectionAction(player, tempDeck));
                 dismiss();
             } else {
                 text.setText("Please select at least the minimum number of ticket cards.");

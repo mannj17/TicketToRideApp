@@ -294,6 +294,7 @@ public class TTRGameState extends GameState {
     private Deck destinationCardsDrawn;
     /** Which player's turn it is */
     private int playerID;
+
     /** The number of players playing the game */
     private int numPlayers = MAX_NUM_PLAYERS;
     /** Says whether or not the player is in track select mode */
@@ -312,6 +313,8 @@ public class TTRGameState extends GameState {
     private boolean onlyDownDeck;
     /** The selected track on screen. Set to -1 if no track is selected. */
     private int trackSpot = -1;
+    private String selectedCardColor;
+    private boolean useRainbow;
     private Boolean isLastRound = false;
     private Boolean isGameOver = false;
 
@@ -328,7 +331,7 @@ public class TTRGameState extends GameState {
     private Deck[] playerTrainDecks = new Deck[numPlayers];
     /** All of the hands of each player */
     private Deck[] playerDestinationDecks = new Deck[numPlayers];
-
+    private int numRainbows;
 
 
     /*
@@ -373,9 +376,12 @@ public class TTRGameState extends GameState {
             playerTrainDecks[i] = new Deck("Player " + i + " Train Card Deck");
             playerDestinationDecks[i] = new Deck("Player " + i + " Destination Card Deck");
         }
+        selectedCardColor = null;
         trainDiscard = new Deck("Train Card Discard");
         destinationCardsDrawn = new Deck("Destination Cards Drawn");
         destinationPool = new Deck("Destination Card Pool");
+
+        numRainbows = 0;
 
         GRID.moveTo(0, maxY * .1f);
         GRID.lineTo(maxX, maxY * .1f);
@@ -1825,7 +1831,7 @@ public class TTRGameState extends GameState {
         cardModeSelected = false;
         destinationCardsSelected = false;
         trainCardsSelected = false;
-
+        useRainbow = false;
         trackModeSelected = false;
         cardModeSelected = true;
         destinationCardsSelected = false;
@@ -1855,6 +1861,9 @@ public class TTRGameState extends GameState {
         }
 
         myTracks = original.getTracks();
+
+        numRainbows = original.getNumRainbows();
+        selectedCardColor = original.getSelectedCardColor();
         //Booleans
         isSelectDestinationCards = original.getIsSelectDestinationCards();
         trackModeSelected = original.getTrackModeSelected();
@@ -1862,6 +1871,7 @@ public class TTRGameState extends GameState {
         destinationCardsSelected = original.getDestinationCardsSelected();
         trainCardsSelected = original.getTrainCardsSelected();
         onlyDownDeck = original.getOnlyDownDeck();
+        useRainbow = original.getUseRainbow();
     }
 
     public int[] getDestinationCities1() {
@@ -2099,5 +2109,29 @@ public class TTRGameState extends GameState {
 
     public void setIsGameOver(Boolean isGameOver) {
         this.isGameOver = isGameOver;
+    }
+
+    public String getSelectedCardColor(){
+        return selectedCardColor;
+    }
+
+    public void setSelectedCardColor(String value){
+        this.selectedCardColor = value;
+    }
+
+    public boolean getUseRainbow(){
+        return useRainbow;
+    }
+
+    public void setUseRainbow(boolean value){
+        this.useRainbow = value;
+    }
+
+    public int getNumRainbows() {
+        return numRainbows;
+    }
+
+    public void setNumRainbows(int value) {
+        this.numRainbows = value;
     }
 }
