@@ -143,7 +143,7 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
 
             int size = myBoard.getTracksLength();
             for (int i = 0; i < size; i++) {
-                //if(canChoose(myBoard.getTracks()[i])) {
+                //if(canChoose(myBoard.getTracks()[i]) || !val) {
                     myBoard.getTracks()[i].setHighlight(val);
                 //}
             }
