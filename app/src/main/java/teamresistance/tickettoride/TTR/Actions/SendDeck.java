@@ -1,12 +1,17 @@
 package teamresistance.tickettoride.TTR.Actions;
 
-import teamresistance.tickettoride.Game.Game;
 import teamresistance.tickettoride.Game.GamePlayer;
 import teamresistance.tickettoride.Game.actionMsg.GameAction;
 import teamresistance.tickettoride.TTR.Deck;
 
 /**
- * Created by Parker on 4/12/2016.
+ *  Sends Deck
+ *
+ * @author Nick Scacciotti
+ * @author Nick Larson
+ * @author Jess Mann
+ * @author Parker Schibel
+ * @version April 2016
  */
 public class SendDeck extends GameAction {
     private Deck sendDeck;

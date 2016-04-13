@@ -9,48 +9,51 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.RadioButton;
 import android.widget.TextView;
-
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-
 import teamresistance.tickettoride.Game.Game;
 import teamresistance.tickettoride.R;
 import teamresistance.tickettoride.TTR.Actions.ConfirmSelectionAction;
 
 /**
  *
- * Created by Parker on 4/12/2016.
+ *  Class that inflates view into dialog for custom handling user selection of of card color
+ *
+ * @author Nick Scacciotti
+ * @author Nick Larson
+ * @author Jess Mann
+ * @author Parker Schibel
+ * @version April 2016
  */
 public class CardColorSelectionDialog extends Dialog implements android.view.View.OnClickListener{
-    private Activity myActivity;
-    private Dialog dialog;
-    private TTRGameState myState;
-    private Button selectBtn;
-    private ImageButton train1, train2, train3, train4, train5, train6, train7, train8;
-    //private ImageButton[] buttons;
-    private RadioButton noLoc, oneLoc, twoLoc, threeLoc, fourLoc, fiveLoc, sixLoc;
-    private RadioButton[] locomotives;
-    private TextView text;
-    private Deck trainCards;
-    private boolean complete = false;
+    /** Class Instance Variables */
+    private Button selectBtn; //button for selection
+    private ImageButton train1, train2, train3, train4, train5, train6, train7, train8; //image buttons for train colors
+    private RadioButton noLoc, oneLoc, twoLoc, threeLoc, fourLoc, fiveLoc, sixLoc; //radiobuttons for selecting how many 'locs' needed
+    private RadioButton[] locomotives; //array for radio buttons
+    private TextView text; //text view for displaying messages to user
+    private Deck trainCards; //deck being passed in
     private final String[] trainColors = {"Red", "Orange", "Yellow", "Green",
-            "Blue", "Pink", "White", "Black"};
-    private boolean[] usable = new boolean[trainColors.length];
-    private boolean[] highlighted = new boolean[trainColors.length];
-    private boolean selected = false;
-    private int numRainbows = 0;
-    private int useRainbows = 0;
-    private Game game;
-    private TTRHumanPlayer player;
-    private Track track;
+            "Blue", "Pink", "White", "Black"}; //train colors of trains
+    private boolean[] usable = new boolean[trainColors.length]; // array of booleans representing if player has enough of that color
+    private boolean[] highlighted = new boolean[trainColors.length]; // boolean to mark which tracks should be highlighted
+    private boolean selected = false; // if select has been pressed
+    private int numRainbows = 0; //num of locomotive cards
+    private int useRainbows = 0; //num of locomotive cards being used
+    private Game game; //game to send action
+    private TTRHumanPlayer player; //player sent in the action
 
+    /**
+     * CardColorSelectionDialog constructor
+     * @param a
+     * @param cards
+     * @param myState
+     * @param track
+     * @param game
+     * @param player
+     */
     public CardColorSelectionDialog(Activity a, Deck cards, TTRGameState myState, Track track, Game game, TTRHumanPlayer player) {
         super(player.myActivity);
         this.game = game;
         this.player = player;
-        this.track = track;
-        this.myState = myState;
-        this.myActivity = a;
         this.trainCards = cards;
         int min = track.getTrainTrackNum();
         int count = 0;
@@ -71,8 +74,7 @@ public class CardColorSelectionDialog extends Dialog implements android.view.Vie
                 }
                 if(count >= min){
                     this.usable[i] = true;
-                }
-                else{
+                } else{
                     this.usable[i] = false;
                 }
             }
@@ -81,12 +83,16 @@ public class CardColorSelectionDialog extends Dialog implements android.view.Vie
         }
     }
 
+    /**
+     * Method called when dialog created, used to initialize all widgets
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.card_selection_dialog);
-
+        //initialize all buttons (regular, image, radio) and set as listeners
         selectBtn = (Button) findViewById(R.id.btn_select);
         train1 = (ImageButton) findViewById(R.id.train1);
         train2 = (ImageButton) findViewById(R.id.train2);
@@ -96,7 +102,6 @@ public class CardColorSelectionDialog extends Dialog implements android.view.Vie
         train6 = (ImageButton) findViewById(R.id.train6);
         train7 = (ImageButton) findViewById(R.id.train7);
         train8 = (ImageButton) findViewById(R.id.train8);
-
         noLoc = (RadioButton)findViewById(R.id.None_Rainbow);
         oneLoc = (RadioButton)findViewById(R.id.One_Rainbow);
         twoLoc = (RadioButton)findViewById(R.id.Two_Rainbow);
@@ -104,9 +109,7 @@ public class CardColorSelectionDialog extends Dialog implements android.view.Vie
         fourLoc = (RadioButton)findViewById(R.id.Four_Rainbow);
         fiveLoc = (RadioButton)findViewById(R.id.Five_Rainbow);
         sixLoc = (RadioButton)findViewById(R.id.Six_Rainbow);
-
         locomotives = new RadioButton[]{noLoc, oneLoc, twoLoc, threeLoc, fourLoc, fiveLoc, sixLoc};
-
         train1.setOnClickListener(this);
         train2.setOnClickListener(this);
         train3.setOnClickListener(this);
@@ -115,7 +118,6 @@ public class CardColorSelectionDialog extends Dialog implements android.view.Vie
         train6.setOnClickListener(this);
         train7.setOnClickListener(this);
         train8.setOnClickListener(this);
-
         noLoc.setOnClickListener(this);
         oneLoc.setOnClickListener(this);
         twoLoc.setOnClickListener(this);
@@ -124,66 +126,60 @@ public class CardColorSelectionDialog extends Dialog implements android.view.Vie
         fiveLoc.setOnClickListener(this);
         sixLoc.setOnClickListener(this);
 
+        //set no loc as default
         noLoc.setChecked(true);
-
+        //set default visibility
         if(numRainbows != 0){
             for(int i = 1; i <= numRainbows; i++){
                 locomotives[i].setVisibility(View.VISIBLE);
             }
         }
+        /** Check if cards are usable */
         if(this.usable[0]){
             train1.setClickable(true);
-        }
-        else{
+        } else{
             train1.setClickable(false);
             train1.setAlpha(0.5f);
         }
         if(this.usable[1]){
             train2.setClickable(true);
-        }
-        else{
+        } else{
             train2.setClickable(false);
             train2.setAlpha(0.5f);
         }
         if(this.usable[2]){
             train3.setClickable(true);
-        }
-        else{
+        } else{
             train3.setClickable(false);
             train3.setAlpha(0.5f);
         }
         if(this.usable[3]){
             train4.setClickable(true);
-        }
-        else{
+        } else{
             train4.setClickable(false);
             train4.setAlpha(0.5f);
         }
         if(this.usable[4]){
             train5.setClickable(true);
-        }
-        else{
+        } else{
             train5.setClickable(false);
             train5.setAlpha(0.5f);
         }
         if(this.usable[5]){
             train6.setClickable(true);
-        }
-        else{
+        } else{
             train6.setClickable(false);
             train6.setAlpha(0.5f);
         }
         if(this.usable[6]){
             train7.setClickable(true);
-        }
-        else{
+        } else{
             train7.setClickable(false);
             train7.setAlpha(0.5f);
         }
         if(this.usable[7]){
             train8.setClickable(true);
-        }
-        else{
+        } else{
             train8.setClickable(false);
             train8.setAlpha(0.5f);
         }
@@ -192,6 +188,10 @@ public class CardColorSelectionDialog extends Dialog implements android.view.Vie
         text = (TextView) findViewById(R.id.ccsd_text);
     }
 
+    /**
+     * Method for handling user clicks inside the dialog box
+     * @param v
+     */
     @Override
     public void onClick(View v) {
         if(v.getId() == R.id.btn_select){
@@ -218,8 +218,7 @@ public class CardColorSelectionDialog extends Dialog implements android.view.Vie
                 train1.setAlpha(0.5f);
                 selected = true;
             }
-        }
-        else if(v.getId() == R.id.train2){
+        } else if(v.getId() == R.id.train2){
             if(highlighted[1]){
                 highlighted[1] = false;
                 train2.setAlpha(1f);
@@ -229,8 +228,7 @@ public class CardColorSelectionDialog extends Dialog implements android.view.Vie
                 train2.setAlpha(0.5f);
                 selected = true;
             }
-        }
-        else if(v.getId() == R.id.train3){
+        } else if(v.getId() == R.id.train3){
             if(highlighted[2]){
                 highlighted[2] = false;
                 train3.setAlpha(1f);
@@ -240,8 +238,7 @@ public class CardColorSelectionDialog extends Dialog implements android.view.Vie
                 train3.setAlpha(0.5f);
                 selected = true;
             }
-        }
-        else if(v.getId() == R.id.train4){
+        } else if(v.getId() == R.id.train4){
             if(highlighted[3]){
                 highlighted[3] = false;
                 train4.setAlpha(1f);
@@ -251,8 +248,7 @@ public class CardColorSelectionDialog extends Dialog implements android.view.Vie
                 train4.setAlpha(0.5f);
                 selected = true;
             }
-        }
-        else if(v.getId() == R.id.train5){
+        } else if(v.getId() == R.id.train5){
             if(highlighted[4]){
                 highlighted[4] = false;
                 train5.setAlpha(1f);
@@ -262,8 +258,7 @@ public class CardColorSelectionDialog extends Dialog implements android.view.Vie
                 train5.setAlpha(0.5f);
                 selected = true;
             }
-        }
-        else if(v.getId() == R.id.train6){
+        } else if(v.getId() == R.id.train6){
             if(highlighted[5]){
                 highlighted[5] = false;
                 train6.setAlpha(1f);
@@ -273,8 +268,7 @@ public class CardColorSelectionDialog extends Dialog implements android.view.Vie
                 train6.setAlpha(0.5f);
                 selected = true;
             }
-        }
-        else if(v.getId() == R.id.train7){
+        } else if(v.getId() == R.id.train7){
             if(highlighted[6]){
                 highlighted[6] = false;
                 train7.setAlpha(1f);
@@ -284,8 +278,7 @@ public class CardColorSelectionDialog extends Dialog implements android.view.Vie
                 train7.setAlpha(0.5f);
                 selected = true;
             }
-        }
-        else if(v.getId() == R.id.train8){
+        } else if(v.getId() == R.id.train8){
             if(highlighted[7]){
                 highlighted[7] = false;
                 train8.setAlpha(1f);
@@ -295,38 +288,35 @@ public class CardColorSelectionDialog extends Dialog implements android.view.Vie
                 train8.setAlpha(0.5f);
                 selected = true;
             }
-        }
-        else if(v.getId() == R.id.None_Rainbow){
+        } else if(v.getId() == R.id.None_Rainbow){
             noLoc.setChecked(true);
             useRainbows = 0;
-        }
-        else if(v.getId() == R.id.One_Rainbow){
+        } else if(v.getId() == R.id.One_Rainbow){
             oneLoc.setChecked(true);
             useRainbows = 1;
-        }
-        else if(v.getId() == R.id.Two_Rainbow){
+        } else if(v.getId() == R.id.Two_Rainbow){
             twoLoc.setChecked(true);
             useRainbows = 2;
-        }
-        else if(v.getId() == R.id.Three_Rainbow){
+        } else if(v.getId() == R.id.Three_Rainbow){
             threeLoc.setChecked(true);
             useRainbows = 3;
-        }
-        else if(v.getId() == R.id.Four_Rainbow){
+        } else if(v.getId() == R.id.Four_Rainbow){
             fourLoc.setChecked(true);
             useRainbows = 4;
-        }
-        else if(v.getId() == R.id.Five_Rainbow){
+        } else if(v.getId() == R.id.Five_Rainbow){
             fiveLoc.setChecked(true);
             useRainbows = 5;
-        }
-        else if(v.getId() == R.id.Six_Rainbow){
+        } else if(v.getId() == R.id.Six_Rainbow){
             sixLoc.setChecked(true);
             useRainbows = 6;
         }
-
     }
 
+    /**
+     * Method to check if a train of a certain color exists in the passed in deck
+     * @param trainColor
+     * @return
+     */
     public int contains(String trainColor){
         Deck tempDeck = this.trainCards;
         int count = 0;
