@@ -378,7 +378,15 @@ public class TTRGameState extends GameState {
             scores[i] = 0;
             names[i] = "";
             playerTrainDecks[i] = new Deck("Player " + i + " Train Card Deck");
+            for(int j = 0; j != 5;j++)
+            {
+                faceDownTrainCards.moveTopCardTo(playerTrainDecks[i], faceDownTrainCards);
+            }
             playerDestinationDecks[i] = new Deck("Player " + i + " Destination Card Deck");
+            for(int j = 0; j != 3;j++)
+            {
+                destinationCards.moveTopCardTo(playerDestinationDecks[i], destinationCards);
+            }
         }
         selectedCardColor = null;
         trainDiscard = new Deck("Train Card Discard");
