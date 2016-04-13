@@ -5,6 +5,9 @@ import java.util.Random;
 import teamresistance.tickettoride.Game.GameComputerPlayer;
 import teamresistance.tickettoride.Game.infoMsg.GameInfo;
 import teamresistance.tickettoride.Game.infoMsg.GameState;
+import teamresistance.tickettoride.TTR.Actions.ConfirmSelectionAction;
+import teamresistance.tickettoride.TTR.Actions.DrawDownCardAction;
+import teamresistance.tickettoride.TTR.Actions.DrawUpCardAction;
 
 /**
  *  TTRComputerPlayer implements and AI player

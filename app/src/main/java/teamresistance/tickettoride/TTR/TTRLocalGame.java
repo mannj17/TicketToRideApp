@@ -7,6 +7,13 @@ import java.util.Random;
 import teamresistance.tickettoride.Game.GamePlayer;
 import teamresistance.tickettoride.Game.LocalGame;
 import teamresistance.tickettoride.Game.actionMsg.GameAction;
+import teamresistance.tickettoride.TTR.Actions.ChangeModeAction;
+import teamresistance.tickettoride.TTR.Actions.ChooseDestinationAction;
+import teamresistance.tickettoride.TTR.Actions.ConfirmSelectionAction;
+import teamresistance.tickettoride.TTR.Actions.DrawDestinationCardAction;
+import teamresistance.tickettoride.TTR.Actions.DrawDownCardAction;
+import teamresistance.tickettoride.TTR.Actions.DrawUpCardAction;
+import teamresistance.tickettoride.TTR.Actions.TrackPlaceAction;
 
 /**
  * Controls the game, allowing actions to be performed by
@@ -171,6 +178,27 @@ public class TTRLocalGame extends LocalGame {
                 for (int i = 0; i < mainState.getTracks().length; i++) {
                     if (mainState.getTracks()[i].getSelected() && !mainState.getTracks()[i].getTrackColor().equals("Gray")) {
                         mainState.getTracks()[i].setCovered(true);
+                        int num = mainState.getTracks()[i].getTrainTrackNum();
+                        switch(num) {
+                            case 1:
+                                mainState.setScore(mainState.getScores()[mainState.getPlayerID()]+1, mainState.getPlayerID());
+                                break;
+                            case 2:
+                                mainState.setScore(mainState.getScores()[mainState.getPlayerID()]+2, mainState.getPlayerID());
+                                break;
+                            case 3:
+                                mainState.setScore(mainState.getScores()[mainState.getPlayerID()]+4, mainState.getPlayerID());
+                                break;
+                            case 4:
+                                mainState.setScore(mainState.getScores()[mainState.getPlayerID()]+7, mainState.getPlayerID());
+                                break;
+                            case 5:
+                                mainState.setScore(mainState.getScores()[mainState.getPlayerID()]+10, mainState.getPlayerID());
+                                break;
+                            case 6:
+                                mainState.setScore(mainState.getScores()[mainState.getPlayerID()]+15, mainState.getPlayerID());
+                                break;
+                        }
                         mainState.getTracks()[i].setPlayerID(mainState.getPlayerID());
                         mainState.getTracks()[i].setSelected(false);
                         int count = mainState.getTracks()[i].getTrainTrackNum();

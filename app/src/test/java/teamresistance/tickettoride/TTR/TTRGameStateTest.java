@@ -3,9 +3,9 @@ package teamresistance.tickettoride.TTR;
 import junit.framework.TestCase;
 import org.junit.Test;
 
-import java.util.ArrayList;
-
 import teamresistance.tickettoride.Game.GamePlayer;
+import teamresistance.tickettoride.TTR.Actions.ConfirmSelectionAction;
+import teamresistance.tickettoride.TTR.Actions.DrawDownCardAction;
 
 /**
  * Created by Jess on 3/30/2016.

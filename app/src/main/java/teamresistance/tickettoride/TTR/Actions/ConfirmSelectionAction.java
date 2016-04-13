@@ -1,4 +1,4 @@
-package teamresistance.tickettoride.TTR;
+package teamresistance.tickettoride.TTR.Actions;
 
 import teamresistance.tickettoride.Game.GamePlayer;
 import teamresistance.tickettoride.Game.actionMsg.GameAction;

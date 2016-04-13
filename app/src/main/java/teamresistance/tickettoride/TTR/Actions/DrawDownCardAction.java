@@ -1,10 +1,10 @@
-package teamresistance.tickettoride.TTR;
+package teamresistance.tickettoride.TTR.Actions;
 
 import teamresistance.tickettoride.Game.GamePlayer;
 import teamresistance.tickettoride.Game.actionMsg.GameAction;
 
 /**
- * When selecting new destination cards, this action chooses which of the three to take
+ *  Draws a card from a face down deck
  *
  * @author Nick Scacciotti
  * @author Nick Larson
@@ -12,8 +12,8 @@ import teamresistance.tickettoride.Game.actionMsg.GameAction;
  * @author Parker Schibel
  * @version March 2016
  */
-public class ChooseDestinationAction extends GameAction {
-    public ChooseDestinationAction(GamePlayer player) {
+public class DrawDownCardAction extends GameAction{
+    public DrawDownCardAction(GamePlayer player) {
         super(player);
     }
 }
