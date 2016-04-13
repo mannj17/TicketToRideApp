@@ -91,7 +91,7 @@ public class TTRGameState extends GameState {
     Rect duluthToTorontoRect = new Rect((int)(maxX * .625), (int)(maxY * .21), (int)(maxX * .755), (int)(maxY * .275));
     Rect duluthToSaultSteMarieRect = new Rect((int)(maxX * .59), (int)(maxY * .155), (int)(maxX * .7), (int)(maxY * .23));
     Rect winnipegToSaultSteMarieRect = new Rect((int)(maxX * .51), (int)(maxY * .08), (int)(maxX * .67), (int)(maxY * .15));
-
+    Rect duluthToOmahaRect = new Rect((int)(maxX * .53), (int)(maxY * .3), (int)(maxX * .58), (int)(maxY * .41));
     Rect winnipegToDuluthRect = new Rect((int)(maxX * .45), (int)(maxY * .09), (int)(maxX * .56), (int)(maxY * .27));
     Rect elPasoToDallasRect = new Rect((int)(maxX * .4), (int)(maxY * .82), (int)(maxX * .55), (int)(maxY * .86));
     Rect dallasToHoustonRect = new Rect((int)(maxX * .55), (int)(maxY * .8), (int)(maxX * .61), (int)(maxY * .87));
@@ -1879,6 +1879,18 @@ public class TTRGameState extends GameState {
         winnipegToSaultSteMarieTrack = new Track(6, "Gray", "Winnipeg", "Sault St Marie",
                 winnipegToSaultSteMarie, winnipegToSaultSteMarieRect);
 
+        duluthToOmaha.moveTo(maxX * .565f, maxY * .303f);
+        duluthToOmaha.lineTo(maxX * .555f, maxY * .297f);
+        duluthToOmaha.lineTo(maxX * .542f, maxY * .345f);
+        duluthToOmaha.lineTo(maxX * .553f, maxY * .35f);
+        duluthToOmaha.close();
+        duluthToOmaha.moveTo(maxX * .552f, maxY * .357f);
+        duluthToOmaha.lineTo(maxX * .542f, maxY * .351f);
+        duluthToOmaha.lineTo(maxX * .529f, maxY * .402f);
+        duluthToOmaha.lineTo(maxX * .540f, maxY * .408f);
+        duluthToOmaha.close();
+        duluthToOmahaTrack = new Track(2, "Gray", "Duluth", "Omaha",duluthToOmaha, duluthToOmahaRect);
+
         myTracks = new Track[]{portlandToSanFranciscoTrack, GRID_TRACK, seattleToHelenaTrack,
                 losAngelesToLasVegasTrack, sanFranciscoToLosAngelesTrack,
                 montrealToBostonTrack, losAngelesToPhoenixTrack, montrealToNewYorkTrack,
@@ -1905,7 +1917,7 @@ public class TTRGameState extends GameState {
                 elPasoToOklahomaCityTrack, elPasoToDallasTrack, elPasoToHoustonTrack, winnipegToDuluthTrack,
                 dallasToHoustonTrack, oklahomaCityToDallasTrack, kansasCityToOklahomaCityTrack,
                 dallasToHoustonTrack,winnipegToSaultSteMarieTrack, omahaToChicagoTrack,
-                duluthToChicagoTrack, duluthToTorontoTrack, duluthToSaultSteMarieTrack
+                duluthToChicagoTrack, duluthToTorontoTrack, duluthToSaultSteMarieTrack, duluthToOmahaTrack
         };
 
         //Booleans set to defaults
