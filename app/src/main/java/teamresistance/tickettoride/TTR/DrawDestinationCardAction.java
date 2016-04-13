@@ -1,5 +1,7 @@
 package teamresistance.tickettoride.TTR;
 
+import android.app.Activity;
+
 import teamresistance.tickettoride.Game.GamePlayer;
 import teamresistance.tickettoride.Game.actionMsg.GameAction;
 

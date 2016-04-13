@@ -28,7 +28,7 @@ public class TTRLocalGame extends LocalGame {
     /**
      * TTRLocalGame constructor
      */
-    public TTRLocalGame(){
+    public TTRLocalGame() {
         mainState = new TTRGameState();
         noMoreTrains = false;
         turnsLeft = mainState.getNumPlayers();
@@ -36,6 +36,7 @@ public class TTRLocalGame extends LocalGame {
 
     /**
      * Sends updated game state
+     *
      * @param p - receiving player
      */
     @Override
@@ -46,8 +47,8 @@ public class TTRLocalGame extends LocalGame {
 
     /**
      * Returns if the player can make a move
-     * @param playerIdx
-     * 		the player's player-number (ID)
+     *
+     * @param playerIdx the player's player-number (ID)
      * @return
      */
     @Override
@@ -57,21 +58,22 @@ public class TTRLocalGame extends LocalGame {
 
     /**
      * Returns the end game status
+     *
      * @return
      */
     @Override
     protected String checkIfGameOver() {
-        for(int i = 0; i < mainState.getTrainTokens().length; i++){
-            if(mainState.getTrainTokens()[i] <=2){
+        for (int i = 0; i < mainState.getTrainTokens().length; i++) {
+            if (mainState.getTrainTokens()[i] <= 2) {
                 noMoreTrains = true;
             }
         }
-        if(noMoreTrains){
+        if (noMoreTrains) {
             turnsLeft--;
         }
-        if(turnsLeft == 0){
-            for(int j = 0; j < mainState.getScores().length; j++){
-                if(mainState.getScores()[j] > mainState.getScores()[topScorePlayer]){
+        if (turnsLeft == 0) {
+            for (int j = 0; j < mainState.getScores().length; j++) {
+                if (mainState.getScores()[j] > mainState.getScores()[topScorePlayer]) {
                     topScorePlayer = j;
                 }
             }
@@ -83,34 +85,32 @@ public class TTRLocalGame extends LocalGame {
 
     /**
      * Returns if the player made a move
-     * @param action
-     * 			The move that the player has sent to the game
+     *
+     * @param action The move that the player has sent to the game
      * @return
      */
     @Override
     protected boolean makeMove(GameAction action) {
-        if(action instanceof ChangeModeAction){
-            if(mainState.getCardModeSelected()){
+        if (action instanceof ChangeModeAction) {
+            if (mainState.getCardModeSelected()) {
                 mainState.setCardModeSelected(false);
                 mainState.setTrackModeSelected(true);
                 mainState.getFaceDownTrainCards().setHighlight(false);
                 mainState.getDestinationCards().setHighlight(false);
                 mainState.setDestinationCardsSelected(false);
                 mainState.setTrainCardsSelected(false);
-                for(int i = 0; i < mainState.getFaceUpTrainCards().size(); i++){
+                for (int i = 0; i < mainState.getFaceUpTrainCards().size(); i++) {
                     mainState.getFaceUpTrainCards().getCards().get(i).setHighlight(false);
                 }
-            }
-            else if(mainState.getTrackModeSelected()){
+            } else if (mainState.getTrackModeSelected()) {
                 mainState.setCardModeSelected(true);
                 mainState.setTrackModeSelected(false);
                 //TODO
             }
             return true;
-        }
-        else if(action instanceof ConfirmSelectionAction){
-            if(mainState.getTrainCardsSelected()){
-                if(mainState.getOnlyDownDeck() && mainState.getFaceDownTrainCards().getHighlight()){
+        } else if (action instanceof ConfirmSelectionAction) {
+            if (mainState.getTrainCardsSelected()) {
+                if (mainState.getOnlyDownDeck() && mainState.getFaceDownTrainCards().getHighlight()) {
                     mainState.getFaceDownTrainCards().moveTopCardTo(
                             mainState.getPlayerTrainDecks()[mainState.getPlayerID()],
                             mainState.getFaceDownTrainCards());
@@ -119,12 +119,11 @@ public class TTRLocalGame extends LocalGame {
                             mainState.getFaceDownTrainCards());
                     mainState.getFaceDownTrainCards().setHighlight(false);
                     mainState.setOnlyDownDeck(false);
-                }
-                else if(!mainState.getOnlyDownDeck() && mainState.getFaceDownTrainCards().getHighlight()){
+                } else if (!mainState.getOnlyDownDeck() && mainState.getFaceDownTrainCards().getHighlight()) {
                     mainState.getFaceDownTrainCards().moveTopCardTo(
                             mainState.getPlayerTrainDecks()[mainState.getPlayerID()],
                             mainState.getFaceDownTrainCards());
-                    for(int i = 0; i < mainState.getFaceUpTrainCards().size(); i++) {
+                    for (int i = 0; i < mainState.getFaceUpTrainCards().size(); i++) {
                         if (mainState.getFaceUpTrainCards().getCards().get(i).getHighlight()) {
                             Card temp = mainState.getFaceUpTrainCards().getCards().get(i);
                             mainState.getPlayerTrainDecks()[mainState.getPlayerID()].add(temp);
@@ -135,10 +134,9 @@ public class TTRLocalGame extends LocalGame {
                         }
                     }
                     mainState.getFaceDownTrainCards().setHighlight(false);
-                }
-                else if(!mainState.getOnlyDownDeck() && !mainState.getFaceDownTrainCards().getHighlight()){
-                    for(int i = mainState.getFaceUpTrainCards().size()-1; i >= 0; i--){
-                        if(mainState.getFaceUpTrainCards().getCards().get(i).getHighlight()){
+                } else if (!mainState.getOnlyDownDeck() && !mainState.getFaceDownTrainCards().getHighlight()) {
+                    for (int i = mainState.getFaceUpTrainCards().size() - 1; i >= 0; i--) {
+                        if (mainState.getFaceUpTrainCards().getCards().get(i).getHighlight()) {
                             Card temp = mainState.getFaceUpTrainCards().getCards().get(i);
                             mainState.getPlayerTrainDecks()[mainState.getPlayerID()].add(temp);
                             mainState.getFaceUpTrainCards().getCards().remove(i);
@@ -150,19 +148,26 @@ public class TTRLocalGame extends LocalGame {
 
                 }
                 mainState.setTrainCardsSelected(false);
-            }
-            else if(mainState.getDestinationCardsSelected()){
+            } else if (mainState.getDestinationCardsSelected()) {
                 mainState.setIsSelectDestinationCards(true);
-                for(int i = 0; i < 3; i++){
+               /** for (int i = 0; i < 3; i++) {
                     mainState.getFaceDownTrainCards().moveTopCardTo(
                             mainState.getDestinationCards(),
                             mainState.getDestinationPool());
+                }*/
+
+                 Deck tempDeck = new Deck("temp");
+                 mainState.getDestinationCards().moveTopCardTo(tempDeck, mainState.getDestinationCards());
+                 mainState.getDestinationCards().moveTopCardTo(tempDeck, mainState.getDestinationCards());
+                 mainState.getDestinationCards().moveTopCardTo(tempDeck, mainState.getDestinationCards());
+
+                if(action.getPlayer() instanceof TTRHumanPlayer){
+                    ((TTRHumanPlayer)action.getPlayer()).displayDestinationPopup(tempDeck);
                 }
 
-            }
-            else if(mainState.getTrackModeSelected()){
-                for(int i = 0; i < mainState.getTracks().length; i++){
-                    if(mainState.getTracks()[i].getSelected()){
+            } else if (mainState.getTrackModeSelected()) {
+                for (int i = 0; i < mainState.getTracks().length; i++) {
+                    if (mainState.getTracks()[i].getSelected()) {
                         mainState.getTracks()[i].setCovered(true);
                         mainState.getTracks()[i].setPlayerID(mainState.getPlayerID());
                         mainState.getTracks()[i].setSelected(false);
@@ -183,160 +188,140 @@ public class TTRLocalGame extends LocalGame {
             }
             mainState.setCardModeSelected(true);
             mainState.setTrackModeSelected(false);
-            mainState.setPlayerID((mainState.getPlayerID()+1)%mainState.getNumPlayers());
+            mainState.setPlayerID((mainState.getPlayerID() + 1) % mainState.getNumPlayers());
             return true;
-        }
-        else if(action instanceof TrackPlaceAction){
-            if(mainState.getCardModeSelected()){
+        } else if (action instanceof TrackPlaceAction) {
+            if (mainState.getCardModeSelected()) {
                 return false;
             }
             boolean alreadySelected = false;
-            for(int i = 0; i < mainState.getTracks().length; i++){
-                if(mainState.getTracks()[i].getSelected()){alreadySelected = true;}
+            for (int i = 0; i < mainState.getTracks().length; i++) {
+                if (mainState.getTracks()[i].getSelected()) {
+                    alreadySelected = true;
+                }
             }
-            TrackPlaceAction temp = (TrackPlaceAction)action;
+            TrackPlaceAction temp = (TrackPlaceAction) action;
             int index = temp.getIndex();
-            if(mainState.getTracks()[index].getHighlight() &&
+            if (mainState.getTracks()[index].getHighlight() &&
                     !mainState.getTracks()[index].getSelected() && !alreadySelected) {
                 mainState.getTracks()[index].setSelected(true);
                 mainState.setPlaceTrainSelected(true);
-            }
-            else{
+            } else {
                 mainState.getTracks()[index].setSelected(false);
                 mainState.setPlaceTrainSelected(false);
             }
             return true;
-        }
-        else if(action instanceof DrawUpCardAction){
-            if(mainState.getTrackModeSelected()){
+        } else if (action instanceof DrawUpCardAction) {
+            if (mainState.getTrackModeSelected()) {
                 return false;
-            }
-            else if(mainState.getDestinationCardsSelected()){
+            } else if (mainState.getDestinationCardsSelected()) {
                 mainState.getDestinationCards().setHighlight(false);
                 mainState.setDestinationCardsSelected(false);
             }
-            DrawUpCardAction temp = (DrawUpCardAction)action;
+            DrawUpCardAction temp = (DrawUpCardAction) action;
             int pos = temp.getPos();
             int numHighlights = 0;
-            for(int i = 0; i < mainState.getFaceUpTrainCards().size(); i++){
-                if(mainState.getFaceUpTrainCards().getCards().get(i).getHighlight()){
-                    if(mainState.getFaceUpTrainCards().getCards().get(i).toString().equals("Rainbow")){
-                        numHighlights = numHighlights+2;
-                    }
-                    else {
+            for (int i = 0; i < mainState.getFaceUpTrainCards().size(); i++) {
+                if (mainState.getFaceUpTrainCards().getCards().get(i).getHighlight()) {
+                    if (mainState.getFaceUpTrainCards().getCards().get(i).toString().equals("Rainbow")) {
+                        numHighlights = numHighlights + 2;
+                    } else {
                         numHighlights++;
                         mainState.setOnlyDownDeck(false);
                         mainState.setTrainCardsSelected(true);
                     }
                 }
             }
-            if(mainState.getFaceDownTrainCards().getHighlight()){
+            if (mainState.getFaceDownTrainCards().getHighlight()) {
                 numHighlights++;
                 mainState.setTrainCardsSelected(true);
             }
-            if(numHighlights < 2){
-                if(mainState.getFaceUpTrainCards().getCards().get(pos).toString().equals("Rainbow")){
-                    if(numHighlights == 0){
+            if (numHighlights < 2) {
+                if (mainState.getFaceUpTrainCards().getCards().get(pos).toString().equals("Rainbow")) {
+                    if (numHighlights == 0) {
                         mainState.getFaceUpTrainCards().getCards().get(pos).setHighlight(true);
                         mainState.setTrainCardsSelected(true);
-                    }
-                    else{
+                    } else {
                         mainState.getFaceUpTrainCards().getCards().get(pos).setHighlight(false);
                     }
-                }
-                else if(mainState.getFaceUpTrainCards().getCards().get(pos).getHighlight()){
+                } else if (mainState.getFaceUpTrainCards().getCards().get(pos).getHighlight()) {
                     mainState.getFaceUpTrainCards().getCards().get(pos).setHighlight(false);
                     mainState.setTrainCardsSelected(false);
-                }
-                else{
+                } else {
                     mainState.getFaceUpTrainCards().getCards().get(pos).setHighlight(true);
                     mainState.setTrainCardsSelected(true);
                 }
-            }
-            else if(mainState.getFaceUpTrainCards().getCards().get(pos).getHighlight()){
+            } else if (mainState.getFaceUpTrainCards().getCards().get(pos).getHighlight()) {
                 mainState.getFaceUpTrainCards().getCards().get(pos).setHighlight(false);
                 mainState.setTrainCardsSelected(true);
             }
             return true;
-        }
-        else if(action instanceof DrawDownCardAction) {
-            if(mainState.getTrackModeSelected()){
+        } else if (action instanceof DrawDownCardAction) {
+            if (mainState.getTrackModeSelected()) {
                 return false;
-            }
-            else if(mainState.getDestinationCardsSelected()){
+            } else if (mainState.getDestinationCardsSelected()) {
                 mainState.getDestinationCards().setHighlight(false);
                 mainState.setDestinationCardsSelected(false);
-            }
-            else if(mainState.getTrainCardsSelected() &&
-                    mainState.getFaceDownTrainCards().getHighlight()){
-                if(mainState.getOnlyDownDeck()){
+            } else if (mainState.getTrainCardsSelected() &&
+                    mainState.getFaceDownTrainCards().getHighlight()) {
+                if (mainState.getOnlyDownDeck()) {
                     mainState.setTrainCardsSelected(false);
                 }
                 mainState.setOnlyDownDeck(false);
                 mainState.getFaceDownTrainCards().setHighlight(false);
-            }
-            else if(mainState.getTrainCardsSelected()
-                    && !mainState.getFaceDownTrainCards().getHighlight()){
+            } else if (mainState.getTrainCardsSelected()
+                    && !mainState.getFaceDownTrainCards().getHighlight()) {
                 int highlightNum = 0;
-                for (int i = 0; i < mainState.getFaceUpTrainCards().size(); i++){
-                    if(mainState.getFaceUpTrainCards().getCards().get(i).getHighlight()){
-                        if(mainState.getFaceUpTrainCards().getCards().get(i).toString().equals("Rainbow")){
-                            highlightNum = highlightNum+2;
-                        }
-                        else {
+                for (int i = 0; i < mainState.getFaceUpTrainCards().size(); i++) {
+                    if (mainState.getFaceUpTrainCards().getCards().get(i).getHighlight()) {
+                        if (mainState.getFaceUpTrainCards().getCards().get(i).toString().equals("Rainbow")) {
+                            highlightNum = highlightNum + 2;
+                        } else {
                             highlightNum++;
                             mainState.setOnlyDownDeck(false);
                             mainState.setTrainCardsSelected(true);
                         }
                     }
                 }
-                if(highlightNum < 2){
+                if (highlightNum < 2) {
                     mainState.getFaceDownTrainCards().setHighlight(true);
                 }
                 mainState.setOnlyDownDeck(false);
-            }
-            else if(!mainState.getTrainCardsSelected() && !mainState.getOnlyDownDeck()){
+            } else if (!mainState.getTrainCardsSelected() && !mainState.getOnlyDownDeck()) {
                 mainState.setOnlyDownDeck(true);
                 mainState.setTrainCardsSelected(true);
                 mainState.getFaceDownTrainCards().setHighlight(true);
-            }
-            else{
+            } else {
                 return false;
             }
-        }
-        else if (action instanceof DrawDestinationCardAction) {
-            if(mainState.getTrackModeSelected()){
+        } else if (action instanceof DrawDestinationCardAction) {
+            if (mainState.getTrackModeSelected()) {
                 return false;
-            }
-            else if(mainState.getTrainCardsSelected()){
+            } else if (mainState.getTrainCardsSelected()) {
                 mainState.setTrainCardsSelected(false);
                 mainState.setOnlyDownDeck(false);
                 mainState.getFaceDownTrainCards().setHighlight(false);
-                for(int i = 0; i < mainState.getFaceUpTrainCards().size(); i++){
+                for (int i = 0; i < mainState.getFaceUpTrainCards().size(); i++) {
                     mainState.getFaceUpTrainCards().getCards().get(i).setHighlight(false);
                 }
                 mainState.getDestinationCards().setHighlight(true);
                 mainState.setDestinationCardsSelected(true);
-            }
-            else if(mainState.getDestinationCardsSelected()
-                    && mainState.getDestinationCards().getHighlight()){
+            } else if (mainState.getDestinationCardsSelected()
+                    && mainState.getDestinationCards().getHighlight()) {
                 mainState.getDestinationCards().setHighlight(false);
                 mainState.setDestinationCardsSelected(false);
-            }
-            else{
+            } else {
                 mainState.getDestinationCards().setHighlight(true);
                 mainState.setDestinationCardsSelected(true);
             }
-        }
-        else if (action instanceof ChooseDestinationAction) {
+        } else if (action instanceof ChooseDestinationAction) {
             return true;
         }
         return true;
     }
 
     @Override
-    public void start(GamePlayer[] players)
-    {
+    public void start(GamePlayer[] players) {
         //Sets gameState's numPlayer and play order
         mainState.setNumPlayers(players.length);
 //        Random rand = new Random();

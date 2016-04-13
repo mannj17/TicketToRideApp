@@ -329,6 +329,7 @@ public class TTRGameState extends GameState {
         for(int i = 0; i < 30; i++){
             destinationCards.add(new DestinationCards(i, i, i));
         }
+        destinationDiscard = new Deck("Destination Discard");
 
         /** initialize array values to max possible size */
         for(int i = 0; i < numPlayers; i++){
@@ -1145,6 +1146,7 @@ public class TTRGameState extends GameState {
         faceDownTrainCards = new Deck(original.faceDownTrainCards);
         faceUpTrainCards = new Deck(original.faceUpTrainCards);
         destinationCards = new Deck(original.destinationCards);
+        destinationDiscard = new Deck(original.destinationDiscard);
         for(int i = 0; i < original.getNumPlayers(); i++){
             trainTokens[i] = original.getTrainTokens()[i];
             scores[i] = original.getScores()[i];
