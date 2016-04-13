@@ -32,11 +32,7 @@ public class TTRComputerPlayer extends GameComputerPlayer{
         rand = new Random();
     }
 
-    /*
-     * Says if player is smart or dumb
-     */
-
-    private boolean isDifficult;
+    private boolean isDifficult; // Says if player is smart or dumb
     private Deck trainDeck;
     private Deck destinationDeck;
     private int score;
