@@ -75,6 +75,7 @@ public class TTRGameState extends GameState {
     Rect denverToKansasCityRect = new Rect((int)(maxX * .4), (int)(maxY * .51), (int)(maxX * .56), (int)(maxY * .6));
     Rect denverToOklahomaCityRect = new Rect((int)(maxX * .38), (int)(maxY * .58), (int)(maxX * .53), (int)(maxY * .67));
     Rect santaFeToOklahomaCityRect = new Rect((int)(maxX * .38), (int)(maxY * .67), (int)(maxX * .5), (int)(maxY * .71));
+    Rect elPasoToHoustonRect = new Rect((int)(maxX * .38), (int)(maxY * .85), (int)(maxX * .59), (int)(maxY));
     Rect elPasoToOklahomaCityRect = new Rect((int)(maxX * .37), (int)(maxY * .71), (int)(maxX * .53), (int)(maxY * .83));
     Rect saintLouisToNashvilleRect = new Rect((int)(maxX * .66), (int)(maxY * .52), (int)(maxX * .74), (int)(maxY * .6));
     Rect littleRockToNashvilleRect = new Rect((int)(maxX * .64), (int)(maxY * .59), (int)(maxX * .75), (int)(maxY * .69));
@@ -1670,6 +1671,39 @@ public class TTRGameState extends GameState {
         elPasoToDallas.close();
         elPasoToDallasTrack = new Track(4, "Red", "ElPaso", "Dallas", elPasoToDallas, elPasoToDallasRect);
 
+
+        elPasoToHouston.moveTo(maxX * .380f, maxY * .867f);
+        elPasoToHouston.lineTo(maxX * .375f, maxY * .877f);
+        elPasoToHouston.lineTo(maxX * .403f, maxY * .904f);
+        elPasoToHouston.lineTo(maxX * .408f, maxY * .889f);
+        elPasoToHouston.close();
+        elPasoToHouston.moveTo(maxX * .412f, maxY * .890f);
+        elPasoToHouston.lineTo(maxX * .408f, maxY * .902f);
+        elPasoToHouston.lineTo(maxX * .440f, maxY * .914f);
+        elPasoToHouston.lineTo(maxX * .443f, maxY * .903f);
+        elPasoToHouston.close();
+        elPasoToHouston.moveTo(maxX * .448f, maxY * .905f);
+        elPasoToHouston.lineTo(maxX * .445f, maxY * .919f);
+        elPasoToHouston.lineTo(maxX * .482f, maxY * .926f);
+        elPasoToHouston.lineTo(maxX * .482f, maxY * .912f);
+        elPasoToHouston.close();
+        elPasoToHouston.moveTo(maxX * .485f, maxY * .912f);
+        elPasoToHouston.lineTo(maxX * .485f, maxY * .928f);
+        elPasoToHouston.lineTo(maxX * .520f, maxY * .930f);
+        elPasoToHouston.lineTo(maxX * .521f, maxY * .914f);
+        elPasoToHouston.close();
+        elPasoToHouston.moveTo(maxX * .524f, maxY * .914f);
+        elPasoToHouston.lineTo(maxX * .524f, maxY * .930f);
+        elPasoToHouston.lineTo(maxX * .556f, maxY * .927f);
+        elPasoToHouston.lineTo(maxX * .554f, maxY * .911f);
+        elPasoToHouston.close();
+        elPasoToHouston.moveTo(maxX * .558f, maxY * .908f);
+        elPasoToHouston.lineTo(maxX * .560f, maxY * .925f);
+        elPasoToHouston.lineTo(maxX * .594f, maxY * .903f);
+        elPasoToHouston.lineTo(maxX * .587f, maxY * .889f);
+        elPasoToHouston.close();
+        elPasoToHoustonTrack = new Track(6, "Green", "ElPaso", "Houston", elPasoToHouston, elPasoToHoustonRect);
+
         myTracks = new Track[]{portlandToSanFranciscoTrack, GRID_TRACK, seattleToHelenaTrack,
                 losAngelesToLasVegasTrack, sanFranciscoToLosAngelesTrack,
                 montrealToBostonTrack, losAngelesToPhoenixTrack, montrealToNewYorkTrack,
@@ -1692,7 +1726,8 @@ public class TTRGameState extends GameState {
                 elPasoToOklahomaCityTrack, elPasoToDallasTrack,
                 littleRockToNashvilleTrack, littleRockToNewOrleansTracks, houstonToNewOrleansTrack,
                 saintLouisToLittleRockTrack, dallasToLittleRockTrack, oklahomaCityToLittleRockTrack,
-                saintLouisToNashvilleTrack, kansasCityToSaintLouiseTrack, chicagoToSaintLouisTrack
+                saintLouisToNashvilleTrack, kansasCityToSaintLouiseTrack, chicagoToSaintLouisTrack,
+                elPasoToOklahomaCityTrack, elPasoToDallasTrack, elPasoToHoustonTrack
         };
 
         //Booleans set to defaults
