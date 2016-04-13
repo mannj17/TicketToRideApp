@@ -86,7 +86,7 @@ public class TTRGameState extends GameState {
     Rect oklahomaCityToLittleRockRect = new Rect((int)(maxX * .54), (int)(maxY * .65), (int)(maxX * .64), (int)(maxY * .685));
     Rect kansasCityToSaintLouiseRect = new Rect((int)(maxX * .555), (int)(maxY * .49), (int)(maxX * .65), (int)(maxY * .535));
     Rect saintLouisToChicagoRect = new Rect((int)(maxX * .65), (int)(maxY * .39), (int)(maxX * .71), (int)(maxY * .51));
-
+    Rect winnipegToDuluthRect = new Rect((int)(maxX * .45), (int)(maxY * .09), (int)(maxX * .56), (int)(maxY * .27));
     Rect elPasoToDallasRect = new Rect((int)(maxX * .4), (int)(maxY * .82), (int)(maxX * .55), (int)(maxY * .86));
     private Path GRID = new Path();
     //THE WEST!
@@ -1704,6 +1704,29 @@ public class TTRGameState extends GameState {
         elPasoToHouston.close();
         elPasoToHoustonTrack = new Track(6, "Green", "ElPaso", "Houston", elPasoToHouston, elPasoToHoustonRect);
 
+
+        winnipegToDuluth.moveTo(maxX * .463f, maxY * .095f);
+        winnipegToDuluth.lineTo(maxX * .456f, maxY * .107f);
+        winnipegToDuluth.lineTo(maxX * .479f, maxY * .139f);
+        winnipegToDuluth.lineTo(maxX * .484f, maxY * .131f);
+        winnipegToDuluth.close();
+        winnipegToDuluth.moveTo(maxX * .488f, maxY * .138f);
+        winnipegToDuluth.lineTo(maxX * .481f, maxY * .15f);
+        winnipegToDuluth.lineTo(maxX * .507f, maxY * .182f);
+        winnipegToDuluth.lineTo(maxX * .512f, maxY * .171f);
+        winnipegToDuluth.close();
+        winnipegToDuluth.moveTo(maxX * .518f, maxY * .176f);
+        winnipegToDuluth.lineTo(maxX * .512f, maxY * .187f);
+        winnipegToDuluth.lineTo(maxX * .533f, maxY * .228f);
+        winnipegToDuluth.lineTo(maxX * .540f, maxY * .215f);
+        winnipegToDuluth.close();
+        winnipegToDuluth.moveTo(maxX * .545f, maxY * .216f);
+        winnipegToDuluth.lineTo(maxX * .538f, maxY * .229f);
+        winnipegToDuluth.lineTo(maxX * .559f, maxY * .270f);
+        winnipegToDuluth.lineTo(maxX * .566f, maxY * .257f);
+        winnipegToDuluth.close();
+        winnipegToDuluthTrack = new Track(4, "Black", "Winnipeg", "Duluth", winnipegToDuluth, winnipegToDuluthRect);
+
         myTracks = new Track[]{portlandToSanFranciscoTrack, GRID_TRACK, seattleToHelenaTrack,
                 losAngelesToLasVegasTrack, sanFranciscoToLosAngelesTrack,
                 montrealToBostonTrack, losAngelesToPhoenixTrack, montrealToNewYorkTrack,
@@ -1727,7 +1750,7 @@ public class TTRGameState extends GameState {
                 littleRockToNashvilleTrack, littleRockToNewOrleansTracks, houstonToNewOrleansTrack,
                 saintLouisToLittleRockTrack, dallasToLittleRockTrack, oklahomaCityToLittleRockTrack,
                 saintLouisToNashvilleTrack, kansasCityToSaintLouiseTrack, chicagoToSaintLouisTrack,
-                elPasoToOklahomaCityTrack, elPasoToDallasTrack, elPasoToHoustonTrack
+                elPasoToOklahomaCityTrack, elPasoToDallasTrack, elPasoToHoustonTrack, winnipegToDuluthTrack
         };
 
         //Booleans set to defaults
