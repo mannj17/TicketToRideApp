@@ -18,20 +18,24 @@ public class ConfirmSelectionAction extends GameAction {
     private String chosenColor = null;
     private int useRainbow = 0;
 
+    // Default constructor
     public ConfirmSelectionAction(GamePlayer player){
         super(player);
     }
 
+    //Constructor for selected destination cards
     public ConfirmSelectionAction(GamePlayer player, Deck sendDeck) {
         super(player);
         this.sendDeck = sendDeck;
     }
 
+    //Constructor for selected rainbow cards
     public ConfirmSelectionAction(GamePlayer player, int useRainbow){
         super(player);
         this.useRainbow = useRainbow;
     }
 
+    //Constructor for choosing cards and how many (if any) rainbow cards
     public ConfirmSelectionAction(GamePlayer player, String chosenColor, int useRainbow){
         super(player);
         this.chosenColor = chosenColor;
