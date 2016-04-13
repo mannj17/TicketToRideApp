@@ -86,6 +86,7 @@ public class TTRGameState extends GameState {
     Rect kansasCityToSaintLouiseRect = new Rect((int)(maxX * .555), (int)(maxY * .49), (int)(maxX * .65), (int)(maxY * .535));
     Rect saintLouisToChicagoRect = new Rect((int)(maxX * .65), (int)(maxY * .39), (int)(maxX * .71), (int)(maxY * .51));
 
+    Rect elPasoToDallasRect = new Rect((int)(maxX * .4), (int)(maxY * .82), (int)(maxX * .55), (int)(maxY * .86));
     private Path GRID = new Path();
     //THE WEST!
     private Path vancouverToCalgary = new Path();
@@ -1647,6 +1648,28 @@ public class TTRGameState extends GameState {
         omahaToChicago.lineTo(maxX * .665f, maxY * .38f);
         omahaToChicago.close();
 
+        elPasoToDallas.moveTo(maxX * .399f, maxY * .850f);
+        elPasoToDallas.lineTo(maxX * .400f, maxY * .865f);
+        elPasoToDallas.lineTo(maxX * .435f, maxY * .860f);
+        elPasoToDallas.lineTo(maxX * .434f, maxY * .843f);
+        elPasoToDallas.close();
+        elPasoToDallas.moveTo(maxX * .439f, maxY * .842f);
+        elPasoToDallas.lineTo(maxX * .440f, maxY * .857f);
+        elPasoToDallas.lineTo(maxX * .473f, maxY * .851f);
+        elPasoToDallas.lineTo(maxX * .472f, maxY * .832f);
+        elPasoToDallas.close();
+        elPasoToDallas.moveTo(maxX * .478f, maxY * .831f);
+        elPasoToDallas.lineTo(maxX * .479f, maxY * .846f);
+        elPasoToDallas.lineTo(maxX * .508f, maxY * .840f);
+        elPasoToDallas.lineTo(maxX * .507f, maxY * .824f);
+        elPasoToDallas.close();
+        elPasoToDallas.moveTo(maxX * .512f, maxY * .825f);
+        elPasoToDallas.lineTo(maxX * .513f, maxY * .839f);
+        elPasoToDallas.lineTo(maxX * .543f, maxY * .833f);
+        elPasoToDallas.lineTo(maxX * .542f, maxY * .817f);
+        elPasoToDallas.close();
+        elPasoToDallasTrack = new Track(4, "Red", "ElPaso", "Dallas", elPasoToDallas, elPasoToDallasRect);
+
         myTracks = new Track[]{portlandToSanFranciscoTrack, GRID_TRACK, seattleToHelenaTrack,
                 losAngelesToLasVegasTrack, sanFranciscoToLosAngelesTrack,
                 montrealToBostonTrack, losAngelesToPhoenixTrack, montrealToNewYorkTrack,
@@ -1666,6 +1689,7 @@ public class TTRGameState extends GameState {
                 nashvilleToPittsburghTrack, saintLouisToPittsburghTrack, chicagoToPittsburghTrack,
                 chicagoToTorontoTrack, saultSteMarieToTorontoTrack, denverToOmahaTrack,
                 denverToKansasCityTrack, denverToOklahomaCityTrack, santaFeToOklahomaCityTrack,
+                elPasoToOklahomaCityTrack, elPasoToDallasTrack
                 littleRockToNashvilleTrack, littleRockToNewOrleansTracks, houstonToNewOrleansTrack,
                 saintLouisToLittleRockTrack, dallasToLittleRockTrack, oklahomaCityToLittleRockTrack,
                 saintLouisToNashvilleTrack, kansasCityToSaintLouiseTrack, chicagoToSaintLouisTrack,
