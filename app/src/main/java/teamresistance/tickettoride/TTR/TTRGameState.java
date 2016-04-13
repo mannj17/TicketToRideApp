@@ -72,6 +72,7 @@ public class TTRGameState extends GameState {
     Rect saultSteMarieToTorontoRect = new Rect((int)(maxX * .72), (int)(maxY * .15), (int)(maxX * .81), (int)(maxY * .21));
     Rect helenaToOmahaRect= new Rect((int)(maxX * .34), (int)(maxY * .31), (int)(maxX * .51), (int)(maxY * .41));
     Rect denverToOmahaRect = new Rect((int)(maxX * .39), (int)(maxY * .43), (int)(maxX * .53), (int)(maxY * .52));
+    Rect denverToKansasCityRect = new Rect((int)(maxX * .4), (int)(maxY * .51), (int)(maxX * .56), (int)(maxY * .6));
 
     private Path GRID = new Path();
     //THE WEST!
@@ -1393,6 +1394,28 @@ public class TTRGameState extends GameState {
         denverToOmaha.close();
         denverToOmahaTrack = new Track(4, "Pink", "Denver", "Omaha", denverToOmaha, denverToOmahaRect);
 
+        denverToKansasCity.moveTo(maxX * .400f, maxY * .541f);
+        denverToKansasCity.lineTo(maxX * .399f, maxY * .558f);
+        denverToKansasCity.lineTo(maxX * .434f, maxY * .560f);
+        denverToKansasCity.lineTo(maxX * .434f, maxY * .543f);
+        denverToKansasCity.close();
+        denverToKansasCity.moveTo(maxX * .438f, maxY * .544f);
+        denverToKansasCity.lineTo(maxX * .439f, maxY * .561f);
+        denverToKansasCity.lineTo(maxX * .471f, maxY * .560f);
+        denverToKansasCity.lineTo(maxX * .472f, maxY * .541f);
+        denverToKansasCity.close();
+        denverToKansasCity.moveTo(maxX * .475f, maxY * .541f);
+        denverToKansasCity.lineTo(maxX * .477f, maxY * .558f);
+        denverToKansasCity.lineTo(maxX * .511f, maxY * .548f);
+        denverToKansasCity.lineTo(maxX * .509f, maxY * .530f);
+        denverToKansasCity.close();
+        denverToKansasCity.moveTo(maxX * .515f, maxY * .529f);
+        denverToKansasCity.lineTo(maxX * .518f, maxY * .544f);
+        denverToKansasCity.lineTo(maxX * .547f, maxY * .522f);
+        denverToKansasCity.lineTo(maxX * .543f, maxY * .504f);
+        denverToKansasCity.close();
+        denverToKansasCityTrack = new Track(4, "Black", "Denver", "Omaha", denverToKansasCity, denverToKansasCityRect);
+
         myTracks = new Track[]{portlandToSanFranciscoTrack, GRID_TRACK, seattleToHelenaTrack,
                 losAngelesToLasVegasTrack, sanFranciscoToLosAngelesTrack,
                 montrealToBostonTrack, losAngelesToPhoenixTrack, montrealToNewYorkTrack,
@@ -1410,7 +1433,8 @@ public class TTRGameState extends GameState {
                 helenaToDuluthTrack, helenaToOmahaTrack, helenaToDuluthTrack,
                 newOrleansToAtlantaTrack, nashvilleToAtlantaTrack, nashvilleToRaleighTrack,
                 nashvilleToPittsburghTrack, saintLouisToPittsburghTrack, chicagoToPittsburghTrack,
-                chicagoToTorontoTrack, saultSteMarieToTorontoTrack, denverToOmahaTrack
+                chicagoToTorontoTrack, saultSteMarieToTorontoTrack, denverToOmahaTrack,
+                denverToKansasCityTrack
         };
 
         //Booleans set to defaults
