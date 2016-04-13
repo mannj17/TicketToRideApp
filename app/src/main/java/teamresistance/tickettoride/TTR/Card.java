@@ -10,7 +10,7 @@ package teamresistance.tickettoride.TTR;
  * @version March 2016
  */
 public class Card {
-    private boolean highlight;
+    private boolean highlight = false;
     /**
      * Sets the highlight variable to the new variable
      *

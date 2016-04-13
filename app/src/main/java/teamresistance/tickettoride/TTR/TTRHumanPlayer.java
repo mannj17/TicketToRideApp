@@ -64,6 +64,7 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
     private TextView cpu3TrainTokenTextView;
     private TextView humanTrainTokenTextView;
     /** TextViews for player's destination card count*/
+    private TextView playerDestinationCardTextView;
     private TextView cpu1DestinationCardTextView;
     private TextView cpu2DestinationCardTextView;
     private TextView cpu3DestinationCardTextView;
@@ -215,7 +216,7 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
             greenColorCount.setText("" + myState.getTrainColorCount("Green", 0));
             rainbowColorCount.setText("" + myState.getTrainColorCount("Rainbow", 0));
 
-
+            this.playerDestinationCardTextView.setText("" + myState.getPlayerDestinationDecks()[0].size());
             myBoard.postInvalidate();
         }
     }
@@ -308,6 +309,7 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
         this.cpu1DestinationCardTextView = (TextView)myActivity.findViewById(R.id.CPU1DestinationCardCount);
         this.cpu2DestinationCardTextView = (TextView)myActivity.findViewById(R.id.CPU2DestinationCardCount);
         this.cpu3DestinationCardTextView = (TextView)myActivity.findViewById(R.id.CPU3DestinationCardCount);
+        this.playerDestinationCardTextView = (TextView)myActivity.findViewById(R.id.playerDestinationCardCount);
         this.cpu1TrainCardTextView = (TextView)myActivity.findViewById(R.id.CPU1TrainCardCount);
         this.cpu2TrainCardTextView  = (TextView)myActivity.findViewById(R.id.CPU2TrainCardCount);
         this.cpu3TrainCardTextView  = (TextView)myActivity.findViewById(R.id.CPU3TrainCardCount);
@@ -325,7 +327,6 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
         this.blackColorCount = (TextView)myActivity.findViewById(R.id.blackCardCount);
         this.whiteColorCount = (TextView)myActivity.findViewById(R.id.whiteCardCount);
         this.rainbowColorCount = (TextView)myActivity.findViewById(R.id.locomotiveCardCount);
-
         this.confirmSelection = (Button)myActivity.findViewById(R.id.confirmSelection);
 
         faceUpTrainCards[0] = (ImageButton)myActivity.findViewById(R.id.Train1);
@@ -403,9 +404,7 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
             game.sendAction(new DrawDownCardAction(this));
         }
         else if(v.getId() == R.id.DrawTicketStack){
-            DestinationSelectionDialog dsd = new DestinationSelectionDialog(myActivity, false);
-            dsd.show();
-            //game.sendAction(new DrawDestinationCardAction(this));
+            game.sendAction(new DrawDestinationCardAction(this));
         }
         else if(v.getId() == R.id.drawCardCheckBox){
             if(myState.getTrackModeSelected() && !myState.getCardModeSelected()){
@@ -448,5 +447,10 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
             }
         }
         return true;
+    }
+
+    public void displayDestinationPopup(Deck tempDeck){
+        DestinationSelectionDialog dsd = new DestinationSelectionDialog(myActivity, false, tempDeck, myState);
+        dsd.show();
     }
 }
