@@ -77,7 +77,7 @@ public class TTRComputerPlayer extends GameComputerPlayer{
                     makeMove = rand.nextInt(100);
 
                     //if makeMove is less than 50, put it in track mode
-                    if(makeMove < 50){
+                    if(makeMove > 66){
                         game.sendAction(new ChangeModeAction(this));
                     }
                 }
@@ -85,7 +85,7 @@ public class TTRComputerPlayer extends GameComputerPlayer{
                 //if it is card mode, select randomly between picking from the face up and
                 //face down decks
                 if(compState.getCardModeSelected()) {
-                    if(makeMove< 50) {
+                    if(makeMove > 33) {
                         startedMove = true;
                         int selectedCards = 0;
                         for (int i = 0; i < compState.getFaceUpTrainCards().size(); i++) {
