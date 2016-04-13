@@ -159,20 +159,26 @@ public class TTRLocalGame extends LocalGame {
                 mainState.setTrainCardsSelected(false);
             } else if (mainState.getDestinationCardsSelected()) {
                 mainState.setIsSelectDestinationCards(true);
+                if(((ConfirmSelectionAction) action).getSendDeck() != null){
+                    for(int i = 0; i < ((ConfirmSelectionAction) action).getSendDeck().size(); i++){
+                        Card tempCard = ((ConfirmSelectionAction) action).getSendDeck().getCards().get(i);
+                        mainState.getPlayerTrainDecks()[mainState.getPlayerID()].add(tempCard);
+                    }
+                }
                /** for (int i = 0; i < 3; i++) {
                     mainState.getFaceDownTrainCards().moveTopCardTo(
                             mainState.getDestinationCards(),
                             mainState.getDestinationPool());
                 }*/
 
-                 Deck tempDeck = new Deck("temp");
-                 mainState.getDestinationCards().moveTopCardTo(tempDeck, mainState.getDestinationCards());
-                 mainState.getDestinationCards().moveTopCardTo(tempDeck, mainState.getDestinationCards());
-                 mainState.getDestinationCards().moveTopCardTo(tempDeck, mainState.getDestinationCards());
-
-                if(action.getPlayer() instanceof TTRHumanPlayer){
-                    ((TTRHumanPlayer)action.getPlayer()).displayDestinationPopup(tempDeck);
-                }
+//                 Deck tempDeck = new Deck("temp");
+//                 mainState.getDestinationCards().moveTopCardTo(tempDeck, mainState.getDestinationCards());
+//                 mainState.getDestinationCards().moveTopCardTo(tempDeck, mainState.getDestinationCards());
+//                 mainState.getDestinationCards().moveTopCardTo(tempDeck, mainState.getDestinationCards());
+//
+//                if(action.getPlayer() instanceof TTRHumanPlayer){
+//                    ((TTRHumanPlayer)action.getPlayer()).displayDestinationPopup(tempDeck);
+//                }
 
             } else if (mainState.getTrackModeSelected()) {
                 for (int i = 0; i < mainState.getTracks().length; i++) {
