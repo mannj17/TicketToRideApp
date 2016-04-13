@@ -353,7 +353,6 @@ public class TTRGameState extends GameState {
             playerDestinationDecks[i] = new Deck("Player " + i + " Destination Card Deck");
         }
         trainDiscard = new Deck("Train Card Discard");
-        destinationDiscard = new Deck("Destination Card Discard");
         destinationCardsDrawn = new Deck("Destination Cards Drawn");
         destinationPool = new Deck("Destination Card Pool");
 
@@ -898,7 +897,6 @@ public class TTRGameState extends GameState {
         portlandToSaltLakeCity.lineTo(maxX * .241f, maxY * .471f);
         portlandToSaltLakeCity.close();
         portlandToSaltLakeCityTrack = new Track(6, "Blue", "Portland", "SaltLakeCity", portlandToSaltLakeCity, portlandToSaltLakeCityRect);
-
 
         sanFranciscoToSaltLakeCity.moveTo(maxX * .050f, maxY * .575f);
         sanFranciscoToSaltLakeCity.lineTo(maxX * .052f, maxY * .590f);

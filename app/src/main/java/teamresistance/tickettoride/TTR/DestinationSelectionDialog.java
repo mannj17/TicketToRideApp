@@ -74,7 +74,7 @@ public class DestinationSelectionDialog extends Dialog implements android.view.V
                         myState.getDestinationDiscard().add(destinationCards[i]);
                     }
                 }
-                complete = true;
+                myState.getPlayerDestinationDecks();
                 dismiss();
             } else {
                 text.setText("Please select at least the minimum number of ticket cards.");
