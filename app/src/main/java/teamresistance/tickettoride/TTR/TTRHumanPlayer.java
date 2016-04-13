@@ -165,8 +165,15 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
                 this.humanTextView.setText("" + this.allPlayerNames[0]);
                 this.humanScoreTextview.setText(""+((TTRGameState) info).getScores()[0]);
                 this.humanTrainTokenTextView.setText(""+((TTRGameState) info).getTrainTokens()[0]);
-              //this.playerDestinationCardTextView.setText("Total Cards: " + ((TTRGameState)info).getPlayerDestinationDecks()[0].getCards().size());
-                for(int i = 0; i < myState.getPlayerDestinationDecks()[0].size(); i++){
+                this.playerDestinationCardTextView.setText("Total Cards: " + myState.getPlayerDestinationDecks()[0].size());
+                int numberOfDestCards = 0;
+                if(myState.getPlayerDestinationDecks()[0].size() > 6){
+                    numberOfDestCards = 6;
+                }
+                else{
+                    numberOfDestCards = myState.getPlayerDestinationDecks()[0].size();
+                }
+                for(int i = 0; i < numberOfDestCards; i++){
                     destinationCards[i].setVisibility(View.VISIBLE);
                     DestinationCards tempCard = (DestinationCards) myState.getPlayerDestinationDecks()[0].getCards().get(i);
                     destinationCards[i].setText("" + tempCard.getCity1() + " to " + tempCard.getCity2());
@@ -335,7 +342,7 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
         this.cpu1DestinationCardTextView = (TextView)myActivity.findViewById(R.id.CPU1DestinationCardCount);
         this.cpu2DestinationCardTextView = (TextView)myActivity.findViewById(R.id.CPU2DestinationCardCount);
         this.cpu3DestinationCardTextView = (TextView)myActivity.findViewById(R.id.CPU3DestinationCardCount);
-        //this.playerDestinationCardTextView = (TextView)myActivity.findViewById(R.id.Total_Cards);
+        this.playerDestinationCardTextView = (TextView)myActivity.findViewById(R.id.Total_Cards);
         this.playerDestinationCardTextViewCard1 = (TextView)myActivity.findViewById(R.id.Card_1);
         this.playerDestinationCardTextViewCard2 = (TextView)myActivity.findViewById(R.id.Card_2);
         this.playerDestinationCardTextViewCard3 = (TextView)myActivity.findViewById(R.id.Card_3);
