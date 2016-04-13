@@ -173,7 +173,11 @@ public class TTRLocalGame extends LocalGame {
                         mainState.getTracks()[i].setPlayerID(mainState.getPlayerID());
                         mainState.getTracks()[i].setSelected(false);
                         int count = mainState.getTracks()[i].getTrainTrackNum();
+                        if(((ConfirmSelectionAction) action).getUseRainbow() != 0){
+                            mainState.setUseRainbow(true);
+                        }
                         if(mainState.getUseRainbow()){
+                            int numRainbows = ((ConfirmSelectionAction) action).getUseRainbow();
                             for(int j =0; j < mainState.getPlayerTrainDecks()[mainState.getPlayerID()].size(); j++){
                                 String cardColor = mainState.getPlayerTrainDecks()[mainState.getPlayerID()]
                                         .getCards().get(j).toString();
@@ -434,9 +438,9 @@ public class TTRLocalGame extends LocalGame {
     public void start(GamePlayer[] players) {
         //Sets gameState's numPlayer and play order
         mainState.setNumPlayers(players.length);
-//        Random rand = new Random();
-//        rand.setSeed(System.currentTimeMillis());
-//        mainState.setPlayerID(rand.nextInt(players.length));
+        Random rand = new Random();
+        rand.setSeed(System.currentTimeMillis());
+        mainState.setPlayerID(rand.nextInt(players.length));
         super.start(players);
     }
 }

@@ -446,8 +446,14 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
                                     Deck tempDeck = myState.getPlayerTrainDecks()[playerNum];
                                     displayCardSelectionPopup(tempDeck, myState.getTracks()[myState.getTrackSpot()]);
                                 }
+                                else if(myState.getTrackSpot() != -1 &&
+                                        myState.getTrackModeSelected() &&
+                                        myState.getTrainColorCount("Rainbow", 0) != 0){
+                                    Deck tempDeck = myState.getPlayerTrainDecks()[playerNum];
+                                    displayLocomotiveSelectionPopup(tempDeck, myState.getTracks()[myState.getTrackSpot()]);
+                                }
                                 else{
-                                    game.sendAction(new ConfirmSelectionAction(me));
+                                    game.sendAction(new ConfirmSelectionAction(me, 0));
                                 }
                                 dialog.cancel();
                             }
@@ -548,7 +554,13 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
 
     public void displayCardSelectionPopup(Deck tempDeck, Track track){
         CardColorSelectionDialog ccsd = new CardColorSelectionDialog(myActivity, tempDeck, myState,
-                                                                     track, game, this);
+                track, game, this);
         ccsd.show();
+    }
+
+    public void displayLocomotiveSelectionPopup(Deck tempDeck, Track track){
+        LocomotiveSelectionDialog lsd = new LocomotiveSelectionDialog(myActivity, tempDeck, myState,
+                track, game, this);
+        lsd.show();
     }
 }

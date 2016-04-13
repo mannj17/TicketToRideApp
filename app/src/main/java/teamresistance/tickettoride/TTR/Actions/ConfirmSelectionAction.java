@@ -27,6 +27,11 @@ public class ConfirmSelectionAction extends GameAction {
         this.sendDeck = sendDeck;
     }
 
+    public ConfirmSelectionAction(GamePlayer player, int useRainbow){
+        super(player);
+        this.useRainbow = useRainbow;
+    }
+
     public ConfirmSelectionAction(GamePlayer player, String chosenColor, int useRainbow){
         super(player);
         this.chosenColor = chosenColor;
