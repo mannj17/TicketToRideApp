@@ -1993,6 +1993,7 @@ public class TTRGameState extends GameState {
         trainCardsSelected = original.getTrainCardsSelected();
         onlyDownDeck = original.getOnlyDownDeck();
         useRainbow = original.getUseRainbow();
+        trackSpot = original.getTrackSpot();
     }
 
     public int[] getDestinationCities1() {

@@ -15,6 +15,8 @@ import teamresistance.tickettoride.TTR.Deck;
  */
 public class ConfirmSelectionAction extends GameAction {
     private Deck sendDeck = null;
+    private String chosenColor = null;
+    private int useRainbow = 0;
 
     public ConfirmSelectionAction(GamePlayer player){
         super(player);
@@ -25,5 +27,15 @@ public class ConfirmSelectionAction extends GameAction {
         this.sendDeck = sendDeck;
     }
 
+    public ConfirmSelectionAction(GamePlayer player, String chosenColor, int useRainbow){
+        super(player);
+        this.chosenColor = chosenColor;
+        this.useRainbow = useRainbow;
+    }
+
     public Deck getSendDeck(){return this.sendDeck;}
+
+    public String getChosenColor(){return this.chosenColor;}
+
+    public int getUseRainbow(){return this.useRainbow;}
 }

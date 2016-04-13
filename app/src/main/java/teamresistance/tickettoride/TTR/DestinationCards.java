@@ -49,8 +49,8 @@ public class DestinationCards extends Card{
         else if (dest2 > destNames.length-1){
             city2 = "";
         } else {
-            city1 = destNames[dest1];
-            city2 = destNames[dest2];
+            city1 = destNames[cities1[dest1]-1];
+            city2 = destNames[cities2[dest2]-1];
         }
         score = point;
         setHighlight(false);
@@ -74,4 +74,7 @@ public class DestinationCards extends Card{
     public int getScore(){
         return score;
     }
+
+    public String getCity1(){return this.city1;}
+    public String getCity2(){return this.city2;}
 }

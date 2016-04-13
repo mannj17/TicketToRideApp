@@ -209,12 +209,36 @@ public class TTRLocalGame extends LocalGame {
                         }
                     }
                     else if(mainState.getTracks()[i].getSelected() && mainState.getTracks()[i].getTrackColor().equals("Gray")){
-                        if(action.getPlayer() instanceof TTRHumanPlayer){
-                            ((TTRHumanPlayer)action.getPlayer()).displayCardSelectionPopup(
-                                    mainState.getPlayerTrainDecks()[mainState.getPlayerID()], mainState.getTracks()[i]);
+                        int count = mainState.getTracks()[i].getTrainTrackNum();
+                        if(((ConfirmSelectionAction) action).getUseRainbow() != 0){
+                            mainState.setUseRainbow(true);
+                            int takeRainbows = ((ConfirmSelectionAction) action).getUseRainbow();
+                            for(int j =0; j < mainState.getPlayerTrainDecks()[mainState.getPlayerID()].size(); j++){
+                                String cardColor = mainState.getPlayerTrainDecks()[mainState.getPlayerID()]
+                                        .getCards().get(j).toString();
+                                if(cardColor.equals("Rainbow") && count != 0 && takeRainbows != 0){
+                                    mainState.getPlayerTrainDecks()[mainState.getPlayerID()].getCards().remove(j);
+                                    count--;
+                                    takeRainbows--;
+                                }
+                            }
+                            mainState.setUseRainbow(false);
+                        }
+                        if(((ConfirmSelectionAction) action).getChosenColor() != null){
+                            for(int j = 0; j < mainState.getPlayerTrainDecks()[mainState.getPlayerID()].size(); j++){
+                                String trackColor = ((ConfirmSelectionAction) action).getChosenColor();
+                                String cardColor = mainState.getPlayerTrainDecks()[mainState.getPlayerID()]
+                                        .getCards().get(j).toString();
+                                if(trackColor.equals(cardColor) && count != 0){
+                                    mainState.getPlayerTrainDecks()[mainState.getPlayerID()].getCards().remove(j);
+                                    count--;
+                                }
+                            }
                         }
                         mainState.getTracks()[i].setCovered(true);
                         int num = mainState.getTracks()[i].getTrainTrackNum();
+                        mainState.getTracks()[i].setPlayerID(mainState.getPlayerID());
+                        mainState.getTracks()[i].setSelected(false);
                         switch(num) {
                             case 1:
                                 mainState.setScore(mainState.getScores()[mainState.getPlayerID()]+1, mainState.getPlayerID());
@@ -241,29 +265,29 @@ public class TTRLocalGame extends LocalGame {
                                 mainState.setTrainToken(mainState.getTrainTokens()[mainState.getPlayerID()]-6,mainState.getPlayerID());
                                 break;
                         }
-                        mainState.getTracks()[i].setPlayerID(mainState.getPlayerID());
-                        mainState.getTracks()[i].setSelected(false);
-                        int count = mainState.getTracks()[i].getTrainTrackNum();
-                        if(mainState.getUseRainbow()){
-                            for(int j =0; j < mainState.getPlayerTrainDecks()[mainState.getPlayerID()].size(); j++){
-                                String cardColor = mainState.getPlayerTrainDecks()[mainState.getPlayerID()]
-                                        .getCards().get(j).toString();
-                                if(cardColor.equals("Rainbow")){
-                                    mainState.getPlayerTrainDecks()[mainState.getPlayerID()].getCards().remove(j);
-                                    count--;
-                                }
-                            }
-                            mainState.setUseRainbow(false);
-                        }
-                        for(int j = 0; j < mainState.getPlayerTrainDecks()[mainState.getPlayerID()].size(); j++){
-                            String trackColor = mainState.getSelectedCardColor();
-                            String cardColor = mainState.getPlayerTrainDecks()[mainState.getPlayerID()]
-                                    .getCards().get(j).toString();
-                            if(trackColor.equals(cardColor) && count != 0){
-                                mainState.getPlayerTrainDecks()[mainState.getPlayerID()].getCards().remove(j);
-                                count--;
-                            }
-                        }
+//                        mainState.getTracks()[i].setPlayerID(mainState.getPlayerID());
+//                        mainState.getTracks()[i].setSelected(false);
+//                        int count = mainState.getTracks()[i].getTrainTrackNum();
+//                        if(mainState.getUseRainbow()){
+//                            for(int j =0; j < mainState.getPlayerTrainDecks()[mainState.getPlayerID()].size(); j++){
+//                                String cardColor = mainState.getPlayerTrainDecks()[mainState.getPlayerID()]
+//                                        .getCards().get(j).toString();
+//                                if(cardColor.equals("Rainbow")){
+//                                    mainState.getPlayerTrainDecks()[mainState.getPlayerID()].getCards().remove(j);
+//                                    count--;
+//                                }
+//                            }
+//                            mainState.setUseRainbow(false);
+//                        }
+//                        for(int j = 0; j < mainState.getPlayerTrainDecks()[mainState.getPlayerID()].size(); j++){
+//                            String trackColor = mainState.getSelectedCardColor();
+//                            String cardColor = mainState.getPlayerTrainDecks()[mainState.getPlayerID()]
+//                                    .getCards().get(j).toString();
+//                            if(trackColor.equals(cardColor) && count != 0){
+//                                mainState.getPlayerTrainDecks()[mainState.getPlayerID()].getCards().remove(j);
+//                                count--;
+//                            }
+//                        }
                     }
                 }
                 mainState.setTrackModeSelected(false);
@@ -285,6 +309,7 @@ public class TTRLocalGame extends LocalGame {
                     if (mainState.getTracks()[i].getSelected()) {
                         alreadySelected = true;
                         currentTrackColor = mainState.getTracks()[i].toString();
+                        mainState.setTrackSpot(i);
                     }
                 }
                 TrackPlaceAction temp = (TrackPlaceAction) action;
@@ -295,6 +320,7 @@ public class TTRLocalGame extends LocalGame {
                     mainState.setPlaceTrainSelected(true);
                     mainState.setSelectedCardColor(temp.getTrackColor());
                     mainState.setUseRainbow(mainState.getTrainColorCount("Rainbow", mainState.getPlayerID()) != 0);
+                    mainState.setTrackSpot(index);
                 } else {
                     mainState.getTracks()[index].setSelected(false);
                     mainState.setPlaceTrainSelected(false);

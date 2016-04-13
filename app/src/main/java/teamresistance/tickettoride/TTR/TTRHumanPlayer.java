@@ -11,6 +11,8 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
 import teamresistance.tickettoride.Game.GameHumanPlayer;
 import teamresistance.tickettoride.Game.GameMainActivity;
 import teamresistance.tickettoride.Game.infoMsg.GameInfo;
@@ -66,6 +68,13 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
     private TextView humanTrainTokenTextView;
     /** TextViews for player's destination card count*/
     private TextView playerDestinationCardTextView;
+    private TextView playerDestinationCardTextViewCard1;
+    private TextView playerDestinationCardTextViewCard2;
+    private TextView playerDestinationCardTextViewCard3;
+    private TextView playerDestinationCardTextViewCard4;
+    private TextView playerDestinationCardTextViewCard5;
+    private TextView playerDestinationCardTextViewCard6;
+    private TextView[] destinationCards;
     private TextView cpu1DestinationCardTextView;
     private TextView cpu2DestinationCardTextView;
     private TextView cpu3DestinationCardTextView;
@@ -144,9 +153,9 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
 
             int size = myBoard.getTracksLength();
             for (int i = 0; i < size; i++) {
-                //if(canChoose(myBoard.getTracks()[i]) || !val) {
+                if(canChoose(myBoard.getTracks()[i]) || !val) {
                     myBoard.getTracks()[i].setHighlight(val);
-                //}
+                }
             }
             if(playerNum >= 2) { //2 is the minimum number of players
                 lp = new LinearLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT,1);
@@ -156,7 +165,12 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
                 this.humanTextView.setText("" + this.allPlayerNames[0]);
                 this.humanScoreTextview.setText(""+((TTRGameState) info).getScores()[0]);
                 this.humanTrainTokenTextView.setText(""+((TTRGameState) info).getTrainTokens()[0]);
-                this.playerDestinationCardTextView.setText("" + ((TTRGameState)info).getPlayerDestinationDecks()[0].getCards().size());
+              //this.playerDestinationCardTextView.setText("Total Cards: " + ((TTRGameState)info).getPlayerDestinationDecks()[0].getCards().size());
+                for(int i = 0; i < myState.getPlayerDestinationDecks()[0].size(); i++){
+                    destinationCards[i].setVisibility(View.VISIBLE);
+                    DestinationCards tempCard = (DestinationCards) myState.getPlayerDestinationDecks()[0].getCards().get(i);
+                    destinationCards[i].setText("" + tempCard.getCity1() + " to " + tempCard.getCity2());
+                }
                 this.cpu1PlayerTextView.setText(""+this.allPlayerNames[1]);
                 this.cpu1TrainTokenTextView.setText(""+((TTRGameState) info).getTrainTokens()[1]);
                 this.cpu1ScoreTextview.setText(""+((TTRGameState) info).getScores()[1]);
@@ -321,7 +335,19 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
         this.cpu1DestinationCardTextView = (TextView)myActivity.findViewById(R.id.CPU1DestinationCardCount);
         this.cpu2DestinationCardTextView = (TextView)myActivity.findViewById(R.id.CPU2DestinationCardCount);
         this.cpu3DestinationCardTextView = (TextView)myActivity.findViewById(R.id.CPU3DestinationCardCount);
-        this.playerDestinationCardTextView = (TextView)myActivity.findViewById(R.id.playerDestinationCardCount);
+        //this.playerDestinationCardTextView = (TextView)myActivity.findViewById(R.id.Total_Cards);
+        this.playerDestinationCardTextViewCard1 = (TextView)myActivity.findViewById(R.id.Card_1);
+        this.playerDestinationCardTextViewCard2 = (TextView)myActivity.findViewById(R.id.Card_2);
+        this.playerDestinationCardTextViewCard3 = (TextView)myActivity.findViewById(R.id.Card_3);
+        this.playerDestinationCardTextViewCard4 = (TextView)myActivity.findViewById(R.id.Card_4);
+        this.playerDestinationCardTextViewCard5 = (TextView)myActivity.findViewById(R.id.Card_5);
+        this.playerDestinationCardTextViewCard6 = (TextView)myActivity.findViewById(R.id.Card_6);
+        destinationCards = new TextView[]{this.playerDestinationCardTextViewCard1,
+                                          this.playerDestinationCardTextViewCard2,
+                                          this.playerDestinationCardTextViewCard3,
+                                          this.playerDestinationCardTextViewCard4,
+                                          this.playerDestinationCardTextViewCard5,
+                                          this.playerDestinationCardTextViewCard6};
         this.cpu1TrainCardTextView = (TextView)myActivity.findViewById(R.id.CPU1TrainCardCount);
         this.cpu2TrainCardTextView  = (TextView)myActivity.findViewById(R.id.CPU2TrainCardCount);
         this.cpu3TrainCardTextView  = (TextView)myActivity.findViewById(R.id.CPU3TrainCardCount);
@@ -397,7 +423,13 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
                                     myState.getDestinationCards().moveTopCardTo(tempDeck, myState.getDestinationCards());
 
                                     displayDestinationPopup(tempDeck);
-                                } else {
+                                } else if (myState.getTrackSpot() != -1 &&
+                                        myState.getTrackModeSelected() &&
+                                        myState.getTracks()[myState.getTrackSpot()].getTrackColor().equals("Gray")) {
+                                    Deck tempDeck = myState.getPlayerTrainDecks()[playerNum];
+                                    displayCardSelectionPopup(tempDeck, myState.getTracks()[myState.getTrackSpot()]);
+                                }
+                                else{
                                     game.sendAction(new ConfirmSelectionAction(me));
                                 }
                                 dialog.cancel();
@@ -498,7 +530,8 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
     }
 
     public void displayCardSelectionPopup(Deck tempDeck, Track track){
-        CardColorSelectionDialog ccsd = new CardColorSelectionDialog(myActivity, tempDeck, myState, track);
+        CardColorSelectionDialog ccsd = new CardColorSelectionDialog(myActivity, tempDeck, myState,
+                                                                     track, game, this);
         ccsd.show();
     }
 }
