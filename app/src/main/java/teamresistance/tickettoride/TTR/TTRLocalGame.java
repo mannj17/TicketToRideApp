@@ -163,6 +163,7 @@ public class TTRLocalGame extends LocalGame {
 
                 if(action.getPlayer() instanceof TTRHumanPlayer){
                     ((TTRHumanPlayer)action.getPlayer()).displayDestinationPopup(tempDeck);
+
                 }
 
             } else if (mainState.getTrackModeSelected()) {

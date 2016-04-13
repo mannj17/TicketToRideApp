@@ -155,6 +155,7 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
                 this.humanTextView.setText("" + this.allPlayerNames[0]);
                 this.humanScoreTextview.setText(""+((TTRGameState) info).getScores()[0]);
                 this.humanTrainTokenTextView.setText(""+((TTRGameState) info).getTrainTokens()[0]);
+                this.playerDestinationCardTextView.setText("" + ((TTRGameState)info).getPlayerDestinationDecks()[0].getCards().size());
                 this.cpu1PlayerTextView.setText(""+this.allPlayerNames[1]);
                 this.cpu1TrainTokenTextView.setText(""+((TTRGameState) info).getTrainTokens()[1]);
                 this.cpu1ScoreTextview.setText(""+((TTRGameState) info).getScores()[1]);
@@ -216,7 +217,6 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
             greenColorCount.setText("" + myState.getTrainColorCount("Green", 0));
             rainbowColorCount.setText("" + myState.getTrainColorCount("Rainbow", 0));
 
-            this.playerDestinationCardTextView.setText("" + myState.getPlayerDestinationDecks()[0].size());
             myBoard.postInvalidate();
         }
     }
