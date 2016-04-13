@@ -31,11 +31,9 @@ public class TTRComputerPlayer extends GameComputerPlayer{
         isDifficult = difficulty;
         rand = new Random();
     }
-
     /*
      * Says if player is smart or dumb
      */
-
     private boolean isDifficult;
     private Deck trainDeck;
     private Deck destinationDeck;
@@ -47,25 +45,17 @@ public class TTRComputerPlayer extends GameComputerPlayer{
     private int makeMove;
     private boolean startedMove = false;
     private boolean foundTrack = false;
-
-//    /*
-//     * recieves and interprets info from the local game
-//     * @info
-//     */
-//
-//    protected final void recieveInfo(GameInfo info) {
-//
-//    }
-
-
     /*
      * Finds the best move for the computer player and makes that move based on what it finds
      * @info
      */
     protected final void findBestMove(GameInfo info) {
-    
     }
 
+    /**
+     * Computer player actions
+     * @param info from game state
+     */
     @Override
     protected void receiveInfo(GameInfo info) {
         if(info instanceof GameState){
