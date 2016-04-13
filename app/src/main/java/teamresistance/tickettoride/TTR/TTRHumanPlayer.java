@@ -442,6 +442,7 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
             }
             else{
                 this.trainCheck.setChecked(true);
+                //
             }
         }
     }
