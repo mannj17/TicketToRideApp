@@ -24,6 +24,7 @@ public class TTRLocalGame extends LocalGame {
     private boolean noMoreTrains;
     private int turnsLeft;
     private int topScorePlayer = 0;
+    private String currentTrackColor = null;
 
     /**
      * TTRLocalGame constructor
@@ -47,8 +48,8 @@ public class TTRLocalGame extends LocalGame {
 
     /**
      * Returns if the player can make a move
-     *
-     * @param playerIdx the player's player-number (ID)
+     * @param playerIdx
+     * 		the player's player-number (ID)
      * @return
      */
     @Override
@@ -58,7 +59,6 @@ public class TTRLocalGame extends LocalGame {
 
     /**
      * Returns the end game status
-     *
      * @return
      */
     @Override
@@ -105,7 +105,9 @@ public class TTRLocalGame extends LocalGame {
             } else if (mainState.getTrackModeSelected()) {
                 mainState.setCardModeSelected(true);
                 mainState.setTrackModeSelected(false);
-                //TODO
+                for(int i = 0; i < mainState.getTracks().length; i++){
+                    mainState.getTracks()[i].setSelected(false);
+                }
             }
             return true;
         } else if (action instanceof ConfirmSelectionAction) {
@@ -163,18 +165,58 @@ public class TTRLocalGame extends LocalGame {
 
                 if(action.getPlayer() instanceof TTRHumanPlayer){
                     ((TTRHumanPlayer)action.getPlayer()).displayDestinationPopup(tempDeck);
-
                 }
 
             } else if (mainState.getTrackModeSelected()) {
                 for (int i = 0; i < mainState.getTracks().length; i++) {
-                    if (mainState.getTracks()[i].getSelected()) {
+                    if (mainState.getTracks()[i].getSelected() && !mainState.getTracks()[i].getTrackColor().equals("Gray")) {
                         mainState.getTracks()[i].setCovered(true);
                         mainState.getTracks()[i].setPlayerID(mainState.getPlayerID());
                         mainState.getTracks()[i].setSelected(false);
                         int count = mainState.getTracks()[i].getTrainTrackNum();
+                        if(mainState.getUseRainbow()){
+                            for(int j =0; j < mainState.getPlayerTrainDecks()[mainState.getPlayerID()].size(); j++){
+                                String cardColor = mainState.getPlayerTrainDecks()[mainState.getPlayerID()]
+                                        .getCards().get(j).toString();
+                                if(cardColor.equals("Rainbow")){
+                                    mainState.getPlayerTrainDecks()[mainState.getPlayerID()].getCards().remove(j);
+                                    count--;
+                                }
+                            }
+                            mainState.setUseRainbow(false);
+                        }
                         for(int j = 0; j < mainState.getPlayerTrainDecks()[mainState.getPlayerID()].size(); j++){
                             String trackColor = mainState.getTracks()[i].getTrackColor();
+                            String cardColor = mainState.getPlayerTrainDecks()[mainState.getPlayerID()]
+                                    .getCards().get(j).toString();
+                            if(trackColor.equals(cardColor) && count != 0){
+                                mainState.getPlayerTrainDecks()[mainState.getPlayerID()].getCards().remove(j);
+                                count--;
+                            }
+                        }
+                    }
+                    else if(mainState.getTracks()[i].getSelected() && mainState.getTracks()[i].getTrackColor().equals("Gray")){
+                        if(action.getPlayer() instanceof TTRHumanPlayer){
+                            ((TTRHumanPlayer)action.getPlayer()).displayCardSelectionPopup(
+                                    mainState.getPlayerTrainDecks()[mainState.getPlayerID()], mainState.getTracks()[i]);
+                        }
+                        mainState.getTracks()[i].setCovered(true);
+                        mainState.getTracks()[i].setPlayerID(mainState.getPlayerID());
+                        mainState.getTracks()[i].setSelected(false);
+                        int count = mainState.getTracks()[i].getTrainTrackNum();
+                        if(mainState.getUseRainbow()){
+                            for(int j =0; j < mainState.getPlayerTrainDecks()[mainState.getPlayerID()].size(); j++){
+                                String cardColor = mainState.getPlayerTrainDecks()[mainState.getPlayerID()]
+                                        .getCards().get(j).toString();
+                                if(cardColor.equals("Rainbow")){
+                                    mainState.getPlayerTrainDecks()[mainState.getPlayerID()].getCards().remove(j);
+                                    count--;
+                                }
+                            }
+                            mainState.setUseRainbow(false);
+                        }
+                        for(int j = 0; j < mainState.getPlayerTrainDecks()[mainState.getPlayerID()].size(); j++){
+                            String trackColor = mainState.getSelectedCardColor();
                             String cardColor = mainState.getPlayerTrainDecks()[mainState.getPlayerID()]
                                     .getCards().get(j).toString();
                             if(trackColor.equals(cardColor) && count != 0){
@@ -190,29 +232,38 @@ public class TTRLocalGame extends LocalGame {
             mainState.setCardModeSelected(true);
             mainState.setTrackModeSelected(false);
             mainState.setPlayerID((mainState.getPlayerID() + 1) % mainState.getNumPlayers());
+            for(int i = 0; i < mainState.getTracks().length; i++){
+                mainState.getTracks()[i].setSelected(false);
+            }
             return true;
         } else if (action instanceof TrackPlaceAction) {
             if (mainState.getCardModeSelected()) {
                 return false;
             }
             boolean alreadySelected = false;
-            for (int i = 0; i < mainState.getTracks().length; i++) {
-                if (mainState.getTracks()[i].getSelected()) {
-                    alreadySelected = true;
+                for (int i = 0; i < mainState.getTracks().length; i++) {
+                    if (mainState.getTracks()[i].getSelected()) {
+                        alreadySelected = true;
+                        currentTrackColor = mainState.getTracks()[i].toString();
+                    }
                 }
+                TrackPlaceAction temp = (TrackPlaceAction) action;
+                int index = temp.getIndex();
+                if (mainState.getTracks()[index].getHighlight() &&
+                        !mainState.getTracks()[index].getSelected() && !alreadySelected) {
+                    mainState.getTracks()[index].setSelected(true);
+                    mainState.setPlaceTrainSelected(true);
+                    mainState.setSelectedCardColor(temp.getTrackColor());
+                    mainState.setUseRainbow(mainState.getTrainColorCount("Rainbow", mainState.getPlayerID()) != 0);
+                } else {
+                    mainState.getTracks()[index].setSelected(false);
+                    mainState.setPlaceTrainSelected(false);
+                    mainState.setSelectedCardColor("");
+                    mainState.setUseRainbow(false);
+                }
+                return true;
             }
-            TrackPlaceAction temp = (TrackPlaceAction) action;
-            int index = temp.getIndex();
-            if (mainState.getTracks()[index].getHighlight() &&
-                    !mainState.getTracks()[index].getSelected() && !alreadySelected) {
-                mainState.getTracks()[index].setSelected(true);
-                mainState.setPlaceTrainSelected(true);
-            } else {
-                mainState.getTracks()[index].setSelected(false);
-                mainState.setPlaceTrainSelected(false);
-            }
-            return true;
-        } else if (action instanceof DrawUpCardAction) {
+            else if (action instanceof DrawUpCardAction) {
             if (mainState.getTrackModeSelected()) {
                 return false;
             } else if (mainState.getDestinationCardsSelected()) {

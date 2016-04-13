@@ -79,9 +79,9 @@ public class TTRSurfaceView extends SurfaceView{
                 }
                 if (track.getCovered()) {
                     if(track.getPlayerID() == 0){paint.setColor(PLAYER1_COLOR);}
-                    if(track.getPlayerID() == 1){paint.setColor(PLAYER2_COLOR);}
-                    if(track.getPlayerID() == 2){paint.setColor(PLAYER3_COLOR);}
-                    if(track.getPlayerID() == 3){paint.setColor(PLAYER4_COLOR);}
+                    else if(track.getPlayerID() == 1){paint.setColor(PLAYER2_COLOR);}
+                    else if(track.getPlayerID() == 2){paint.setColor(PLAYER3_COLOR);}
+                    else if(track.getPlayerID() == 3){paint.setColor(PLAYER4_COLOR);}
                     paint.setStyle(Paint.Style.FILL);
                     canvas.drawPath(track.getPath(), paint);
                 }

@@ -29,7 +29,7 @@ public class TrackPlaceAction extends GameAction{
         this.index = index;
     }
 
-    public void setChosenColor(String value){
+    public void setTrackColor(String value){
         this.trackColor = value;
     }
 
@@ -37,7 +37,7 @@ public class TrackPlaceAction extends GameAction{
         this.index = value;
     }
 
-    public String getChosenColor(){
+    public String getTrackColor(){
         return this.trackColor;
     }
 

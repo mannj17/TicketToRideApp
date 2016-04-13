@@ -43,6 +43,9 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
     private String name;
     private Boolean isTurn;
     private int trainTokens;
+    private final String[] trainColors = {"Yellow", "Blue", "Orange", "White",
+            "Pink", "Black", "Red", "Green",
+            "Rainbow"};
 
     private Button confirmSelection;
     private Button placeTrain;
@@ -143,9 +146,9 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
 
             int size = myBoard.getTracksLength();
             for (int i = 0; i < size; i++) {
-                //if(canChoose(myBoard.getTracks()[i]) || !val) {
+                if(canChoose(myBoard.getTracks()[i]) || !val) {
                     myBoard.getTracks()[i].setHighlight(val);
-                //}
+                }
             }
             if(playerNum >= 2) { //2 is the minimum number of players
                 lp = new LinearLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT,1);
@@ -275,6 +278,17 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
         else{
             return false;
         }
+    }
+
+    public int contains(String trainColor){
+        Deck tempDeck = this.trainDeck;
+        int count = 0;
+        for(int i = 0; i < tempDeck.size();i++){
+            if(tempDeck.getCards().get(i).toString().equals(trainColor)){
+                count++;
+            }
+        }
+        return count;
     }
 
     /*
@@ -439,8 +453,28 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
                 }
             }
             if (index != -1) {
-                game.sendAction(new TrackPlaceAction(this,
-                        myState.getTracks()[index].getTrackColor(), index));
+                String sendingString = myState.getTracks()[index].getTrackColor();
+                if(myState.getTracks()[index].getTrackColor().equals("Gray")){
+                    int redCount= myState.getTrainColorCount("Red",this.playerNum);
+                    int orangeCount= myState.getTrainColorCount("Orange",this.playerNum);
+                    int yellowCount= myState.getTrainColorCount("Yellow",this.playerNum);
+                    int greenCount= myState.getTrainColorCount("Green",this.playerNum);
+                    int blueCount= myState.getTrainColorCount("Blue",this.playerNum);
+                    int pinkCount= myState.getTrainColorCount("Pink",this.playerNum);
+                    int whiteCount= myState.getTrainColorCount("White",this.playerNum);
+                    int blackCount= myState.getTrainColorCount("Black",this.playerNum);
+                    int rainbowCount= myState.getTrainColorCount("Rainbow",this.playerNum);
+                    int min = myState.getTracks()[index].getTrainTrackNum();
+                    if(redCount + rainbowCount >= min){sendingString = "Red";}
+                    if(orangeCount + rainbowCount >= min){sendingString = "Orange";}
+                    if(yellowCount + rainbowCount >= min){sendingString = "Yellow";}
+                    if(greenCount + rainbowCount >= min){sendingString = "Green";}
+                    if(blueCount + rainbowCount >= min){sendingString = "Blue";}
+                    if(pinkCount + rainbowCount >= min){sendingString = "Pink";}
+                    if(whiteCount + rainbowCount >= min){sendingString = "White";}
+                    if(blackCount + rainbowCount >= min){sendingString = "Black";}
+                }
+                game.sendAction(new TrackPlaceAction(this, sendingString, index));
             }
             else{
                 return false;
@@ -452,5 +486,10 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
     public void displayDestinationPopup(Deck tempDeck){
         DestinationSelectionDialog dsd = new DestinationSelectionDialog(myActivity, false, tempDeck, myState);
         dsd.show();
+    }
+
+    public void displayCardSelectionPopup(Deck tempDeck, Track track){
+        CardColorSelectionDialog ccsd = new CardColorSelectionDialog(myActivity, tempDeck, myState, track);
+        ccsd.show();
     }
 }

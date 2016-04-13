@@ -2,6 +2,7 @@ package teamresistance.tickettoride.TTR;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
@@ -14,7 +15,7 @@ import teamresistance.tickettoride.R;
 /**
  * Created by Jess on 4/12/2016.
  */
-public class DestinationSelectionDialog extends Dialog implements android.view.View.OnClickListener {
+public class DestinationSelectionDialog extends  Dialog implements android.view.View.OnClickListener {
     private Activity c;
     private Dialog d;
     private TTRGameState myState;
@@ -74,7 +75,7 @@ public class DestinationSelectionDialog extends Dialog implements android.view.V
                         myState.getDestinationDiscard().add(destinationCards[i]);
                     }
                 }
-                myState.getPlayerDestinationDecks();
+                //myState.getPlayerDestinationDecks();
                 dismiss();
             } else {
                 text.setText("Please select at least the minimum number of ticket cards.");
