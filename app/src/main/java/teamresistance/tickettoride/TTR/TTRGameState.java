@@ -375,12 +375,21 @@ public class TTRGameState extends GameState {
         /** initialize array values to max possible size */
         for(int i = 0; i < numPlayers; i++){
             trainTokens[i] = 45;
+            int k = 0;
             scores[i] = 0;
             names[i] = "";
             playerTrainDecks[i] = new Deck("Player " + i + " Train Card Deck");
-            for(int j = 0; j != 5;j++)
+            while(k!= 5)
             {
-                faceDownTrainCards.moveTopCardTo(playerTrainDecks[i], faceDownTrainCards);
+                if(!faceDownTrainCards.peekAtTopCard().toString().equals("Rainbow"))
+                {
+                    faceDownTrainCards.moveTopCardTo(playerTrainDecks[i], faceDownTrainCards);
+                    k++;
+                }
+                else
+                {
+                    faceDownTrainCards.shuffle();
+                }
             }
             playerDestinationDecks[i] = new Deck("Player " + i + " Destination Card Deck");
             for(int j = 0; j != 3;j++)
