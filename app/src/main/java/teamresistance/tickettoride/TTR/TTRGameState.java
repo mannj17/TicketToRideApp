@@ -97,6 +97,7 @@ public class TTRGameState extends GameState {
     Rect dallasToHoustonRect = new Rect((int)(maxX * .55), (int)(maxY * .8), (int)(maxX * .61), (int)(maxY * .87));
     Rect oklahomaCityToDallasRect = new Rect((int)(maxX * .53), (int)(maxY * .68), (int)(maxX * .58), (int)(maxY * .8));
     Rect kansasCityToOklahomaCityRect = new Rect((int)(maxX * .53), (int)(maxY * .53), (int)(maxX * .58), (int)(maxY * .64));
+    Rect omahaToKansasCityRect = new Rect((int)(maxX * .54), (int)(maxY * .46), (int)(maxX * .59), (int)(maxY * .5));
     private Path GRID = new Path();
     //THE WEST!
     private Path vancouverToCalgary = new Path();
@@ -1891,7 +1892,14 @@ public class TTRGameState extends GameState {
         duluthToOmaha.close();
         duluthToOmahaTrack = new Track(2, "Gray", "Duluth", "Omaha",duluthToOmaha, duluthToOmahaRect);
 
-        myTracks = new Track[]{portlandToSanFranciscoTrack, GRID_TRACK, seattleToHelenaTrack,
+        omahatoKansasCity.moveTo(maxX * .543f, maxY * .450f);
+        omahatoKansasCity.lineTo(maxX * .533f, maxY * .463f);
+        omahatoKansasCity.lineTo(maxX * .547f, maxY * .511f);
+        omahatoKansasCity.lineTo(maxX * .558f, maxY * .499f);
+        omahatoKansasCity.close();
+        omahatoKansasCityTrack = new Track(1,"Gray", "Omaha", "KansasCity", omahatoKansasCity, omahaToKansasCityRect);
+
+        myTracks = new Track[]{portlandToSanFranciscoTrack,seattleToHelenaTrack,
                 losAngelesToLasVegasTrack, sanFranciscoToLosAngelesTrack,
                 montrealToBostonTrack, losAngelesToPhoenixTrack, montrealToNewYorkTrack,
                 newYorkToBostonTrack, newYorkToWashingtonTrack, raleighToWashingtonTrack,
@@ -1917,7 +1925,8 @@ public class TTRGameState extends GameState {
                 elPasoToOklahomaCityTrack, elPasoToDallasTrack, elPasoToHoustonTrack, winnipegToDuluthTrack,
                 dallasToHoustonTrack, oklahomaCityToDallasTrack, kansasCityToOklahomaCityTrack,
                 dallasToHoustonTrack,winnipegToSaultSteMarieTrack, omahaToChicagoTrack,
-                duluthToChicagoTrack, duluthToTorontoTrack, duluthToSaultSteMarieTrack, duluthToOmahaTrack
+                duluthToChicagoTrack, duluthToTorontoTrack, duluthToSaultSteMarieTrack, duluthToOmahaTrack,
+                omahatoKansasCityTrack //,GRID_TRACK
         };
 
         //Booleans set to defaults
