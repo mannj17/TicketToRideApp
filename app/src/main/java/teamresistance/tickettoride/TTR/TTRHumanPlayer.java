@@ -482,6 +482,7 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
             }
         }
     }
+
     /**
      *  The touch handler for the touches.
      * @param v reference to surface view

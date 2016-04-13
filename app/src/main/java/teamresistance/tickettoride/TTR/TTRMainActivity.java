@@ -21,11 +21,6 @@ import java.util.ArrayList;
  */
 public class TTRMainActivity extends GameMainActivity {
 
-//    @Override
-//    protected void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_ttr_main);
-//    }
     public static final int PORT_NUMBER = 4567;
 
     /**
@@ -71,8 +66,13 @@ public class TTRMainActivity extends GameMainActivity {
 
     }//createDefaultConfig
 
+    /**
+     *  Creates a new TTRLocalGame
+     * @return
+     */
     @Override
     public LocalGame createLocalGame() {
         return new TTRLocalGame();
     }
+
 }
