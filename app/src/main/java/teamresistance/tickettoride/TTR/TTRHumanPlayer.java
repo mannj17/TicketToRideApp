@@ -74,6 +74,9 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
     private TextView playerDestinationCardTextViewCard4;
     private TextView playerDestinationCardTextViewCard5;
     private TextView playerDestinationCardTextViewCard6;
+
+    private TextView playerTurnTextView;
+
     private TextView[] destinationCards;
     private TextView cpu1DestinationCardTextView;
     private TextView cpu2DestinationCardTextView;
@@ -177,6 +180,12 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
                     destinationCards[i].setVisibility(View.VISIBLE);
                     DestinationCards tempCard = (DestinationCards) myState.getPlayerDestinationDecks()[0].getCards().get(i);
                     destinationCards[i].setText("" + tempCard.getCity1() + " to " + tempCard.getCity2());
+                }
+                if(myState.getPlayerID() == this.playerNum) {
+                    this.playerTurnTextView.setText("It is your turn!");
+                }
+                else{
+                    this.playerTurnTextView.setText("" + allPlayerNames[myState.getPlayerID()] + "'s turn!");
                 }
                 this.cpu1PlayerTextView.setText(""+this.allPlayerNames[1]);
                 this.cpu1TrainTokenTextView.setText(""+((TTRGameState) info).getTrainTokens()[1]);
@@ -349,6 +358,7 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
         this.playerDestinationCardTextViewCard4 = (TextView)myActivity.findViewById(R.id.Card_4);
         this.playerDestinationCardTextViewCard5 = (TextView)myActivity.findViewById(R.id.Card_5);
         this.playerDestinationCardTextViewCard6 = (TextView)myActivity.findViewById(R.id.Card_6);
+        this.playerTurnTextView = (TextView)myActivity.findViewById(R.id.Turn_View);
         destinationCards = new TextView[]{this.playerDestinationCardTextViewCard1,
                                           this.playerDestinationCardTextViewCard2,
                                           this.playerDestinationCardTextViewCard3,

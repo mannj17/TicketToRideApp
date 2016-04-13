@@ -193,6 +193,36 @@ public class TTRLocalGame extends LocalGame {
                                 count--;
                             }
                         }
+                        mainState.getTracks()[i].setCovered(true);
+                        int num = mainState.getTracks()[i].getTrainTrackNum();
+                        mainState.getTracks()[i].setPlayerID(mainState.getPlayerID());
+                        mainState.getTracks()[i].setSelected(false);
+                        switch(num) {
+                            case 1:
+                                mainState.setScore(mainState.getScores()[mainState.getPlayerID()]+1, mainState.getPlayerID());
+                                mainState.setTrainToken(mainState.getTrainTokens()[mainState.getPlayerID()] - 1, mainState.getPlayerID());
+                                break;
+                            case 2:
+                                mainState.setScore(mainState.getScores()[mainState.getPlayerID()]+2, mainState.getPlayerID());
+                                mainState.setTrainToken(mainState.getTrainTokens()[mainState.getPlayerID()] - 2, mainState.getPlayerID());
+                                break;
+                            case 3:
+                                mainState.setScore(mainState.getScores()[mainState.getPlayerID()]+4, mainState.getPlayerID());
+                                mainState.setTrainToken(mainState.getTrainTokens()[mainState.getPlayerID()] - 3, mainState.getPlayerID());
+                                break;
+                            case 4:
+                                mainState.setScore(mainState.getScores()[mainState.getPlayerID()]+7, mainState.getPlayerID());
+                                mainState.setTrainToken(mainState.getTrainTokens()[mainState.getPlayerID()] - 4, mainState.getPlayerID());
+                                break;
+                            case 5:
+                                mainState.setScore(mainState.getScores()[mainState.getPlayerID()]+10, mainState.getPlayerID());
+                                mainState.setTrainToken(mainState.getTrainTokens()[mainState.getPlayerID()] - 5, mainState.getPlayerID());
+                                break;
+                            case 6:
+                                mainState.setScore(mainState.getScores()[mainState.getPlayerID()]+15, mainState.getPlayerID());
+                                mainState.setTrainToken(mainState.getTrainTokens()[mainState.getPlayerID()]-6,mainState.getPlayerID());
+                                break;
+                        }
                     }
                     else if(mainState.getTracks()[i].getSelected() && mainState.getTracks()[i].getTrackColor().equals("Gray")){
                         int count = mainState.getTracks()[i].getTrainTrackNum();
@@ -283,13 +313,11 @@ public class TTRLocalGame extends LocalGame {
                     mainState.getTracks()[index].setSelected(true);
                     mainState.setPlaceTrainSelected(true);
                     mainState.setSelectedCardColor(temp.getTrackColor());
-                    mainState.setUseRainbow(mainState.getTrainColorCount("Rainbow", mainState.getPlayerID()) != 0);
                     mainState.setTrackSpot(index);
                 } else {
                     mainState.getTracks()[index].setSelected(false);
                     mainState.setPlaceTrainSelected(false);
                     mainState.setSelectedCardColor("");
-                    mainState.setUseRainbow(false);
                 }
             return true;
             }

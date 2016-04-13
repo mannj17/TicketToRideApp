@@ -25,6 +25,7 @@ public class DestinationSelectionDialog extends  Dialog implements android.view.
     private TTRGameState myState;
     private Button selectBtn;
     private ImageButton ticket1, ticket2, ticket3;
+    private TextView routes1, routes2, routes3;
     private int min;
     private int selected;
     private TextView text;
@@ -64,6 +65,15 @@ public class DestinationSelectionDialog extends  Dialog implements android.view.
         ticket1 = (ImageButton) findViewById(R.id.ticket1);
         ticket2 = (ImageButton) findViewById(R.id.ticket2);
         ticket3 = (ImageButton) findViewById(R.id.ticket3);
+        routes1 = (TextView) findViewById(R.id.ticket1_destinations);
+        routes2 = (TextView) findViewById(R.id.ticket2_destinations);
+        routes3 = (TextView) findViewById(R.id.ticket3_destinations);
+        DestinationCards tempCard1 = (DestinationCards)destinationCards[0];
+        DestinationCards tempCard2 = (DestinationCards)destinationCards[1];
+        DestinationCards tempCard3 = (DestinationCards)destinationCards[2];
+        routes1.setText("" + tempCard1.getCity1() + " to " + tempCard1.getCity2());
+        routes2.setText("" + tempCard2.getCity1() + " to " + tempCard2.getCity2());
+        routes3.setText("" + tempCard3.getCity1() + " to " + tempCard3.getCity2());
         ticket1.setOnClickListener(this);
         ticket2.setOnClickListener(this);
         ticket3.setOnClickListener(this);
