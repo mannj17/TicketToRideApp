@@ -164,7 +164,18 @@ public class TTRLocalGame extends LocalGame {
                 for(int i = 0; i < mainState.getTracks().length; i++){
                     if(mainState.getTracks()[i].getSelected()){
                         mainState.getTracks()[i].setCovered(true);
-                        mainState.setPlayerID(this.getPlayerIdx(action.getPlayer()));
+                        mainState.getTracks()[i].setPlayerID(mainState.getPlayerID());
+                        mainState.getTracks()[i].setSelected(false);
+                        int count = mainState.getTracks()[i].getTrainTrackNum();
+                        for(int j = 0; j < mainState.getPlayerTrainDecks()[mainState.getPlayerID()].size(); j++){
+                            String trackColor = mainState.getTracks()[i].getTrackColor();
+                            String cardColor = mainState.getPlayerTrainDecks()[mainState.getPlayerID()]
+                                    .getCards().get(j).toString();
+                            if(trackColor.equals(cardColor) && count != 0){
+                                mainState.getPlayerTrainDecks()[mainState.getPlayerID()].getCards().remove(j);
+                                count--;
+                            }
+                        }
                     }
                 }
                 mainState.setTrackModeSelected(false);
