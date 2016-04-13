@@ -25,8 +25,8 @@ public class DestinationSelectionDialog extends  Dialog implements android.view.
     private TTRGameState myState;
     private Button selectBtn;
     private ImageButton ticket1, ticket2, ticket3;
-    private int min = 0;
-    private int selected = 0;
+    private int min;
+    private int selected;
     private TextView text;
     private Card[] destinationCards = new Card[3];
     private Game game;
@@ -34,7 +34,8 @@ public class DestinationSelectionDialog extends  Dialog implements android.view.
 
     public DestinationSelectionDialog(TTRHumanPlayer me, boolean start, Deck cards, Game game) {
         super(me.myActivity);
-
+        min = 0;
+        selected = 0;
         this.player = me;
         this.game = game;
         this.myState = me.myState;
@@ -48,6 +49,7 @@ public class DestinationSelectionDialog extends  Dialog implements android.view.
         for(int i = 0; i < 3; i++){
             if(cards != null) {
                 destinationCards[i] = cards.getCards().get(i);
+                destinationCards[i].setHighlight(false);
             }
         }
     }
@@ -78,13 +80,16 @@ public class DestinationSelectionDialog extends  Dialog implements android.view.
                 int count = 0;
                 for(int i = 0; i < 3; i++){
                     if(destinationCards[i].getHighlight()){
-                        //tempCards[count] = destinationCards[i];
-                        myState.getPlayerDestinationDecks()[0].add(destinationCards[i]);
+                        tempCards[count] = destinationCards[i];
+                        //myState.getPlayerDestinationDecks()[0].add(destinationCards[i]);
                         count++;
                     } else {
                         myState.getDestinationDiscard().add(destinationCards[i]);
                     }
                 }
+                destinationCards[0].setHighlight(false);
+                destinationCards[1].setHighlight(false);
+                destinationCards[2].setHighlight(false);
                 Deck tempDeck = new Deck("temporary", tempCards);
                 game.sendAction(new ConfirmSelectionAction(player, tempDeck));
                 dismiss();

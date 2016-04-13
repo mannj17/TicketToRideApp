@@ -162,7 +162,7 @@ public class TTRLocalGame extends LocalGame {
                 if(((ConfirmSelectionAction) action).getSendDeck() != null){
                     for(int i = 0; i < ((ConfirmSelectionAction) action).getSendDeck().size(); i++){
                         Card tempCard = ((ConfirmSelectionAction) action).getSendDeck().getCards().get(i);
-                        mainState.getPlayerTrainDecks()[mainState.getPlayerID()].add(tempCard);
+                        mainState.getPlayerDestinationDecks()[mainState.getPlayerID()].getCards().add(tempCard);
                     }
                 }
                /** for (int i = 0; i < 3; i++) {
