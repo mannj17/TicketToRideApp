@@ -74,7 +74,8 @@ public class TTRGameState extends GameState {
     Rect denverToOmahaRect = new Rect((int)(maxX * .39), (int)(maxY * .43), (int)(maxX * .53), (int)(maxY * .52));
     Rect denverToKansasCityRect = new Rect((int)(maxX * .4), (int)(maxY * .51), (int)(maxX * .56), (int)(maxY * .6));
     Rect denverToOklahomaCityRect = new Rect((int)(maxX * .38), (int)(maxY * .58), (int)(maxX * .53), (int)(maxY * .67));
-    Rect santaFeToOklahomaCityRect = new Rect((int)(maxX * .38), (int)(maxY * .67), (int)(maxX * .5), (int)(maxY * .72));
+    Rect santaFeToOklahomaCityRect = new Rect((int)(maxX * .38), (int)(maxY * .67), (int)(maxX * .5), (int)(maxY * .71));
+    Rect elPasoToOklahomaCityRect = new Rect((int)(maxX * .37), (int)(maxY * .71), (int)(maxX * .53), (int)(maxY * .83));
     Rect saintLouisToNashvilleRect = new Rect((int)(maxX * .66), (int)(maxY * .52), (int)(maxX * .74), (int)(maxY * .6));
     Rect littleRockToNashvilleRect = new Rect((int)(maxX * .64), (int)(maxY * .59), (int)(maxX * .75), (int)(maxY * .69));
     Rect littleRockToNewOrleansRect = new Rect((int)(maxX * .64), (int)(maxY * .68), (int)(maxX * .7), (int)(maxY * .78));
@@ -1339,6 +1340,7 @@ public class TTRGameState extends GameState {
         chicagoToToronto.close();
         chicagoToTorontoTrack = new Track(4, "White", "Chicago", "Toronto", chicagoToToronto, chicagoToTorontoRect);
 
+
         saultSteMarieToToronto.moveTo(maxX * .723f, maxY * .165f);
         saultSteMarieToToronto.lineTo(maxX * .76f, maxY * .176f);
         saultSteMarieToToronto.lineTo(maxX * .758f, maxY * .19f);
@@ -1467,6 +1469,34 @@ public class TTRGameState extends GameState {
         santaFeToOklahomaCityTrack = new Track(3, "Blue", "santaFe", "OklahomaCity", santaFeToOklahomaCity, santaFeToOklahomaCityRect);
 
 
+        elPasoToOklahomaCity.moveTo(maxX * .381f, maxY * .836f);
+        elPasoToOklahomaCity.lineTo(maxX * .382f, maxY * .849f);
+        elPasoToOklahomaCity.lineTo(maxX * .414f, maxY * .834f);
+        elPasoToOklahomaCity.lineTo(maxX * .413f, maxY * .824f);
+        elPasoToOklahomaCity.close();
+        elPasoToOklahomaCity.moveTo(maxX * .418f, maxY * .820f);
+        elPasoToOklahomaCity.lineTo(maxX * .420f, maxY * .832f);
+        elPasoToOklahomaCity.lineTo(maxX * .450f, maxY * .803f);
+        elPasoToOklahomaCity.lineTo(maxX * .446f, maxY * .791f);
+        elPasoToOklahomaCity.close();
+        elPasoToOklahomaCity.moveTo(maxX * .449f, maxY * .791f);
+        elPasoToOklahomaCity.lineTo(maxX * .451f, maxY * .802f);
+        elPasoToOklahomaCity.lineTo(maxX * .479f, maxY * .773f);
+        elPasoToOklahomaCity.lineTo(maxX * .472f, maxY * .760f);
+        elPasoToOklahomaCity.close();
+        elPasoToOklahomaCity.moveTo(maxX * .478f, maxY * .755f);
+        elPasoToOklahomaCity.lineTo(maxX * .484f, maxY * .767f);
+        elPasoToOklahomaCity.lineTo(maxX * .510f, maxY * .735f);
+        elPasoToOklahomaCity.lineTo(maxX * .505f, maxY * .720f);
+        elPasoToOklahomaCity.close();
+        elPasoToOklahomaCity.moveTo(maxX * .509f, maxY * .718f);
+        elPasoToOklahomaCity.lineTo(maxX * .513f, maxY * .726f);
+        elPasoToOklahomaCity.lineTo(maxX * .538f, maxY * .685f);
+        elPasoToOklahomaCity.lineTo(maxX * .528f, maxY * .678f);
+        elPasoToOklahomaCity.close();
+        elPasoToOklahomaCityTrack = new Track(5, "Yellow", "ElPaso", "OklahomaCity", elPasoToOklahomaCity, elPasoToOklahomaCityRect);
+
+
         saintLouisToNashville.moveTo(maxX * .665f, maxY * .542f);
         saintLouisToNashville.lineTo(maxX * .7f, maxY * .557f);
         saintLouisToNashville.lineTo(maxX * .697f, maxY * .57f);
@@ -1586,7 +1616,8 @@ public class TTRGameState extends GameState {
                 newOrleansToAtlantaTrack, nashvilleToAtlantaTrack, nashvilleToRaleighTrack,
                 nashvilleToPittsburghTrack, saintLouisToPittsburghTrack, chicagoToPittsburghTrack,
                 chicagoToTorontoTrack, saultSteMarieToTorontoTrack, denverToOmahaTrack,
-                denverToKansasCityTrack, denverToOklahomaCityTrack, santaFeToOklahomaCityTrack
+                denverToKansasCityTrack, denverToOklahomaCityTrack, santaFeToOklahomaCityTrack,
+                elPasoToOklahomaCityTrack,
                 chicagoToTorontoTrack, saultSteMarieToTorontoTrack, saintLouisToNashvilleTrack,
                 littleRockToNashvilleTrack, littleRockToNewOrleansTracks, houstonToNewOrleansTrack,
                 saintLouisToLittleRockTrack, dallasToLittleRockTrack, oklahomaCityToLittleRockTrack
