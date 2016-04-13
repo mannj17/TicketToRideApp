@@ -9,7 +9,10 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import teamresistance.tickettoride.Game.Game;
+import teamresistance.tickettoride.Game.GameHumanPlayer;
 import teamresistance.tickettoride.R;
+import teamresistance.tickettoride.TTR.Actions.ConfirmSelectionAction;
 
 /**
  * Created by Jess on 4/12/2016.
@@ -24,14 +27,16 @@ public class DestinationSelectionDialog extends Dialog implements android.view.V
     private int selected = 0;
     private TextView text;
     private Card[] destinationCards = new Card[3];
-    private boolean complete = false;
+    private Game game;
+    private TTRHumanPlayer player;
 
-    public DestinationSelectionDialog(Activity a, boolean start, Deck cards, TTRGameState myState) {
-        super(a);
+    public DestinationSelectionDialog(TTRHumanPlayer me, boolean start, Deck cards, Game game) {
+        super(me.myActivity);
 
-        this.myState = myState;
-
-        this.c = a;
+        this.player = me;
+        this.game = game;
+        this.myState = me.myState;
+        this.c = me.myActivity;
         if(start){
             min = 2;
         } else {
@@ -74,7 +79,7 @@ public class DestinationSelectionDialog extends Dialog implements android.view.V
                         myState.getDestinationDiscard().add(destinationCards[i]);
                     }
                 }
-                myState.getPlayerDestinationDecks();
+                game.sendAction(new ConfirmSelectionAction(player));
                 dismiss();
             } else {
                 text.setText("Please select at least the minimum number of ticket cards.");
@@ -114,9 +119,5 @@ public class DestinationSelectionDialog extends Dialog implements android.view.V
             }
         }
 
-    }
-
-    public boolean isComplete(){
-        return  complete;
     }
 }

@@ -1,28 +1,26 @@
 package teamresistance.tickettoride.TTR;
 
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.DialogInterface;
-import android.graphics.Color;
-import android.util.Log;
 import android.view.MotionEvent;
-import android.view.TextureView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
-import java.util.ArrayList;
 
 import teamresistance.tickettoride.Game.GameHumanPlayer;
 import teamresistance.tickettoride.Game.GameMainActivity;
 import teamresistance.tickettoride.Game.infoMsg.GameInfo;
-import teamresistance.tickettoride.Game.GamePlayer;
 import teamresistance.tickettoride.R;
+import teamresistance.tickettoride.TTR.Actions.ChangeModeAction;
+import teamresistance.tickettoride.TTR.Actions.ConfirmSelectionAction;
+import teamresistance.tickettoride.TTR.Actions.DrawDestinationCardAction;
+import teamresistance.tickettoride.TTR.Actions.DrawDownCardAction;
+import teamresistance.tickettoride.TTR.Actions.DrawUpCardAction;
+import teamresistance.tickettoride.TTR.Actions.TrackPlaceAction;
 
 /**
  *  TTRHumanPlayer implements the human player
@@ -34,9 +32,9 @@ import teamresistance.tickettoride.R;
  * @version March 2016
  */
 public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListener, View.OnTouchListener {
-    private TTRSurfaceView myBoard;
-    private GameMainActivity myActivity;
-    private TTRGameState myState;
+    public TTRSurfaceView myBoard;
+    public GameMainActivity myActivity;
+    public TTRGameState myState;
     private Deck trainDeck;
     private Deck destinationDeck;
     private int score;
@@ -377,7 +375,17 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
                 builder1.setPositiveButton("Okay",
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
-                                game.sendAction(new ConfirmSelectionAction(me));
+                                if(myState.getDestinationCardsSelected()){
+
+                                    Deck tempDeck = new Deck("temp");
+                                    myState.getDestinationCards().moveTopCardTo(tempDeck, myState.getDestinationCards());
+                                    myState.getDestinationCards().moveTopCardTo(tempDeck, myState.getDestinationCards());
+                                    myState.getDestinationCards().moveTopCardTo(tempDeck, myState.getDestinationCards());
+
+                                    displayDestinationPopup(tempDeck);
+                                } else {
+                                    game.sendAction(new ConfirmSelectionAction(me));
+                                }
                                 dialog.cancel();
                             }
                         });
@@ -450,7 +458,7 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
     }
 
     public void displayDestinationPopup(Deck tempDeck){
-        DestinationSelectionDialog dsd = new DestinationSelectionDialog(myActivity, false, tempDeck, myState);
+        DestinationSelectionDialog dsd = new DestinationSelectionDialog(this, false, tempDeck, game);
         dsd.show();
     }
 }

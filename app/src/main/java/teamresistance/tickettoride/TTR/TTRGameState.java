@@ -355,10 +355,10 @@ public class TTRGameState extends GameState {
         /** initialize destination deck */
         //needs to be corrected later
         destinationCards = new Deck("Destination Cards");
+        destinationDiscard = new Deck("Destination Discard");
         for(int i = 0; i < 30; i++){
             destinationCards.add(new DestinationCards(i, i, i));
         }
-        destinationDiscard = new Deck("Destination Discard");
 
         /** initialize array values to max possible size */
         for(int i = 0; i < numPlayers; i++){
@@ -1912,8 +1912,8 @@ public class TTRGameState extends GameState {
         return scores;
     }
 
-    public void setScores(int[] scores) {
-        this.scores = scores;
+    public void setScore(int score, int index) {
+        this.scores[index] = score;
     }
 
     public Boolean getTrackModeSelected() {
