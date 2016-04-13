@@ -81,7 +81,7 @@ public class TTRGameState extends GameState {
     Rect littleRockToNashvilleRect = new Rect((int)(maxX * .64), (int)(maxY * .59), (int)(maxX * .75), (int)(maxY * .69));
     Rect littleRockToNewOrleansRect = new Rect((int)(maxX * .64), (int)(maxY * .68), (int)(maxX * .7), (int)(maxY * .78));
     Rect houstonToNewOrleanRect = new Rect((int)(maxX * .61), (int)(maxY * .85), (int)(maxX * .7), (int)(maxY * .9));
-    Rect saintLouisToLittleRockRect = new Rect((int)(maxX * .61), (int)(maxY * .85), (int)(maxX * .7), (int)(maxY * .9));
+    Rect saintLouisToLittleRockRect = new Rect((int)(maxX * .61), (int)(maxY * .52), (int)(maxX * .7), (int)(maxY * .6));
     Rect dallasToLittleRockRect = new Rect((int)(maxX * .58), (int)(maxY * .68), (int)(maxX * .635), (int)(maxY * .8));
     Rect oklahomaCityToLittleRockRect = new Rect((int)(maxX * .54), (int)(maxY * .65), (int)(maxX * .64), (int)(maxY * .685));
     Rect kansasCityToSaintLouiseRect = new Rect((int)(maxX * .555), (int)(maxY * .49), (int)(maxX * .65), (int)(maxY * .535));
