@@ -88,6 +88,7 @@ public class TTRGameState extends GameState {
     Rect saintLouisToChicagoRect = new Rect((int)(maxX * .65), (int)(maxY * .39), (int)(maxX * .71), (int)(maxY * .51));
     Rect winnipegToDuluthRect = new Rect((int)(maxX * .45), (int)(maxY * .09), (int)(maxX * .56), (int)(maxY * .27));
     Rect elPasoToDallasRect = new Rect((int)(maxX * .4), (int)(maxY * .82), (int)(maxX * .55), (int)(maxY * .86));
+    Rect dallasToHoustonRect = new Rect((int)(maxX * .55), (int)(maxY * .8), (int)(maxX * .61), (int)(maxY * .87));
     private Path GRID = new Path();
     //THE WEST!
     private Path vancouverToCalgary = new Path();
@@ -1727,6 +1728,14 @@ public class TTRGameState extends GameState {
         winnipegToDuluth.close();
         winnipegToDuluthTrack = new Track(4, "Black", "Winnipeg", "Duluth", winnipegToDuluth, winnipegToDuluthRect);
 
+        dallasToHouston.moveTo(maxX * .568f, maxY * .828f);
+        dallasToHouston.lineTo(maxX * .563f, maxY * .835f);
+        dallasToHouston.lineTo(maxX * .583f, maxY * .876f);
+        dallasToHouston.lineTo(maxX * .588f, maxY * .868f);
+        dallasToHouston.close();
+        dallasToHoustonTrack = new Track(1, "Gray", "Dallas", "Houston", dallasToHouston, dallasToHoustonRect);
+
+
         myTracks = new Track[]{portlandToSanFranciscoTrack, GRID_TRACK, seattleToHelenaTrack,
                 losAngelesToLasVegasTrack, sanFranciscoToLosAngelesTrack,
                 montrealToBostonTrack, losAngelesToPhoenixTrack, montrealToNewYorkTrack,
@@ -1750,7 +1759,8 @@ public class TTRGameState extends GameState {
                 littleRockToNashvilleTrack, littleRockToNewOrleansTracks, houstonToNewOrleansTrack,
                 saintLouisToLittleRockTrack, dallasToLittleRockTrack, oklahomaCityToLittleRockTrack,
                 saintLouisToNashvilleTrack, kansasCityToSaintLouiseTrack, chicagoToSaintLouisTrack,
-                elPasoToOklahomaCityTrack, elPasoToDallasTrack, elPasoToHoustonTrack, winnipegToDuluthTrack
+                elPasoToOklahomaCityTrack, elPasoToDallasTrack, elPasoToHoustonTrack, winnipegToDuluthTrack,
+                dallasToHoustonTrack
         };
 
         //Booleans set to defaults
