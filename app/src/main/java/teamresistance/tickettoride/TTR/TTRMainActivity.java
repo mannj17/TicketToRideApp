@@ -75,6 +75,4 @@ public class TTRMainActivity extends GameMainActivity {
     public LocalGame createLocalGame() {
         return new TTRLocalGame();
     }
-
-
 }
