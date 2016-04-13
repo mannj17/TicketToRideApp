@@ -35,6 +35,7 @@ public class TTRComputerPlayer extends GameComputerPlayer{
      * Says if player is smart or dumb
      */
     private boolean isDifficult;
+    //initializes the variables used by the computer player
     private Deck trainDeck;
     private Deck destinationDeck;
     private int score;

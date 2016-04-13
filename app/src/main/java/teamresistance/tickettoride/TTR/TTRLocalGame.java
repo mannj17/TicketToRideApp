@@ -434,6 +434,10 @@ public class TTRLocalGame extends LocalGame {
         return true;
     }
 
+    /**
+     * Sets the players in the game state
+     * @param players
+     */
     @Override
     public void start(GamePlayer[] players) {
         //Sets gameState's numPlayer and play order
