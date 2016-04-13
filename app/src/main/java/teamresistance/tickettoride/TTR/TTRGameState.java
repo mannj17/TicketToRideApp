@@ -2166,8 +2166,8 @@ public class TTRGameState extends GameState {
         return trainTokens;
     }
 
-    public void setTrainTokens(int[] trainTokens) {
-        this.trainTokens = trainTokens;
+    public void setTrainToken(int trainToken, int index) {
+        this.trainTokens[index] = trainToken;
     }
 
     public int getTrackSpot() {
