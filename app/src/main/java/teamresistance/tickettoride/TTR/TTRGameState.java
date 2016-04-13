@@ -1689,11 +1689,10 @@ public class TTRGameState extends GameState {
                 nashvilleToPittsburghTrack, saintLouisToPittsburghTrack, chicagoToPittsburghTrack,
                 chicagoToTorontoTrack, saultSteMarieToTorontoTrack, denverToOmahaTrack,
                 denverToKansasCityTrack, denverToOklahomaCityTrack, santaFeToOklahomaCityTrack,
-                elPasoToOklahomaCityTrack, elPasoToDallasTrack
+                elPasoToOklahomaCityTrack, elPasoToDallasTrack,
                 littleRockToNashvilleTrack, littleRockToNewOrleansTracks, houstonToNewOrleansTrack,
                 saintLouisToLittleRockTrack, dallasToLittleRockTrack, oklahomaCityToLittleRockTrack,
-                saintLouisToNashvilleTrack, kansasCityToSaintLouiseTrack, chicagoToSaintLouisTrack,
-                elPasoToOklahomaCityTrack
+                saintLouisToNashvilleTrack, kansasCityToSaintLouiseTrack, chicagoToSaintLouisTrack
         };
 
         //Booleans set to defaults
