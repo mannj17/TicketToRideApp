@@ -72,7 +72,7 @@ public class CardColorSelectionDialog extends Dialog implements android.view.Vie
                 if(trainCards.getCards().get(j).toString().equals(trainColors[i])){
                     count++;
                 }
-                if(count >= min){
+                if(count+numRainbows >= min){
                     this.usable[i] = true;
                 } else{
                     this.usable[i] = false;
