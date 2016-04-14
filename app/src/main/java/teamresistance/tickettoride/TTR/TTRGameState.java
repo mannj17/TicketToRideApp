@@ -1918,9 +1918,9 @@ public class TTRGameState extends GameState {
         }
 
         myTracks = original.getTracks();/**
-        for(int i = 0; i < original.getTracks().length; i++){
-            myTracks[i] = new Track(original.getTracks()[i]);
-        }**/
+         for(int i = 0; i < original.getTracks().length; i++){
+         myTracks[i] = new Track(original.getTracks()[i]);
+         }**/
         trackSpot = original.getTrackSpot();
         numRainbows = original.getNumRainbows();
         selectedCardColor = original.getSelectedCardColor();
