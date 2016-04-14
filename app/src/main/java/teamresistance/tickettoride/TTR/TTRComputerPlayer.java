@@ -90,7 +90,7 @@ public class TTRComputerPlayer extends GameComputerPlayer{
 
 
                     int numSelected = 0;
-                    while(numSelected != 2) {
+                    while(numSelected < 2) {
                         for (int i = 0; i < tempDeck.size(); i++) {
                             if (Math.random() < 0.8) {
                                 if(!tempDeck.getCards().get(i).getHighlight()) {

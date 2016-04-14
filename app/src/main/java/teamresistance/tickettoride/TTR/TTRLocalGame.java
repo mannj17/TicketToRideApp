@@ -197,11 +197,9 @@ public class TTRLocalGame extends LocalGame {
             //if the player chose to get destination cards, get the deck sent by the action that
             //holds the cards to be moved to the player's hand.
             else if (((ConfirmSelectionAction) action).getSendDeck() != null) {
-                if(((ConfirmSelectionAction) action).getSendDeck() != null){
-                    for(int i = 0; i < ((ConfirmSelectionAction) action).getSendDeck().size(); i++){
-                        Card tempCard = ((ConfirmSelectionAction) action).getSendDeck().getCards().get(i);
-                        mainState.getPlayerDestinationDecks()[mainState.getPlayerID()].getCards().add(tempCard);
-                    }
+                for(int i = 0; i < ((ConfirmSelectionAction) action).getSendDeck().size(); i++){
+                    Card tempCard = ((ConfirmSelectionAction) action).getSendDeck().getCards().get(i);
+                    mainState.getPlayerDestinationDecks()[mainState.getPlayerID()].getCards().add(tempCard);
                 }
             }
 

@@ -141,7 +141,7 @@ public class TTRGameState extends GameState {
             names[i] = "";
             playerTrainDecks[i] = new Deck("Player " + i + " Train Card Deck");
             //places the top 5 cards of the face down deck into the current players train card deck
-            while (k != 5) {
+            while (k != 4) {
                 //checks to make sure that player does not get a locomotive card
                 if (!faceDownTrainCards.peekAtTopCard().toString().equals("Rainbow")) {
                     faceDownTrainCards.moveTopCardTo(playerTrainDecks[i], faceDownTrainCards);
@@ -154,11 +154,6 @@ public class TTRGameState extends GameState {
             //places 3 destination cards into the current players destination deck
             playerDestinationDecks[i] = new Deck("Player " + i + " Destination Card Deck");
             //randomizes order of dest. cards
-            destinationCards.shuffle();
-            //places 3 destination cards into the current players destination deck
-            for (int j = 0; j != 3;j++) {
-                destinationCards.moveTopCardTo(playerDestinationDecks[i], destinationCards);
-            }
         }
         selectedCardColor = null;
         trainDiscard = new Deck("Train Card Discard");
