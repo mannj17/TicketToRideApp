@@ -38,19 +38,9 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
     public GameMainActivity myActivity;
     public TTRGameState myState;
     private Deck trainDeck;
-    private Deck destinationDeck;
-    private int score;
-    private String name;
-    private Boolean isTurn;
-    private int trainTokens;
     private final String[] trainColors = {"Yellow", "Blue", "Orange", "White",
-            "Pink", "Black", "Red", "Green",
-            "Rainbow"};
-
+            "Pink", "Black", "Red", "Green", "Rainbow"};
     private Button confirmSelection;
-    private Button placeTrain;
-    private TextView playerTrainCount = null;
-
     /** TextViews for player's names*/
     private TextView cpu1PlayerTextView;
     private TextView cpu2PlayerTextView;
@@ -74,9 +64,8 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
     private TextView playerDestinationCardTextViewCard4;
     private TextView playerDestinationCardTextViewCard5;
     private TextView playerDestinationCardTextViewCard6;
-
+    /**tells whose turn it is*/
     private TextView playerTurnTextView;
-
     private TextView[] destinationCards;
     private TextView cpu1DestinationCardTextView;
     private TextView cpu2DestinationCardTextView;
@@ -85,7 +74,7 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
     private TextView cpu1TrainCardTextView;
     private TextView cpu2TrainCardTextView;
     private TextView cpu3TrainCardTextView;
-    /** TextViews for the plaer deck card colors */
+    /** TextViews for the player deck card colors */
     private TextView redColorCount;
     private TextView orangeColorCount;
     private TextView yellowColorCount;
@@ -99,7 +88,6 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
     private FrameLayout cpu1FrameLayout;
     private FrameLayout cpu2FrameLayout;
     private FrameLayout cpu3FrameLayout;
-
     /*
     Variables for all of the buttons on the right side of the screen,
     the place holder variables to eliminate hard coding, and the
@@ -109,13 +97,9 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
 
     private ImageButton clickTrain;
     private ImageButton clickDestination;
-    private boolean[] trainPressed;
-
     private CheckBox cardCheck;
     private CheckBox trainCheck;
-
     private LinearLayout.LayoutParams lp;
-
     /*
      * The human player
      * @name
@@ -237,7 +221,6 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
                     this.faceUpTrainCards[i].setImageResource(R.drawable.rainbow_train);
                 }
             }
-
             blackColorCount.setText("" + myState.getTrainColorCount("Black", 0));
             whiteColorCount.setText("" + myState.getTrainColorCount("White", 0));
             blueColorCount.setText("" + myState.getTrainColorCount("Blue", 0));
@@ -247,11 +230,15 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
             pinkColorCount.setText("" + myState.getTrainColorCount("Pink", 0));
             greenColorCount.setText("" + myState.getTrainColorCount("Green", 0));
             rainbowColorCount.setText("" + myState.getTrainColorCount("Rainbow", 0));
-
             myBoard.postInvalidate();
         }
     }
 
+    /**
+     * determines which non gray tracks should be highlight-able
+     * @param track reference to Tracks
+     * @return boolean
+     */
     public boolean canChoose(Track track){
         if(track.getCovered()){return false;}
         String tempColor = track.getTrackColor();
@@ -277,6 +264,11 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
         }
     }
 
+    /**
+     * Checks to see what gray tracks should be highlighted
+     * @param track reference to Track
+     * @return boolean
+     */
     public boolean chooseGray(Track track){
         int rainbowCount = myState.getTrainColorCount("Rainbow", 0);
         if((myState.getTrainColorCount("Black", 0)+ rainbowCount) >= track.getTrainTrackNum()){
@@ -306,17 +298,6 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
         else{
             return false;
         }
-    }
-
-    public int contains(String trainColor){
-        Deck tempDeck = this.trainDeck;
-        int count = 0;
-        for(int i = 0; i < tempDeck.size();i++){
-            if(tempDeck.getCards().get(i).toString().equals(trainColor)){
-                count++;
-            }
-        }
-        return count;
     }
 
     /*
@@ -501,8 +482,12 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
             }
         }
     }
+
     /**
-     * The touch handler for the touches.
+     *  The touch handler for the touches.
+     * @param v reference to surface view
+     * @param event event on surface view
+     * @return boolean
      */
     @Override
     public boolean onTouch(View v, MotionEvent event) {
@@ -547,17 +532,31 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
         return true;
     }
 
+    /**
+     * Pop up for selecting destination cards
+     * @param tempDeck reference to the destination deck
+     */
     public void displayDestinationPopup(Deck tempDeck){
         DestinationSelectionDialog dsd = new DestinationSelectionDialog(this, false, tempDeck, game);
         dsd.show();
     }
 
+    /**
+     * Pop-up for gray track
+     * @param tempDeck reference to player deck
+     * @param track reference to current track
+     */
     public void displayCardSelectionPopup(Deck tempDeck, Track track){
         CardColorSelectionDialog ccsd = new CardColorSelectionDialog(myActivity, tempDeck, myState,
                 track, game, this);
         ccsd.show();
     }
 
+    /**
+     * Pop-up that asks user if they want to use a locomotive card
+     * @param tempDeck reference to player deck
+     * @param track reference to current track
+     */
     public void displayLocomotiveSelectionPopup(Deck tempDeck, Track track){
         LocomotiveSelectionDialog lsd = new LocomotiveSelectionDialog(myActivity, tempDeck, myState,
                 track, game, this);

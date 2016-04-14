@@ -11,6 +11,11 @@ import teamresistance.tickettoride.R;
 /**
  * This is a surface view class that draws the game board/pieces onto the screen.
  *
+ * @author Nick Scacciotti
+ * @author Nick Larson
+ * @author Jess Mann
+ * @author Parker Schibel
+ * @version March 2016
  */
 
 public class TTRSurfaceView extends SurfaceView{
@@ -47,14 +52,6 @@ public class TTRSurfaceView extends SurfaceView{
         setWillNotCacheDrawing(false);
         int maxX = getMaxWidth();
         int maxY = getMaxHeight();
-//        /* Initilize all track objects */
-//        vancouverToSeattle.addRect(102f, 115f, 125f, 165f, Path.Direction.CW);
-//        vancouverToSeattleTrack = new Track(1, "Gray", "Vancouver", "Seattle", vancouverToSeattle, touchArea1);
-
-    //    vancouverToCalgaryTrack = new Track(3, "Gray", "Vancouver", "Calgary");
-        //not initialized
-//        vancouverToSeattleTrack = new Track(1, "Gray", "Vancouver", "Seattle");
-//        vancouverToSeattle.addRect(102f, 115f, 125f, 165f, Path.Direction.CW);
 
     }
 
@@ -150,6 +147,12 @@ public class TTRSurfaceView extends SurfaceView{
         return size;
     }
 
+    /**
+     * Returns the position of the track clicked by the user if within the track selection area
+     * @param xPos
+     * @param yPos
+     * @return position in myTracks array
+     */
     public int clickedTrack(int xPos, int yPos){
         int pos = -1;
         for(int i = 0; i < myTracks.length; i++){

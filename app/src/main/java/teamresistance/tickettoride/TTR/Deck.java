@@ -134,7 +134,7 @@ public class Deck {
      * @return
      */
     public Card peekAtTopCard() {
-        return cards.get(0);
+        return cards.get(this.size()-1);
     }
 
     /**
