@@ -790,7 +790,7 @@
                     android:layout_height="wrap_content"
                     android:text="New Text"
                     android:id="@+id/Card_3"
-                    android:visibility="visible" />
+                    android:visibility="gone" />
 
                 <TextView
                     android:layout_width="wrap_content"

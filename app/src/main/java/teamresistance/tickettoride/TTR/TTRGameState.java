@@ -377,6 +377,7 @@ public class TTRGameState extends GameState {
         for(int i = 0; i < 30; i++){
             destinationCards.add(new DestinationCards(i, i, i));
         }
+        destinationCards.shuffle();
 
         /** initialize array values to max possible size */
         for(int i = 0; i < numPlayers; i++){
@@ -401,10 +402,6 @@ public class TTRGameState extends GameState {
             }
             //places 3 destination cards into the current players destination deck
             playerDestinationDecks[i] = new Deck("Player " + i + " Destination Card Deck");
-            for(int j = 0; j != 3;j++)
-            {
-                destinationCards.moveTopCardTo(playerDestinationDecks[i], destinationCards);
-            }
         }
         selectedCardColor = null;
         trainDiscard = new Deck("Train Card Discard");

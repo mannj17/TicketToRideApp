@@ -100,6 +100,8 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
     private CheckBox cardCheck;
     private CheckBox trainCheck;
     private LinearLayout.LayoutParams lp;
+
+    private boolean startGame = true;
     /*
      * The human player
      * @name
@@ -231,6 +233,14 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
             greenColorCount.setText("" + myState.getTrainColorCount("Green", 0));
             rainbowColorCount.setText("" + myState.getTrainColorCount("Rainbow", 0));
             myBoard.postInvalidate();
+            if(startGame && myState.getPlayerID() == this.playerNum){
+                startGame = false;
+                Deck tempDeck = new Deck("temp");
+                myState.getDestinationCards().moveTopCardTo(tempDeck, myState.getDestinationCards());
+                myState.getDestinationCards().moveTopCardTo(tempDeck, myState.getDestinationCards());
+                myState.getDestinationCards().moveTopCardTo(tempDeck, myState.getDestinationCards());
+                displayDestinationPopup(tempDeck, true);
+            }
         }
     }
 
@@ -420,7 +430,7 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
                                     myState.getDestinationCards().moveTopCardTo(tempDeck, myState.getDestinationCards());
                                     myState.getDestinationCards().moveTopCardTo(tempDeck, myState.getDestinationCards());
 
-                                    displayDestinationPopup(tempDeck);
+                                    displayDestinationPopup(tempDeck, false);
                                 } else if (myState.getTrackSpot() != -1 &&
                                         myState.getTrackModeSelected() &&
                                         myState.getTracks()[myState.getTrackSpot()].getTrackColor().equals("Gray")) {
@@ -536,8 +546,8 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
      * Pop up for selecting destination cards
      * @param tempDeck reference to the destination deck
      */
-    public void displayDestinationPopup(Deck tempDeck){
-        DestinationSelectionDialog dsd = new DestinationSelectionDialog(this, false, tempDeck, game);
+    public void displayDestinationPopup(Deck tempDeck, boolean value){
+        DestinationSelectionDialog dsd = new DestinationSelectionDialog(this, value, tempDeck, game);
         dsd.show();
     }
 
