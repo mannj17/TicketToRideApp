@@ -131,7 +131,6 @@ public class TTRGameState extends GameState {
         for (int i = 0; i < 30; i++) {
             destinationCards.add(new DestinationCards(i, i, i));
         }
-        destinationCards.shuffle();
 
         /** initialize array values to max possible size */
         for (int i = 0; i < numPlayers; i++){
@@ -141,8 +140,7 @@ public class TTRGameState extends GameState {
             names[i] = "";
             playerTrainDecks[i] = new Deck("Player " + i + " Train Card Deck");
             //places the top 5 cards of the face down deck into the current players train card deck
-            while (k != 4) {
-            {
+            while (k != 5) {
                 //checks to make sure that player does not get a locomotive card
                 if (!faceDownTrainCards.peekAtTopCard().toString().equals("Rainbow")) {
                     faceDownTrainCards.moveTopCardTo(playerTrainDecks[i], faceDownTrainCards);
@@ -2054,20 +2052,9 @@ public class TTRGameState extends GameState {
      */
     public int getTrainColorCount(String color, int index){
         int count = 0;
-        if(index != -1) {
-            for (int i = 0; i < playerTrainDecks[index].size(); i++) {
-                if (playerTrainDecks[index].getCards().get(i).toString().equals(color)) {
-                    count++;
-                }
-            }
-        }
-        else
-        {
-            for(int i = 0; i< faceUpTrainCards.size(); i++){
-                if (faceUpTrainCards.getCards().get(i).toString().equals(color)){
-                    count++;
-                    //Log.i("COUNT", "getTrainColorCount: "+count);
-                }
+        for(int i = 0; i< playerTrainDecks[index].size(); i++){
+            if (playerTrainDecks[index].getCards().get(i).toString().equals(color)){
+                count++;
             }
         }
         return count;
