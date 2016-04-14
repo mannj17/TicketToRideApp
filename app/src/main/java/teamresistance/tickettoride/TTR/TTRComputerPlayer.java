@@ -42,6 +42,7 @@ public class TTRComputerPlayer extends GameComputerPlayer{
     private String name;
     private int trainTokens;
     private Boolean isTurn;
+    private boolean startGame = true;
 
     //random variable
     private Random rand;
@@ -73,19 +74,48 @@ public class TTRComputerPlayer extends GameComputerPlayer{
                 this.sleep(1000);
 
                 //if its the start of a turn, randomly choose its move type
-                if(!startedMove){
+                if(!startedMove && !startGame){
                     makeMove = rand.nextInt(100);
 
-                    //if makeMove is less than 50, put it in track mode
-                    if(makeMove > 66){
+                    //if makeMove is greater than 75, put it in track mode
+                    if(makeMove > 75){
                         game.sendAction(new ChangeModeAction(this));
                     }
+                }
+                else if(startGame){
+                    Deck tempDeck = new Deck("temp");
+                    compState.getDestinationCards().moveTopCardTo(tempDeck, compState.getDestinationCards());
+                    compState.getDestinationCards().moveTopCardTo(tempDeck, compState.getDestinationCards());
+                    compState.getDestinationCards().moveTopCardTo(tempDeck, compState.getDestinationCards());
+
+
+                    int numSelected = 0;
+                    while(numSelected != 2) {
+                        for (int i = 0; i < tempDeck.size(); i++) {
+                            if (Math.random() < 0.8) {
+                                if(!tempDeck.getCards().get(i).getHighlight()) {
+                                    tempDeck.getCards().get(i).setHighlight(true);
+                                    numSelected++;
+                                }
+                            }
+                        }
+                    }
+                    Card[] tempCards = new Card[numSelected];
+                    int count=0;
+                    for(int i = 0; i < tempDeck.size(); i++){
+                        if(tempDeck.getCards().get(i).getHighlight()){
+                            tempCards[count] = tempDeck.getCards().get(i);
+                        }
+                    }
+                    startGame = false;
+                    Deck sendDeck = new Deck("Sending", tempCards);
+                    game.sendAction(new ConfirmSelectionAction(this, sendDeck));
                 }
 
                 //if it is card mode, select randomly between picking from the face up and
                 //face down decks
                 if(compState.getCardModeSelected()) {
-                    if(makeMove > 33) {
+                    if(makeMove > 40) {
                         startedMove = true;
                         int selectedCards = 0;
                         for (int i = 0; i < compState.getFaceUpTrainCards().size(); i++) {
@@ -124,7 +154,7 @@ public class TTRComputerPlayer extends GameComputerPlayer{
                     }
 
                     //only pull from the down deck
-                    else{
+                    else if (makeMove > 5){
                         startedMove = true;
                         if(!compState.getOnlyDownDeck()){
                             game.sendAction(new DrawDownCardAction(this));
@@ -132,6 +162,23 @@ public class TTRComputerPlayer extends GameComputerPlayer{
                         else{
                             startedMove = false;
                             game.sendAction(new ConfirmSelectionAction(this));
+                        }
+                    }
+
+                    else{
+                        Deck tempDeck = new Deck("temp");
+                        compState.getDestinationCards().moveTopCardTo(tempDeck, compState.getDestinationCards());
+                        compState.getDestinationCards().moveTopCardTo(tempDeck, compState.getDestinationCards());
+                        compState.getDestinationCards().moveTopCardTo(tempDeck, compState.getDestinationCards());
+
+                        int numSelected = 0;
+                        while(numSelected == 0) {
+                            for (int i = 0; i < tempDeck.size(); i++) {
+                                if (Math.random() < 0.5) {
+                                    tempDeck.getCards().get(i).setHighlight(true);
+                                    numSelected++;
+                                }
+                            }
                         }
                     }
                 }
@@ -299,6 +346,7 @@ public class TTRComputerPlayer extends GameComputerPlayer{
                         //a different move needs to be made.
                         if(!foundTrack){
                             startedMove = false;
+                            makeMove = rand.nextInt(75);
                         }
                     }
 

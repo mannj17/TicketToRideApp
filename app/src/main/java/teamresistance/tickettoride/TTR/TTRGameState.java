@@ -131,6 +131,7 @@ public class TTRGameState extends GameState {
         for (int i = 0; i < 30; i++) {
             destinationCards.add(new DestinationCards(i, i, i));
         }
+        destinationCards.shuffle();
 
         /** initialize array values to max possible size */
         for (int i = 0; i < numPlayers; i++){
@@ -153,7 +154,9 @@ public class TTRGameState extends GameState {
             }
             //places 3 destination cards into the current players destination deck
             playerDestinationDecks[i] = new Deck("Player " + i + " Destination Card Deck");
+            //randomizes order of dest. cards
             destinationCards.shuffle();
+            //places 3 destination cards into the current players destination deck
             for (int j = 0; j != 3;j++) {
                 destinationCards.moveTopCardTo(playerDestinationDecks[i], destinationCards);
             }
@@ -282,8 +285,7 @@ public class TTRGameState extends GameState {
         pathTemp.lineTo(maxX * .9826f, maxY * .1298f);
         pathTemp.lineTo(maxX * .9762f, maxY * .1405f);
         pathTemp.close();
-        tempTrack = new Track(2, "Gray", "Montreal", "Boston",
-                pathTemp, tempRect);
+        tempTrack = new Track(2, "Gray", "Montreal", "Boston", pathTemp, tempRect);
         tempTracks.add(tempTrack);
         pathTemp.reset();
 
@@ -303,8 +305,7 @@ public class TTRGameState extends GameState {
         pathTemp.lineTo(maxX * .927f, maxY * .26f);
         pathTemp.lineTo(maxX * .916f, maxY * .26f);
         pathTemp.close();
-        tempTrack = new Track(3, "Blue", "Montreal", "New York",
-                pathTemp, tempRect);
+        tempTrack = new Track(3, "Blue", "Montreal", "New York", pathTemp, tempRect);
         tempTracks.add(tempTrack);
         pathTemp.reset();
 
@@ -319,8 +320,7 @@ public class TTRGameState extends GameState {
         pathTemp.lineTo(maxX * .943f, maxY * .272f);
         pathTemp.lineTo(maxX * .934f, maxY * .263f);
         pathTemp.close();
-        tempTrack = new Track(2, "Yellow", "New York", "Boston",
-                pathTemp, tempRect);
+        tempTrack = new Track(2, "Yellow", "New York", "Boston", pathTemp, tempRect);
         tempTracks.add(tempTrack);
         pathTemp.reset();
 
@@ -335,8 +335,7 @@ public class TTRGameState extends GameState {
         pathTemp.lineTo(maxX * .939f, maxY * .417f);
         pathTemp.lineTo(maxX * .928f, maxY * .417f);
         pathTemp.close();
-        tempTrack = new Track(2, "Orange", "New York", "Washington",
-                pathTemp, tempRect);
+        tempTrack = new Track(2, "Orange", "New York", "Washington", pathTemp, tempRect);
         tempTracks.add(tempTrack);
         pathTemp.reset();
 
@@ -351,8 +350,7 @@ public class TTRGameState extends GameState {
         pathTemp.lineTo(maxX * .887f, maxY * .534f);
         pathTemp.lineTo(maxX * .877f, maxY * .525f);
         pathTemp.close();
-        tempTrack = new Track(2, "Gray", "Raleigh", "Washington",
-                pathTemp, tempRect);
+        tempTrack = new Track(2, "Gray", "Raleigh", "Washington", pathTemp, tempRect);
         tempTracks.add(tempTrack);
         pathTemp.reset();
 
@@ -367,8 +365,7 @@ public class TTRGameState extends GameState {
         pathTemp.lineTo(maxX * .915f, maxY * .65f);
         pathTemp.lineTo(maxX * .902f, maxY * .64f);
         pathTemp.close();
-        tempTrack = new Track(2, "Gray", "Raleigh", "Charleston",
-                pathTemp, tempRect);
+        tempTrack = new Track(2, "Gray", "Raleigh", "Charleston", pathTemp, tempRect);
         tempTracks.add(tempTrack);
         pathTemp.reset();
 
@@ -393,8 +390,7 @@ public class TTRGameState extends GameState {
         pathTemp.lineTo(maxX * .951f, maxY * .9f);
         pathTemp.lineTo(maxX * .94f, maxY * .905f);
         pathTemp.close();
-        tempTrack = new Track(4, "Pink", "Miami", "Charleston",
-                pathTemp, tempRect);
+        tempTrack = new Track(4, "Pink", "Miami", "Charleston", pathTemp, tempRect);
         tempTracks.add(tempTrack);
         pathTemp.reset();
 
@@ -424,8 +420,7 @@ public class TTRGameState extends GameState {
         pathTemp.lineTo(maxX * .935f, maxY * .905f);
         pathTemp.lineTo(maxX * .925f, maxY * .91f);
         pathTemp.close();
-        tempTrack = new Track(5, "Blue", "Atlanta", "Miami",
-                pathTemp, tempRect);
+        tempTrack = new Track(5, "Blue", "Atlanta", "Miami", pathTemp, tempRect);
         tempTracks.add(tempTrack);
         pathTemp.reset();
 
@@ -440,8 +435,7 @@ public class TTRGameState extends GameState {
         pathTemp.lineTo(maxX * .895f, maxY * .673f);
         pathTemp.lineTo(maxX * .862f, maxY * .673f);
         pathTemp.close();
-        tempTrack = new Track(2, "Gray", "Atlanta", "Charleston",
-                pathTemp, tempRect);
+        tempTrack = new Track(2, "Gray", "Atlanta", "Charleston", pathTemp, tempRect);
         tempTracks.add(tempTrack);
         pathTemp.reset();
 
@@ -456,8 +450,7 @@ public class TTRGameState extends GameState {
         pathTemp.lineTo(maxX * .815f, maxY * .633f);
         pathTemp.lineTo(maxX * .808f, maxY * .619f);
         pathTemp.close();
-        tempTrack = new Track(2, "Gray", "Raleigh", "Atlanta",
-                pathTemp, tempRect);
+        tempTrack = new Track(2, "Gray", "Raleigh", "Atlanta", pathTemp, tempRect);
         tempTracks.add(tempTrack);
         pathTemp.reset();
 
@@ -472,8 +465,7 @@ public class TTRGameState extends GameState {
         pathTemp.lineTo(maxX * .873f, maxY * .508f);
         pathTemp.lineTo(maxX * .86f, maxY * .51f);
         pathTemp.close();
-        tempTrack = new Track(2, "Gray", "Pittsburgh", "Raleigh",
-                pathTemp, tempRect);
+        tempTrack = new Track(2, "Gray", "Pittsburgh", "Raleigh", pathTemp, tempRect);
         tempTracks.add(tempTrack);
         pathTemp.reset();
 
@@ -488,8 +480,7 @@ public class TTRGameState extends GameState {
         pathTemp.lineTo(maxX * .928f, maxY * .418f);
         pathTemp.lineTo(maxX * .919f, maxY * .434f);
         pathTemp.close();
-        tempTrack = new Track(2, "Gray", "Pittsburgh", "Washington",
-                pathTemp, tempRect);
+        tempTrack = new Track(2, "Gray", "Pittsburgh", "Washington", pathTemp, tempRect);
         tempTracks.add(tempTrack);
         pathTemp.reset();
 
@@ -504,8 +495,7 @@ public class TTRGameState extends GameState {
         pathTemp.lineTo(maxX * .915f, maxY * .285f);
         pathTemp.lineTo(maxX * .884f, maxY * .31f);
         pathTemp.close();
-        tempTrack = new Track(2, "White", "Pittsburgh", "New York",
-                pathTemp, tempRect);
+        tempTrack = new Track(2, "White", "Pittsburgh", "New York", pathTemp, tempRect);
         tempTracks.add(tempTrack);
         pathTemp.reset();
 
@@ -520,8 +510,7 @@ public class TTRGameState extends GameState {
         pathTemp.lineTo(maxX * .84f, maxY * .335f);
         pathTemp.lineTo(maxX * .829f, maxY * .336f);
         pathTemp.close();
-        tempTrack = new Track(2, "Gray", "Toronto", "Pittsburgh",
-                pathTemp, tempRect);
+        tempTrack = new Track(2, "Gray", "Toronto", "Pittsburgh", pathTemp, tempRect);
         tempTracks.add(tempTrack);
         pathTemp.reset();
 
@@ -541,8 +530,7 @@ public class TTRGameState extends GameState {
         pathTemp.lineTo(maxX * .87f, maxY * .0999f);
         pathTemp.lineTo(maxX * .865f, maxY * .083f);
         pathTemp.close();
-        tempTrack = new Track(3, "Gray", "Toronto", "Montreal",
-                pathTemp, tempRect);
+        tempTrack = new Track(3, "Gray", "Toronto", "Montreal", pathTemp, tempRect);
         tempTracks.add(tempTrack);
         pathTemp.reset();
 
@@ -572,8 +560,7 @@ public class TTRGameState extends GameState {
         pathTemp.lineTo(maxX * .855f, maxY * .06f);
         pathTemp.lineTo(maxX * .855f, maxY * .043f);
         pathTemp.close();
-        tempTrack = new Track(5, "Black", "Sault St. Marie", "Montreal",
-                pathTemp, tempRect);
+        tempTrack = new Track(5, "Black", "Sault St. Marie", "Montreal", pathTemp, tempRect);
         tempTracks.add(tempTrack);
         pathTemp.reset();
 
@@ -608,8 +595,7 @@ public class TTRGameState extends GameState {
         pathTemp.lineTo(maxX * .92f, maxY * .94f);
         pathTemp.lineTo(maxX * .899f, maxY * .899f);
         pathTemp.close();
-        tempTrack = new Track(6, "Red", "New Orleans", "Miami",
-                pathTemp, tempRect);
+        tempTrack = new Track(6, "Red", "New Orleans", "Miami", pathTemp, tempRect);
         tempTracks.add(tempTrack);
         pathTemp.reset();
 
@@ -644,8 +630,7 @@ public class TTRGameState extends GameState {
         pathTemp.lineTo(maxX * .340f, maxY * .865f);
         pathTemp.lineTo(maxX * .338f, maxY * .855f);
         pathTemp.close();
-        tempTrack = new Track(6, "Black", "LosAngeles", "ElPaso",
-                pathTemp,tempRect);
+        tempTrack = new Track(6, "Black", "LosAngeles", "ElPaso", pathTemp,tempRect);
         tempTracks.add(tempTrack);
         pathTemp.reset();
 
@@ -655,8 +640,7 @@ public class TTRGameState extends GameState {
         pathTemp.lineTo(maxX * .085f, maxY * .165f);
         pathTemp.lineTo(maxX * .085f, maxY * .115f);
         pathTemp.close();
-        tempTrack = new Track(1, "Gray", "Vancouver", "Seattle",
-                pathTemp, tempRect);
+        tempTrack = new Track(1, "Gray", "Vancouver", "Seattle", pathTemp, tempRect);
         pathTemp.reset();
 
         tempRect = new Rect((int)(maxX * .0), (int)(maxY * .19), (int)(maxX * .075), (int)(maxY * .279));

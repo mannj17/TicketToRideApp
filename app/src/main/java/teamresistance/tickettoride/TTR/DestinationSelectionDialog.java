@@ -110,10 +110,7 @@ public class DestinationSelectionDialog extends  Dialog implements android.view.
                 for(int i = 0; i < 3; i++){
                     if(destinationCards[i].getHighlight()){
                         tempCards[count] = destinationCards[i];
-                        //myState.getPlayerDestinationDecks()[0].add(destinationCards[i]);
                         count++;
-                    } else {
-                        myState.getDestinationDiscard().add(destinationCards[i]);
                     }
                 }
                 destinationCards[0].setHighlight(false);

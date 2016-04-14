@@ -205,8 +205,7 @@ public class TTRLocalGame extends LocalGame {
 
             //if the player chose to get destination cards, get the deck sent by the action that
             //holds the cards to be moved to the player's hand.
-            else if (mainState.getDestinationCardsSelected()) {
-                mainState.setIsSelectDestinationCards(true);
+            else if (((ConfirmSelectionAction) action).getSendDeck() != null) {
                 if(((ConfirmSelectionAction) action).getSendDeck() != null){
                     for(int i = 0; i < ((ConfirmSelectionAction) action).getSendDeck().size(); i++){
                         Card tempCard = ((ConfirmSelectionAction) action).getSendDeck().getCards().get(i);
@@ -242,14 +241,15 @@ public class TTRLocalGame extends LocalGame {
                         //if the player chose to use rainbow cards, remove the corresponding cards
                         //from their hand and reduce the count for the number of cards used to get
                         //the track.
-                        if(mainState.getUseRainbow()){
+                        if(((ConfirmSelectionAction) action).getUseRainbow() != 0){
                             int numRainbows = ((ConfirmSelectionAction) action).getUseRainbow();
                             for(int j =0; j < mainState.getPlayerTrainDecks()[mainState.getPlayerID()].size(); j++){
                                 String cardColor = mainState.getPlayerTrainDecks()[mainState.getPlayerID()]
                                         .getCards().get(j).toString();
-                                if(cardColor.equals("Rainbow")){
+                                if(cardColor.equals("Rainbow") && numRainbows != 0){
                                     mainState.getPlayerTrainDecks()[mainState.getPlayerID()].getCards().remove(j);
                                     count--;
+                                    numRainbows--;
                                 }
                             }
 
@@ -622,9 +622,9 @@ public class TTRLocalGame extends LocalGame {
     public void start(GamePlayer[] players) {
         //Sets gameState's numPlayer and play order
         mainState.setNumPlayers(players.length);
-        Random rand = new Random();
-        rand.setSeed(System.currentTimeMillis());
-        mainState.setPlayerID(rand.nextInt(players.length));
+//        Random rand = new Random();
+//        rand.setSeed(System.currentTimeMillis());
+//        mainState.setPlayerID(rand.nextInt(players.length));
         super.start(players);
     }
 }
