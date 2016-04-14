@@ -189,7 +189,16 @@ public class TTRLocalGame extends LocalGame {
                     }
 
                 }
-
+                Log.i("Count", "Count Exterior= "+mainState.getTrainColorCount("Rainbow", -1));
+                if(mainState.getTrainColorCount("Rainbow", -1) >= 3){
+                    Log.i("Count", "Count Interior= "+mainState.getTrainColorCount("Rainbow", -1));
+                    for(int i = 0; i < mainState.getFaceUpTrainCards().size(); i++)
+                    {
+                        mainState.getFaceUpTrainCards().getCards().remove(i);
+                        mainState.getFaceDownTrainCards().moveTopCardTo(
+                                mainState.getFaceUpTrainCards(), mainState.getFaceDownTrainCards());
+                    }
+                }
                 //resets the state of selected cards
                 mainState.setTrainCardsSelected(false);
             }

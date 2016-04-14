@@ -131,7 +131,6 @@ public class TTRGameState extends GameState {
         for (int i = 0; i < 30; i++) {
             destinationCards.add(new DestinationCards(i, i, i));
         }
-        destinationCards.shuffle();
 
         /** initialize array values to max possible size */
         for (int i = 0; i < numPlayers; i++){
@@ -1912,9 +1911,9 @@ public class TTRGameState extends GameState {
         }
 
         myTracks = original.getTracks();/**
-        for(int i = 0; i < original.getTracks().length; i++){
-            myTracks[i] = new Track(original.getTracks()[i]);
-        }**/
+         for(int i = 0; i < original.getTracks().length; i++){
+         myTracks[i] = new Track(original.getTracks()[i]);
+         }**/
         trackSpot = original.getTrackSpot();
         numRainbows = original.getNumRainbows();
         selectedCardColor = original.getSelectedCardColor();
@@ -2048,12 +2047,16 @@ public class TTRGameState extends GameState {
      */
     public int getTrainColorCount(String color, int index){
         int count = 0;
-        for(int i = 0; i< playerTrainDecks[index].size(); i++){
-            if (playerTrainDecks[index].getCards().get(i).toString().equals(color)){
-                count++;
+        if(index != -1) {
+            for (int i = 0; i < playerTrainDecks[index].size(); i++) {
+                if (playerTrainDecks[index].getCards().get(i).toString().equals(color)) {
+                    count++;
+                }
             }
+            return count;
+        } else{
+            return 0;
         }
-        return count;
     }
     public int getPlayerID() {
         return playerID;
