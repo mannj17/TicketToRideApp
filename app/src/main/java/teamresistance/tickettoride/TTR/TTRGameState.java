@@ -152,6 +152,7 @@ public class TTRGameState extends GameState {
             }
             //places 3 destination cards into the current players destination deck
             playerDestinationDecks[i] = new Deck("Player " + i + " Destination Card Deck");
+            destinationCards.shuffle();
             for (int j = 0; j != 3;j++) {
                 destinationCards.moveTopCardTo(playerDestinationDecks[i], destinationCards);
             }
