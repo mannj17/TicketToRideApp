@@ -131,7 +131,7 @@ public class TTRGameState extends GameState {
         for (int i = 0; i < 30; i++) {
             destinationCards.add(new DestinationCards(i, i, i));
         }
-
+        destinationCards.shuffle();
         /** initialize array values to max possible size */
         for (int i = 0; i < numPlayers; i++){
             trainTokens[i] = 45;

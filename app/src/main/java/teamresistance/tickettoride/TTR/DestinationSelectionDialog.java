@@ -116,8 +116,9 @@ public class DestinationSelectionDialog extends  Dialog implements android.view.
                 destinationCards[0].setHighlight(false);
                 destinationCards[1].setHighlight(false);
                 destinationCards[2].setHighlight(false);
-                Deck tempDeck = new Deck("temporary", tempCards);
-                game.sendAction(new ConfirmSelectionAction(player, tempDeck));
+                Deck sendDeck = new Deck("deck with added cards", tempCards);
+                Deck removeDeck = new Deck("Cards to be removed", destinationCards);
+                game.sendAction(new ConfirmSelectionAction(player, sendDeck, removeDeck));
                 dismiss();
             } else { //display error
                 text.setText("Please select at least the minimum number of ticket cards.");

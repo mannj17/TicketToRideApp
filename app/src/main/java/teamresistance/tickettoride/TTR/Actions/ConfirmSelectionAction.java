@@ -15,6 +15,7 @@ import teamresistance.tickettoride.TTR.Deck;
  */
 public class ConfirmSelectionAction extends GameAction {
     private Deck sendDeck = null;
+    private Deck removeDeck = null;
     private String chosenColor = null;
     private int useRainbow = 0;
 
@@ -24,9 +25,11 @@ public class ConfirmSelectionAction extends GameAction {
     }
 
     //Constructor for selected destination cards
-    public ConfirmSelectionAction(GamePlayer player, Deck sendDeck) {
+    public ConfirmSelectionAction(GamePlayer player, Deck sendDeck, Deck removeDeck) {
         super(player);
         this.sendDeck = sendDeck;
+        this.removeDeck = removeDeck; //used to remove all destination cards when
+                                      //selecting destination cards
     }
 
     //Constructor for selected rainbow cards
@@ -43,6 +46,8 @@ public class ConfirmSelectionAction extends GameAction {
     }
 
     public Deck getSendDeck(){return this.sendDeck;}
+
+    public Deck getRemoveDeck(){return this.removeDeck;}
 
     public String getChosenColor(){return this.chosenColor;}
 

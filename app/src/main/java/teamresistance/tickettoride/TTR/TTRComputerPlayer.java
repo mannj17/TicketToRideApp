@@ -109,7 +109,7 @@ public class TTRComputerPlayer extends GameComputerPlayer{
                     }
                     startGame = false;
                     Deck sendDeck = new Deck("Sending", tempCards);
-                    game.sendAction(new ConfirmSelectionAction(this, sendDeck));
+                    game.sendAction(new ConfirmSelectionAction(this, sendDeck, tempDeck));
                 }
 
                 //if it is card mode, select randomly between picking from the face up and
