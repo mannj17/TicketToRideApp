@@ -167,82 +167,19 @@ public class TTRLocalGame extends LocalGame {
                     mainState.getFaceDownTrainCards().setHighlight(false);
                     mainState.setOnlyDownDeck(false);
 
-                    for (int i = 0; i < mainState.getFaceUpTrainCards().size(); i++) {
+                    for (int i = mainState.getFaceUpTrainCards().size() - 1; i >= 0; i--) {
                         if (mainState.getFaceUpTrainCards().getCards().get(i).getHighlight()) {
                             mainState.getPlayerTrainDecks()[mainState.getPlayerID()].moveCardTo(
                                     mainState.getPlayerTrainDecks()[mainState.getPlayerID()],
                                     mainState.getFaceUpTrainCards(), i);
-//                            Card temp = mainState.getFaceUpTrainCards().getCards().get(i);
-//                            mainState.getPlayerTrainDecks()[mainState.getPlayerID()].add(temp);
-//                            mainState.getFaceUpTrainCards().getCards().remove(i);
-                            mainState.getFaceDownTrainCards().moveTopCardTo(
-                                    mainState.getFaceUpTrainCards(), mainState.getFaceDownTrainCards());
-                            mainState.getFaceUpTrainCards().getCards().get(i).setHighlight(false);
                         }
                     }
-
-//
-//                //if only the down deck was selected, take the top two cards from the face down
-//                //deck and put them in the players hand.
-//                if (mainState.getOnlyDownDeck() && mainState.getFaceDownTrainCards().getHighlight()) {
-//                    mainState.getFaceDownTrainCards().moveTopCardTo(
-//                            mainState.getPlayerTrainDecks()[mainState.getPlayerID()],
-//                            mainState.getFaceDownTrainCards());
-//                    mainState.getFaceDownTrainCards().moveTopCardTo(
-//                            mainState.getPlayerTrainDecks()[mainState.getPlayerID()],
-//                            mainState.getFaceDownTrainCards());
-//
-//                    //resets the state of selected cards
-//                    mainState.getFaceDownTrainCards().setHighlight(false);
-//                    mainState.setOnlyDownDeck(false);
-//                }
-//
-//                //if the player chose cards from both the face up and face down deck, move the
-//                //corresponding cards to the player's hand.
-//                else if (!mainState.getOnlyDownDeck() && mainState.getFaceDownTrainCards().getHighlight()) {
-//                    mainState.getFaceDownTrainCards().moveTopCardTo(
-//                            mainState.getPlayerTrainDecks()[mainState.getPlayerID()],
-//                            mainState.getFaceDownTrainCards());
-//                    for (int i = 0; i < mainState.getFaceUpTrainCards().size(); i++) {
-//                        if (mainState.getFaceUpTrainCards().getCards().get(i).getHighlight()) {
-//                            mainState.getPlayerTrainDecks()[mainState.getPlayerID()].moveCardTo(
-//                                    mainState.getPlayerTrainDecks()[mainState.getPlayerID()],
-//                                    mainState.getFaceUpTrainCards(), i);
-////                            Card temp = mainState.getFaceUpTrainCards().getCards().get(i);
-////                            mainState.getPlayerTrainDecks()[mainState.getPlayerID()].add(temp);
-////                            mainState.getFaceUpTrainCards().getCards().remove(i);
-//                            mainState.getFaceDownTrainCards().moveTopCardTo(
-//                                    mainState.getFaceUpTrainCards(), mainState.getFaceDownTrainCards());
-//                            mainState.getFaceUpTrainCards().getCards().get(i).setHighlight(false);
-//                        }
-//                    }
-//
-//                    //resets the state of selected cards
-//                    mainState.getFaceDownTrainCards().setHighlight(false);
-//                }
-//
-//                //if the player only selected cards from the face up deck, move the corresponding
-//                //cards to the players hand.
-//                else if (!mainState.getOnlyDownDeck() && !mainState.getFaceDownTrainCards().getHighlight()) {
-//                    for (int i = mainState.getFaceUpTrainCards().size() - 1; i >= 0; i--) {
-//                        if (mainState.getFaceUpTrainCards().getCards().get(i).getHighlight()) {
-//                            Card temp = mainState.getFaceUpTrainCards().getCards().get(i);
-//                            mainState.getPlayerTrainDecks()[mainState.getPlayerID()].add(temp);
-//                            mainState.getFaceUpTrainCards().getCards().remove(i);
-//                            mainState.getFaceDownTrainCards().moveTopCardTo(
-//                                    mainState.getFaceUpTrainCards(), mainState.getFaceDownTrainCards());
-//                            mainState.getFaceUpTrainCards().getCards().get(i).setHighlight(false);
-//                        }
-//                    }
-//
-//                }
-                    Log.i("Count", "Count Exterior= " + mainState.getTrainColorCount("Rainbow", -1));
-                    if (mainState.getTrainColorCount("Rainbow", -1) >= 3) {
-                        Log.i("Count", "Count Interior= " + mainState.getTrainColorCount("Rainbow", -1));
-                        for (int i = 0; i < mainState.getFaceUpTrainCards().size(); i++) {
+                    if(mainState.getTrainColorCount("Rainbow", -1) >=3){
+                        for(int i = 0; i < mainState.getFaceUpTrainCards().size(); i++){
                             mainState.getFaceUpTrainCards().getCards().remove(i);
                             mainState.getFaceDownTrainCards().moveTopCardTo(
                                     mainState.getFaceUpTrainCards(), mainState.getFaceDownTrainCards());
+                            mainState.getFaceUpTrainCards().getCards().get(i).setHighlight(false);
                         }
                     }
                     //resets the state of selected cards
@@ -302,7 +239,6 @@ public class TTRLocalGame extends LocalGame {
                                         mainState.getPlayerTrainDecks()[mainState.getPlayerID()].moveCardTo(
                                                 mainState.getTrainDiscard(),
                                                 mainState.getPlayerTrainDecks()[mainState.getPlayerID()], j);
-                                        //mainState.getPlayerTrainDecks()[mainState.getPlayerID()].getCards().remove(j);
                                         count--;
                                         numRainbows--;
                                     }
@@ -384,7 +320,6 @@ public class TTRLocalGame extends LocalGame {
                                         mainState.getPlayerTrainDecks()[mainState.getPlayerID()].moveCardTo(
                                                 mainState.getTrainDiscard(),
                                                 mainState.getPlayerTrainDecks()[mainState.getPlayerID()], j);
-                                        //mainState.getPlayerTrainDecks()[mainState.getPlayerID()].getCards().remove(j);
                                         count--;
                                         takeRainbows--;
                                     }
@@ -456,12 +391,6 @@ public class TTRLocalGame extends LocalGame {
                 //reset the mode of the game state so that card mode is selected and track mode is not.
                 mainState.setCardModeSelected(true);
                 mainState.setTrackModeSelected(false);
-//                if((mainState.getPlayerID()+1) == mainState.getNumPlayers()){
-//                    mainState.setPlayerID(0);
-//                }
-//                else{
-//                    mainState.setPlayerID(mainState.getPlayerID()+1);
-//                }
                 mainState.setPlayerID((mainState.getPlayerID() + 1) % mainState.getNumPlayers());
 
                 if (noMoreTrains) {

@@ -1908,7 +1908,7 @@ public class TTRGameState extends GameState {
         trainDiscard = new Deck(original.trainDiscard);
         destinationDiscard = new Deck(original.destinationDiscard);
         if(faceDownTrainCards.size() < 5){
-            if(destinationDiscard.size() != 0) {
+            if(trainDiscard.size() != 0) {
                 trainDiscard.shuffle();
                 faceDownTrainCards.moveAllCardsTo(faceDownTrainCards, trainDiscard);
             }

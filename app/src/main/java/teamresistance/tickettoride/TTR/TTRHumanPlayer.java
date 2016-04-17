@@ -204,7 +204,7 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
                 this.cpu3DestinationCardTextView.setText(""+((TTRGameState) info).getPlayerDestinationDecks()[3].getCards().size());
                 this.cpu3TrainCardTextView.setText(""+((TTRGameState) info).getPlayerTrainDecks()[3].getCards().size());
             }
-            for( int i = 0; i < 5; i++) {
+            for(int i = 0; i < myState.getFaceUpTrainCards().size(); i++) {
                 if ((myState.getFaceUpTrainCards().getCards().get(i)).toString() == "Black") {
                     faceUpTrainCards[i].setImageResource(R.drawable.black_train);
                 } else if (((TrainCards) myState.getFaceUpTrainCards().getCards().get(i)).toString() == "Pink") {
