@@ -26,6 +26,7 @@ import teamresistance.tickettoride.TTR.Actions.ConfirmSelectionAction;
 public class CardColorSelectionDialog extends Dialog implements android.view.View.OnClickListener{
     /** Class Instance Variables */
     private Button selectBtn; //button for selection
+    private Button cancelBtn; //button for cancellation
     private ImageButton train1, train2, train3, train4, train5, train6, train7, train8; //image buttons for train colors
     private RadioButton noLoc, oneLoc, twoLoc, threeLoc, fourLoc, fiveLoc, sixLoc; //radiobuttons for selecting how many 'locs' needed
     private RadioButton[] locomotives; //array for radio buttons
@@ -91,9 +92,12 @@ public class CardColorSelectionDialog extends Dialog implements android.view.Vie
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
+        setCanceledOnTouchOutside(false);
         setContentView(R.layout.card_selection_dialog);
         //initialize all buttons (regular, image, radio) and set as listeners
         selectBtn = (Button) findViewById(R.id.btn_select);
+        cancelBtn = (Button) findViewById(R.id.btn_cancel);
+        cancelBtn.setOnClickListener(this);
         train1 = (ImageButton) findViewById(R.id.train1);
         train2 = (ImageButton) findViewById(R.id.train2);
         train3 = (ImageButton) findViewById(R.id.train3);
@@ -207,6 +211,8 @@ public class CardColorSelectionDialog extends Dialog implements android.view.Vie
             } else {
                 text.setText("Please choose a deck.");
             }
+        } else if (v.getId() == R.id.btn_cancel){
+        dismiss();
         }
         if(v.getId() == R.id.train1){
             if(highlighted[0]){
