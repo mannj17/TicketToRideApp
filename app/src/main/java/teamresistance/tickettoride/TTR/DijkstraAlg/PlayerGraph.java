@@ -20,6 +20,10 @@ public class PlayerGraph {
         this.playerNum = playerNum;
     }
 
+    public PlayerGraph() {
+        playerNum = -1;
+    }
+
     public List<Vertex> getVertexes() {
         return vertexes;
     }
@@ -27,6 +31,8 @@ public class PlayerGraph {
     public List<Edge> getEdges() {
         return edges;
     }
+
+    public int getPlayerNum(){ return playerNum; }
 
     public ArrayList<Track> divideTrackByPlayer(Track[] tracks, int playerID){
         ArrayList<Track> ownedTracks = new ArrayList<Track>();
