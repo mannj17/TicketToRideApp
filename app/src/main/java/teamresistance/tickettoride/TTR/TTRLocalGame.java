@@ -263,6 +263,7 @@ public class TTRLocalGame extends LocalGame {
                                     mainState.getPlayerTrainDecks()[mainState.getPlayerID()].moveCardTo(
                                             mainState.getTrainDiscard(),
                                             mainState.getPlayerTrainDecks()[mainState.getPlayerID()], j);
+                                    j =0;
                                     //mainState.getPlayerTrainDecks()[mainState.getPlayerID()].getCards().remove(j);
                                     count--;
                                 }

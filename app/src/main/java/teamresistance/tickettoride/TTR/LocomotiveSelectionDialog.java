@@ -36,6 +36,8 @@ public class LocomotiveSelectionDialog extends Dialog implements View.OnClickLis
             "Blue", "Pink", "White", "Black"}; //array of the train colors
     private int numRainbows = 0; //how many locomotive cards player has
     private int useRainbows = 0; //how many locomotive cards player wants to user
+    private int numCards = 0;
+    private int min = 0;
     private Game game; //game to send action
     private TTRHumanPlayer player; //player to send in action
 
@@ -53,11 +55,13 @@ public class LocomotiveSelectionDialog extends Dialog implements View.OnClickLis
         this.game = game;
         this.player = player;
         this.trainCards = cards;
+        this.min = track.getTrainTrackNum();
         for(int i = 0; i < trainCards.size(); i++){
             if(trainCards.getCards().get(i).toString().equals("Rainbow")){
                 numRainbows++;
             }
         }
+        numCards = contains(track.getTrackColor());
     }
 
     /**
@@ -91,12 +95,18 @@ public class LocomotiveSelectionDialog extends Dialog implements View.OnClickLis
         fourLoc.setOnClickListener(this);
         fiveLoc.setOnClickListener(this);
         sixLoc.setOnClickListener(this);
-        //set noLoc selected as default
-        noLoc.setChecked(true);
+
         //set visibility
         if(numRainbows != 0){
-            for(int i = 1; i <= numRainbows; i++){
-                locomotives[i].setVisibility(View.VISIBLE);
+            for(int i = numRainbows; i >= 0; i--){
+                if(numCards + i >= min) {
+                    locomotives[i].setVisibility(View.VISIBLE);
+                    locomotives[i].setChecked(true);
+                    useRainbows = i;
+                }
+                else{
+                    locomotives[i].setVisibility(View.GONE);
+                }
             }
         }
     }

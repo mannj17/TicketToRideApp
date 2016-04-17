@@ -34,6 +34,7 @@ public class CardColorSelectionDialog extends Dialog implements android.view.Vie
     private Deck trainCards; //deck being passed in
     private final String[] trainColors = {"Red", "Orange", "Yellow", "Green",
             "Blue", "Pink", "White", "Black"}; //train colors of trains
+    int[] colorCounts = new int[8];
     private boolean[] usable = new boolean[trainColors.length]; // array of booleans representing if player has enough of that color
     private boolean[] highlighted = new boolean[trainColors.length]; // boolean to mark which tracks should be highlighted
     private boolean selected = false; // if select has been pressed
@@ -41,6 +42,7 @@ public class CardColorSelectionDialog extends Dialog implements android.view.Vie
     private int useRainbows = 0; //num of locomotive cards being used
     private Game game; //game to send action
     private TTRHumanPlayer player; //player sent in the action
+    private int min = 0;
 
     /**
      * CardColorSelectionDialog constructor
@@ -56,8 +58,7 @@ public class CardColorSelectionDialog extends Dialog implements android.view.Vie
         this.game = game;
         this.player = player;
         this.trainCards = cards;
-        int min = track.getTrainTrackNum();
-        int count = 0;
+        min = track.getTrainTrackNum();
         selected = false;
 
         for(int i = 0; i < trainCards.size(); i++){
@@ -71,16 +72,15 @@ public class CardColorSelectionDialog extends Dialog implements android.view.Vie
         for(int i = 0; i < trainColors.length; i++){
             for(int j = 0; j < trainCards.size(); j++){
                 if(trainCards.getCards().get(j).toString().equals(trainColors[i])){
-                    count++;
+                    colorCounts[i]++;
                 }
-                if(count+numRainbows >= min){
+                if(colorCounts[i]+numRainbows >= min){
                     this.usable[i] = true;
                 } else{
                     this.usable[i] = false;
                 }
             }
             this.highlighted[i] = false;
-            count = 0;
         }
     }
 
@@ -206,8 +206,13 @@ public class CardColorSelectionDialog extends Dialog implements android.view.Vie
                         position = i;
                     }
                 }
-                game.sendAction(new ConfirmSelectionAction(player, trainColors[position], numRainbows));
-                dismiss();
+                if(colorCounts[position] + useRainbows >= min) {
+                    game.sendAction(new ConfirmSelectionAction(player, trainColors[position], numRainbows));
+                    dismiss();
+                }
+                else{
+                    text.setText("In order to use this deck, you must use Locomotive cards.");
+                }
             } else {
                 text.setText("Please choose a deck.");
             }
