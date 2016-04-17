@@ -16,6 +16,12 @@ import teamresistance.tickettoride.TTR.Actions.ConfirmSelectionAction;
  * Class that inflates view into dialog for custom handling user choice of which destination cards
  * to keep.
  *
+ * RESOURCES:
+ * 4/11/16
+ * http://stackoverflow.com/questions/13341560/how-to-create-a-custom-dialog-box-in-android
+ * 4/17/16
+ * http://stackoverflow.com/questions/9829453/android-4-0-dialog-gets-canceled-when-touched-outside-of-dialog-window
+ *
  * @author Nick Scacciotti
  * @author Nick Larson
  * @author Jess Mann
