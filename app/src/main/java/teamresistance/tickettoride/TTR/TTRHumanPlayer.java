@@ -141,9 +141,11 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
             boolean val = myState.getTrackModeSelected();
 
             int size = myBoard.getTracksLength();
-            for (int i = 0; i < size; i++) {
-                if(canChoose(myBoard.getTracks()[i]) || !val) {
-                    myBoard.getTracks()[i].setHighlight(val);
+            if(myState.getPlayerID() == this.playerNum) {
+                for (int i = 0; i < size; i++) {
+                    if (canChoose(myBoard.getTracks()[i]) || !val) {
+                        myBoard.getTracks()[i].setHighlight(val);
+                    }
                 }
             }
             if(playerNum >= 2) { //2 is the minimum number of players

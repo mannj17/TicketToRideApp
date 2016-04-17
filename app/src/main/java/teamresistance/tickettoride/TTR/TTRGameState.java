@@ -18,6 +18,8 @@ import teamresistance.tickettoride.Game.infoMsg.GameState;
  * @version March 2016
  */
 public class TTRGameState extends GameState {
+    public boolean reset;
+
     protected int maxX = 1720;
     protected int maxY = 980;
 
@@ -81,6 +83,7 @@ public class TTRGameState extends GameState {
     private int trackSpot = -1;
     private String selectedCardColor;
     private boolean useRainbow;
+    private boolean gameStart;
     private Boolean isLastRound = false;
     private Boolean isGameOver = false;
 
@@ -1884,12 +1887,14 @@ public class TTRGameState extends GameState {
         trainCardsSelected = false;
         useRainbow = false;
         trackModeSelected = false;
-        cardModeSelected = true;
-        destinationCardsSelected = false;
+        cardModeSelected = false;
+        destinationCardsSelected = true;
         trainCardsSelected = false;
         placeTrainSelected = false;
         isSelectDestinationCards = false;
         onlyDownDeck = false;
+        gameStart = false;
+        reset = false;
     }
     /*
      * Creates a deep copy of the GameState
@@ -1901,7 +1906,20 @@ public class TTRGameState extends GameState {
         faceDownTrainCards = new Deck(original.faceDownTrainCards);
         faceUpTrainCards = new Deck(original.faceUpTrainCards);
         destinationCards = new Deck(original.destinationCards);
+        trainDiscard = new Deck(original.trainDiscard);
         destinationDiscard = new Deck(original.destinationDiscard);
+        if(faceDownTrainCards.size() < 5){
+            if(destinationDiscard.size() != 0) {
+                trainDiscard.shuffle();
+                faceDownTrainCards.moveAllCardsTo(faceDownTrainCards, trainDiscard);
+            }
+        }
+        if(destinationCards.size() < 3){
+            if(destinationDiscard.size() != 0) {
+                destinationCards.shuffle();
+                destinationCards.moveAllCardsTo(destinationCards, destinationDiscard);
+            }
+        }
         for(int i = 0; i < original.getNumPlayers(); i++){
             trainTokens[i] = original.getTrainTokens()[i];
             scores[i] = original.getScores()[i];
@@ -1914,17 +1932,40 @@ public class TTRGameState extends GameState {
          for(int i = 0; i < original.getTracks().length; i++){
          myTracks[i] = new Track(original.getTracks()[i]);
          }**/
-        trackSpot = original.getTrackSpot();
-        numRainbows = original.getNumRainbows();
-        selectedCardColor = original.getSelectedCardColor();
-        //Booleans
-        isSelectDestinationCards = original.getIsSelectDestinationCards();
-        trackModeSelected = original.getTrackModeSelected();
-        cardModeSelected = original.getCardModeSelected();
-        destinationCardsSelected = original.getDestinationCardsSelected();
-        trainCardsSelected = original.getTrainCardsSelected();
-        onlyDownDeck = original.getOnlyDownDeck();
-        useRainbow = original.getUseRainbow();
+
+        if(reset){
+            trackSpot = -1;
+            numRainbows = 0;
+            selectedCardColor = "";
+            isSelectDestinationCards = false;
+            trackModeSelected = false;
+            cardModeSelected = true;
+            destinationCardsSelected = false;
+            trainCardsSelected = false;
+            onlyDownDeck = false;
+            useRainbow = false;
+        }
+        else {
+            trackSpot = original.getTrackSpot();
+            numRainbows = original.getNumRainbows();
+            selectedCardColor = original.getSelectedCardColor();
+            isSelectDestinationCards = original.getIsSelectDestinationCards();
+            trackModeSelected = original.getTrackModeSelected();
+            cardModeSelected = original.getCardModeSelected();
+            destinationCardsSelected = original.getDestinationCardsSelected();
+            trainCardsSelected = original.getTrainCardsSelected();
+            onlyDownDeck = original.getOnlyDownDeck();
+            useRainbow = original.getUseRainbow();
+        }
+        gameStart = original.getGameStart();
+        if(gameStart){
+            cardModeSelected = original.getCardModeSelected();
+            trackModeSelected = original.getTrackModeSelected();
+        }
+        else{
+            cardModeSelected = false;
+            trackModeSelected = false;
+        }
     }
 
     public int[] getDestinationCities1() {
@@ -2201,4 +2242,8 @@ public class TTRGameState extends GameState {
     public void setNumRainbows(int value) {
         this.numRainbows = value;
     }
+
+    public boolean getGameStart(){ return gameStart; }
+
+    public void setGameStart(boolean val){ gameStart = val; }
 }
