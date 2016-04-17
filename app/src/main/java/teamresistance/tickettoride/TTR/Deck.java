@@ -97,12 +97,34 @@ public class Deck {
     }
 
     /**
+     * Moves the top cards from one Deck to another
+     * @param targetDeck
+     * @param sourceDeck
+     */
+    public void moveCardTo(Deck targetDeck, Deck sourceDeck, int position) {
+        synchronized (this.cards) {
+            if (!sourceDeck.getCards().isEmpty()) {
+                Card temp = sourceDeck.getCards().get(position);
+                targetDeck.add(temp);
+                sourceDeck.getCards().remove(position);
+            }
+        }
+    }
+
+    /**
      * Moves all cards from one Deck to another
      * @param targetDeck
      * @param sourceDeck
      */
     public void moveAllCardsTo(Deck targetDeck, Deck sourceDeck) {
-        return;
+        int i = 0;
+        while(!sourceDeck.getCards().isEmpty()){
+            if(i < sourceDeck.getCards().size()) {
+                Card c = sourceDeck.getCards().get(i);
+                sourceDeck.getCards().remove(i);
+                targetDeck.getCards().add(c);
+            }
+        }
     }
 
     /**
