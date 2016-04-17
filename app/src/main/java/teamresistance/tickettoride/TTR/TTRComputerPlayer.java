@@ -18,7 +18,7 @@ import teamresistance.tickettoride.TTR.Actions.TrackPlaceAction;
  * @author Nick Larson
  * @author Jess Mann
  * @author Parker Schibel
- * @version March 2016
+ * @version April 2016
  */
 public class TTRComputerPlayer extends GameComputerPlayer{
     /*
@@ -31,7 +31,6 @@ public class TTRComputerPlayer extends GameComputerPlayer{
         isDifficult = difficulty;
         rand = new Random();
     }
-
     /*
      * Says if player is smart or dumb
      */
@@ -43,53 +42,103 @@ public class TTRComputerPlayer extends GameComputerPlayer{
     private String name;
     private int trainTokens;
     private Boolean isTurn;
+    private boolean startGame = true;
+
+    //random variable
     private Random rand;
+
+    //indicates which move to make
     private int makeMove;
-    private boolean startedMove = false;
-    private boolean foundTrack = false;
+    private boolean startedMove = false; //boolean that says if the move has started
+    private boolean foundTrack = false; //if a track has been found
+
 
     /*
      * Finds the best move for the computer player and makes that move based on what it finds
      * @info
      */
     protected final void findBestMove(GameInfo info) {
-    
     }
 
     /**
-     *
-     * @param info
+     * Computer player actions
+     * @param info from game state
      */
     @Override
     protected void receiveInfo(GameInfo info) {
         if(info instanceof GameState){
             TTRGameState compState = (TTRGameState) info;
+
+            //if it's the players turn
             if(compState.getPlayerID() == this.playerNum){
                 this.sleep(1000);
-                if(!startedMove){
+
+                //if its the start of a turn, randomly choose its move type
+                if(!startedMove && !startGame){
                     makeMove = rand.nextInt(100);
-                    if(makeMove < 50){
+
+                    //if makeMove is greater than 75, put it in track mode
+                    if(makeMove > 75){
                         game.sendAction(new ChangeModeAction(this));
                     }
                 }
+                else if(startGame){
+                    Deck tempDeck = new Deck("temp");
+                    compState.getDestinationCards().moveTopCardTo(tempDeck, compState.getDestinationCards());
+                    compState.getDestinationCards().moveTopCardTo(tempDeck, compState.getDestinationCards());
+                    compState.getDestinationCards().moveTopCardTo(tempDeck, compState.getDestinationCards());
+
+
+                    int numSelected = 0;
+                    while(numSelected < 2) {
+                        for (int i = 0; i < tempDeck.size(); i++) {
+                            if (Math.random() < 0.8) {
+                                if(!tempDeck.getCards().get(i).getHighlight()) {
+                                    tempDeck.getCards().get(i).setHighlight(true);
+                                    numSelected++;
+                                }
+                            }
+                        }
+                    }
+                    Card[] tempCards = new Card[numSelected];
+                    int count=0;
+                    for(int i = 0; i < tempDeck.size(); i++){
+                        if(tempDeck.getCards().get(i).getHighlight()){
+                            tempCards[count] = tempDeck.getCards().get(i);
+                        }
+                    }
+                    startGame = false;
+                    Deck sendDeck = new Deck("Sending", tempCards);
+                    game.sendAction(new ConfirmSelectionAction(this, sendDeck, tempDeck));
+                }
+
+                //if it is card mode, select randomly between picking from the face up and
+                //face down decks
                 if(compState.getCardModeSelected()) {
-                    if(makeMove< 50) {
+                    if(makeMove > 40) {
                         startedMove = true;
                         int selectedCards = 0;
                         for (int i = 0; i < compState.getFaceUpTrainCards().size(); i++) {
                             if (compState.getFaceUpTrainCards().getCards().get(i).getHighlight()) {
+
+                                //if the player randomly choose a rainbow card, take it right away
                                 if (compState.getFaceUpTrainCards().getCards().get(i).toString().equals("Rainbow")) {
                                     selectedCards = 2;
                                 } else {
                                     selectedCards++;
                                 }
                             }
+
+                            //if the player is taking from the down deck, increment selectedCards
+                            //accordingly.
                             if (compState.getOnlyDownDeck()) {
                                 selectedCards = 2;
                             } else if (compState.getFaceDownTrainCards().getHighlight()) {
                                 selectedCards++;
                             }
                         }
+
+                        //if two cards have not been selected, randomly choose a card.
                         if (selectedCards < 2) {
                             if (Math.random() < .75) {
                                 game.sendAction(new DrawUpCardAction(this, rand.nextInt(5)));
@@ -103,7 +152,9 @@ public class TTRComputerPlayer extends GameComputerPlayer{
                             game.sendAction(new ConfirmSelectionAction(this));
                         }
                     }
-                    else{
+
+                    //only pull from the down deck
+                    else if (makeMove > 5){
                         startedMove = true;
                         if(!compState.getOnlyDownDeck()){
                             game.sendAction(new DrawDownCardAction(this));
@@ -113,9 +164,32 @@ public class TTRComputerPlayer extends GameComputerPlayer{
                             game.sendAction(new ConfirmSelectionAction(this));
                         }
                     }
+
+                    else{
+                        Deck tempDeck = new Deck("temp");
+                        compState.getDestinationCards().moveTopCardTo(tempDeck, compState.getDestinationCards());
+                        compState.getDestinationCards().moveTopCardTo(tempDeck, compState.getDestinationCards());
+                        compState.getDestinationCards().moveTopCardTo(tempDeck, compState.getDestinationCards());
+
+                        int numSelected = 0;
+                        while(numSelected == 0) {
+                            for (int i = 0; i < tempDeck.size(); i++) {
+                                if (Math.random() < 0.5) {
+                                    tempDeck.getCards().get(i).setHighlight(true);
+                                    numSelected++;
+                                }
+                            }
+                        }
+                    }
                 }
+
+                //if in track mode
                 else if(compState.getTrackModeSelected()){
+
+                    //indicates the move has been started
                     startedMove = true;
+
+                    //get the count of the computer players cards for each color.
                     int redCount= compState.getTrainColorCount("Red",this.playerNum);
                     int orangeCount= compState.getTrainColorCount("Orange",this.playerNum);
                     int yellowCount= compState.getTrainColorCount("Yellow",this.playerNum);
@@ -125,11 +199,23 @@ public class TTRComputerPlayer extends GameComputerPlayer{
                     int whiteCount= compState.getTrainColorCount("White",this.playerNum);
                     int blackCount= compState.getTrainColorCount("Black",this.playerNum);
                     int rainbowCount= compState.getTrainColorCount("Rainbow",this.playerNum);
+
+                    //if a track has not been found
                     if(!foundTrack) {
                         for (int i = 0; i < compState.getTracks().length; i++) {
+
+                            //if a track has not been found
                             if (!compState.getTracks()[i].getCovered() && !foundTrack) {
+
+                                //get the color of the track currently being looked at.
                                 String trainColor = compState.getTracks()[i].getTrackColor();
+
+                                //if the track is gray, check to see if the Computer Player has
+                                //any combination of colored cards and rainbow cards to claim the track.
                                 if (trainColor.equals("Gray")) {
+
+                                    //check each colored card count + rainbow cards against the Gray
+                                    //track. If a combination has been found, select that track.
                                     if (redCount + rainbowCount >= compState.getTracks()[i].getTrainTrackNum()) {
                                         compState.setUseRainbow(true);
                                         foundTrack = true;
@@ -171,7 +257,15 @@ public class TTRComputerPlayer extends GameComputerPlayer{
                                         compState.setSelectedCardColor("Black");
                                         game.sendAction(new TrackPlaceAction(this, "Black", i));
                                     }
-                                } else if (trainColor.equals("Red")) {
+                                }
+
+                                /*
+                                if the track is not Gray, go through these else if statements until
+                                its color has been found. Once it has been found check to see if
+                                the corresponding there are enough cards of the same color + rainbow
+                                cards. If there are enough cards, select the track
+                                 */
+                                else if (trainColor.equals("Red")) {
                                     if (redCount >= compState.getTracks()[i].getTrainTrackNum()) {
                                         foundTrack = true;
                                         game.sendAction(new TrackPlaceAction(this, trainColor, i));
@@ -247,13 +341,21 @@ public class TTRComputerPlayer extends GameComputerPlayer{
                                 }
                             }
                         }
+
+                        //if a track was not found, set startedMove to false to indicate that
+                        //a different move needs to be made.
                         if(!foundTrack){
                             startedMove = false;
+                            makeMove = rand.nextInt(75);
                         }
                     }
+
+                    //if a track was not found, change the mode of the game state
                     if (!startedMove) {
                         game.sendAction(new ChangeModeAction(this));
                     }
+
+                    //if a track was found, reset the boolean values and send a confirmSelectionAction.
                     if(foundTrack){
                         startedMove = false;
                         foundTrack = false;
