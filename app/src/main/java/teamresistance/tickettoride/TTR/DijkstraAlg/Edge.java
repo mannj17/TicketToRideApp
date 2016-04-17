@@ -1,4 +1,5 @@
-package teamresistance.tickettoride.TTR;
+package teamresistance.tickettoride.TTR.DijkstraAlg;
+
 /**
  * @author Nicholas Larson
  * @author Parker Schibel

@@ -1,4 +1,4 @@
-package teamresistance.tickettoride.TTR;
+package teamresistance.tickettoride.TTR.DijkstraAlg;
 
 
 import java.util.ArrayList;
@@ -9,10 +9,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
-import teamresistance.tickettoride.TTR.Edge;
-import teamresistance.tickettoride.TTR.Graph;
-import teamresistance.tickettoride.TTR.Vertex;
 
 /**
  * @author Nicholas Larson
