@@ -182,6 +182,10 @@ public class TTRLocalGame extends LocalGame {
                             mainState.getFaceUpTrainCards().getCards().get(i).setHighlight(false);
                         }
                     }
+                    while(mainState.getFaceUpTrainCards().getCards().size() < 5){
+                        mainState.getFaceDownTrainCards().moveTopCardTo(
+                                mainState.getFaceUpTrainCards(), mainState.getFaceDownTrainCards());
+                    }
                     //resets the state of selected cards
                     mainState.setTrainCardsSelected(false);
                 }
