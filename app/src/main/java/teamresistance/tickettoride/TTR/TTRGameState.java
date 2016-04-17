@@ -2093,7 +2093,8 @@ public class TTRGameState extends GameState {
                     count++;
                 }
             }
-        } else{
+        }
+        else{
             for(int i = 0; i< faceUpTrainCards.size(); i++){
                 if (faceUpTrainCards.getCards().get(i).toString().equals(color)){
                     count++;
