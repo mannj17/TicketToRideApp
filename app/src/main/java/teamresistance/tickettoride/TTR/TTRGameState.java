@@ -152,7 +152,6 @@ public class TTRGameState extends GameState {
             }
             //places 3 destination cards into the current players destination deck
             playerDestinationDecks[i] = new Deck("Player " + i + " Destination Card Deck");
-            //randomizes order of dest. cards
         }
         selectedCardColor = null;
         trainDiscard = new Deck("Train Card Discard");
@@ -2053,10 +2052,14 @@ public class TTRGameState extends GameState {
                     count++;
                 }
             }
-            return count;
         } else{
-            return 0;
+            for(int i = 0; i< faceUpTrainCards.size(); i++){
+                if (faceUpTrainCards.getCards().get(i).toString().equals(color)){
+                    count++;
+                }
+            }
         }
+        return count;
     }
     public int getPlayerID() {
         return playerID;
