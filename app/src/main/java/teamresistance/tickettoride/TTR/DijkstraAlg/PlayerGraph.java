@@ -1,6 +1,8 @@
 package teamresistance.tickettoride.TTR.DijkstraAlg;
 
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 
 import teamresistance.tickettoride.TTR.Track;
@@ -55,6 +57,61 @@ public class PlayerGraph {
             newEdges.add(new Edge(temp,temp2, tracks.get(i).getTrainTrackNum()));
         }
         return (new PlayerGraph(newVertices, newEdges, playerID));
+    }
+
+    Boolean isReachable(int s, int d)
+    {
+        LinkedList<Integer> temp;
+
+        // Mark all the vertices as not visited(By default set
+        // as false)
+        int V = this.vertexes.size(); //number of total vertices
+        boolean visited[] = new boolean[V];
+
+        //Adjacency List
+        LinkedList<Integer> adj[] = new LinkedList[V];
+        //void addEdge(int v,int w)  {   adj[v].add(w);   }
+
+        // Create a queue for BFS
+        LinkedList<Integer> queue = new LinkedList<Integer>();
+
+        // Mark the current node as visited and enqueue it
+        visited[s]=true;
+        queue.add(s);
+
+        // 'i' will be used to get all adjacent vertices of a vertex
+        Iterator<Integer> i;
+        while (queue.size()!=0)
+        {
+            // Dequeue a vertex from queue and print it
+            s = queue.poll();
+
+            int n;
+            i = adj[s].listIterator();
+
+            // Get all adjacent vertices of the dequeued vertex s
+            // If a adjacent has not been visited, then mark it
+            // visited and enqueue it
+            while (i.hasNext())
+            {
+                n = i.next();
+
+                // If this adjacent node is the destination node,
+                // then return true
+                if (n==d)
+                    return true;
+
+                // Else, continue to do BFS
+                if (!visited[n])
+                {
+                    visited[n] = true;
+                    queue.add(n);
+                }
+            }
+        }
+
+        // If BFS is complete without visited d
+        return false;
     }
 }
 
