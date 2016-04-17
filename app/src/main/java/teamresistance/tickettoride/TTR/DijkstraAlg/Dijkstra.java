@@ -37,7 +37,7 @@ public class Dijkstra {
     private Map<Vertex, Vertex> predecessors;
     private Map<Vertex, Integer> distance;
 
-    public Dijkstra(Graph graph) {
+    public Dijkstra(DijkstraGraph graph) {
         // create a copy of the array so that we can operate on this array
         this.nodes = new ArrayList<Vertex>(graph.getVertexes());
         this.edges = new ArrayList<Edge>(graph.getEdges());

@@ -20,11 +20,11 @@ import java.util.List;
  * @author Parker Schibel
  * @version April 2016
  */
-public class Graph {
+public class DijkstraGraph {
         private final List<Vertex> vertexes;
         private final List<Edge> edges;
 
-        public Graph(List<Vertex> vertexes, List<Edge> edges) {
+        public DijkstraGraph(List<Vertex> vertexes, List<Edge> edges) {
             this.vertexes = vertexes;
             this.edges = edges;
         }
