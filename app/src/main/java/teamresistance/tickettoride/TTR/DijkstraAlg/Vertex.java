@@ -20,11 +20,9 @@ package teamresistance.tickettoride.TTR.DijkstraAlg;
  */
 public class Vertex {
 
-    final private String id;
     final private String name;
 
-    public Vertex(String id, String name) {
-        this.id = id;
+    public Vertex(String name) {
         this.name = name;
     }
     @Override
@@ -36,15 +34,7 @@ public class Vertex {
         if (getClass() != obj.getClass())
             return false;
         Vertex other = (Vertex) obj;
-        if (id == null) {
-            if (other.id != null)
-                return false;
-        } else if (!id.equals(other.id))
-            return false;
         return true;
-    }
-    public String getId() {
-        return id;
     }
     public String getName(){
         return name;
