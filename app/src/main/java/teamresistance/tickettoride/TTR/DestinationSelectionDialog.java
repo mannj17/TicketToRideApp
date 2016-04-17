@@ -71,6 +71,7 @@ public class DestinationSelectionDialog extends  Dialog implements android.view.
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
+        setCanceledOnTouchOutside(false);
         setContentView(R.layout.destination_selection_dialog);
         //set all buttons
         selectBtn = (Button) findViewById(R.id.btn_select);

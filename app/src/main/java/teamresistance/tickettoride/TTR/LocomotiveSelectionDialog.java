@@ -28,6 +28,7 @@ import teamresistance.tickettoride.TTR.Actions.ConfirmSelectionAction;
 public class LocomotiveSelectionDialog extends Dialog implements View.OnClickListener{
     /** Class Instance Variables */
     private Button selectBtn; //button for user to select
+    private Button cancelBtn; //button for cancellation
     private RadioButton noLoc, oneLoc, twoLoc, threeLoc, fourLoc, fiveLoc, sixLoc; //radio buttons repreenting how many 'loc' you want to use
     private RadioButton[] locomotives; //array to contain all radio buttons
     private Deck trainCards; //player deck of train cards of user
@@ -68,10 +69,13 @@ public class LocomotiveSelectionDialog extends Dialog implements View.OnClickLis
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.locomotive_selection);
+        setCanceledOnTouchOutside(false);
 
         //initialize buttons and set as listeners
         selectBtn = (Button) findViewById(R.id.btn_select);
         selectBtn.setOnClickListener(this);
+        cancelBtn = (Button) findViewById(R.id.btn_cancel);
+        cancelBtn.setOnClickListener(this);
         noLoc = (RadioButton)findViewById(R.id.None_Rainbow);
         oneLoc = (RadioButton)findViewById(R.id.One_Rainbow);
         twoLoc = (RadioButton)findViewById(R.id.Two_Rainbow);
@@ -105,6 +109,8 @@ public class LocomotiveSelectionDialog extends Dialog implements View.OnClickLis
     public void onClick(View v) {
         if(v.getId() == R.id.btn_select){
             game.sendAction(new ConfirmSelectionAction(player, useRainbows));
+            dismiss();
+        } else if (v.getId() == R.id.btn_cancel){
             dismiss();
         } else if(v.getId() == R.id.None_Rainbow){
             noLoc.setChecked(true);
