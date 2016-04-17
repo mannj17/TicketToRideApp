@@ -239,7 +239,7 @@ public class TTRLocalGame extends LocalGame {
                                 for (int j = 0; j < mainState.getPlayerTrainDecks()[mainState.getPlayerID()].size(); j++) {
                                     String cardColor = mainState.getPlayerTrainDecks()[mainState.getPlayerID()]
                                             .getCards().get(j).toString();
-                                    if (cardColor.equals("Rainbow") && numRainbows != 0) {
+                                    if (cardColor.equals("Rainbow") && numRainbows != 0 && count != 0) {
                                         mainState.getPlayerTrainDecks()[mainState.getPlayerID()].moveCardTo(
                                                 mainState.getTrainDiscard(),
                                                 mainState.getPlayerTrainDecks()[mainState.getPlayerID()], j);
