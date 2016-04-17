@@ -19,6 +19,12 @@ import teamresistance.tickettoride.TTR.Actions.ConfirmSelectionAction;
  *  Allows user to select train color for grey tracks and allows user to select how many locomotive
  *  cards they wish to use.
  *
+ * RESOURCES:
+ * 4/11/16
+ * http://stackoverflow.com/questions/13341560/how-to-create-a-custom-dialog-box-in-android
+ * 4/17/16
+ * http://stackoverflow.com/questions/9829453/android-4-0-dialog-gets-canceled-when-touched-outside-of-dialog-window
+ *
  * @author Nick Scacciotti
  * @author Nick Larson
  * @author Jess Mann
