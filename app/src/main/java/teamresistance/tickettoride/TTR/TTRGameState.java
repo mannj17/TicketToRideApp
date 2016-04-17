@@ -107,13 +107,18 @@ public class TTRGameState extends GameState {
     //THE WEST!
     private Path vancouverToCalgary = new Path();
     private Path vancouverToSeattle = new Path();
+    private Path vancouverToSeattle2 = new Path();
     private Path seattleToCalgary = new Path();
     private Path seattleToHelena = new Path();
-    private Path seattleToPortland= new Path();
+    private Path seattleToPortland = new Path();
+    private Path seattleToPortland2 = new Path();
     private Path portlandToSanFrancisco = new Path();
+    private Path portlandToSanFrancisco2 = new Path();
     private Path portlandToSaltLakeCity = new Path();
     private Path sanFranciscoToLosAngeles = new Path();
+    private Path sanFranciscoToLosAngeles2 = new Path();
     private Path sanFranciscoToSaltLakeCity = new Path();
+    private Path sanFranciscoToSaltLakeCity2 = new Path();
     private Path losAngelesToLasVegas = new Path();
     private Path losAngelesToPheonix = new Path();
     private Path losAngelesToElPaso = new Path();
@@ -126,12 +131,14 @@ public class TTRGameState extends GameState {
     private Path helenaToDenver = new Path();
     private Path helenaToSaltLakeCity = new Path();
     private Path saltLakeCityToDenver = new Path();
+    private Path saltLakeCityToDenver2 = new Path();
     private Path saltLakeCityToLasVegas = new Path();
     private Path phoenixToDenver = new Path();
     private Path phoenixToSantaFe = new Path();
     private Path phoenixToElPaso = new Path();
     private Path denverToOmaha = new Path();
     private Path denverToKansasCity = new Path();
+    private Path denverToKansasCity2 = new Path();
     private Path denverToOklahomaCity = new Path();
     private Path denverToSantaFe = new Path();
     private Path santaFeToOklahomaCity = new Path();
@@ -146,21 +153,29 @@ public class TTRGameState extends GameState {
     private Path duluthToToronto = new Path();
     private Path duluthToChicago = new Path();
     private Path duluthToOmaha = new Path();
+    private Path duluthToOmaha2 = new Path();
     private Path omahaToChicago = new Path();
     private Path omahatoKansasCity = new Path();
+    private Path omahatoKansasCity2 = new Path();
     private Path kansasCityToSaintLouise = new Path();
     private Path kansasCityToOklahomaCity = new Path();
+    private Path kansasCityToSaintLouise2 = new Path();
+    private Path kansasCityToOklahomaCity2 = new Path();
     private Path oklahomaCityToLittleRock = new Path();
     private Path oklahomaCityToDallas = new Path();
+    private Path oklahomaCityToDallas2 = new Path();
     private Path dallasToLittleRock = new Path();
     private Path dallasToHouston = new Path();
+    private Path dallasToHouston2 = new Path();
     private Path houstonToNewOrlean = new Path();
     //Mississippi
     private Path saultSteMarieToMontreal = new Path();
     private Path saultSteMarieToToronto = new Path();
     private Path chicagoToToronto = new Path();
     private Path chicagoToPittsburgh = new Path();
+    private Path chicagoToPittsburgh2 = new Path();
     private Path chicagoToSaintLouis = new Path();
+    private Path chicagoToSaintLouis2 = new Path();
     private Path saintLouisToPittsburgh = new Path();
     private Path saintLouisToNashville = new Path();
     private Path saintLouisToLittleRock = new Path();
@@ -170,24 +185,31 @@ public class TTRGameState extends GameState {
     private Path littleRockToNashville = new Path();
     private Path littleRockToNewOrleans = new Path();
     private Path newOrleansToAtlanta = new Path();
+    private Path newOrleansToAtlanta2 = new Path();
     private Path newOrleansToMiami = new Path();
     //Appalachia
     private Path torontoToMontreal = new Path();
     private Path torontoToPittsburgh = new Path();
     private Path pittsburghToNewYork = new Path();
+    private Path pittsburghToNewYork2 = new Path();
     private Path pittsburghToWashington = new Path();
     private Path pittsburghToRaleigh = new Path();
     private Path raleighToWashington = new Path();
+    private Path raleighToWashington2 = new Path();
     private Path raleighToCharleston = new Path();
     private Path raleighToAtlanta = new Path();
+    private Path raleighToAtlanta2 = new Path();
     private Path atlantaToCharleston = new Path();
     private Path atlantaToMiami = new Path();
     private Path miamiToCharleston = new Path();
     //NorthEast
     private Path montrealToBoston = new Path();
+    private Path montrealToBoston2 = new Path();
     private Path montrealToNewYork = new Path();
     private Path newYorkToBoston = new Path();
     private Path newYorkToWashington = new Path();
+    private Path newYorkToBoston2 = new Path();
+    private Path newYorkToWashington2 = new Path();
 
 
     //initializes track object for every track in game
@@ -195,13 +217,18 @@ public class TTRGameState extends GameState {
     //THE WEST
     Track vancouverToCalgaryTrack;
     Track vancouverToSeattleTrack;
+    Track vancouverToSeattleTrack2;
     Track seattleToCalgaryTrack;
     Track seattleToHelenaTrack;
     Track seattleToPortlandTrack;
+    Track seattleToPortlandTrack2;
     Track portlandToSanFranciscoTrack;
+    Track portlandToSanFranciscoTrack2;
     Track portlandToSaltLakeCityTrack;
     Track sanFranciscoToLosAngelesTrack;
+    Track sanFranciscoToLosAngelesTrack2;
     Track sanFranciscoToSaltLakeCityTrack;
+    Track sanFranciscoToSaltLakeCityTrack2;
     Track losAngelesToLasVegasTrack;
     Track losAngelesToPhoenixTrack;
     Track losAngelesToElPasoTrack;
@@ -214,12 +241,14 @@ public class TTRGameState extends GameState {
     Track helenaToDenverTrack;
     Track helenaToSaltLakeCityTrack;
     Track saltLakeCityToDenverTrack;
+    Track saltLakeCityToDenverTrack2;
     Track saltLakeCityToLasVegasTrack;
     Track phoenixToDenverTrack;
     Track phoenixToSantaFeTrack;
     Track phoenixToElPasoTrack;
     Track denverToOmahaTrack;
     Track denverToKansasCityTrack;
+    Track denverToKansasCityTrack2;
     Track denverToOklahomaCityTrack;
     Track denverToSantaFeTrack;
     Track santaFeToOklahomaCityTrack;
@@ -234,21 +263,29 @@ public class TTRGameState extends GameState {
     Track duluthToTorontoTrack;
     Track duluthToChicagoTrack;
     Track duluthToOmahaTrack;
+    Track duluthToOmahaTrack2;
     Track omahaToChicagoTrack;
     Track omahatoKansasCityTrack;
+    Track omahatoKansasCityTrack2;
     Track kansasCityToSaintLouiseTrack;
     Track kansasCityToOklahomaCityTrack;
+    Track kansasCityToSaintLouiseTrack2;
+    Track kansasCityToOklahomaCityTrack2;
     Track oklahomaCityToLittleRockTrack;
     Track oklahomaCityToDallasTrack;
+    Track oklahomaCityToDallasTrack2;
     Track dallasToLittleRockTrack;
     Track dallasToHoustonTrack;
+    Track dallasToHoustonTrack2;
     Track houstonToNewOrleansTrack;
     //Mississippi
     Track saultSteMarieToMontrealTrack;
     Track saultSteMarieToTorontoTrack;
     Track chicagoToTorontoTrack;
     Track chicagoToPittsburghTrack;
+    Track chicagoToPittsburghTrack2;
     Track chicagoToSaintLouisTrack;
+    Track chicagoToSaintLouisTrack2;
     Track saintLouisToPittsburghTrack;
     Track saintLouisToNashvilleTrack;
     Track saintLouisToLittleRockTrack;
@@ -258,24 +295,31 @@ public class TTRGameState extends GameState {
     Track littleRockToNashvilleTrack;
     Track littleRockToNewOrleansTracks;
     Track newOrleansToAtlantaTrack;
+    Track newOrleansToAtlantaTrack2;
     Track newOrleansToMiamiTrack;
     //Appalachia
     Track torontoToMontrealTrack;
     Track torontoToPittsburghTrack;
     Track pittsburghToNewYorkTrack;
+    Track pittsburghToNewYorkTrack2;
     Track pittsburghToWashingtonTrack;
     Track pittsburghToRaleighTrack;
     Track raleighToWashingtonTrack;
+    Track raleighToWashingtonTrack2;
     Track raleighToCharlestonTrack;
     Track raleighToAtlantaTrack;
+    Track raleighToAtlantaTrack2;
     Track atlantaToCharlestonTrack;
     Track atlantaToMiamiTrack;
     Track miamiToCharlestonTrack;
     //NorthEast
     Track montrealToBostonTrack;
+    Track montrealToBostonTrack2;
     Track montrealToNewYorkTrack;
     Track newYorkToBostonTrack;
     Track newYorkToWashingtonTrack;
+    Track newYorkToBostonTrack2;
+    Track newYorkToWashingtonTrack2;
 
     int MAX_NUM_PLAYERS = 4;
     //The first locations labeled on the destination cards
@@ -480,6 +524,34 @@ public class TTRGameState extends GameState {
         portlandToSanFranciscoTrack = new Track(5, "Green", "Portland", "SanFrancisco",
                 portlandToSanFrancisco, sanFranciscoToPortlandRect);
 
+        portlandToSanFrancisco2.moveTo(maxX * .043f, maxY * .286f);
+        portlandToSanFrancisco2.lineTo(maxX * .032f, maxY * .338f);
+        portlandToSanFrancisco2.lineTo(maxX * .045f, maxY * .343f);
+        portlandToSanFrancisco2.lineTo(maxX * .055f, maxY * .294f);
+        portlandToSanFrancisco2.close();
+        portlandToSanFrancisco2.moveTo(maxX * .030f, maxY * .345f);
+        portlandToSanFrancisco2.lineTo(maxX * .024f, maxY * .398f);
+        portlandToSanFrancisco2.lineTo(maxX * .034f, maxY * .398f);
+        portlandToSanFrancisco2.lineTo(maxX * .039f, maxY * .35f);
+        portlandToSanFrancisco2.close();
+        portlandToSanFrancisco2.moveTo(maxX * .023f, maxY * .408f);
+        portlandToSanFrancisco2.lineTo(maxX * .033f, maxY * .408f);
+        portlandToSanFrancisco2.lineTo(maxX * .032f, maxY * .459f);
+        portlandToSanFrancisco2.lineTo(maxX * .022f, maxY * .459f);
+        portlandToSanFrancisco2.close();
+        portlandToSanFrancisco2.moveTo(maxX * .022f, maxY * .469f);
+        portlandToSanFrancisco2.lineTo(maxX * .0248f, maxY * .523f);
+        portlandToSanFrancisco2.lineTo(maxX * .0327f, maxY * .522f);
+        portlandToSanFrancisco2.lineTo(maxX * .0318f, maxY * .469f);
+        portlandToSanFrancisco2.close();
+        portlandToSanFrancisco2.moveTo(maxX * .0255f, maxY * .5336f);
+        portlandToSanFrancisco2.lineTo(maxX * .0336f, maxY * .579f);
+        portlandToSanFrancisco2.lineTo(maxX * .044f, maxY * .578f);
+        portlandToSanFrancisco2.lineTo(maxX * .0365f, maxY * .5285f);
+        portlandToSanFrancisco2.close();
+        portlandToSanFranciscoTrack2 = new Track(5, "Pink", "Portland", "SanFrancisco",
+                portlandToSanFrancisco2, sanFranciscoToPortlandRect);
+
         sanFranciscoToLosAngeles.moveTo(maxX * .029f, maxY * .629f);
         sanFranciscoToLosAngeles.lineTo(maxX * .043f, maxY * .680f);
         sanFranciscoToLosAngeles.lineTo(maxX * .053f, maxY * .675f);
@@ -497,6 +569,25 @@ public class TTRGameState extends GameState {
         sanFranciscoToLosAngeles.close();
         sanFranciscoToLosAngelesTrack = new Track(3, "Yellow", "SanFrancisco", "LosAngeles",
                 sanFranciscoToLosAngeles, sanFranciscoToLosAngelesRect);
+
+        sanFranciscoToLosAngeles2.moveTo(maxX * .039f, maxY * .624f);
+        sanFranciscoToLosAngeles2.lineTo(maxX * .053f, maxY * .675f);
+        sanFranciscoToLosAngeles2.lineTo(maxX * .063f, maxY * .670f);
+        sanFranciscoToLosAngeles2.lineTo(maxX * .048f, maxY * .617f);
+        sanFranciscoToLosAngeles2.close();
+        sanFranciscoToLosAngeles2.moveTo(maxX * .055f, maxY * .681f);
+        sanFranciscoToLosAngeles2.lineTo(maxX * .075f, maxY * .726f);
+        sanFranciscoToLosAngeles2.lineTo(maxX * .084f, maxY * .718f);
+        sanFranciscoToLosAngeles2.lineTo(maxX * .065f, maxY * .673f);
+        sanFranciscoToLosAngeles2.close();
+        sanFranciscoToLosAngeles2.moveTo(maxX * .078f, maxY * .73f);
+        sanFranciscoToLosAngeles2.lineTo(maxX * .101f, maxY * .765f);
+        sanFranciscoToLosAngeles2.lineTo(maxX * .109f, maxY * .76f);
+        sanFranciscoToLosAngeles2.lineTo(maxX * .087f, maxY * .722f);
+        sanFranciscoToLosAngeles2.close();
+        sanFranciscoToLosAngelesTrack2 = new Track(3, "Pink", "SanFrancisco", "LosAngeles",
+                sanFranciscoToLosAngeles2, sanFranciscoToLosAngelesRect);
+
 
         losAngelesToLasVegas.moveTo(maxX * .127f, maxY * .702f);
         losAngelesToLasVegas.lineTo(maxX * .137f, maxY * .707f);
@@ -523,6 +614,19 @@ public class TTRGameState extends GameState {
         montrealToBoston.close();
         montrealToBostonTrack = new Track(2, "Gray", "Montreal", "Boston",
                 montrealToBoston, montrealtoBostonRect);
+
+        montrealToBoston2.moveTo(maxX * .923f, maxY * .0683f);
+        montrealToBoston2.lineTo(maxX * .9477f, maxY * .1051f);
+        montrealToBoston2.lineTo(maxX * .94f, maxY * .115f);
+        montrealToBoston2.lineTo(maxX * .917f, maxY * .078f);
+        montrealToBoston2.close();
+        montrealToBoston2.moveTo(maxX * .944f, maxY * .12f);
+        montrealToBoston2.lineTo(maxX * .9513f, maxY * .107f);
+        montrealToBoston2.lineTo(maxX * .9766f, maxY * .1398f);
+        montrealToBoston2.lineTo(maxX * .9702f, maxY * .1505f);
+        montrealToBoston2.close();
+        montrealToBostonTrack2 = new Track(2, "Gray", "Montreal", "Boston",
+                montrealToBoston2, montrealtoBostonRect);
 
         montrealToNewYork.moveTo(maxX * .899f, maxY * .089f);
         montrealToNewYork.lineTo(maxX * .91f, maxY * .087f);
@@ -554,6 +658,19 @@ public class TTRGameState extends GameState {
         newYorkToBoston.close();
         newYorkToBostonTrack = new Track(2, "Yellow", "New York City", "Boston", newYorkToBoston, newYorkToBostonRect);
 
+        newYorkToBoston2.moveTo(maxX * .981f, maxY * .176f);
+        newYorkToBoston2.lineTo(maxX * .991f, maxY * .181f);
+        newYorkToBoston2.lineTo(maxX * .976f, maxY * .224f);
+        newYorkToBoston2.lineTo(maxX * .963f, maxY * .216f);
+        newYorkToBoston2.close();
+        newYorkToBoston2.moveTo(maxX * .961f, maxY * .224f);
+        newYorkToBoston2.lineTo(maxX * .970f, maxY * .234f);
+        newYorkToBoston2.lineTo(maxX * .954f, maxY * .278f);
+        newYorkToBoston2.lineTo(maxX * .945f, maxY * .269f);
+        newYorkToBoston2.close();
+        newYorkToBostonTrack2 = new Track(2, "Red", "New York City", "Boston",
+                newYorkToBoston2, newYorkToBostonRect);
+
         newYorkToWashington.moveTo(maxX * .922f, maxY * .3f);
         newYorkToWashington.lineTo(maxX * .935f, maxY * .3f);
         newYorkToWashington.lineTo(maxX * .937f, maxY * .357f);
@@ -565,6 +682,19 @@ public class TTRGameState extends GameState {
         newYorkToWashington.lineTo(maxX * .928f, maxY * .417f);
         newYorkToWashington.close();
         newYorkToWashingtonTrack = new Track(2, "Orange", "New York City", "Washington", newYorkToWashington,
+                newYorkToWashingtonRect);
+
+        newYorkToWashington2.moveTo(maxX * .936f, maxY * .299f);
+        newYorkToWashington2.lineTo(maxX * .949f, maxY * .299f);
+        newYorkToWashington2.lineTo(maxX * .951f, maxY * .356f);
+        newYorkToWashington2.lineTo(maxX * .937f, maxY * .353f);
+        newYorkToWashington2.close();
+        newYorkToWashington2.moveTo(maxX * .939f, maxY * .359f);
+        newYorkToWashington2.lineTo(maxX * .949f, maxY * .359f);
+        newYorkToWashington2.lineTo(maxX * .953f, maxY * .416f);
+        newYorkToWashington2.lineTo(maxX * .942f, maxY * .416f);
+        newYorkToWashington2.close();
+        newYorkToWashingtonTrack2 = new Track(2, "Black", "New York City", "Washington", newYorkToWashington2,
                 newYorkToWashingtonRect);
 
         raleighToWashington.moveTo(maxX * .923f, maxY * .436f);
@@ -579,6 +709,19 @@ public class TTRGameState extends GameState {
         raleighToWashington.close();
         raleighToWashingtonTrack = new Track(2, "Gray", "Raleigh", "Washington",
                 raleighToWashington, raleighToWashingtonRect);
+
+        raleighToWashington2.moveTo(maxX * .935f, maxY * .449f);
+        raleighToWashington2.lineTo(maxX * .946f, maxY * .461f);
+        raleighToWashington2.lineTo(maxX * .922f, maxY * .503f);
+        raleighToWashington2.lineTo(maxX * .912f, maxY * .493f);
+        raleighToWashington2.close();
+        raleighToWashington2.moveTo(maxX * .909f, maxY * .500f);
+        raleighToWashington2.lineTo(maxX * .916f, maxY * .510f);
+        raleighToWashington2.lineTo(maxX * .899f, maxY * .547f);
+        raleighToWashington2.lineTo(maxX * .889f, maxY * .538f);
+        raleighToWashington2.close();
+        raleighToWashingtonTrack2 = new Track(2, "Gray", "Raleigh", "Washington",
+                raleighToWashington2, raleighToWashingtonRect);
 
         raleighToCharleston.moveTo(maxX * .882f, maxY * .566f);
         raleighToCharleston.lineTo(maxX * .889f, maxY * .551f);
@@ -670,6 +813,19 @@ public class TTRGameState extends GameState {
         raleighToAtlantaTrack = new Track(2, "Gray", "Raleigh", "Atlanta",
                 raleighToAtlanta, raleighToAtlantaRect);
 
+        raleighToAtlanta2.moveTo(maxX * .872f, maxY * .557f);
+        raleighToAtlanta2.lineTo(maxX * .881f, maxY * .568f);
+        raleighToAtlanta2.lineTo(maxX * .854f, maxY * .612f);
+        raleighToAtlanta2.lineTo(maxX * .844f, maxY * .593f);
+        raleighToAtlanta2.close();
+        raleighToAtlanta2.moveTo(maxX * .844f, maxY * .601f);
+        raleighToAtlanta2.lineTo(maxX * .853f, maxY * .612f);
+        raleighToAtlanta2.lineTo(maxX * .825f, maxY * .645f);
+        raleighToAtlanta2.lineTo(maxX * .818f, maxY * .631f);
+        raleighToAtlanta2.close();
+        raleighToAtlantaTrack2 = new Track(2, "Gray", "Raleigh", "Atlanta",
+                raleighToAtlanta2, raleighToAtlantaRect);
+
         pittsburghToRaleigh.moveTo(maxX * .843f, maxY * .393f);
         pittsburghToRaleigh.lineTo(maxX * .855f, maxY * .39f);
         pittsburghToRaleigh.lineTo(maxX * .864f, maxY * .448f);
@@ -706,7 +862,21 @@ public class TTRGameState extends GameState {
         pittsburghToNewYork.lineTo(maxX * .915f, maxY * .285f);
         pittsburghToNewYork.lineTo(maxX * .884f, maxY * .31f);
         pittsburghToNewYork.close();
-        pittsburghToNewYorkTrack = new Track(2, "White", "Pittsburgh", "New York City", pittsburghToNewYork, pittsburghToNewYorkRect);
+        pittsburghToNewYorkTrack = new Track(2, "White", "Pittsburgh", "New York City",
+                pittsburghToNewYork, pittsburghToNewYorkRect);
+
+        pittsburghToNewYork2.moveTo(maxX * .854f, maxY * .342f);
+        pittsburghToNewYork2.lineTo(maxX * .884f, maxY * .312f);
+        pittsburghToNewYork2.lineTo(maxX * .892f, maxY * .325f);
+        pittsburghToNewYork2.lineTo(maxX * .862f, maxY * .352f);
+        pittsburghToNewYork2.close();
+        pittsburghToNewYork2.moveTo(maxX * .888f, maxY * .307f);
+        pittsburghToNewYork2.lineTo(maxX * .919f, maxY * .282f);
+        pittsburghToNewYork2.lineTo(maxX * .924f, maxY * .297f);
+        pittsburghToNewYork2.lineTo(maxX * .893f, maxY * .322f);
+        pittsburghToNewYork2.close();
+        pittsburghToNewYorkTrack2 = new Track(2, "Green", "Pittsburgh", "New York City",
+                pittsburghToNewYork2, pittsburghToNewYorkRect);
 
         torontoToPittsburgh.moveTo(maxX * .824f, maxY * .216f);
         torontoToPittsburgh.lineTo(maxX * .835f, maxY * .215f);
@@ -841,6 +1011,14 @@ public class TTRGameState extends GameState {
         vancouverToSeattleTrack = new Track(1, "Gray", "Vancouver", "Seattle",
                 vancouverToSeattle, vancouverToSeattleRect);
 
+        vancouverToSeattle2.moveTo(maxX * .058f, maxY * .115f);
+        vancouverToSeattle2.lineTo(maxX * .058f, maxY * .165f);
+        vancouverToSeattle2.lineTo(maxX * .07f, maxY * .165f);
+        vancouverToSeattle2.lineTo(maxX * .07f, maxY * .115f);
+        vancouverToSeattle2.close();
+        vancouverToSeattleTrack2 = new Track(1, "Gray", "Vancouver", "Seattle",
+                vancouverToSeattle2, vancouverToSeattleRect);
+
         seattleToPortland.moveTo(maxX * .053f, maxY * .200f);
         seattleToPortland.lineTo(maxX * .040f, maxY * .252f);
         seattleToPortland.lineTo(maxX * .050f, maxY * .257f);
@@ -849,6 +1027,14 @@ public class TTRGameState extends GameState {
         seattleToPortlandTrack = new Track(1, "Gray", "Seattle", "Portland",
                 seattleToPortland, seattleToPortlandRect);
 
+
+        seattleToPortland2.moveTo(maxX * .066f, maxY * .206f);
+        seattleToPortland2.lineTo(maxX * .053f, maxY * .256f);
+        seattleToPortland2.lineTo(maxX * .060f, maxY * .263f);
+        seattleToPortland2.lineTo(maxX * .075f, maxY * .212f);
+        seattleToPortland2.close();
+        seattleToPortlandTrack2 = new Track(1, "Gray", "Seattle", "Portland",
+                seattleToPortland2, seattleToPortlandRect);
 
         vancouverToCalgary.moveTo(maxX * .09f, maxY * .08f);
         vancouverToCalgary.lineTo(maxX * .091f, maxY * .098f);
@@ -1003,6 +1189,34 @@ public class TTRGameState extends GameState {
         sanFranciscoToSaltLakeCityTrack = new Track(5, "Orange", "SanFrancisco", "SaltLakeCity",
                 sanFranciscoToSaltLakeCity, sanFranciscoToSaltLakeCityRect);
 
+        sanFranciscoToSaltLakeCity2.moveTo(maxX * .053f, maxY * .591f);
+        sanFranciscoToSaltLakeCity2.lineTo(maxX * .055f, maxY * .606f);
+        sanFranciscoToSaltLakeCity2.lineTo(maxX * .085f, maxY * .594f);
+        sanFranciscoToSaltLakeCity2.lineTo(maxX * .083f, maxY * .579f);
+        sanFranciscoToSaltLakeCity2.close();
+        sanFranciscoToSaltLakeCity2.moveTo(maxX * .088f, maxY * .575f);
+        sanFranciscoToSaltLakeCity2.lineTo(maxX * .091f, maxY * .599f);
+        sanFranciscoToSaltLakeCity2.lineTo(maxX * .123f, maxY * .574f);
+        sanFranciscoToSaltLakeCity2.lineTo(maxX * .120f, maxY * .558f);
+        sanFranciscoToSaltLakeCity2.close();
+        sanFranciscoToSaltLakeCity2.moveTo(maxX * .125f, maxY * .554f);
+        sanFranciscoToSaltLakeCity2.lineTo(maxX * .127f, maxY * .569f);
+        sanFranciscoToSaltLakeCity2.lineTo(maxX * .157f, maxY * .556f);
+        sanFranciscoToSaltLakeCity2.lineTo(maxX * .153f, maxY * .543f);
+        sanFranciscoToSaltLakeCity2.close();
+        sanFranciscoToSaltLakeCity2.moveTo(maxX * .158f, maxY * .539f);
+        sanFranciscoToSaltLakeCity2.lineTo(maxX * .161f, maxY * .551f);
+        sanFranciscoToSaltLakeCity2.lineTo(maxX * .192f, maxY * .538f);
+        sanFranciscoToSaltLakeCity2.lineTo(maxX * .188f, maxY * .521f);
+        sanFranciscoToSaltLakeCity2.close();
+        sanFranciscoToSaltLakeCity2.moveTo(maxX * .196f, maxY * .517f);
+        sanFranciscoToSaltLakeCity2.lineTo(maxX * .199f, maxY * .530f);
+        sanFranciscoToSaltLakeCity2.lineTo(maxX * .228f, maxY * .518f);
+        sanFranciscoToSaltLakeCity2.lineTo(maxX * .223f, maxY * .503f);
+        sanFranciscoToSaltLakeCity2.close();
+        sanFranciscoToSaltLakeCityTrack2 = new Track(5, "White", "SanFrancisco", "SaltLakeCity",
+                sanFranciscoToSaltLakeCity2, sanFranciscoToSaltLakeCityRect);
+
         saltLakeCityToLasVegas.moveTo(maxX * .194f, maxY * .670f);
         saltLakeCityToLasVegas.lineTo(maxX * .201f, maxY * .680f);
         saltLakeCityToLasVegas.lineTo(maxX * .224f, maxY * .641f);
@@ -1112,6 +1326,24 @@ public class TTRGameState extends GameState {
         saltLakeCityToDenver.close();
         saltLakeCityToDenverTrack = new Track(3, "Red", "SaltLakeCity", "Denver",
                 saltLakeCityToDenver, saltLakeCityToDenverRect);
+
+        saltLakeCityToDenver2.moveTo(maxX * .257f, maxY * .498f);
+        saltLakeCityToDenver2.lineTo(maxX * .256f, maxY * .512f);
+        saltLakeCityToDenver2.lineTo(maxX * .286f, maxY * .519f);
+        saltLakeCityToDenver2.lineTo(maxX * .289f, maxY * .506f);
+        saltLakeCityToDenver2.close();
+        saltLakeCityToDenver2.moveTo(maxX * .292f, maxY * .506f);
+        saltLakeCityToDenver2.lineTo(maxX * .291f, maxY * .521f);
+        saltLakeCityToDenver2.lineTo(maxX * .323f, maxY * .534f);
+        saltLakeCityToDenver2.lineTo(maxX * .324f, maxY * .517f);
+        saltLakeCityToDenver2.close();
+        saltLakeCityToDenver2.moveTo(maxX * .328f, maxY * .518f);
+        saltLakeCityToDenver2.lineTo(maxX * .327f, maxY * .533f);
+        saltLakeCityToDenver2.lineTo(maxX * .359f, maxY * .546f);
+        saltLakeCityToDenver2.lineTo(maxX * .360f, maxY * .529f);
+        saltLakeCityToDenver2.close();
+        saltLakeCityToDenverTrack2 = new Track(3, "Yellow", "SaltLakeCity", "Denver",
+                saltLakeCityToDenver2, saltLakeCityToDenverRect);
 
         phoenixToDenver.moveTo(maxX * .243f, maxY * .773f);
         phoenixToDenver.lineTo(maxX * .252f, maxY * .778f);
@@ -1306,6 +1538,29 @@ public class TTRGameState extends GameState {
         newOrleansToAtlantaTrack = new Track(4, "Yellow", "New Orleans", "Atlanta",
                 newOrleansToAtlanta, newOrleansToAtlantaRect);
 
+        newOrleansToAtlanta2.moveTo(maxX * .725f, maxY * .804f);
+        newOrleansToAtlanta2.lineTo(maxX * .735f, maxY * .813f);
+        newOrleansToAtlanta2.lineTo(maxX * .719f, maxY * .86f);
+        newOrleansToAtlanta2.lineTo(maxX * .709f, maxY * .855f);
+        newOrleansToAtlanta2.close();
+        newOrleansToAtlanta2.moveTo(maxX * .746f, maxY * .75f);
+        newOrleansToAtlanta2.lineTo(maxX * .757f, maxY * .76f);
+        newOrleansToAtlanta2.lineTo(maxX * .736f, maxY * .807f);
+        newOrleansToAtlanta2.lineTo(maxX * .725f, maxY * .795f);
+        newOrleansToAtlanta2.close();
+        newOrleansToAtlanta2.moveTo(maxX * .772f, maxY * .705f);
+        newOrleansToAtlanta2.lineTo(maxX * .779f, maxY * .715f);
+        newOrleansToAtlanta2.lineTo(maxX * .759f, maxY * .753f);
+        newOrleansToAtlanta2.lineTo(maxX * .749f, maxY * .745f);
+        newOrleansToAtlanta2.close();
+        newOrleansToAtlanta2.moveTo(maxX * .801f, maxY * .658f);
+        newOrleansToAtlanta2.lineTo(maxX * .809f, maxY * .677f);
+        newOrleansToAtlanta2.lineTo(maxX * .784f, maxY * .713f);
+        newOrleansToAtlanta2.lineTo(maxX * .773f, maxY * .700f);
+        newOrleansToAtlanta2.close();
+        newOrleansToAtlantaTrack2 = new Track(4, "Orange", "New Orleans", "Atlanta",
+                newOrleansToAtlanta2, newOrleansToAtlantaRect);
+
         nashvilleToAtlanta.moveTo(maxX * .757f, maxY * .605f);
         nashvilleToAtlanta.lineTo(maxX * .764f, maxY * .586f);
         nashvilleToAtlanta.lineTo(maxX * .797f, maxY * .62f);
@@ -1400,6 +1655,24 @@ public class TTRGameState extends GameState {
         chicagoToPittsburgh.close();
         chicagoToPittsburghTrack = new Track(3, " Orange", "Chicago", "Pittsburgh",
                 chicagoToPittsburgh, chicagoToPittsburghRect);
+
+        chicagoToPittsburgh2.moveTo(maxX * .713f, maxY * .371f);
+        chicagoToPittsburgh2.lineTo(maxX * .75f, maxY * .361f);
+        chicagoToPittsburgh2.lineTo(maxX * .75f, maxY * .38f);
+        chicagoToPittsburgh2.lineTo(maxX * .717f, maxY * .396f);
+        chicagoToPittsburgh2.close();
+        chicagoToPittsburgh2.moveTo(maxX * .755f, maxY * .356f);
+        chicagoToPittsburgh2.lineTo(maxX * .785f, maxY * .350f);
+        chicagoToPittsburgh2.lineTo(maxX * .788f, maxY * .371f);
+        chicagoToPittsburgh2.lineTo(maxX * .757f, maxY * .381f);
+        chicagoToPittsburgh2.close();
+        chicagoToPittsburgh2.moveTo(maxX * .79f, maxY * .351f);
+        chicagoToPittsburgh2.lineTo(maxX * .828f, maxY * .354f);
+        chicagoToPittsburgh2.lineTo(maxX * .826f, maxY * .374f);
+        chicagoToPittsburgh2.lineTo(maxX * .793f, maxY * .370f);
+        chicagoToPittsburgh2.close();
+        chicagoToPittsburghTrack2 = new Track(3, " Black", "Chicago", "Pittsburgh",
+                chicagoToPittsburgh2, chicagoToPittsburghRect);
 
         chicagoToToronto.moveTo(maxX * .715f, maxY * .309f);
         chicagoToToronto.lineTo(maxX * .724f, maxY * .32f);
@@ -1512,6 +1785,29 @@ public class TTRGameState extends GameState {
         denverToKansasCity.close();
         denverToKansasCityTrack = new Track(4, "Black", "Denver", "KansasCity",
                 denverToKansasCity, denverToKansasCityRect);
+
+        denverToKansasCity2.moveTo(maxX * .400f, maxY * .559f);
+        denverToKansasCity2.lineTo(maxX * .399f, maxY * .576f);
+        denverToKansasCity2.lineTo(maxX * .434f, maxY * .578f);
+        denverToKansasCity2.lineTo(maxX * .434f, maxY * .561f);
+        denverToKansasCity2.close();
+        denverToKansasCity2.moveTo(maxX * .438f, maxY * .562f);
+        denverToKansasCity2.lineTo(maxX * .439f, maxY * .579f);
+        denverToKansasCity2.lineTo(maxX * .471f, maxY * .578f);
+        denverToKansasCity2.lineTo(maxX * .472f, maxY * .559f);
+        denverToKansasCity2.close();
+        denverToKansasCity2.moveTo(maxX * .475f, maxY * .559f);
+        denverToKansasCity2.lineTo(maxX * .477f, maxY * .576f);
+        denverToKansasCity2.lineTo(maxX * .511f, maxY * .566f);
+        denverToKansasCity2.lineTo(maxX * .509f, maxY * .548f);
+        denverToKansasCity2.close();
+        denverToKansasCity2.moveTo(maxX * .515f, maxY * .547f);
+        denverToKansasCity2.lineTo(maxX * .518f, maxY * .562f);
+        denverToKansasCity2.lineTo(maxX * .547f, maxY * .540f);
+        denverToKansasCity2.lineTo(maxX * .543f, maxY * .522f);
+        denverToKansasCity2.close();
+        denverToKansasCityTrack2 = new Track(4, "Orange", "Denver", "KansasCity",
+                denverToKansasCity2, denverToKansasCityRect);
 
         denverToOklahomaCity.moveTo(maxX * .391f, maxY * .577f);
         denverToOklahomaCity.lineTo(maxX * .385f, maxY * .586f);
@@ -1696,6 +1992,19 @@ public class TTRGameState extends GameState {
         kansasCityToSaintLouiseTrack = new Track(2, "Pink", "Kansas City", "Saint Louis",
                 kansasCityToSaintLouise, kansasCityToSaintLouiseRect);
 
+        kansasCityToSaintLouise2.moveTo(maxX * .572f, maxY * .502f);
+        kansasCityToSaintLouise2.lineTo(maxX * .605f, maxY * .502f);
+        kansasCityToSaintLouise2.lineTo(maxX * .606f, maxY * .517f);
+        kansasCityToSaintLouise2.lineTo(maxX * .574f, maxY * .517f);
+        kansasCityToSaintLouise2.close();
+        kansasCityToSaintLouise2.moveTo(maxX * .61f, maxY * .502f);
+        kansasCityToSaintLouise2.lineTo(maxX * .645f, maxY * .502f);
+        kansasCityToSaintLouise2.lineTo(maxX * .645f, maxY * .518f);
+        kansasCityToSaintLouise2.lineTo(maxX * .612f, maxY * .518f);
+        kansasCityToSaintLouise2.close();
+        kansasCityToSaintLouiseTrack2 = new Track(2, "Blue", "Kansas City", "Saint Louis",
+                kansasCityToSaintLouise2, kansasCityToSaintLouiseRect);
+
         chicagoToSaintLouis.moveTo(maxX * .682f, maxY * .395f);
         chicagoToSaintLouis.lineTo(maxX * .693f, maxY * .402f);
         chicagoToSaintLouis.lineTo(maxX * .673f, maxY * .45f);
@@ -1708,6 +2017,19 @@ public class TTRGameState extends GameState {
         chicagoToSaintLouis.close();
         chicagoToSaintLouisTrack = new Track(2, "Green", "Chicago", "Saint Louis",
                 chicagoToSaintLouis, saintLouisToChicagoRect);
+
+        chicagoToSaintLouis2.moveTo(maxX * .694f, maxY * .403f);
+        chicagoToSaintLouis2.lineTo(maxX * .705f, maxY * .410f);
+        chicagoToSaintLouis2.lineTo(maxX * .685f, maxY * .458f);
+        chicagoToSaintLouis2.lineTo(maxX * .676f, maxY * .450f);
+        chicagoToSaintLouis2.close();
+        chicagoToSaintLouis2.moveTo(maxX * .672f, maxY * .423f);
+        chicagoToSaintLouis2.lineTo(maxX * .685f, maxY * .462f);
+        chicagoToSaintLouis2.lineTo(maxX * .665f, maxY * .509f);
+        chicagoToSaintLouis2.lineTo(maxX * .654f, maxY * .502f);
+        chicagoToSaintLouis2.close();
+        chicagoToSaintLouisTrack2 = new Track(2, "White", "Chicago", "Saint Louis",
+                chicagoToSaintLouis2, saintLouisToChicagoRect);
 
         omahaToChicago.moveTo(maxX * .545f, maxY * .425f);
         omahaToChicago.lineTo(maxX * .575f, maxY * .395f);
@@ -1811,13 +2133,21 @@ public class TTRGameState extends GameState {
         winnipegToDuluthTrack = new Track(4, "Black", "Winnipeg", "Duluth",
                 winnipegToDuluth, winnipegToDuluthRect);
 
-        dallasToHouston.moveTo(maxX * .568f, maxY * .828f);
+        dallasToHouston.moveTo(maxX * .57f, maxY * .826f);
         dallasToHouston.lineTo(maxX * .563f, maxY * .835f);
         dallasToHouston.lineTo(maxX * .583f, maxY * .876f);
-        dallasToHouston.lineTo(maxX * .588f, maxY * .868f);
+        dallasToHouston.lineTo(maxX * .593f, maxY * .864f);
         dallasToHouston.close();
         dallasToHoustonTrack = new Track(1, "Gray", "Dallas", "Houston",
                 dallasToHouston, dallasToHoustonRect);
+
+        dallasToHouston2.moveTo(maxX * .58f, maxY * .816f);
+        dallasToHouston2.lineTo(maxX * .573f, maxY * .823f);
+        dallasToHouston2.lineTo(maxX * .6f, maxY * .864f);
+        dallasToHouston2.lineTo(maxX * .606f, maxY * .856f);
+        dallasToHouston2.close();
+        dallasToHoustonTrack2 = new Track(1, "Gray", "Dallas", "Houston",
+                dallasToHouston2, dallasToHoustonRect);
         
         oklahomaCityToDallas.moveTo(maxX * .564f, maxY * .680f);
         oklahomaCityToDallas.lineTo(maxX * .552f, maxY * .682f);
@@ -1831,6 +2161,19 @@ public class TTRGameState extends GameState {
         oklahomaCityToDallas.close();
         oklahomaCityToDallasTrack = new Track(2, "Gray", "OklahomaCity", "Dallas",
                 oklahomaCityToDallas, oklahomaCityToDallasRect);
+
+        oklahomaCityToDallas2.moveTo(maxX * .551f, maxY * .682f);
+        oklahomaCityToDallas2.lineTo(maxX * .539f, maxY * .684f);
+        oklahomaCityToDallas2.lineTo(maxX * .543f, maxY * .737f);
+        oklahomaCityToDallas2.lineTo(maxX * .555f, maxY * .736f);
+        oklahomaCityToDallas2.close();
+        oklahomaCityToDallas2.moveTo(maxX * .554f, maxY * .74f);
+        oklahomaCityToDallas2.lineTo(maxX * .542f, maxY * .742f);
+        oklahomaCityToDallas2.lineTo(maxX * .546f, maxY * .795f);
+        oklahomaCityToDallas2.lineTo(maxX * .558f, maxY * .794f);
+        oklahomaCityToDallas2.close();
+        oklahomaCityToDallasTrack2 = new Track(2, "Gray", "OklahomaCity", "Dallas",
+                oklahomaCityToDallas2, oklahomaCityToDallasRect);
         
         kansasCityToOklahomaCity.moveTo(maxX * .578f, maxY * .542f);
         kansasCityToOklahomaCity.lineTo(maxX * .568f, maxY * .538f);
@@ -1844,6 +2187,19 @@ public class TTRGameState extends GameState {
         kansasCityToOklahomaCity.close();
         kansasCityToOklahomaCityTrack = new Track(2, "Gray", "KansasCity", "OklahomaCity",
                 kansasCityToOklahomaCity, kansasCityToOklahomaCityRect);
+
+        kansasCityToOklahomaCity2.moveTo(maxX * .567f, maxY * .537f);
+        kansasCityToOklahomaCity2.lineTo(maxX * .557f, maxY * .533f);
+        kansasCityToOklahomaCity2.lineTo(maxX * .546f, maxY * .584f);
+        kansasCityToOklahomaCity2.lineTo(maxX * .555f, maxY * .588f);
+        kansasCityToOklahomaCity2.close();
+        kansasCityToOklahomaCity2.moveTo(maxX * .556f, maxY * .596f);
+        kansasCityToOklahomaCity2.lineTo(maxX * .545f, maxY * .591f);
+        kansasCityToOklahomaCity2.lineTo(maxX * .535f, maxY * .642f);
+        kansasCityToOklahomaCity2.lineTo(maxX * .544f, maxY * .646f);
+        kansasCityToOklahomaCity2.close();
+        kansasCityToOklahomaCityTrack2 = new Track(2, "Gray", "KansasCity", "OklahomaCity",
+                kansasCityToOklahomaCity2, kansasCityToOklahomaCityRect);
         
         duluthToChicago.moveTo(maxX * .579f, maxY * .29f);
         duluthToChicago.lineTo(maxX * .613f, maxY * .315f);
@@ -1961,6 +2317,19 @@ public class TTRGameState extends GameState {
         duluthToOmahaTrack = new Track(2, "Gray", "Duluth", "Omaha",
                 duluthToOmaha, duluthToOmahaRect);
 
+        duluthToOmaha2.moveTo(maxX * .575f, maxY * .310f);
+        duluthToOmaha2.lineTo(maxX * .565f, maxY * .304f);
+        duluthToOmaha2.lineTo(maxX * .552f, maxY * .352f);
+        duluthToOmaha2.lineTo(maxX * .563f, maxY * .357f);
+        duluthToOmaha2.close();
+        duluthToOmaha2.moveTo(maxX * .562f, maxY * .364f);
+        duluthToOmaha2.lineTo(maxX * .552f, maxY * .358f);
+        duluthToOmaha2.lineTo(maxX * .539f, maxY * .409f);
+        duluthToOmaha2.lineTo(maxX * .550f, maxY * .415f);
+        duluthToOmaha2.close();
+        duluthToOmahaTrack2 = new Track(2, "Gray", "Duluth", "Omaha",
+                duluthToOmaha2, duluthToOmahaRect);
+
         omahatoKansasCity.moveTo(maxX * .543f, maxY * .450f);
         omahatoKansasCity.lineTo(maxX * .533f, maxY * .463f);
         omahatoKansasCity.lineTo(maxX * .547f, maxY * .511f);
@@ -1969,12 +2338,20 @@ public class TTRGameState extends GameState {
         omahatoKansasCityTrack = new Track(1,"Gray", "Omaha", "KansasCity",
                 omahatoKansasCity, omahaToKansasCityRect);
 
+        omahatoKansasCity2.moveTo(maxX * .554f, maxY * .436f);
+        omahatoKansasCity2.lineTo(maxX * .544f, maxY * .449f);
+        omahatoKansasCity2.lineTo(maxX * .558f, maxY * .497f);
+        omahatoKansasCity2.lineTo(maxX * .569f, maxY * .485f);
+        omahatoKansasCity2.close();
+        omahatoKansasCityTrack2 = new Track(1,"Gray", "Omaha", "KansasCity",
+                omahatoKansasCity2, omahaToKansasCityRect);
+
         //initializes the track array with above tracks
         myTracks = new Track[]{portlandToSanFranciscoTrack,seattleToHelenaTrack,
-                losAngelesToLasVegasTrack, sanFranciscoToLosAngelesTrack,
+                losAngelesToLasVegasTrack, sanFranciscoToLosAngelesTrack, sanFranciscoToLosAngelesTrack2,
                 montrealToBostonTrack, losAngelesToPhoenixTrack, montrealToNewYorkTrack,
                 newYorkToBostonTrack, newYorkToWashingtonTrack, raleighToWashingtonTrack,
-                raleighToCharlestonTrack, miamiToCharlestonTrack, atlantaToMiamiTrack,
+                raleighToCharlestonTrack, miamiToCharlestonTrack, atlantaToMiamiTrack, //,GRID_TRACK,
                 atlantaToCharlestonTrack, raleighToAtlantaTrack, pittsburghToRaleighTrack,
                 pittsburghToWashingtonTrack, pittsburghToNewYorkTrack, torontoToPittsburghTrack,
                 torontoToMontrealTrack, saultSteMarieToMontrealTrack, newOrleansToMiamiTrack,
@@ -1997,7 +2374,13 @@ public class TTRGameState extends GameState {
                 dallasToHoustonTrack, oklahomaCityToDallasTrack, kansasCityToOklahomaCityTrack,
                 dallasToHoustonTrack,winnipegToSaultSteMarieTrack, omahaToChicagoTrack,
                 duluthToChicagoTrack, duluthToTorontoTrack, duluthToSaultSteMarieTrack, duluthToOmahaTrack,
-                omahatoKansasCityTrack //,GRID_TRACK
+                omahatoKansasCityTrack, vancouverToSeattleTrack2, seattleToPortlandTrack2,
+                sanFranciscoToSaltLakeCityTrack2, portlandToSanFranciscoTrack2, saltLakeCityToDenverTrack2,
+                denverToKansasCityTrack2, duluthToOmahaTrack2, omahatoKansasCityTrack2,
+                kansasCityToOklahomaCityTrack2, kansasCityToSaintLouiseTrack2, oklahomaCityToDallasTrack2,
+                dallasToHoustonTrack2, newOrleansToAtlantaTrack2, raleighToAtlantaTrack2,
+                raleighToWashingtonTrack2, newYorkToWashingtonTrack2, newYorkToBostonTrack2,
+                montrealToBostonTrack2, chicagoToPittsburghTrack2
         };
 
         //Booleans set to defaults
