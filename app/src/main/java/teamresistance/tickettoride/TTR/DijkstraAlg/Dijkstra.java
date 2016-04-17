@@ -21,6 +21,12 @@ import java.util.Set;
  *
  * 4/17/2016
  * Source: http://www.vogella.com/tutorials/JavaAlgorithmsDijkstra/article.html
+ *
+ * @author Nick Scacciotti
+ * @author Nick Larson
+ * @author Jess Mann
+ * @author Parker Schibel
+ * @version April 2016
  */
 
 public class Dijkstra {
