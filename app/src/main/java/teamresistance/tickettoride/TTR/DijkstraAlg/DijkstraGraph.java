@@ -1,5 +1,6 @@
 package teamresistance.tickettoride.TTR.DijkstraAlg;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -21,10 +22,10 @@ import java.util.List;
  * @version April 2016
  */
 public class DijkstraGraph {
-        private final List<Vertex> vertexes;
-        private final List<Edge> edges;
+        private final ArrayList<Vertex> vertexes;
+        private final ArrayList<Edge> edges;
 
-        public DijkstraGraph(List<Vertex> vertexes, List<Edge> edges) {
+        public DijkstraGraph(ArrayList<Vertex> vertexes, ArrayList<Edge> edges) {
             this.vertexes = vertexes;
             this.edges = edges;
         }
@@ -35,5 +36,9 @@ public class DijkstraGraph {
 
         public List<Edge> getEdges() {
             return edges;
+        }
+
+        public void removeEdge(int pos){
+            vertexes.remove(pos);
         }
 }

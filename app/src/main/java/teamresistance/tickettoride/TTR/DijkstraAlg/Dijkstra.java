@@ -1,6 +1,8 @@
 package teamresistance.tickettoride.TTR.DijkstraAlg;
 
 
+import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -30,107 +32,96 @@ import java.util.Set;
  */
 
 public class Dijkstra {
-    private final List<Vertex> nodes;
-    private final List<Edge> edges;
-    private Set<Vertex> settledNodes;
-    private Set<Vertex> unSettledNodes;
-    private Map<Vertex, Vertex> predecessors;
-    private Map<Vertex, Integer> distance;
+    private DijkstraGraph myGraph;
+    final private int MAX = 100000000;
 
-    public Dijkstra(DijkstraGraph graph) {
-        // create a copy of the array so that we can operate on this array
-        this.nodes = new ArrayList<Vertex>(graph.getVertexes());
-        this.edges = new ArrayList<Edge>(graph.getEdges());
+    public Dijkstra(DijkstraGraph myGraph){
+        this.myGraph = myGraph;
     }
 
-    public void execute(Vertex source) {
-        settledNodes = new HashSet<Vertex>();
-        unSettledNodes = new HashSet<Vertex>();
-        distance = new HashMap<Vertex, Integer>();
-        predecessors = new HashMap<Vertex, Vertex>();
-        distance.put(source, 0);
-        unSettledNodes.add(source);
-        while (unSettledNodes.size() > 0) {
-            Vertex node = getMinimum(unSettledNodes);
-            settledNodes.add(node);
-            unSettledNodes.remove(node);
-            findMinimalDistances(node);
+    public void dijkstra(int source) {
+        for (Vertex vertex : myGraph.getVertexes()) {
+            vertex.setDistance(MAX);
+            vertex.setKnown(false);
+            vertex.setPredecessor(-1);
         }
-    }
-    private void findMinimalDistances(Vertex node) {
-        List<Vertex> adjacentNodes = getNeighbors(node);
-        for (Vertex target : adjacentNodes) {
-            if (getShortestDistance(target) > getShortestDistance(node)
-                    + getDistance(node, target)) {
-                distance.put(target, getShortestDistance(node)
-                        + getDistance(node, target));
-                predecessors.put(target, node);
-                unSettledNodes.add(target);
+
+        int currentVertex = source;
+        myGraph.getVertexes().get(currentVertex).setDistance(0);
+        boolean allHit = true;
+        while(currentVertex != -1){
+            relax(currentVertex);
+            currentVertex = findSmallest();
+            for (Vertex vertex : myGraph.getVertexes()) {
+                if (!vertex.getKnown()) {
+                    allHit = false;
+                }
             }
         }
 
-    }
-
-    private int getDistance(Vertex node, Vertex target) {
-        for (Edge edge : edges) {
-            if (edge.getSource().equals(node)
-                    && edge.getDestination().equals(target)) {
-                return edge.getWeight();
-            }
+        if(allHit) {
+            Log.i("Working: ", "All Done");
         }
-        throw new RuntimeException("Should not happen");
     }
 
-    private List<Vertex> getNeighbors(Vertex node) {
-        List<Vertex> neighbors = new ArrayList<Vertex>();
-        for (Edge edge : edges) {
-            if (edge.getSource().equals(node)
-                    && !isSettled(edge.getDestination())) {
-                neighbors.add(edge.getDestination());
+    private ArrayList<Edge> getNeighbors(Vertex vertex){
+        ArrayList<Edge> neighbors = new ArrayList<Edge>();
+        for(Edge edge: myGraph.getEdges()){
+            if(edge.getV1().getName().equals(vertex.getName())
+                    || edge.getV2().getName().equals(vertex.getName())){
+                neighbors.add(edge);
             }
         }
         return neighbors;
     }
-    private Vertex getMinimum(Set<Vertex> vertexes) {
-        Vertex minimum = null;
-        for (Vertex vertex : vertexes) {
-            if (minimum == null) {
-                minimum = vertex;
-            } else {
-                if (getShortestDistance(vertex) < getShortestDistance(minimum)) {
-                    minimum = vertex;
+
+    private void relax(int currentVertex){
+        ArrayList<Edge> neighbors = getNeighbors(myGraph.getVertexes().get(currentVertex));
+        for(Edge edge: neighbors){
+            int checking = -1;
+            String check1 = edge.getV1().getName();
+            String check2 = edge.getV2().getName();
+            if(check1.equals(myGraph.getVertexes().get(currentVertex).getName())){
+                checking = edge.getV2().getId();
+            }
+            else if(check2.equals(myGraph.getVertexes().get(currentVertex).getName())){
+                checking = edge.getV1().getId();
+            }
+            if(myGraph.getVertexes().get(checking).getDistance() >
+                    (edge.getWeight() + myGraph.getVertexes().get(currentVertex).getDistance())){
+                myGraph.getVertexes().get(checking).setDistance(
+                        edge.getWeight() + myGraph.getVertexes().get(currentVertex).getDistance());
+                myGraph.getVertexes().get(checking).setPredecessor(currentVertex);
+            }
+        }
+        myGraph.getVertexes().get(currentVertex).setKnown(true);
+    }
+
+    private int findSmallest(){
+        int smallest = MAX;
+        int smallestId = -1;
+        for(Vertex vertex: myGraph.getVertexes()){
+            if(!vertex.getKnown()){
+                if(vertex.getDistance() < smallest){
+                    smallest = vertex.getDistance();
+                    smallestId = vertex.getId();
                 }
             }
         }
-        return minimum;
+        return smallestId;
     }
 
-    private boolean isSettled(Vertex vertex) {
-        return settledNodes.contains(vertex);
-    }
-
-    private int getShortestDistance(Vertex destination) {
-        Integer d = distance.get(destination);
-        if (d == null) {
-            return Integer.MAX_VALUE;
-        } else {
-            return d;
+    public ArrayList<Vertex> getPath(int source, int destination){
+        dijkstra(source);
+        ArrayList<Vertex> path = new ArrayList<Vertex>();
+        Vertex currentVertex = myGraph.getVertexes().get(destination);
+        path.add(currentVertex);
+        while(currentVertex.getPredecessor() != -1){
+            int newVertex = currentVertex.getPredecessor();
+            currentVertex = myGraph.getVertexes().get(newVertex);
+            path.add(currentVertex);
+            Log.i("Path: ", currentVertex.getName());
         }
-    }
-    public LinkedList<Vertex> getPath(Vertex target) {
-        LinkedList<Vertex> path = new LinkedList<Vertex>();
-        Vertex step = target;
-        // check if a path exists
-        if (predecessors.get(step) == null) {
-            return null;
-        }
-        path.add(step);
-        while (predecessors.get(step) != null) {
-            step = predecessors.get(step);
-            path.add(step);
-        }
-        // Put it into the correct order
-        Collections.reverse(path);
         return path;
     }
 }

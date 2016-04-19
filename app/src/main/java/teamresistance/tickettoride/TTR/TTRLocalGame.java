@@ -210,6 +210,7 @@ public class TTRLocalGame extends LocalGame {
                     if(numStarted == players.length-1){ mainState.setGameStart(true);}
                     else{ numStarted++; }
                     mainState.setDestinationCardsSelected(false);
+                    mainState.getDestinationCards().setHighlight(false);
                 }
 
                 //if the player selected some tracks on the map, enter this if statement
@@ -411,6 +412,17 @@ public class TTRLocalGame extends LocalGame {
                 for (int i = 0; i < mainState.getTracks().length; i++) {
                     mainState.getTracks()[i].setSelected(false);
                     mainState.getTracks()[i].setHighlight(false);
+                }
+
+                if(mainState.getTrainColorCount("Rainbow", -1) >=3){
+                    while(!mainState.getFaceUpTrainCards().getCards().isEmpty()){
+                        mainState.getFaceUpTrainCards().getCards().remove(0);
+                    }
+                    for(int i = 0; i < 5; i++){
+                        mainState.getFaceDownTrainCards().moveTopCardTo(
+                                mainState.getFaceUpTrainCards(), mainState.getFaceDownTrainCards());
+                        mainState.getFaceUpTrainCards().getCards().get(i).setHighlight(false);
+                    }
                 }
 
                 mainState.reset = true;

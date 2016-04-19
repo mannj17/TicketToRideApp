@@ -21,9 +21,15 @@ package teamresistance.tickettoride.TTR.DijkstraAlg;
 public class Vertex {
 
     final private String name;
+    final private int id;
+    private int distance = -1;
+    private boolean known = false;
+    private int predecessor = -1;
 
-    public Vertex(String name) {
+
+    public Vertex(String name, int id) {
         this.name = name;
+        this.id = id;
     }
     @Override
     public boolean equals(Object obj) {
@@ -36,8 +42,36 @@ public class Vertex {
         Vertex other = (Vertex) obj;
         return true;
     }
+    public int getId(){
+        return id;
+    }
+
     public String getName(){
         return name;
+    }
+
+    public int getDistance(){
+        return distance;
+    }
+
+    public void setDistance(int distance){
+        this.distance = distance;
+    }
+
+    public boolean getKnown(){
+        return known;
+    }
+
+    public void setKnown(boolean known){
+        this.known = known;
+    }
+
+    public int getPredecessor(){
+        return predecessor;
+    }
+
+    public void setPredecessor(int predecessor){
+        this.predecessor = predecessor;
     }
     @Override
     public String toString() {

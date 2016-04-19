@@ -19,22 +19,26 @@ package teamresistance.tickettoride.TTR.DijkstraAlg;
  * @version April 2016
  */
 public class Edge {
-    private final Vertex source;
-    private final Vertex destination;
+    private final String city1;
+    private final String city2;
+    private final Vertex v1;
+    private final Vertex v2;
     private final int weight;
 
-    public Edge(Vertex source, Vertex destination, int weight) {
-        this.source = source;
-        this.destination = destination;
+    public Edge(String city1, String city2, Vertex v1, Vertex v2, int weight) {
+        this.city1 = city1;
+        this.city2 = city2;
+        this.v1 = v1;
+        this.v2 = v2;
         this.weight = weight;
     }
 
-    public Vertex getDestination() {
-        return destination;
+    public Vertex getV1() {
+        return v1;
     }
 
-    public Vertex getSource() {
-        return source;
+    public Vertex getV2() {
+        return v2;
     }
     public int getWeight() {
         return weight;
@@ -42,6 +46,6 @@ public class Edge {
 
     @Override
     public String toString() {
-        return source + " " + destination;
+        return v1.getName() + " to " + v2.getName();
     }
 }
