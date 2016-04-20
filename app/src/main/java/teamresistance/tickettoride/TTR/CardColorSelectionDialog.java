@@ -9,6 +9,9 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.RadioButton;
 import android.widget.TextView;
+
+import java.io.Serializable;
+
 import teamresistance.tickettoride.Game.Game;
 import teamresistance.tickettoride.R;
 import teamresistance.tickettoride.TTR.Actions.ConfirmSelectionAction;
@@ -17,15 +20,24 @@ import teamresistance.tickettoride.TTR.Actions.ConfirmSelectionAction;
  *
  *  Class that inflates view into dialog for custom handling user selection of of card color
  *
+ *
+ * RESOURCES:
+ * 4/11/16
+ * http://stackoverflow.com/questions/13341560/how-to-create-a-custom-dialog-box-in-android
+ * 4/17/16
+ * http://stackoverflow.com/questions/9829453/android-4-0-dialog-gets-canceled-when-touched-outside-of-dialog-window
+ *
  * @author Nick Scacciotti
  * @author Nick Larson
  * @author Jess Mann
  * @author Parker Schibel
  * @version April 2016
  */
-public class CardColorSelectionDialog extends Dialog implements android.view.View.OnClickListener{
+public class CardColorSelectionDialog extends Dialog implements android.view.View.OnClickListener, Serializable {
+    private static final long serialVersionUID = 388245564192016L;
     /** Class Instance Variables */
     private Button selectBtn; //button for selection
+    private Button cancelBtn; //button for cancellation
     private ImageButton train1, train2, train3, train4, train5, train6, train7, train8; //image buttons for train colors
     private RadioButton noLoc, oneLoc, twoLoc, threeLoc, fourLoc, fiveLoc, sixLoc; //radiobuttons for selecting how many 'locs' needed
     private RadioButton[] locomotives; //array for radio buttons
@@ -33,6 +45,7 @@ public class CardColorSelectionDialog extends Dialog implements android.view.Vie
     private Deck trainCards; //deck being passed in
     private final String[] trainColors = {"Red", "Orange", "Yellow", "Green",
             "Blue", "Pink", "White", "Black"}; //train colors of trains
+    int[] colorCounts = new int[8];
     private boolean[] usable = new boolean[trainColors.length]; // array of booleans representing if player has enough of that color
     private boolean[] highlighted = new boolean[trainColors.length]; // boolean to mark which tracks should be highlighted
     private boolean selected = false; // if select has been pressed
@@ -40,6 +53,7 @@ public class CardColorSelectionDialog extends Dialog implements android.view.Vie
     private int useRainbows = 0; //num of locomotive cards being used
     private Game game; //game to send action
     private TTRHumanPlayer player; //player sent in the action
+    private int min = 0;
 
     /**
      * CardColorSelectionDialog constructor
@@ -55,8 +69,7 @@ public class CardColorSelectionDialog extends Dialog implements android.view.Vie
         this.game = game;
         this.player = player;
         this.trainCards = cards;
-        int min = track.getTrainTrackNum();
-        int count = 0;
+        min = track.getTrainTrackNum();
         selected = false;
 
         for(int i = 0; i < trainCards.size(); i++){
@@ -70,16 +83,15 @@ public class CardColorSelectionDialog extends Dialog implements android.view.Vie
         for(int i = 0; i < trainColors.length; i++){
             for(int j = 0; j < trainCards.size(); j++){
                 if(trainCards.getCards().get(j).toString().equals(trainColors[i])){
-                    count++;
+                    colorCounts[i]++;
                 }
-                if(count+numRainbows >= min){
+                if(colorCounts[i]+numRainbows >= min){
                     this.usable[i] = true;
                 } else{
                     this.usable[i] = false;
                 }
             }
             this.highlighted[i] = false;
-            count = 0;
         }
     }
 
@@ -91,9 +103,12 @@ public class CardColorSelectionDialog extends Dialog implements android.view.Vie
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
+        setCanceledOnTouchOutside(false);
         setContentView(R.layout.card_selection_dialog);
         //initialize all buttons (regular, image, radio) and set as listeners
         selectBtn = (Button) findViewById(R.id.btn_select);
+        cancelBtn = (Button) findViewById(R.id.btn_cancel);
+        cancelBtn.setOnClickListener(this);
         train1 = (ImageButton) findViewById(R.id.train1);
         train2 = (ImageButton) findViewById(R.id.train2);
         train3 = (ImageButton) findViewById(R.id.train3);
@@ -202,11 +217,18 @@ public class CardColorSelectionDialog extends Dialog implements android.view.Vie
                         position = i;
                     }
                 }
-                game.sendAction(new ConfirmSelectionAction(player, trainColors[position], numRainbows));
-                dismiss();
+                if(colorCounts[position] + useRainbows >= min) {
+                    game.sendAction(new ConfirmSelectionAction(player, trainColors[position], numRainbows));
+                    dismiss();
+                }
+                else{
+                    text.setText("In order to use this deck, you must use Locomotive cards.");
+                }
             } else {
                 text.setText("Please choose a deck.");
             }
+        } else if (v.getId() == R.id.btn_cancel){
+        dismiss();
         }
         if(v.getId() == R.id.train1){
             if(highlighted[0]){

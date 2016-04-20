@@ -7,6 +7,9 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
+
+import java.io.Serializable;
+
 import teamresistance.tickettoride.Game.Game;
 import teamresistance.tickettoride.R;
 import teamresistance.tickettoride.TTR.Actions.ConfirmSelectionAction;
@@ -16,13 +19,20 @@ import teamresistance.tickettoride.TTR.Actions.ConfirmSelectionAction;
  * Class that inflates view into dialog for custom handling user choice of which destination cards
  * to keep.
  *
+ * RESOURCES:
+ * 4/11/16
+ * http://stackoverflow.com/questions/13341560/how-to-create-a-custom-dialog-box-in-android
+ * 4/17/16
+ * http://stackoverflow.com/questions/9829453/android-4-0-dialog-gets-canceled-when-touched-outside-of-dialog-window
+ *
  * @author Nick Scacciotti
  * @author Nick Larson
  * @author Jess Mann
  * @author Parker Schibel
  * @version April 2016
  */
-public class DestinationSelectionDialog extends  Dialog implements android.view.View.OnClickListener {
+public class DestinationSelectionDialog extends  Dialog implements android.view.View.OnClickListener, Serializable {
+    private static final long serialVersionUID = 388245564192016L;
     /** Class Instance Variables */
     private TTRGameState myState; //TTRGameState
     private Button selectBtn; //button for user to select their choices
@@ -71,6 +81,7 @@ public class DestinationSelectionDialog extends  Dialog implements android.view.
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
+        setCanceledOnTouchOutside(false);
         setContentView(R.layout.destination_selection_dialog);
         //set all buttons
         selectBtn = (Button) findViewById(R.id.btn_select);

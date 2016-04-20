@@ -2,7 +2,7 @@
     android:id="@+id/localTabLayout"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:layout_marginLeft="20dp"
+    android:layout_marginLeft="@dimen/config_horiz_margin"
     android:orientation="vertical" >
 
     <TableLayout
@@ -35,7 +35,7 @@
             android:id="@+id/tableHeadingRow"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="10dp" >
+            android:padding="@dimen/table_row_vert_pad" >
 
             <TextView
                 android:id="@+id/playerNameHeadingText"

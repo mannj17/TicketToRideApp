@@ -3,6 +3,8 @@ package teamresistance.tickettoride.TTR;
 import android.graphics.Path;
 import android.graphics.Rect;
 
+import java.io.Serializable;
+
 /**
  *  Track is a class representing the tracks
  *
@@ -12,7 +14,8 @@ import android.graphics.Rect;
  * @author Parker Schibel
  * @version March 2016
  */
-public class Track {
+public class Track implements Serializable {
+    private static final long serialVersionUID = 388245564192016L;
     //instance variables for tracks
     private int trainTrackNum = 0;
     private int playerID = -1;

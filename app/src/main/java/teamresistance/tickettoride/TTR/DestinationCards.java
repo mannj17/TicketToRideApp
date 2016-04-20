@@ -1,5 +1,7 @@
 package teamresistance.tickettoride.TTR;
 
+import java.io.Serializable;
+
 /**
  *  DestinationCards is a class representing destination cards and extends Card class
  *
@@ -9,7 +11,8 @@ package teamresistance.tickettoride.TTR;
  * @author Parker Schibel
  * @version March 2016
  */
-public class DestinationCards extends Card{
+public class DestinationCards extends Card implements Serializable {
+    private static final long serialVersionUID = 388245564192016L;
     //instance variables for beginning and end destinations, score, and if highlighted/claimed
     /** The first city listed on a destination card */
     private String city1;

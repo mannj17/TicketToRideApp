@@ -9,6 +9,9 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.RadioButton;
 import android.widget.TextView;
+
+import java.io.Serializable;
+
 import teamresistance.tickettoride.Game.Game;
 import teamresistance.tickettoride.R;
 import teamresistance.tickettoride.TTR.Actions.ConfirmSelectionAction;
@@ -19,15 +22,23 @@ import teamresistance.tickettoride.TTR.Actions.ConfirmSelectionAction;
  *  Allows user to select train color for grey tracks and allows user to select how many locomotive
  *  cards they wish to use.
  *
+ * RESOURCES:
+ * 4/11/16
+ * http://stackoverflow.com/questions/13341560/how-to-create-a-custom-dialog-box-in-android
+ * 4/17/16
+ * http://stackoverflow.com/questions/9829453/android-4-0-dialog-gets-canceled-when-touched-outside-of-dialog-window
+ *
  * @author Nick Scacciotti
  * @author Nick Larson
  * @author Jess Mann
  * @author Parker Schibel
  * @version April 2016
  */
-public class LocomotiveSelectionDialog extends Dialog implements View.OnClickListener{
+public class LocomotiveSelectionDialog extends Dialog implements View.OnClickListener, Serializable {
+    private static final long serialVersionUID = 388245564192016L;
     /** Class Instance Variables */
     private Button selectBtn; //button for user to select
+    private Button cancelBtn; //button for cancellation
     private RadioButton noLoc, oneLoc, twoLoc, threeLoc, fourLoc, fiveLoc, sixLoc; //radio buttons repreenting how many 'loc' you want to use
     private RadioButton[] locomotives; //array to contain all radio buttons
     private Deck trainCards; //player deck of train cards of user
@@ -35,6 +46,8 @@ public class LocomotiveSelectionDialog extends Dialog implements View.OnClickLis
             "Blue", "Pink", "White", "Black"}; //array of the train colors
     private int numRainbows = 0; //how many locomotive cards player has
     private int useRainbows = 0; //how many locomotive cards player wants to user
+    private int numCards = 0;
+    private int min = 0;
     private Game game; //game to send action
     private TTRHumanPlayer player; //player to send in action
 
@@ -52,11 +65,13 @@ public class LocomotiveSelectionDialog extends Dialog implements View.OnClickLis
         this.game = game;
         this.player = player;
         this.trainCards = cards;
+        this.min = track.getTrainTrackNum();
         for(int i = 0; i < trainCards.size(); i++){
             if(trainCards.getCards().get(i).toString().equals("Rainbow")){
                 numRainbows++;
             }
         }
+        numCards = contains(track.getTrackColor());
     }
 
     /**
@@ -68,10 +83,13 @@ public class LocomotiveSelectionDialog extends Dialog implements View.OnClickLis
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.locomotive_selection);
+        setCanceledOnTouchOutside(false);
 
         //initialize buttons and set as listeners
         selectBtn = (Button) findViewById(R.id.btn_select);
         selectBtn.setOnClickListener(this);
+        cancelBtn = (Button) findViewById(R.id.btn_cancel);
+        cancelBtn.setOnClickListener(this);
         noLoc = (RadioButton)findViewById(R.id.None_Rainbow);
         oneLoc = (RadioButton)findViewById(R.id.One_Rainbow);
         twoLoc = (RadioButton)findViewById(R.id.Two_Rainbow);
@@ -87,12 +105,18 @@ public class LocomotiveSelectionDialog extends Dialog implements View.OnClickLis
         fourLoc.setOnClickListener(this);
         fiveLoc.setOnClickListener(this);
         sixLoc.setOnClickListener(this);
-        //set noLoc selected as default
-        noLoc.setChecked(true);
+
         //set visibility
         if(numRainbows != 0){
-            for(int i = 1; i <= numRainbows; i++){
-                locomotives[i].setVisibility(View.VISIBLE);
+            for(int i = numRainbows; i >= 0; i--){
+                if(numCards + i >= min) {
+                    locomotives[i].setVisibility(View.VISIBLE);
+                    locomotives[i].setChecked(true);
+                    useRainbows = i;
+                }
+                else{
+                    locomotives[i].setVisibility(View.GONE);
+                }
             }
         }
     }
@@ -105,6 +129,8 @@ public class LocomotiveSelectionDialog extends Dialog implements View.OnClickLis
     public void onClick(View v) {
         if(v.getId() == R.id.btn_select){
             game.sendAction(new ConfirmSelectionAction(player, useRainbows));
+            dismiss();
+        } else if (v.getId() == R.id.btn_cancel){
             dismiss();
         } else if(v.getId() == R.id.None_Rainbow){
             noLoc.setChecked(true);

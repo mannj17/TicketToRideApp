@@ -1,5 +1,5 @@
 package teamresistance.tickettoride.TTR;
-
+import java.io.*;
 /**
  * A class meant to be inherited from by the other cards
  *
@@ -9,7 +9,9 @@ package teamresistance.tickettoride.TTR;
  * @author Parker Schibel
  * @version March 2016
  */
-public class Card {
+
+public class Card implements Serializable{
+    private static final long serialVersionUID = 388245564192016L;
     private boolean highlight = false;
     /**
      * Sets the highlight variable to the new variable
