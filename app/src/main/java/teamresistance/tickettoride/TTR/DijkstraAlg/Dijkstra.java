@@ -27,7 +27,7 @@ import java.util.Set;
  */
 
 public class Dijkstra implements Serializable {
-    private static final long serialVersionUID = 388245564192016L;
+    private static final long serialVersionUID = 3867985564192016L;
     private DijkstraGraph myGraph;
     final private int MAX = 100000000;
 

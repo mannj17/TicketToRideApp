@@ -16,7 +16,7 @@ import teamresistance.tickettoride.TTR.Deck;
  * @version April 2016
  */
 public class SendDeck extends GameAction implements Serializable {
-    private static final long serialVersionUID = 388245564192016L;
+    private static final long serialVersionUID = 34824575564192016L;
     private Deck sendDeck;
 
     /**

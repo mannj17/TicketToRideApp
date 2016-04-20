@@ -15,7 +15,7 @@ import teamresistance.tickettoride.Game.actionMsg.GameAction;
  * @version March 2016
  */
 public class TrackPlaceAction extends GameAction implements Serializable {
-    private static final long serialVersionUID = 388245564192016L;
+    private static final long serialVersionUID = 3882400014192016L;
 
     private String trackColor;
     private int index;
