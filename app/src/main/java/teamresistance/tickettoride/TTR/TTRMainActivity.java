@@ -22,7 +22,7 @@ import java.util.ArrayList;
  * @version March 2016
  */
 public class TTRMainActivity extends GameMainActivity implements Serializable {
-    private static final long serialVersionUID = 388245564192016L;
+    private static final long serialVersionUID = 668245564192016L;
 
     public static final int PORT_NUMBER = 4567;
 

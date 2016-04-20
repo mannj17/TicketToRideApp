@@ -27,7 +27,7 @@ import java.util.Set;
  */
 
 public class Dijkstra implements Serializable {
-    private static final long serialVersionUID = 388245564192016L;
+    private static final long serialVersionUID = 3867985564192016L;
     private DijkstraGraph myGraph;
     final private int MAX = 100000000;
 
@@ -119,5 +119,38 @@ public class Dijkstra implements Serializable {
             Log.i("Path: ", currentVertex.getName());
         }
         return path;
+    }
+
+    public ArrayList<Edge> getEdges(int source, int destination){
+        dijkstra(source);
+        ArrayList<Vertex> usedVertices = getPath(source, destination);
+        ArrayList<Edge> myEdges = new ArrayList<Edge>();
+        for(Vertex vertex: usedVertices){
+            for(Edge edge: myGraph.getEdges()){
+                if(edge.getV1().getName().equals(vertex.getName())
+                   || edge.getV2().getName().equals(vertex.getName())){
+                    if(vertex.getPredecessor() == -1){}
+                    else if(edge.getV1().getName().equals(myGraph.getVertexes().get(vertex.getPredecessor()).getName())
+                            || edge.getV2().getName().equals(myGraph.getVertexes().get(vertex.getPredecessor()).getName())){
+                        myEdges.add(edge);
+                        Log.i("Path: ", edge.toString());
+                    }
+                }
+            }
+        }
+        return myEdges;
+    }
+
+    public ArrayList<Vertex> getSingleNeighbor(){
+        ArrayList<Vertex> lonelyNeighbor = new ArrayList<Vertex>();
+        for(Vertex vertex: myGraph.getVertexes()){
+            if(getNeighbors(vertex).size() == 1){
+                lonelyNeighbor.add(vertex);
+            }
+        }
+        return lonelyNeighbor;
+    }
+    public DijkstraGraph getMyGraph(){
+        return myGraph;
     }
 }

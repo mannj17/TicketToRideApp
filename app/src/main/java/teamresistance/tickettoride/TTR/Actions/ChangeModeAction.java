@@ -15,7 +15,7 @@ import teamresistance.tickettoride.Game.actionMsg.GameAction;
  * @version March 2016
  */
 public class ChangeModeAction extends GameAction implements Serializable {
-    private static final long serialVersionUID = 388245564192016L;
+    private static final long serialVersionUID = 3884322323564192016L;
     public ChangeModeAction(GamePlayer player) {
         super(player);
     }

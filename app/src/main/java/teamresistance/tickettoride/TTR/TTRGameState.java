@@ -20,7 +20,7 @@ import teamresistance.tickettoride.Game.infoMsg.GameState;
  */
 public class TTRGameState extends GameState implements Serializable{
     public boolean reset;
-    private static final long serialVersionUID = 388245564192016L;
+    private static final long serialVersionUID = 388245678192016L;
     protected int maxX = 1720;
     protected int maxY = 980;
 
@@ -33,8 +33,8 @@ public class TTRGameState extends GameState implements Serializable{
     Rect gridTouch = new Rect(0,0,1,1);
 
     //initializes a path for eeach track
-    private Path GRID = new Path();
-    private Path pathTemp = new Path();
+    private CustomPath GRID = new CustomPath();
+    private CustomPath pathTemp = new CustomPath();
 
     Track GRID_TRACK;
     int MAX_NUM_PLAYERS = 4;
@@ -637,6 +637,7 @@ public class TTRGameState extends GameState implements Serializable{
         pathTemp.lineTo(maxX * .085f, maxY * .115f);
         pathTemp.close();
         tempTrack = new Track(1, "Gray", "Vancouver", "Seattle", pathTemp, tempRect);
+        tempTracks.add(tempTrack);
         pathTemp.reset();
 
         tempRect = new Rect((int)(maxX * .0), (int)(maxY * .19), (int)(maxX * .075), (int)(maxY * .279));
@@ -910,7 +911,7 @@ public class TTRGameState extends GameState implements Serializable{
         pathTemp.lineTo(maxX * .318f, maxY * .312f);
         pathTemp.lineTo(maxX * .308f, maxY * .304f);
         pathTemp.close();
-        tempTrack = new Track(3, "Pin", "Helena", "Salt Lake City", pathTemp, tempRect);
+        tempTrack = new Track(3, "Pink", "Helena", "Salt Lake City", pathTemp, tempRect);
         tempTracks.add(tempTrack);
         pathTemp.reset();
 
@@ -1874,7 +1875,7 @@ public class TTRGameState extends GameState implements Serializable{
         tempTracks.add(tempTrack);
         pathTemp.reset();
 
-        myTracks = new Track[77];
+        myTracks = new Track[tempTracks.size()];
         for(int i = 0; i < tempTracks.size(); i++){
             myTracks[i] = tempTracks.get(i);
         }
@@ -1957,6 +1958,15 @@ public class TTRGameState extends GameState implements Serializable{
         }
     }
 
+    public int getTrackPosition(String city1, String city2){
+        int position = -1;
+        for(int i = 0; i < myTracks.length; i++){
+            if(city1.equals(myTracks[i].getStartCity()) && city2.equals(myTracks[i].getEndCity())){
+                position = i;
+            }
+        }
+        return position;
+    }
     public int[] getDestinationCities1() {
         return destinationCities1;
     }

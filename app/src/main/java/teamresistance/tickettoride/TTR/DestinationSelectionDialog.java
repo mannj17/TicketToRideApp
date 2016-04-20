@@ -32,7 +32,7 @@ import teamresistance.tickettoride.TTR.Actions.ConfirmSelectionAction;
  * @version April 2016
  */
 public class DestinationSelectionDialog extends  Dialog implements android.view.View.OnClickListener, Serializable {
-    private static final long serialVersionUID = 388245564192016L;
+    private static final long serialVersionUID = 388255575192016L;
     /** Class Instance Variables */
     private TTRGameState myState; //TTRGameState
     private Button selectBtn; //button for user to select their choices

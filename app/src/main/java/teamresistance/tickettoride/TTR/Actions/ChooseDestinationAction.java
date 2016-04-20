@@ -15,7 +15,7 @@ import teamresistance.tickettoride.Game.actionMsg.GameAction;
  * @version March 2016
  */
 public class ChooseDestinationAction extends GameAction implements Serializable {
-    private static final long serialVersionUID = 388245564192016L;
+    private static final long serialVersionUID = 38827898764192016L;
     public ChooseDestinationAction(GamePlayer player) {
         super(player);
     }

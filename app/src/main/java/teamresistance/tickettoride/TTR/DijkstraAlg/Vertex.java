@@ -21,7 +21,7 @@ import java.io.Serializable;
  * @version April 2016
  */
 public class Vertex implements Serializable {
-    private static final long serialVersionUID = 388245564192016L;
+    private static final long serialVersionUID = 380426764192016L;
 
     final private String name;
     final private int id;

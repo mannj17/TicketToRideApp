@@ -12,7 +12,7 @@ import java.io.Serializable;
  * @version March 2016
  */
 public class TrainCards extends Card implements Serializable {
-    private static final long serialVersionUID = 388245564192016L;
+    private static final long serialVersionUID = 777245564192016L;
     //String of names of the different train card colors
     private final String[] trainCarNames = {"Yellow", "Blue", "Orange", "White",
             "Pink", "Black", "Red", "Green",

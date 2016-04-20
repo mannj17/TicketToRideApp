@@ -35,7 +35,7 @@ import teamresistance.tickettoride.TTR.Actions.ConfirmSelectionAction;
  * @version April 2016
  */
 public class LocomotiveSelectionDialog extends Dialog implements View.OnClickListener, Serializable {
-    private static final long serialVersionUID = 388245564192016L;
+    private static final long serialVersionUID = 588445564192016L;
     /** Class Instance Variables */
     private Button selectBtn; //button for user to select
     private Button cancelBtn; //button for cancellation

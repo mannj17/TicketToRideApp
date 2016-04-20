@@ -23,7 +23,7 @@ import java.util.List;
  * @version April 2016
  */
 public class DijkstraGraph implements Serializable {
-    private static final long serialVersionUID = 388245564192016L;
+    private static final long serialVersionUID = 3803995564192016L;
         private final ArrayList<Vertex> vertexes;
         private final ArrayList<Edge> edges;
 
@@ -32,11 +32,11 @@ public class DijkstraGraph implements Serializable {
             this.edges = edges;
         }
 
-        public List<Vertex> getVertexes() {
+        public ArrayList<Vertex> getVertexes() {
             return vertexes;
         }
 
-        public List<Edge> getEdges() {
+        public ArrayList<Edge> getEdges() {
             return edges;
         }
 

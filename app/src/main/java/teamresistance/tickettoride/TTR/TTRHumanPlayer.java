@@ -40,7 +40,7 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
     private final String[] trainColors = {"Yellow", "Blue", "Orange", "White",
             "Pink", "Black", "Red", "Green", "Rainbow"};
     private Button confirmSelection;
-    private static final long serialVersionUID = 388245564192016L;
+    private static final long serialVersionUID = 333245564192016L;
     /**
      * TextViews for player's names
      */
@@ -179,7 +179,7 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
                 cpu3FrameLayout.setVisibility(View.GONE);
                 this.humanTextView.setText("" + this.allPlayerNames[this.playerNum]);
                 this.humanScoreTextview.setText("" + ((TTRGameState) info).getScores()[this.playerNum]);
-                this.humanTrainTokenTextView.setText("" + ((TTRGameState) info).getTrainTokens()[0]);
+                this.humanTrainTokenTextView.setText("" + ((TTRGameState) info).getTrainTokens()[this.playerNum]);
                 this.playerDestinationCardTextView.setText("Total Cards: " + myState.getPlayerDestinationDecks()[this.playerNum].size());
                 int numberOfDestCards = 0;
                 if (myState.getPlayerDestinationDecks()[this.playerNum].size() > 6) {

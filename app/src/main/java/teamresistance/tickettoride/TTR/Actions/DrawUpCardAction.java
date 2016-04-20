@@ -15,7 +15,7 @@ import teamresistance.tickettoride.Game.actionMsg.GameAction;
  * @version March 2016
  */
 public class DrawUpCardAction extends GameAction implements Serializable {
-    private static final long serialVersionUID = 388245564192016L;
+    private static final long serialVersionUID = 388970564192016L;
     private int pos;
     public DrawUpCardAction(GamePlayer player, int pos) {
         super(player);

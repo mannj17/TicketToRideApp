@@ -16,7 +16,7 @@ import teamresistance.tickettoride.TTR.Deck;
  * @version March 2016
  */
 public class ConfirmSelectionAction extends GameAction implements Serializable {
-    private static final long serialVersionUID = 388245564192016L;
+    private static final long serialVersionUID = 388780064192016L;
     private Deck sendDeck = null;
     private Deck removeDeck = null;
     private String chosenColor = null;
