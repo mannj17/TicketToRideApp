@@ -23,7 +23,7 @@ public class Track implements Serializable {
     private Boolean selected = false;
     private Boolean highlight = false;
     private Boolean covered = false;
-    private Path trackPath = new Path();
+    private CustomPath trackPath = new CustomPath();
     private Rect touchArea = new Rect();
     private String startCity = "";
     private String endCity = "";
