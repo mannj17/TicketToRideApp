@@ -29,16 +29,9 @@ public class TTRGameState extends GameState implements Serializable{
     Track[] myTracks;
     Rect tempRect;
 
-    //Rects that are used to define touchable areas for track selection in Track object
-    Rect gridTouch = new Rect(0,0,1,1);
-
-    //initializes a path for eeach track
-    private CustomPath GRID = new CustomPath();
     private CustomPath pathTemp = new CustomPath();
     private CustomPath pathTemp2 = new CustomPath();
 
-
-    Track GRID_TRACK;
     int MAX_NUM_PLAYERS = 4;
     //The first locations labeled on the destination cards
     private int[] destinationCities1 = {1, 3, 4, 7, 9, 11, 13, 14, 16, 14, 18, 7, 13, 20, 22, 24,
@@ -56,14 +49,10 @@ public class TTRGameState extends GameState implements Serializable{
     private Deck faceUpTrainCards;
     /** The deck of destination cards */
     private Deck destinationCards;
-    /**pool of destination cards for a player to choose from*/
-    private Deck destinationPool;
     /** The pile of discarded train cards */
     private Deck trainDiscard;
     /** The pile of discarded destination cards */
     private Deck destinationDiscard;
-    /** The pool of destination cards for when a player is selecting new destination cards*/
-    private Deck destinationCardsDrawn;
     /** Which player's turn it is */
     private int playerID;
     /** The number of players playing the game */
@@ -162,48 +151,7 @@ public class TTRGameState extends GameState implements Serializable{
         }
         selectedCardColor = null;
         trainDiscard = new Deck("Train Card Discard");
-        destinationCardsDrawn = new Deck("Destination Cards Drawn");
-        destinationPool = new Deck("Destination Card Pool");
         numRainbows = 0;
-
-        // GRID creates a "Track" path used to aid in mapping out locations
-        GRID.moveTo(0, maxY * .1f);
-        GRID.lineTo(maxX, maxY * .1f);
-        GRID.moveTo(0, maxY * .2f);
-        GRID.lineTo(maxX, maxY * .2f);
-        GRID.moveTo(0, maxY * .3f);
-        GRID.lineTo(maxX, maxY * .3f);
-        GRID.moveTo(0, maxY * .4f);
-        GRID.lineTo(maxX, maxY * .4f);
-        GRID.moveTo(0, maxY * .5f);
-        GRID.lineTo(maxX, maxY * .5f);
-        GRID.moveTo(0, maxY * .6f);
-        GRID.lineTo(maxX, maxY * .6f);
-        GRID.moveTo(0, maxY * .7f);
-        GRID.lineTo(maxX, maxY * .7f);
-        GRID.moveTo(0, maxY * .8f);
-        GRID.lineTo(maxX, maxY * .8f);
-        GRID.moveTo(0, maxY * .9f);
-        GRID.lineTo(maxX, maxY * .9f);
-        GRID.moveTo(maxX * .1f, 0);
-        GRID.lineTo(maxX * .1f, maxY);
-        GRID.moveTo(maxX * .2f, 0);
-        GRID.lineTo(maxX * .2f, maxY);
-        GRID.moveTo(maxX * .3f, 0);
-        GRID.lineTo(maxX * .3f, maxY);
-        GRID.moveTo(maxX * .4f, 0);
-        GRID.lineTo(maxX * .4f, maxY);
-        GRID.moveTo(maxX * .5f, 0);
-        GRID.lineTo(maxX * .5f, maxY);
-        GRID.moveTo(maxX * .6f, 0);
-        GRID.lineTo(maxX * .6f, maxY);
-        GRID.moveTo(maxX * .7f, 0);
-        GRID.lineTo(maxX * .7f, maxY);
-        GRID.moveTo(maxX * .8f, 0);
-        GRID.lineTo(maxX * .8f, maxY);
-        GRID.moveTo(maxX * .9f, 0);
-        GRID.lineTo(maxX * .9f, maxY);
-        GRID_TRACK = new Track(0, "GRID", "NOWHERE", "NOWHERE", GRID, gridTouch, false, "", pathTemp2);
 
         //creates a path for each track
         tempRect = new Rect((int)(maxX*.0), (int)(maxY*.290), (int)(maxX*.05), (int)(maxY*.8));
@@ -2185,65 +2133,83 @@ public class TTRGameState extends GameState implements Serializable{
         onlyDownDeck = false;
         gameStart = false;
         reset = false;
+
+        TTRGameState tempState = new TTRGameState(this);
     }
     /*
      * Creates a deep copy of the GameState
      * @original
      */
     public TTRGameState(TTRGameState original) {
-        numPlayers = original.getNumPlayers();
-        playerID = original.getPlayerID();
-        faceDownTrainCards = new Deck(original.faceDownTrainCards);
-        faceUpTrainCards = new Deck(original.faceUpTrainCards);
-        destinationCards = new Deck(original.destinationCards);
-        trainDiscard = new Deck(original.trainDiscard);
-        destinationDiscard = new Deck(original.destinationDiscard);
+        this.numPlayers = original.getNumPlayers();
+        this.playerID = original.getPlayerID();
+        this.faceDownTrainCards = new Deck(original.faceDownTrainCards);
+        this.faceUpTrainCards = new Deck(original.faceUpTrainCards);
+        this.destinationCards = new Deck(original.destinationCards);
+        this.trainDiscard = new Deck(original.trainDiscard);
+        this.destinationDiscard = new Deck(original.destinationDiscard);
 
-        for(int i = 0; i < original.getNumPlayers(); i++){
-            trainTokens[i] = original.getTrainTokens()[i];
-            scores[i] = original.getScores()[i];
-            names[i] = original.getNames()[i];
-            playerTrainDecks[i] = new Deck(original.getPlayerTrainDecks()[i]);
-            playerDestinationDecks[i] = new Deck(original.getPlayerDestinationDecks()[i]);
+        int[] temp = original.getScores();
+        this.scores = new int[4];
+        String[] temp2 = original.getNames();
+        this.names = new String[4];
+        int[] temp3 = original.getTrainTokens();
+        this.trainTokens = new int[4];
+        for(int i = 0; i < 4; i++){
+            scores[i] = temp[i];
+            names[i] = temp2[i];
+            trainTokens[i] = temp3[i];
         }
 
-        myTracks = original.getTracks();
+        for(int i = 0; i < original.getNumPlayers(); i++){
+            this.playerTrainDecks[i] = new Deck(original.getPlayerTrainDecks()[i]);
+            this.playerDestinationDecks[i] = new Deck(original.getPlayerDestinationDecks()[i]);
+        }
+
+        Track[] temp4 = original.getTracks();
+        this.myTracks = new Track[temp.length];
+        for(int i = 0; i < myTracks.length; i++){
+            myTracks[i] = new Track(temp4[i]);
+        }
+
 
         //if a turn was made reset all the necessary values to where they need
         //to be at the start of someone's turn.
         if(reset){
-            trackSpot = -1;
-            numRainbows = 0;
-            selectedCardColor = "";
-            isSelectDestinationCards = false;
-            trackModeSelected = false;
-            cardModeSelected = true;
-            destinationCardsSelected = false;
-            trainCardsSelected = false;
-            onlyDownDeck = false;
-            useRainbow = false;
+            this.trackSpot = -1;
+            this.numRainbows = 0;
+            this.selectedCardColor = "";
+            this.isSelectDestinationCards = false;
+            this.trackModeSelected = false;
+            this.cardModeSelected = true;
+            this.destinationCardsSelected = false;
+            this.trainCardsSelected = false;
+            this.onlyDownDeck = false;
+            this.useRainbow = false;
         }
         else {
-            trackSpot = original.getTrackSpot();
-            numRainbows = original.getNumRainbows();
-            selectedCardColor = original.getSelectedCardColor();
-            isSelectDestinationCards = original.getIsSelectDestinationCards();
-            trackModeSelected = original.getTrackModeSelected();
-            cardModeSelected = original.getCardModeSelected();
-            destinationCardsSelected = original.getDestinationCardsSelected();
-            trainCardsSelected = original.getTrainCardsSelected();
-            onlyDownDeck = original.getOnlyDownDeck();
-            useRainbow = original.getUseRainbow();
+            this.trackSpot = original.getTrackSpot();
+            this.numRainbows = original.getNumRainbows();
+            this.selectedCardColor = original.getSelectedCardColor();
+            this.isSelectDestinationCards = original.getIsSelectDestinationCards();
+            this.trackModeSelected = original.getTrackModeSelected();
+            this.cardModeSelected = original.getCardModeSelected();
+            this.destinationCardsSelected = original.getDestinationCardsSelected();
+            this.trainCardsSelected = original.getTrainCardsSelected();
+            this.onlyDownDeck = original.getOnlyDownDeck();
+            this.useRainbow = original.getUseRainbow();
         }
-        gameStart = original.getGameStart();
-        if(gameStart){
-            cardModeSelected = original.getCardModeSelected();
-            trackModeSelected = original.getTrackModeSelected();
+        this.gameStart = original.getGameStart();
+        if(this.gameStart){
+            this.cardModeSelected = original.getCardModeSelected();
+            this.trackModeSelected = original.getTrackModeSelected();
         }
         else{
-            cardModeSelected = false;
-            trackModeSelected = false;
+            this.cardModeSelected = false;
+            this.trackModeSelected = false;
         }
+        this.placeTrainSelected = false;
+        this.trainDiscard = new Deck(original.getTrainDiscard());
     }
 
     public int getTrackPosition(String city1, String city2){
@@ -2327,28 +2293,12 @@ public class TTRGameState extends GameState implements Serializable{
         this.trainDiscard = trainDiscard;
     }
 
-    public Deck getDestinationPool() {
-        return destinationPool;
-    }
-
-    public void setDestinationPool(Deck destinationPool) {
-        this.destinationPool = destinationPool;
-    }
-
     public Deck getDestinationDiscard() {
         return destinationDiscard;
     }
 
     public void setDestinationDiscard(Deck destinationDiscard) {
         this.destinationDiscard = destinationDiscard;
-    }
-
-    public Deck getDestinationCardsDrawn() {
-        return destinationCardsDrawn;
-    }
-
-    public void setDestinationCardsDrawn(Deck destinationCardsDrawn) {
-        this.destinationCardsDrawn = destinationCardsDrawn;
     }
 
     public Deck[] getPlayerTrainDecks() {
