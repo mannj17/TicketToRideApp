@@ -36,7 +36,7 @@ public class Track implements Serializable {
      * @param secondCity collection of paths representing the locations for placed train tokens
      * @param firstCity area around path that is selectable by user
      */
-    public Track(int trainTrackNum, String trackColor, String firstCity, String secondCity, Path path, Rect passedTouchArea){
+    public Track(int trainTrackNum, String trackColor, String firstCity, String secondCity, CustomPath path, Rect passedTouchArea){
         this.trainTrackNum = trainTrackNum;
         this.trackColor = trackColor;
         startCity = firstCity;
@@ -88,7 +88,7 @@ public class Track implements Serializable {
      * Retruns the track Path
      * @return
      */
-    public Path getPath(){
+    public CustomPath getPath(){
         return trackPath;
     }
 
@@ -96,7 +96,7 @@ public class Track implements Serializable {
      * Sets the track path
      * @param path - new Path for graphics
      */
-    public void setPath(Path path){
+    public void setPath(CustomPath path){
         trackPath.set(path);
     }
 
