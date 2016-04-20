@@ -102,8 +102,9 @@ public class TTRLocalGame extends LocalGame implements Serializable {
         //if the final turns are over, find and announce the winner
         if (turnsLeft == 0 && noMoreTrains) {
             ArrayList<Vertex> myVertexList = new ArrayList<Vertex>();
-            ArrayList<Edge> myEdgeList = new ArrayList<Edge>();
             Vertex temp = null;
+            int longest = 0;
+            int longestDistance = 0;
             for(int i = 0; i < destNames.size(); i++){
                 temp = new Vertex(destNames.get(i),i);
                 myVertexList.add(temp);
@@ -111,6 +112,7 @@ public class TTRLocalGame extends LocalGame implements Serializable {
             Vertex startCity = null;
             Vertex endCity = null;
             for(int j = 0; j < this.players.length; j++) {
+                ArrayList<Edge> myEdgeList = new ArrayList<Edge>();
                 for (int i = 0; i < mainState.getTracks().length; i++) {
                     String city1 = mainState.getTracks()[i].getStartCity();
                     String city2 = mainState.getTracks()[i].getEndCity();
@@ -139,23 +141,21 @@ public class TTRLocalGame extends LocalGame implements Serializable {
                         myEdgeList.add(temporary);
                     }
                 }
-            /* If final turn over do final turn scoring */
-
                 DijkstraGraph playerGraph = new DijkstraGraph(myVertexList, myEdgeList);
                 Dijkstra playerDijkstra = new Dijkstra(playerGraph);
-                for(int k = 0; k < mainState.getPlayerDestinationDecks().length; k++){
+                for(int k = 0; k < mainState.getPlayerDestinationDecks()[j].getCards().size(); k++){
                     int spot1 = -1;
                     int spot2 = -1;
                     DestinationCards lookCard =
                             (DestinationCards) mainState.getPlayerDestinationDecks()[j].getCards().get(k);
                     String city1 = lookCard.getCity1();
                     String city2 = lookCard.getCity2();
-                    for(int m = 0; j < playerGraph.getVertexes().size(); j++) {
+                    for(int m = 0; m < playerGraph.getVertexes().size(); m++) {
                         if (playerGraph.getVertexes().get(m).getName().equals(city1)){
-                            spot1 = j;
+                            spot1 = m;
                         }
                         else if(playerGraph.getVertexes().get(m).getName().equals(city2)){
-                            spot2 = j;
+                            spot2 = m;
                         }
                     }
                     playerDijkstra.dijkstra(spot1);
@@ -175,7 +175,20 @@ public class TTRLocalGame extends LocalGame implements Serializable {
                     }
 
                 }
+                ArrayList<Vertex> lonelyVertex = playerDijkstra.getSingleNeighbor();
+
+                for(int n = 0; n < lonelyVertex.size(); n++){
+                    playerDijkstra.dijkstra(lonelyVertex.get(n).getId());
+                    for(Vertex vertex: playerGraph.getVertexes()){
+                        if(vertex.getDistance() != 100000000 && vertex.getDistance() > longestDistance){
+                            longestDistance = vertex.getDistance();
+                            longest = j;
+                        }
+                    }
+                }
+                myEdgeList.clear();
             }
+            mainState.setScore(mainState.getScores()[longest] + 10, longest);
             for (int j = 0; j < mainState.getScores().length; j++) {
                 if (mainState.getScores()[j] > mainState.getScores()[topScorePlayer]) {
                     topScorePlayer = j;
