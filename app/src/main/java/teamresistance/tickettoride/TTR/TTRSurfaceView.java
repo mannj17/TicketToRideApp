@@ -23,7 +23,7 @@ import teamresistance.tickettoride.R;
 public class TTRSurfaceView extends SurfaceView implements Serializable {
     private static final long serialVersionUID = 388245561312013L;
 
-    Bitmap boardImage = BitmapFactory.decodeResource(getResources(), R.drawable.game_board);
+    SerialBitmap boardImage =new SerialBitmap(getResources(), R.drawable.game_board);
 
     /*
     * Booleans relating to the placement process for trains
@@ -94,8 +94,9 @@ public class TTRSurfaceView extends SurfaceView implements Serializable {
      * Method which draws the board image onto the canvas
      */
     protected void drawBoard(Canvas canvas){
-        boardImage = Bitmap.createScaledBitmap(boardImage, maxX, maxY, false);
-        canvas.drawBitmap(boardImage, 0, 0, new Paint());
+        //boardImage = Bitmap.createScaledBitmap(boardImage, maxX, maxY, false);
+        //canvas.drawBitmap(boardImage, 0, 0, new Paint());
+        boardImage.drawBitmap(canvas);
     }
 
     /*

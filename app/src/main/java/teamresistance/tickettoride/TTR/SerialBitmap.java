@@ -3,6 +3,8 @@ package teamresistance.tickettoride.TTR;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Paint;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -20,6 +22,16 @@ public class SerialBitmap implements Serializable {
     SerialBitmap(Resources resources, int id) {
         // Take your existing call to BitmapFactory and put it here
         bitmap = BitmapFactory.decodeResource(resources,id);
+    }
+
+    SerialBitmap(Resources resources, int maxX, int maxY, int id) {
+        // Take your existing call to BitmapFactory and put it here
+        bitmap = BitmapFactory.decodeResource(resources,id);
+    }
+
+    public void drawBitmap(Canvas canvas){
+        bitmap = Bitmap.createScaledBitmap(bitmap, 1720, 980, false);
+        canvas.drawBitmap(bitmap, 0, 0, new Paint());
     }
 
     // Converts the Bitmap into a byte array for serialization
