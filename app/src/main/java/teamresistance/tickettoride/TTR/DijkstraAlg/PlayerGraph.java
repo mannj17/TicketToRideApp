@@ -59,7 +59,7 @@ public class PlayerGraph {
 //        return (new PlayerGraph(newVertices, newEdges, playerID));
 //    }
 
-    Boolean isReachable(int s, int d)
+    public boolean isReachable(int s, int d)
     {
         LinkedList<Integer> temp;
 
