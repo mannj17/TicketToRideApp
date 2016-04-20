@@ -20,9 +20,9 @@ public class Track implements Serializable {
     private int trainTrackNum = 0;
     private int playerID = -1;
     private String trackColor = "";
-    private Boolean selected = false;
-    private Boolean highlight = false;
-    private Boolean covered = false;
+    private boolean selected = false;
+    private boolean highlight = false;
+    private boolean covered = false;
     private CustomPath trackPath = new CustomPath();
     private Rect touchArea = new Rect();
     private String startCity = "";

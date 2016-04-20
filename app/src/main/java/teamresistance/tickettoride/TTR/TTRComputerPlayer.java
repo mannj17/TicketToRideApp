@@ -29,7 +29,7 @@ import teamresistance.tickettoride.TTR.DijkstraAlg.Vertex;
  * @version April 2016
  */
 public class TTRComputerPlayer extends GameComputerPlayer implements Serializable {
-    private static final long serialVersionUID = 388245564192016L;
+    private static final long serialVersionUID = 388245564192099L;
 
     private boolean isDifficult;
     private Random rand;

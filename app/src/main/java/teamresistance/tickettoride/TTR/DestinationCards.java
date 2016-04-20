@@ -12,7 +12,7 @@ import java.io.Serializable;
  * @version March 2016
  */
 public class DestinationCards extends Card implements Serializable {
-    private static final long serialVersionUID = 388245564192016L;
+    private static final long serialVersionUID = 558245564192016L;
     //instance variables for beginning and end destinations, score, and if highlighted/claimed
     /** The first city listed on a destination card */
     private String city1;

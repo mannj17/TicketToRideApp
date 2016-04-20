@@ -24,7 +24,7 @@ import teamresistance.tickettoride.TTR.Actions.TrackPlaceAction;
  * @version March 2016
  */
 public class TTRLocalGame extends LocalGame implements Serializable {
-    private static final long serialVersionUID = 388245564192016L;
+    private static final long serialVersionUID = 388111564192016L;
     //instance variables for the TTRLocalGame
     private TTRGameState mainState; //reference to the game state
     private boolean noMoreTrains; //boolean to indicate the start of a game over

@@ -21,7 +21,7 @@ import teamresistance.tickettoride.R;
  */
 
 public class TTRSurfaceView extends SurfaceView implements Serializable {
-    private static final long serialVersionUID = 388245564192016L;
+    private static final long serialVersionUID = 388245561312013L;
 
     Bitmap boardImage = BitmapFactory.decodeResource(getResources(), R.drawable.game_board);
 

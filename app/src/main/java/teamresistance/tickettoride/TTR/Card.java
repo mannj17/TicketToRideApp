@@ -11,7 +11,7 @@ import java.io.*;
  */
 
 public class Card implements Serializable{
-    private static final long serialVersionUID = 388245564192016L;
+    private static final long serialVersionUID = 288446564192016L;
     private boolean highlight = false;
     /**
      * Sets the highlight variable to the new variable

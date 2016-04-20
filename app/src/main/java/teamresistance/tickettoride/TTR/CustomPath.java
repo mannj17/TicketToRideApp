@@ -50,7 +50,7 @@ public class CustomPath extends Path implements Serializable {
     }
 
     public class ActionMove implements PathAction, Serializable{
-        private static final long serialVersionUID = -7198142191254133295L;
+        private static final long serialVersionUID = 7198142191254133295L;
 
         private float x,y;
 

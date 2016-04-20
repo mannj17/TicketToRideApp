@@ -40,7 +40,7 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
     private final String[] trainColors = {"Yellow", "Blue", "Orange", "White",
             "Pink", "Black", "Red", "Green", "Rainbow"};
     private Button confirmSelection;
-    private static final long serialVersionUID = 388245564192016L;
+    private static final long serialVersionUID = 333245564192016L;
     /**
      * TextViews for player's names
      */

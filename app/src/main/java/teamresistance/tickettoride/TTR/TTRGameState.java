@@ -20,7 +20,7 @@ import teamresistance.tickettoride.Game.infoMsg.GameState;
  */
 public class TTRGameState extends GameState implements Serializable{
     public boolean reset;
-    private static final long serialVersionUID = 388245564192016L;
+    private static final long serialVersionUID = 388245678192016L;
     protected int maxX = 1720;
     protected int maxY = 980;
 
