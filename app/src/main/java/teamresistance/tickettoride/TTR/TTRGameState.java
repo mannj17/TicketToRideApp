@@ -637,6 +637,7 @@ public class TTRGameState extends GameState implements Serializable{
         pathTemp.lineTo(maxX * .085f, maxY * .115f);
         pathTemp.close();
         tempTrack = new Track(1, "Gray", "Vancouver", "Seattle", pathTemp, tempRect);
+        tempTracks.add(tempTrack);
         pathTemp.reset();
 
         tempRect = new Rect((int)(maxX * .0), (int)(maxY * .19), (int)(maxX * .075), (int)(maxY * .279));
