@@ -203,7 +203,7 @@ public class TTRGameState extends GameState implements Serializable{
         GRID.lineTo(maxX * .8f, maxY);
         GRID.moveTo(maxX * .9f, 0);
         GRID.lineTo(maxX * .9f, maxY);
-        GRID_TRACK = new Track(0, "GRID", "NOWHERE", "NOWHERE", GRID, gridTouch, false, "", pathTemp2);
+        GRID_TRACK = new Track(0, "GRID", "NOWHERE", "NOWHERE", GRID, gridTouch, false, "", pathTemp);
 
         //creates a path for each track
         tempRect = new Rect((int)(maxX*.0), (int)(maxY*.290), (int)(maxX*.05), (int)(maxY*.8));
@@ -313,7 +313,7 @@ public class TTRGameState extends GameState implements Serializable{
         pathTemp.close();
         tempTrack = new Track(2, "Gray", "Los Angeles", "Las Vegas", pathTemp, tempRect,
 
-                false, "", pathTemp2);
+                false, "", pathTemp);
         tempTracks.add(tempTrack);
         pathTemp.reset();
         pathTemp2.reset();
@@ -360,7 +360,7 @@ public class TTRGameState extends GameState implements Serializable{
         pathTemp.lineTo(maxX * .927f, maxY * .26f);
         pathTemp.lineTo(maxX * .916f, maxY * .26f);
         pathTemp.close();
-        tempTrack = new Track(3, "Blue", "Montreal", "New York", pathTemp, tempRect, false, "", pathTemp2);
+        tempTrack = new Track(3, "Blue", "Montreal", "New York", pathTemp, tempRect, false, "", pathTemp);
         tempTracks.add(tempTrack);
         pathTemp.reset();
 
@@ -453,7 +453,7 @@ public class TTRGameState extends GameState implements Serializable{
         pathTemp.lineTo(maxX * .915f, maxY * .65f);
         pathTemp.lineTo(maxX * .902f, maxY * .64f);
         pathTemp.close();
-        tempTrack = new Track(2, "Gray", "Raleigh", "Charleston", pathTemp, tempRect, false, "", pathTemp2);
+        tempTrack = new Track(2, "Gray", "Raleigh", "Charleston", pathTemp, tempRect, false, "", pathTemp);
         tempTracks.add(tempTrack);
         pathTemp.reset();
 
@@ -478,7 +478,7 @@ public class TTRGameState extends GameState implements Serializable{
         pathTemp.lineTo(maxX * .951f, maxY * .9f);
         pathTemp.lineTo(maxX * .94f, maxY * .905f);
         pathTemp.close();
-        tempTrack = new Track(4, "Pink", "Miami", "Charleston", pathTemp, tempRect, false, "", pathTemp2);
+        tempTrack = new Track(4, "Pink", "Miami", "Charleston", pathTemp, tempRect, false, "", pathTemp);
         tempTracks.add(tempTrack);
         pathTemp.reset();
 
@@ -508,7 +508,7 @@ public class TTRGameState extends GameState implements Serializable{
         pathTemp.lineTo(maxX * .935f, maxY * .905f);
         pathTemp.lineTo(maxX * .925f, maxY * .91f);
         pathTemp.close();
-        tempTrack = new Track(5, "Blue", "Atlanta", "Miami", pathTemp, tempRect, false, "", pathTemp2);
+        tempTrack = new Track(5, "Blue", "Atlanta", "Miami", pathTemp, tempRect, false, "", pathTemp);
         tempTracks.add(tempTrack);
         pathTemp.reset();
 
@@ -523,7 +523,7 @@ public class TTRGameState extends GameState implements Serializable{
         pathTemp.lineTo(maxX * .895f, maxY * .673f);
         pathTemp.lineTo(maxX * .862f, maxY * .673f);
         pathTemp.close();
-        tempTrack = new Track(2, "Gray", "Atlanta", "Charleston", pathTemp, tempRect, false, "", pathTemp2);
+        tempTrack = new Track(2, "Gray", "Atlanta", "Charleston", pathTemp, tempRect, false, "", pathTemp);
         tempTracks.add(tempTrack);
         pathTemp.reset();
 
@@ -564,7 +564,7 @@ public class TTRGameState extends GameState implements Serializable{
         pathTemp.lineTo(maxX * .873f, maxY * .508f);
         pathTemp.lineTo(maxX * .86f, maxY * .51f);
         pathTemp.close();
-        tempTrack = new Track(2, "Gray", "Pittsburgh", "Raleigh", pathTemp, tempRect, false, "", pathTemp2);
+        tempTrack = new Track(2, "Gray", "Pittsburgh", "Raleigh", pathTemp, tempRect, false, "", pathTemp);
         tempTracks.add(tempTrack);
         pathTemp.reset();
 
@@ -579,7 +579,7 @@ public class TTRGameState extends GameState implements Serializable{
         pathTemp.lineTo(maxX * .928f, maxY * .418f);
         pathTemp.lineTo(maxX * .919f, maxY * .434f);
         pathTemp.close();
-        tempTrack = new Track(2, "Gray", "Pittsburgh", "Washington", pathTemp, tempRect, false, "", pathTemp2);
+        tempTrack = new Track(2, "Gray", "Pittsburgh", "Washington", pathTemp, tempRect, false, "", pathTemp);
         tempTracks.add(tempTrack);
         pathTemp.reset();
 
@@ -620,7 +620,7 @@ public class TTRGameState extends GameState implements Serializable{
         pathTemp.lineTo(maxX * .84f, maxY * .335f);
         pathTemp.lineTo(maxX * .829f, maxY * .336f);
         pathTemp.close();
-        tempTrack = new Track(2, "Gray", "Toronto", "Pittsburgh", pathTemp, tempRect, false, "", pathTemp2);
+        tempTrack = new Track(2, "Gray", "Toronto", "Pittsburgh", pathTemp, tempRect, false, "", pathTemp);
         tempTracks.add(tempTrack);
         pathTemp.reset();
 
@@ -640,7 +640,7 @@ public class TTRGameState extends GameState implements Serializable{
         pathTemp.lineTo(maxX * .87f, maxY * .0999f);
         pathTemp.lineTo(maxX * .865f, maxY * .083f);
         pathTemp.close();
-        tempTrack = new Track(3, "Gray", "Toronto", "Montreal", pathTemp, tempRect, false, "", pathTemp2);
+        tempTrack = new Track(3, "Gray", "Toronto", "Montreal", pathTemp, tempRect, false, "", pathTemp);
         tempTracks.add(tempTrack);
         pathTemp.reset();
 
@@ -671,7 +671,7 @@ public class TTRGameState extends GameState implements Serializable{
         pathTemp.lineTo(maxX * .855f, maxY * .043f);
         pathTemp.close();
         tempTrack = new Track(5, "Black", "Sault Ste Marie", "Montreal", pathTemp, tempRect,
-                false, "", pathTemp2);
+                false, "", pathTemp);
         tempTracks.add(tempTrack);
         pathTemp.reset();
 
@@ -706,7 +706,7 @@ public class TTRGameState extends GameState implements Serializable{
         pathTemp.lineTo(maxX * .92f, maxY * .94f);
         pathTemp.lineTo(maxX * .899f, maxY * .899f);
         pathTemp.close();
-        tempTrack = new Track(6, "Red", "New Orleans", "Miami", pathTemp, tempRect, false, "", pathTemp2);
+        tempTrack = new Track(6, "Red", "New Orleans", "Miami", pathTemp, tempRect, false, "", pathTemp);
         tempTracks.add(tempTrack);
         pathTemp.reset();
 
@@ -741,7 +741,7 @@ public class TTRGameState extends GameState implements Serializable{
         pathTemp.lineTo(maxX * .340f, maxY * .865f);
         pathTemp.lineTo(maxX * .338f, maxY * .855f);
         pathTemp.close();
-        tempTrack = new Track(6, "Black", "Los Angeles", "El Paso", pathTemp,tempRect, false, "", pathTemp2);
+        tempTrack = new Track(6, "Black", "Los Angeles", "El Paso", pathTemp,tempRect, false, "", pathTemp);
         tempTracks.add(tempTrack);
         pathTemp.reset();
 
@@ -793,7 +793,7 @@ public class TTRGameState extends GameState implements Serializable{
         pathTemp.lineTo(maxX * .200f, maxY * .080f);
         pathTemp.lineTo(maxX * .198f, maxY * .064f);
         pathTemp.close();
-        tempTrack = new Track(3, "Gray", "Vancouver", "Calgary", pathTemp, tempRect, false, "", pathTemp2);
+        tempTrack = new Track(3, "Gray", "Vancouver", "Calgary", pathTemp, tempRect, false, "", pathTemp);
         tempTracks.add(tempTrack);
         pathTemp.reset();
 
@@ -818,7 +818,7 @@ public class TTRGameState extends GameState implements Serializable{
         pathTemp.lineTo(maxX * .215f, maxY * .091f);
         pathTemp.lineTo(maxX * .203f, maxY * .085f);
         pathTemp.close();
-        tempTrack = new Track(4, "Gray", "Seattle", "Calgary", pathTemp, tempRect, false, "", pathTemp2);
+        tempTrack = new Track(4, "Gray", "Seattle", "Calgary", pathTemp, tempRect, false, "", pathTemp);
         tempTracks.add(tempTrack);
         pathTemp.reset();
 
@@ -838,7 +838,7 @@ public class TTRGameState extends GameState implements Serializable{
         pathTemp.lineTo(maxX * .235f, maxY * .783f);
         pathTemp.lineTo(maxX * .238f, maxY * .770f);
         pathTemp.close();
-        tempTrack = new Track(3, "Gray", "Los Angeles", "Phoenix", pathTemp, tempRect, false, "", pathTemp2);
+        tempTrack = new Track(3, "Gray", "Los Angeles", "Phoenix", pathTemp, tempRect, false, "", pathTemp);
         tempTracks.add(tempTrack);
         pathTemp.reset();
 
@@ -873,7 +873,7 @@ public class TTRGameState extends GameState implements Serializable{
         pathTemp.lineTo(maxX * .302f, maxY * .295f);
         pathTemp.lineTo(maxX * .304f, maxY * .278f);
         pathTemp.close();
-        tempTrack = new Track(6, "Yellow", "Seattle", "Helena", pathTemp, tempRect, false, "", pathTemp2);
+        tempTrack = new Track(6, "Yellow", "Seattle", "Helena", pathTemp, tempRect, false, "", pathTemp);
         tempTracks.add(tempTrack);
         pathTemp.reset();
 
@@ -908,7 +908,7 @@ public class TTRGameState extends GameState implements Serializable{
         pathTemp.lineTo(maxX * .233f, maxY * .479f);
         pathTemp.lineTo(maxX * .241f, maxY * .471f);
         pathTemp.close();
-        tempTrack = new Track(6, "Blue", "Portland", "Salt Lake City", pathTemp, tempRect, false, "", pathTemp2);
+        tempTrack = new Track(6, "Blue", "Portland", "Salt Lake City", pathTemp, tempRect, false, "", pathTemp);
         tempTracks.add(tempTrack);
         pathTemp.reset();
 
@@ -984,7 +984,7 @@ public class TTRGameState extends GameState implements Serializable{
         pathTemp.lineTo(maxX * .246f, maxY * .523f);
         pathTemp.lineTo(maxX * .237f, maxY * .521f);
         pathTemp.close();
-        tempTrack = new Track(3, "Orange", "Las Vegas", "Salt Lake City", pathTemp, tempRect, false, "", pathTemp2);
+        tempTrack = new Track(3, "Orange", "Las Vegas", "Salt Lake City", pathTemp, tempRect, false, "", pathTemp);
         tempTracks.add(tempTrack);
         pathTemp.reset();
 
@@ -1019,7 +1019,7 @@ public class TTRGameState extends GameState implements Serializable{
         pathTemp.lineTo(maxX * .443f, maxY * .072f);
         pathTemp.lineTo(maxX * .445f, maxY * .063f);
         pathTemp.close();
-        tempTrack  = new Track(6, "White", "Calgary", "Winnipeg", pathTemp, tempRect, false, "", pathTemp2);
+        tempTrack  = new Track(6, "White", "Calgary", "Winnipeg", pathTemp, tempRect, false, "", pathTemp);
         tempTracks.add(tempTrack);
         pathTemp.reset();
 
@@ -1044,7 +1044,7 @@ public class TTRGameState extends GameState implements Serializable{
         pathTemp.lineTo(maxX * .313f, maxY * .269f);
         pathTemp.lineTo(maxX * .323f, maxY * .263f);
         pathTemp.close();
-        tempTrack = new Track(4, "Gray", "Calgary", "Helena", pathTemp, tempRect, false, "", pathTemp2);
+        tempTrack = new Track(4, "Gray", "Calgary", "Helena", pathTemp, tempRect, false, "", pathTemp);
         tempTracks.add(tempTrack);
         pathTemp.reset();
 
@@ -1064,7 +1064,7 @@ public class TTRGameState extends GameState implements Serializable{
         pathTemp.lineTo(maxX * .318f, maxY * .312f);
         pathTemp.lineTo(maxX * .308f, maxY * .304f);
         pathTemp.close();
-        tempTrack = new Track(3, "Pink", "Helena", "Salt Lake City", pathTemp, tempRect, false, "", pathTemp2);
+        tempTrack = new Track(3, "Pink", "Helena", "Salt Lake City", pathTemp, tempRect, false, "", pathTemp);
         tempTracks.add(tempTrack);
         pathTemp.reset();
 
@@ -1129,7 +1129,7 @@ public class TTRGameState extends GameState implements Serializable{
         pathTemp.lineTo(maxX * .369f, maxY * .566f);
         pathTemp.lineTo(maxX * .365f, maxY * .556f);
         pathTemp.close();
-        tempTrack = new Track(5, "White", "Phoenix", "Denver", pathTemp, tempRect, false, "", pathTemp2);
+        tempTrack = new Track(5, "White", "Phoenix", "Denver", pathTemp, tempRect, false, "", pathTemp);
         tempTracks.add(tempTrack);
         pathTemp.reset();
 
@@ -1149,7 +1149,7 @@ public class TTRGameState extends GameState implements Serializable{
         pathTemp.lineTo(maxX * .365f, maxY * .717f);
         pathTemp.lineTo(maxX * .360f, maxY * .7f);
         pathTemp.close();
-        tempTrack = new Track(3, "Gray", "Phoenix", "Santa Fe", pathTemp, tempRect, false, "", pathTemp2);
+        tempTrack = new Track(3, "Gray", "Phoenix", "Santa Fe", pathTemp, tempRect, false, "", pathTemp);
         tempTracks.add(tempTrack);
         pathTemp.reset();
 
@@ -1169,7 +1169,7 @@ public class TTRGameState extends GameState implements Serializable{
         pathTemp.lineTo(maxX * .356f, maxY * .849f);
         pathTemp.lineTo(maxX * .360f, maxY * .833f);
         pathTemp.close();
-        tempTrack = new Track(3, "Gray", "Phoenix", "El Paso", pathTemp, tempRect, false, "", pathTemp2);
+        tempTrack = new Track(3, "Gray", "Phoenix", "El Paso", pathTemp, tempRect, false, "", pathTemp);
         tempTracks.add(tempTrack);
         pathTemp.reset();
 
@@ -1194,7 +1194,7 @@ public class TTRGameState extends GameState implements Serializable{
         pathTemp.lineTo(maxX * .440f, maxY * .103f);
         pathTemp.lineTo(maxX * .434f, maxY * .092f);
         pathTemp.close();
-        tempTrack = new Track(4, "Blue", "Helena", "Winnipeg", pathTemp, tempRect, false, "", pathTemp2);
+        tempTrack = new Track(4, "Blue", "Helena", "Winnipeg", pathTemp, tempRect, false, "", pathTemp);
         tempTracks.add(tempTrack);
         pathTemp.reset();
 
@@ -1219,7 +1219,7 @@ public class TTRGameState extends GameState implements Serializable{
         pathTemp.lineTo(maxX * .376f, maxY * .521f);
         pathTemp.lineTo(maxX * .382f, maxY * .514f);
         pathTemp.close();
-        tempTrack = new Track(4, "Green", "Helena", "Denver", pathTemp, tempRect, false, "", pathTemp2);
+        tempTrack = new Track(4, "Green", "Helena", "Denver", pathTemp, tempRect, false, "", pathTemp);
         tempTracks.add(tempTrack);
         pathTemp.reset();
 
@@ -1234,7 +1234,7 @@ public class TTRGameState extends GameState implements Serializable{
         pathTemp.lineTo(maxX * .367f, maxY * .684f);
         pathTemp.lineTo(maxX * .378f, maxY * .685f);
         pathTemp.close();
-        tempTrack = new Track(2, "Gray", "Denver", "Santa Fe", pathTemp, tempRect, false, "", pathTemp2);
+        tempTrack = new Track(2, "Gray", "Denver", "Santa Fe", pathTemp, tempRect, false, "", pathTemp);
         tempTracks.add(tempTrack);
         pathTemp.reset();
 
@@ -1249,7 +1249,7 @@ public class TTRGameState extends GameState implements Serializable{
         pathTemp.lineTo(maxX * .361f, maxY * .831f);
         pathTemp.lineTo(maxX * .373f, maxY * .832f);
         pathTemp.close();
-        tempTrack = new Track(2, "Gray", "Santa Fe", "El Paso", pathTemp, tempRect, false, "", pathTemp2);
+        tempTrack = new Track(2, "Gray", "Santa Fe", "El Paso", pathTemp, tempRect, false, "", pathTemp);
         tempTracks.add(tempTrack);
         pathTemp.reset();
 
@@ -1284,7 +1284,7 @@ public class TTRGameState extends GameState implements Serializable{
         pathTemp.lineTo(maxX * .559f, maxY * .290f);
         pathTemp.lineTo(maxX * .559f, maxY * .271f);
         pathTemp.close();
-        tempTrack = new Track(6, "Orange", "Helena", "Duluth", pathTemp, tempRect, false, "", pathTemp2);
+        tempTrack = new Track(6, "Orange", "Helena", "Duluth", pathTemp, tempRect, false, "", pathTemp);
         tempTracks.add(tempTrack);
         pathTemp.reset();
 
@@ -1341,7 +1341,7 @@ public class TTRGameState extends GameState implements Serializable{
         pathTemp.lineTo(maxX * .797f, maxY * .62f);
         pathTemp.lineTo(maxX * .788f, maxY * .637f);
         pathTemp.close();
-        tempTrack = new Track(1, "Gray", "Nashville", "Atlanta", pathTemp, tempRect, false, "", pathTemp2);
+        tempTrack = new Track(1, "Gray", "Nashville", "Atlanta", pathTemp, tempRect, false, "", pathTemp);
         tempTracks.add(tempTrack);
         pathTemp.reset();
 
@@ -1361,7 +1361,7 @@ public class TTRGameState extends GameState implements Serializable{
         pathTemp.lineTo(maxX * .868f, maxY * .542f);
         pathTemp.lineTo(maxX * .834f, maxY * .54f);
         pathTemp.close();
-        tempTrack = new Track(3, "Black", "Nashville", "Raleigh", pathTemp, tempRect, false, "", pathTemp2);
+        tempTrack = new Track(3, "Black", "Nashville", "Raleigh", pathTemp, tempRect, false, "", pathTemp);
         tempTracks.add(tempTrack);
         pathTemp.reset();
 
@@ -1386,7 +1386,7 @@ public class TTRGameState extends GameState implements Serializable{
         pathTemp.lineTo(maxX * .822f, maxY * .45f);
         pathTemp.lineTo(maxX * .813f, maxY * .432f);
         pathTemp.close();
-        tempTrack = new Track(4, "Yellow", "Nashville", "Pittsburgh", pathTemp, tempRect, false, "", pathTemp2);
+        tempTrack = new Track(4, "Yellow", "Nashville", "Pittsburgh", pathTemp, tempRect, false, "", pathTemp);
         tempTracks.add(tempTrack);
         pathTemp.reset();
 
@@ -1416,7 +1416,7 @@ public class TTRGameState extends GameState implements Serializable{
         pathTemp.lineTo(maxX * .8f, maxY * .41f);
         pathTemp.lineTo(maxX * .793f, maxY * .396f);
         pathTemp.close();
-        tempTrack = new Track(5, "Green", "Saint Louis", "Pittsburgh", pathTemp, tempRect, false, "", pathTemp2);
+        tempTrack = new Track(5, "Green", "Saint Louis", "Pittsburgh", pathTemp, tempRect, false, "", pathTemp);
         tempTracks.add(tempTrack);
         pathTemp.reset();
 
@@ -1477,7 +1477,7 @@ public class TTRGameState extends GameState implements Serializable{
         pathTemp.lineTo(maxX * .795f, maxY * .264f);
         pathTemp.lineTo(maxX * .79f, maxY * .248f);
         pathTemp.close();
-        tempTrack = new Track(4, "White", "Chicago", "Toronto", pathTemp, tempRect, false, "", pathTemp2);
+        tempTrack = new Track(4, "White", "Chicago", "Toronto", pathTemp, tempRect, false, "", pathTemp);
         tempTracks.add(tempTrack);
         pathTemp.reset();
 
@@ -1492,7 +1492,7 @@ public class TTRGameState extends GameState implements Serializable{
         pathTemp.lineTo(maxX * .797f, maxY * .203f);
         pathTemp.lineTo(maxX * .762f, maxY * .192f);
         pathTemp.close();
-        tempTrack = new Track(2, "Gray", "Sault Ste Marie", "Toronto", pathTemp, tempRect, false, "", pathTemp2);
+        tempTrack = new Track(2, "Gray", "Sault Ste Marie", "Toronto", pathTemp, tempRect, false, "", pathTemp);
         tempTracks.add(tempTrack);
         pathTemp.reset();
 
@@ -1522,7 +1522,7 @@ public class TTRGameState extends GameState implements Serializable{
         pathTemp.lineTo(maxX * .513f, maxY * .431f);
         pathTemp.lineTo(maxX * .518f, maxY * .416f);
         pathTemp.close();
-        tempTrack = new Track(5, "Red", "Helena", "Omaha", pathTemp, tempRect, false, "", pathTemp2);
+        tempTrack = new Track(5, "Red", "Helena", "Omaha", pathTemp, tempRect, false, "", pathTemp);
         tempTracks.add(tempTrack);
         pathTemp.reset();
 
@@ -1547,7 +1547,7 @@ public class TTRGameState extends GameState implements Serializable{
         pathTemp.lineTo(maxX * .528f, maxY * .445f);
         pathTemp.lineTo(maxX * .527f, maxY * .431f);
         pathTemp.close();
-        tempTrack = new Track(4, "Pink", "Denver", "Omaha", pathTemp, tempRect, false, "", pathTemp2);
+        tempTrack = new Track(4, "Pink", "Denver", "Omaha", pathTemp, tempRect, false, "", pathTemp);
         tempTracks.add(tempTrack);
         pathTemp.reset();
 
@@ -1619,7 +1619,7 @@ public class TTRGameState extends GameState implements Serializable{
         pathTemp.lineTo(maxX * .520f, maxY * .670f);
         pathTemp.lineTo(maxX * .521f, maxY * .654f);
         pathTemp.close();
-        tempTrack =new Track(4, "Red", "Denver", "Oklahoma City", pathTemp, tempRect, false, "", pathTemp2);
+        tempTrack =new Track(4, "Red", "Denver", "Oklahoma City", pathTemp, tempRect, false, "", pathTemp);
         tempTracks.add(tempTrack);
         pathTemp.reset();
 
@@ -1639,7 +1639,7 @@ public class TTRGameState extends GameState implements Serializable{
         pathTemp.lineTo(maxX * .498f, maxY * .687f);
         pathTemp.lineTo(maxX * .496f, maxY * .671f);
         pathTemp.close();
-        tempTrack = new Track(3, "Blue", "Santa Fe", "Oklahoma City", pathTemp, tempRect, false, "", pathTemp2);
+        tempTrack = new Track(3, "Blue", "Santa Fe", "Oklahoma City", pathTemp, tempRect, false, "", pathTemp);
         tempTracks.add(tempTrack);
         pathTemp.reset();
 
@@ -1669,7 +1669,7 @@ public class TTRGameState extends GameState implements Serializable{
         pathTemp.lineTo(maxX * .538f, maxY * .685f);
         pathTemp.lineTo(maxX * .528f, maxY * .678f);
         pathTemp.close();
-        tempTrack = new Track(5, "Yellow", "El Paso", "Oklahoma City", pathTemp, tempRect, false, "", pathTemp2);
+        tempTrack = new Track(5, "Yellow", "El Paso", "Oklahoma City", pathTemp, tempRect, false, "", pathTemp);
         tempTracks.add(tempTrack);
         pathTemp.reset();
 
@@ -1684,7 +1684,7 @@ public class TTRGameState extends GameState implements Serializable{
         pathTemp.lineTo(maxX * .735f, maxY * .589f);
         pathTemp.lineTo(maxX * .699f, maxY * .575f);
         pathTemp.close();
-        tempTrack = new Track(2, "Gray", "Saint Louis", "Nashville", pathTemp, tempRect, false, "", pathTemp2);
+        tempTrack = new Track(2, "Gray", "Saint Louis", "Nashville", pathTemp, tempRect, false, "", pathTemp);
         tempTracks.add(tempTrack);
         pathTemp.reset();
 
@@ -1704,7 +1704,7 @@ public class TTRGameState extends GameState implements Serializable{
         pathTemp.lineTo(maxX * .752f, maxY * .606f);
         pathTemp.lineTo(maxX * .725f, maxY * .64f);
         pathTemp.close();
-        tempTrack = new Track(3, "White", "Little Rock", "Nashville", pathTemp, tempRect, false, "", pathTemp2);
+        tempTrack = new Track(3, "White", "Little Rock", "Nashville", pathTemp, tempRect, false, "", pathTemp);
         tempTracks.add(tempTrack);
         pathTemp.reset();
 
@@ -1724,7 +1724,7 @@ public class TTRGameState extends GameState implements Serializable{
         pathTemp.lineTo(maxX * .7f, maxY * .845f);
         pathTemp.lineTo(maxX * .69f, maxY * .85f);
         pathTemp.close();
-        tempTrack = new Track(3, "Green", "Little Rock", "New Orleans", pathTemp, tempRect, false, "", pathTemp2);
+        tempTrack = new Track(3, "Green", "Little Rock", "New Orleans", pathTemp, tempRect, false, "", pathTemp);
         tempTracks.add(tempTrack);
         pathTemp.reset();
 
@@ -1739,7 +1739,7 @@ public class TTRGameState extends GameState implements Serializable{
         pathTemp.lineTo(maxX * .691f, maxY * .87f);
         pathTemp.lineTo(maxX * .655f, maxY * .878f);
         pathTemp.close();
-        tempTrack = new Track(2, "Gray", "Houston", "New Orleans", pathTemp, tempRect, false, "", pathTemp2);
+        tempTrack = new Track(2, "Gray", "Houston", "New Orleans", pathTemp, tempRect, false, "", pathTemp);
         tempTracks.add(tempTrack);
         pathTemp.reset();
 
@@ -1754,7 +1754,7 @@ public class TTRGameState extends GameState implements Serializable{
         pathTemp.lineTo(maxX * .642f, maxY * .653f);
         pathTemp.lineTo(maxX * .63f, maxY * .65f);
         pathTemp.close();
-        tempTrack = new Track(2, "Gray", "Saint Louis", "Little Rock", pathTemp, tempRect, false, "", pathTemp2);
+        tempTrack = new Track(2, "Gray", "Saint Louis", "Little Rock", pathTemp, tempRect, false, "", pathTemp);
         tempTracks.add(tempTrack);
         pathTemp.reset();
 
@@ -1769,7 +1769,7 @@ public class TTRGameState extends GameState implements Serializable{
         pathTemp.lineTo(maxX * .629f, maxY * .69f);
         pathTemp.lineTo(maxX * .61f, maxY * .73f);
         pathTemp.close();
-        tempTrack = new Track(2, "Gray", "Dallas", "Little Rock", pathTemp, tempRect, false, "", pathTemp2);
+        tempTrack = new Track(2, "Gray", "Dallas", "Little Rock", pathTemp, tempRect, false, "", pathTemp);
         tempTracks.add(tempTrack);
         pathTemp.reset();
 
@@ -1784,7 +1784,7 @@ public class TTRGameState extends GameState implements Serializable{
         pathTemp.lineTo(maxX * .628f, maxY * .67f);
         pathTemp.lineTo(maxX * .591f, maxY * .675f);
         pathTemp.close();
-        tempTrack = new Track(2, "Gray", "Oklahoma City", "Little Rock", pathTemp, tempRect, false, "", pathTemp2);
+        tempTrack = new Track(2, "Gray", "Oklahoma City", "Little Rock", pathTemp, tempRect, false, "", pathTemp);
         tempTracks.add(tempTrack);
         pathTemp.reset();
 
@@ -1859,7 +1859,7 @@ public class TTRGameState extends GameState implements Serializable{
         pathTemp.lineTo(maxX * .688f, maxY * .39f);
         pathTemp.lineTo(maxX * .655f, maxY * .385f);
         pathTemp.close();
-        tempTrack = new Track(4, "Blue", "Omaha", "Chicago", pathTemp, tempRect, false, "", pathTemp2);
+        tempTrack = new Track(4, "Blue", "Omaha", "Chicago", pathTemp, tempRect, false, "", pathTemp);
         tempTracks.add(tempTrack);
         pathTemp.reset();
 
@@ -1884,7 +1884,7 @@ public class TTRGameState extends GameState implements Serializable{
         pathTemp.lineTo(maxX * .543f, maxY * .833f);
         pathTemp.lineTo(maxX * .542f, maxY * .817f);
         pathTemp.close();
-        tempTrack = new Track(4, "Red", "El Paso", "Dallas", pathTemp, tempRect, false, "", pathTemp2);
+        tempTrack = new Track(4, "Red", "El Paso", "Dallas", pathTemp, tempRect, false, "", pathTemp);
         tempTracks.add(tempTrack);
         pathTemp.reset();
 
@@ -1919,7 +1919,7 @@ public class TTRGameState extends GameState implements Serializable{
         pathTemp.lineTo(maxX * .594f, maxY * .903f);
         pathTemp.lineTo(maxX * .587f, maxY * .889f);
         pathTemp.close();
-        tempTrack = new Track(6, "Green", "El Paso", "Houston", pathTemp, tempRect, false, "", pathTemp2);
+        tempTrack = new Track(6, "Green", "El Paso", "Houston", pathTemp, tempRect, false, "", pathTemp);
         tempTracks.add(tempTrack);
         pathTemp.reset();
 
@@ -1944,7 +1944,7 @@ public class TTRGameState extends GameState implements Serializable{
         pathTemp.lineTo(maxX * .559f, maxY * .270f);
         pathTemp.lineTo(maxX * .566f, maxY * .257f);
         pathTemp.close();
-        tempTrack = new Track(4, "Black", "Winnipeg", "Duluth", pathTemp, tempRect, false, "", pathTemp2);
+        tempTrack = new Track(4, "Black", "Winnipeg", "Duluth", pathTemp, tempRect, false, "", pathTemp);
         tempTracks.add(tempTrack);
         pathTemp.reset();
 
@@ -2029,7 +2029,7 @@ public class TTRGameState extends GameState implements Serializable{
         pathTemp.lineTo(maxX * .682f, maxY * .364f);
         pathTemp.lineTo(maxX * .65f, maxY * .355f);
         pathTemp.close();
-        tempTrack = new Track(3, "Red", "Duluth", "Chicago", pathTemp, tempRect, false, "", pathTemp2);
+        tempTrack = new Track(3, "Red", "Duluth", "Chicago", pathTemp, tempRect, false, "", pathTemp);
         tempTracks.add(tempTrack);
         pathTemp.reset();
 
@@ -2064,7 +2064,7 @@ public class TTRGameState extends GameState implements Serializable{
         pathTemp.lineTo(maxX * .808f, maxY * .223f);
         pathTemp.lineTo(maxX * .773f, maxY * .232f);
         pathTemp.close();
-        tempTrack = new Track(6, "Pink", "Duluth", "Toronto", pathTemp, tempRect, false, "", pathTemp2);
+        tempTrack = new Track(6, "Pink", "Duluth", "Toronto", pathTemp, tempRect, false, "", pathTemp);
         tempTracks.add(tempTrack);
         pathTemp.reset();
 
@@ -2084,7 +2084,7 @@ public class TTRGameState extends GameState implements Serializable{
         pathTemp.lineTo(maxX * .698f, maxY * .191f);
         pathTemp.lineTo(maxX * .663f, maxY * .21f);
         pathTemp.close();
-        tempTrack = new Track(3, "Gray", "Duluth", "Sault Ste Marie", pathTemp, tempRect, false, "", pathTemp2);
+        tempTrack = new Track(3, "Gray", "Duluth", "Sault Ste Marie", pathTemp, tempRect, false, "", pathTemp);
         tempTracks.add(tempTrack);
         pathTemp.reset();
 
@@ -2119,7 +2119,7 @@ public class TTRGameState extends GameState implements Serializable{
         pathTemp.lineTo(maxX * .692f, maxY * .162f);
         pathTemp.lineTo(maxX * .659f, maxY * .15f);
         pathTemp.close();
-        tempTrack = new Track(6, "Gray", "Winnipeg", "Sault Ste Marie", pathTemp, tempRect, false, "", pathTemp2);
+        tempTrack = new Track(6, "Gray", "Winnipeg", "Sault Ste Marie", pathTemp, tempRect, false, "", pathTemp);
         tempTracks.add(tempTrack);
         pathTemp.reset();
 

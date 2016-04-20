@@ -648,17 +648,37 @@ public class TTRLocalGame extends LocalGame implements Serializable {
                 if(action.getPlayer() instanceof TTRHumanPlayer) {
                     if (mainState.getTracks()[index].getHighlight() &&
                             !mainState.getTracks()[index].getSelected() && !mainState.getTracks()[index].getSelected2()) {
-                        mainState.getTracks()[index].setSelected(true);
-                        mainState.setPlaceTrainSelected(true);
-                        mainState.setSelectedCardColor(temp.getTrackColor());
-                        mainState.setTrackSpot(index);
+                        if(mainState.getTracks()[index].isDoubleTrack()){
+                            mainState.getTracks()[index].setSelected(true);
+                            mainState.setPlaceTrainSelected(true);
+                            mainState.setSelectedCardColor(temp.getTrackColor());
+                            mainState.setTrackSpot(index);
+                        }
+                        else {
+                            mainState.getTracks()[index].setSelected(true);
+                            mainState.setPlaceTrainSelected(true);
+                            mainState.setSelectedCardColor(temp.getTrackColor());
+                            mainState.setTrackSpot(index);
+                        }
                     }
 
                     //if a track has already been selected, set it's selected variable to false.
                     else {
-                        mainState.getTracks()[index].setSelected(false);
-                        mainState.setPlaceTrainSelected(false);
-                        mainState.setSelectedCardColor("");
+                        if(mainState.getTracks()[index].isDoubleTrack()){
+                            if (mainState.getTracks()[index].getSelected()){
+                                mainState.getTracks()[index].setSelected(false);
+                                mainState.getTracks()[index].setSelected2(true);
+                            }
+                            else if (mainState.getTracks()[index].getSelected2()){
+                                mainState.getTracks()[index].setSelected(true);
+                                mainState.getTracks()[index].setSelected2(false);
+                            }
+                        }
+                        else {
+                            mainState.getTracks()[index].setSelected(false);
+                            mainState.setPlaceTrainSelected(false);
+                            mainState.setSelectedCardColor("");
+                        }
                     }
                 }
                 else if(action.getPlayer() instanceof TTRComputerPlayer){
