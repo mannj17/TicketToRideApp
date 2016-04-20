@@ -33,8 +33,8 @@ public class TTRGameState extends GameState implements Serializable{
     Rect gridTouch = new Rect(0,0,1,1);
 
     //initializes a path for eeach track
-    private Path GRID = new Path();
-    private Path pathTemp = new Path();
+    private CustomPath GRID = new CustomPath();
+    private CustomPath pathTemp = new CustomPath();
 
     Track GRID_TRACK;
     int MAX_NUM_PLAYERS = 4;
