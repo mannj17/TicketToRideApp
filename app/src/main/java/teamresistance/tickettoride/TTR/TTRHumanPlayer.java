@@ -332,7 +332,7 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
      * returns the top view for the player
      */
     public View getTopView() {
-        return null;
+        return myActivity.findViewById(R.id.top_gui_layout);
     }
 
     /*
