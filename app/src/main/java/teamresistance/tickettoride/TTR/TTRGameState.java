@@ -2117,7 +2117,7 @@ public class TTRGameState extends GameState implements Serializable{
             myTracks[i] = tempTracks.get(i);
         }
 
-        //Booleans set to defaults
+        //Booleans set to defaults for the game
         isSelectDestinationCards = false;
         trackModeSelected = false;
         cardModeSelected = false;
