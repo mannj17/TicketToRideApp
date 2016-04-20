@@ -1,5 +1,7 @@
 package teamresistance.tickettoride.TTR.DijkstraAlg;
 
+import teamresistance.tickettoride.TTR.Track;
+
 import java.io.Serializable;
 
 /**
@@ -21,6 +23,7 @@ import java.io.Serializable;
  * @version April 2016
  */
 public class Edge implements Serializable {
+    private final Track track;
     private static final long serialVersionUID = 386249734192016L;
     private final String city1;
     private final String city2;
@@ -28,14 +31,16 @@ public class Edge implements Serializable {
     private final Vertex v2;
     private final int weight;
 
-    public Edge(String city1, String city2, Vertex v1, Vertex v2, int weight) {
-        this.city1 = city1;
-        this.city2 = city2;
+    public Edge(Track track, Vertex v1, Vertex v2, int weight) {
+        this.track = track;
+        this.city1 = track.getStartCity();
+        this.city2 = track.getEndCity();
         this.v1 = v1;
         this.v2 = v2;
         this.weight = weight;
     }
 
+    public Track getTrack(){ return track; }
     public Vertex getV1() {
         return v1;
     }

@@ -26,17 +26,20 @@ public class DestinationCards extends Card implements Serializable {
             "Houston", "New York", "Atlanta", "Chicago", "New Orleans", "Calgary",
             "Salt Lake City", "Helena", "Los Angeles", "Duluth", "Sault Ste Marie",
             "Nashville", "Montreal", "Oklahoma City", "Seattle", "Santa Fe",
-            "Toronto", "Miami", "Portland", "Phoenix", "Dallas", "New York City",
+            "Toronto", "Miami", "Portland", "Phoenix", "Dallas",
             "Pittsburgh", "Winnipeg", "Little Rock", "Boston", "Vancouver",
             "San Francisco"};
 
     //The first locations labeled on the destination cards based on the destNames array
-    private int[] cities1 = {1, 3, 5, 7, 9, 11, 13, 14, 16, 14, 18, 7, 13, 20, 22, 24,
-            1, 27, 27, 29, 30, 9, 16, 12, 31, 22, 30, 12, 12, 18};
+    private int[] cities1 = {11, 12, 13, 4, 21, 28, 12, 19, 21, 23, 8, 8, 11, 25, 29, 2,
+            11, 0, 6, 28, 27, 6, 15, 17, 0, 10, 25, 15, 13, 17};
 
     //The second locations labeled on the destination cards based on the destNames array
-    private int[] cities2 = {2, 4, 6, 8, 10, 12, 4, 15, 6, 17, 12, 19, 2, 21, 23, 25,
-            26, 28, 4, 21, 19, 23, 8, 7, 6, 15, 16, 21, 25, 5};
+    private int[] cities2 = {4, 3, 14, 5, 14, 15, 1, 20, 22, 4, 9, 22, 20, 26, 5, 3,
+            6, 24, 18, 18, 20, 7, 5, 4, 1, 11, 3, 7, 16, 11};
+
+    private int[] scores = {21, 8, 8, 6, 17, 20, 10, 10, 11, 11, 7, 13, 20, 11, 17, 5, 16,
+            11, 9, 13, 12, 7, 9, 22, 4, 8, 12, 13, 9, 9};
 
     /**
      * Constructor for Destination Cards
@@ -52,10 +55,10 @@ public class DestinationCards extends Card implements Serializable {
         else if (dest2 > destNames.length-1){
             city2 = "";
         } else {
-            city1 = destNames[cities1[dest1]-1];
-            city2 = destNames[cities2[dest2]-1];
+            city1 = destNames[cities1[dest1]];
+            city2 = destNames[cities2[dest2]];
         }
-        score = point;
+        score = scores[point];
         setHighlight(false);
     }
 

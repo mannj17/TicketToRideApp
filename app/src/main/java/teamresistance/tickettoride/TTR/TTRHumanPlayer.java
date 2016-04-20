@@ -179,7 +179,7 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
                 cpu3FrameLayout.setVisibility(View.GONE);
                 this.humanTextView.setText("" + this.allPlayerNames[this.playerNum]);
                 this.humanScoreTextview.setText("" + ((TTRGameState) info).getScores()[this.playerNum]);
-                this.humanTrainTokenTextView.setText("" + ((TTRGameState) info).getTrainTokens()[0]);
+                this.humanTrainTokenTextView.setText("" + ((TTRGameState) info).getTrainTokens()[this.playerNum]);
                 this.playerDestinationCardTextView.setText("Total Cards: " + myState.getPlayerDestinationDecks()[this.playerNum].size());
                 int numberOfDestCards = 0;
                 if (myState.getPlayerDestinationDecks()[this.playerNum].size() > 6) {

@@ -32,11 +32,11 @@ public class DijkstraGraph implements Serializable {
             this.edges = edges;
         }
 
-        public List<Vertex> getVertexes() {
+        public ArrayList<Vertex> getVertexes() {
             return vertexes;
         }
 
-        public List<Edge> getEdges() {
+        public ArrayList<Edge> getEdges() {
             return edges;
         }
 

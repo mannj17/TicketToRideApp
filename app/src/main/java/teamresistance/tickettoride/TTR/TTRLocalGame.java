@@ -2,6 +2,10 @@ package teamresistance.tickettoride.TTR;
 
 import java.io.Serializable;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Random;
+
 import teamresistance.tickettoride.Game.GamePlayer;
 import teamresistance.tickettoride.Game.LocalGame;
 import teamresistance.tickettoride.Game.actionMsg.GameAction;
@@ -12,6 +16,10 @@ import teamresistance.tickettoride.TTR.Actions.DrawDestinationCardAction;
 import teamresistance.tickettoride.TTR.Actions.DrawDownCardAction;
 import teamresistance.tickettoride.TTR.Actions.DrawUpCardAction;
 import teamresistance.tickettoride.TTR.Actions.TrackPlaceAction;
+import teamresistance.tickettoride.TTR.DijkstraAlg.Dijkstra;
+import teamresistance.tickettoride.TTR.DijkstraAlg.DijkstraGraph;
+import teamresistance.tickettoride.TTR.DijkstraAlg.Edge;
+import teamresistance.tickettoride.TTR.DijkstraAlg.Vertex;
 
 /**
  * Controls the game, allowing actions to be performed by
@@ -33,7 +41,14 @@ public class TTRLocalGame extends LocalGame implements Serializable {
                                     //the highest score
     private int numStarted;
     private String currentTrackColor = null; //the track color of the currently chosen track.
-    private boolean okayMove;
+    private final ArrayList<String> destNames = new ArrayList<String>(Arrays.asList("Denver", "El Paso", "Kansas City",
+            "Houston", "New York", "Atlanta", "Chicago", "New Orleans", "Calgary",
+            "Salt Lake City", "Helena", "Los Angeles", "Duluth", "Sault Ste Marie",
+            "Nashville", "Montreal", "Oklahoma City", "Seattle", "Santa Fe",
+            "Toronto", "Miami", "Portland", "Phoenix", "Dallas",
+            "Pittsburgh", "Winnipeg", "Little Rock", "Boston", "Vancouver",
+            "San Francisco", "Las Vegas", "Washington", "Raleigh", "Charleston",
+            "Saint Louis", "Omaha"));
 
     /**
      * TTRLocalGame constructor
@@ -42,7 +57,6 @@ public class TTRLocalGame extends LocalGame implements Serializable {
         mainState = new TTRGameState();
         noMoreTrains = false;
         turnsLeft = 0;
-        okayMove = false;
         numStarted = 0;
     }
 
@@ -87,8 +101,81 @@ public class TTRLocalGame extends LocalGame implements Serializable {
 
         //if the final turns are over, find and announce the winner
         if (turnsLeft == 0 && noMoreTrains) {
+            ArrayList<Vertex> myVertexList = new ArrayList<Vertex>();
+            ArrayList<Edge> myEdgeList = new ArrayList<Edge>();
+            Vertex temp = null;
+            for(int i = 0; i < destNames.size(); i++){
+                temp = new Vertex(destNames.get(i),i);
+                myVertexList.add(temp);
+            }
+            Vertex startCity = null;
+            Vertex endCity = null;
+            for(int j = 0; j < this.players.length; j++) {
+                for (int i = 0; i < mainState.getTracks().length; i++) {
+                    String city1 = mainState.getTracks()[i].getStartCity();
+                    String city2 = mainState.getTracks()[i].getEndCity();
+                    for (Vertex vert : myVertexList) {
+                        int spot = vert.getId();
+                        if (city1.equals(destNames.get(spot))
+                                && (mainState.getTracks()[i].getPlayerID() == -1
+                                || mainState.getTracks()[i].getPlayerID() == j)
+                                && startCity == null) {
+                            startCity = vert;
+                        } else if (city2.equals(destNames.get(spot))
+                                && (mainState.getTracks()[i].getPlayerID() == -1
+                                || mainState.getTracks()[i].getPlayerID() == j)
+                                && endCity == null) {
+                            endCity = vert;
+                        }
+                    }
+                    Edge temporary = null;
+                    if (startCity != null && endCity != null) {
+                        temporary = new Edge(mainState.getTracks()[i], startCity, endCity,
+                                mainState.getTracks()[i].getTrainTrackNum());
+                    }
+                    startCity = null;
+                    endCity = null;
+                    if (!myEdgeList.contains(temporary) && temporary != null) {
+                        myEdgeList.add(temporary);
+                    }
+                }
             /* If final turn over do final turn scoring */
 
+                DijkstraGraph playerGraph = new DijkstraGraph(myVertexList, myEdgeList);
+                Dijkstra playerDijkstra = new Dijkstra(playerGraph);
+                for(int k = 0; k < mainState.getPlayerDestinationDecks().length; k++){
+                    int spot1 = -1;
+                    int spot2 = -1;
+                    DestinationCards lookCard =
+                            (DestinationCards) mainState.getPlayerDestinationDecks()[j].getCards().get(k);
+                    String city1 = lookCard.getCity1();
+                    String city2 = lookCard.getCity2();
+                    for(int m = 0; j < playerGraph.getVertexes().size(); j++) {
+                        if (playerGraph.getVertexes().get(m).getName().equals(city1)){
+                            spot1 = j;
+                        }
+                        else if(playerGraph.getVertexes().get(m).getName().equals(city2)){
+                            spot2 = j;
+                        }
+                    }
+                    playerDijkstra.dijkstra(spot1);
+                    if(!playerDijkstra.getMyGraph().getEdges().isEmpty()) {
+                        if (playerDijkstra.getMyGraph().getVertexes().get(spot1).getDistance() == 0) {
+                            if (playerDijkstra.getMyGraph().getVertexes().get(spot2).getDistance() != 100000000) {
+                                mainState.setScore(mainState.getScores()[j] + lookCard.getScore(), j);
+                            }
+                        } else if (playerDijkstra.getMyGraph().getVertexes().get(spot2).getDistance() == 0) {
+                            if (playerDijkstra.getMyGraph().getVertexes().get(spot1).getDistance() != 100000000) {
+                                mainState.setScore(mainState.getScores()[j] + lookCard.getScore(), j);
+                            }
+                        }
+                        else{
+                            mainState.setScore(mainState.getScores()[j] - lookCard.getScore(), j);
+                        }
+                    }
+
+                }
+            }
             for (int j = 0; j < mainState.getScores().length; j++) {
                 if (mainState.getScores()[j] > mainState.getScores()[topScorePlayer]) {
                     topScorePlayer = j;
@@ -137,8 +224,7 @@ public class TTRLocalGame extends LocalGame implements Serializable {
                     mainState.getTracks()[i].setSelected(false);
                 }
             }
-            okayMove = true;
-            //return true;
+            return true;
 
         //If ConfirmSelectionAction is thrown, perform one of these changes to the game state.
         } else if (action instanceof ConfirmSelectionAction) {
@@ -496,8 +582,7 @@ public class TTRLocalGame extends LocalGame implements Serializable {
                     mainState.setSelectedCardColor(temp.getTrackColor());
                     mainState.setTrackSpot(index);
                 }
-            okayMove = true;
-            //return true;
+            return true;
             }
 
         //if the action is for choosing face up cards, enter this if statement.
@@ -568,8 +653,7 @@ public class TTRLocalGame extends LocalGame implements Serializable {
                 mainState.getFaceUpTrainCards().getCards().get(pos).setHighlight(false);
                 mainState.setTrainCardsSelected(true);
             }
-            okayMove = true;
-            //return true;
+            return true;
         }
 
         //if the down deck was selected, enter this if statement.
@@ -668,16 +752,10 @@ public class TTRLocalGame extends LocalGame implements Serializable {
                 mainState.setDestinationCardsSelected(true);
             }
         } else if (action instanceof ChooseDestinationAction) {
-            okayMove = true;
-            //return true;
-        }
-//        if(okayMove){
-//            okayMove = false;
+
             return true;
-//        }
-//        else {
-//            return false;
-//        }
+        }
+            return true;
     }
 
     /**
