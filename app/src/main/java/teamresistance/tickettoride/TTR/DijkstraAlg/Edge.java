@@ -13,23 +13,24 @@ import java.io.Serializable;
  *
  * Creates the edges for the dijkstra algorithm
  *
- * 4/17/2016
- * Source: http://www.vogella.com/tutorials/JavaAlgorithmsDijkstra/article.html
- *
- * @author Nick Scacciotti
- * @author Nick Larson
- * @author Jess Mann
- * @author Parker Schibel
- * @version April 2016
+ * External Citation
+Date: 4/18/2016
+Problem: Had trouble re-visualizing the structure of Dijkstra's algorithm
+Resource:
+https://www.cs.usfca.edu/~galles/visualization/Dijkstra.html
+and C-code from Data Structures class(Spring 2015)
+Solution: This tool helped me to visualize the step by step process better
+and build my graph based on that. The previously written program helped me check
+my steps along the way.
  */
 public class Edge implements Serializable {
     private final Track track;
     private static final long serialVersionUID = 386249734192016L;
-    private final String city1;
-    private final String city2;
-    private final Vertex v1;
-    private final Vertex v2;
-    private final int weight;
+    private final String city1; //first city attached to edge. helps to identify correct edge in algorithm
+    private final String city2; //second city attached to edge. helps to identify correct edge in algorithm
+    private final Vertex v1;    //first vertex of the edge, corresponding to the first city
+    private final Vertex v2;    //second vertex of the edge, corresponding to the second city
+    private final int weight;   //how many tracks are in this edge.
 
     public Edge(Track track, Vertex v1, Vertex v2, int weight) {
         this.track = track;

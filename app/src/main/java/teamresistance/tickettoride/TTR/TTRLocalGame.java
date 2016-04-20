@@ -101,21 +101,41 @@ public class TTRLocalGame extends LocalGame implements Serializable {
 
         //if the final turns are over, find and announce the winner
         if (turnsLeft == 0 && noMoreTrains) {
+
+            //ArrayList of all the cities
             ArrayList<Vertex> myVertexList = new ArrayList<Vertex>();
             Vertex temp = null;
+
+            //holds the player number who has the longest track and the
+            //longest evaluated distance thus far.
             int longest = 0;
             int longestDistance = 0;
+
+            //add all of the cities to the Vertex list
             for(int i = 0; i < destNames.size(); i++){
                 temp = new Vertex(destNames.get(i),i);
                 myVertexList.add(temp);
             }
+
+            //placeHolders for the Vertexes to be added to edges
             Vertex startCity = null;
             Vertex endCity = null;
+
+            //run through all the players to see what destination cards they
+            //completed and see who had the longest continuous track.
             for(int j = 0; j < this.players.length; j++) {
+
+                //create an arrayList of Edges that correspond to the
+                //tracks owned by the player.
                 ArrayList<Edge> myEdgeList = new ArrayList<Edge>();
                 for (int i = 0; i < mainState.getTracks().length; i++) {
+
+                    //used to create the correct Edge
                     String city1 = mainState.getTracks()[i].getStartCity();
                     String city2 = mainState.getTracks()[i].getEndCity();
+
+                    //run through every Vertex on the map and get only the Edges
+                    //that the player owns
                     for (Vertex vert : myVertexList) {
                         int spot = vert.getId();
                         if (city1.equals(destNames.get(spot))
@@ -130,6 +150,8 @@ public class TTRLocalGame extends LocalGame implements Serializable {
                             endCity = vert;
                         }
                     }
+
+                    //if both Vertexes for an Edge were found, add it to the list of Edges
                     Edge temporary = null;
                     if (startCity != null && endCity != null) {
                         temporary = new Edge(mainState.getTracks()[i], startCity, endCity,
@@ -141,15 +163,26 @@ public class TTRLocalGame extends LocalGame implements Serializable {
                         myEdgeList.add(temporary);
                     }
                 }
+
+                //Create a Graph and Dijkstra using the cities on the map and all of
+                //the players claimed tracks.
                 DijkstraGraph playerGraph = new DijkstraGraph(myVertexList, myEdgeList);
                 Dijkstra playerDijkstra = new Dijkstra(playerGraph);
+
+                //run through all of the destination cards in the player's hand
+                //to see which they completed and which they did not.
                 for(int k = 0; k < mainState.getPlayerDestinationDecks()[j].getCards().size(); k++){
                     int spot1 = -1;
                     int spot2 = -1;
+
+                    //get the current destination card being looked at and save it to a temporary variable
                     DestinationCards lookCard =
                             (DestinationCards) mainState.getPlayerDestinationDecks()[j].getCards().get(k);
                     String city1 = lookCard.getCity1();
                     String city2 = lookCard.getCity2();
+
+                    //run through every vertex and find the ones that correspond to the current
+                    //destination card.
                     for(int m = 0; m < playerGraph.getVertexes().size(); m++) {
                         if (playerGraph.getVertexes().get(m).getName().equals(city1)){
                             spot1 = m;
@@ -158,27 +191,47 @@ public class TTRLocalGame extends LocalGame implements Serializable {
                             spot2 = m;
                         }
                     }
+
+                    //perform dijkstra on the first city on the destination card.
                     playerDijkstra.dijkstra(spot1);
+
+                    //only enter if the player has any tracks
                     if(!playerDijkstra.getMyGraph().getEdges().isEmpty()) {
+
+                        //if one the spots is the source enter. Then check to see if the second
+                        //city on the card still has the maximum distance value. If the distance
+                        //value is still the maximum, this means the Vertex was never reached
+                        //from the source.
                         if (playerDijkstra.getMyGraph().getVertexes().get(spot1).getDistance() == 0) {
                             if (playerDijkstra.getMyGraph().getVertexes().get(spot2).getDistance() != 100000000) {
                                 mainState.setScore(mainState.getScores()[j] + lookCard.getScore(), j);
+                            }
+                            else{
+                                mainState.setScore(mainState.getScores()[j] - lookCard.getScore(), j);
                             }
                         } else if (playerDijkstra.getMyGraph().getVertexes().get(spot2).getDistance() == 0) {
                             if (playerDijkstra.getMyGraph().getVertexes().get(spot1).getDistance() != 100000000) {
                                 mainState.setScore(mainState.getScores()[j] + lookCard.getScore(), j);
                             }
-                        }
-                        else{
-                            mainState.setScore(mainState.getScores()[j] - lookCard.getScore(), j);
+                            else{
+                                mainState.setScore(mainState.getScores()[j] - lookCard.getScore(), j);
+                            }
                         }
                     }
 
                 }
+
+                //Get all of the Vertexes with one claimed route next to it. This means that
+                //this vertex could potentially be the start of the longest continuous track.
                 ArrayList<Vertex> lonelyVertex = playerDijkstra.getSingleNeighbor();
 
+                //Run through and perform dijkstra on all of the lonely Vertexes
                 for(int n = 0; n < lonelyVertex.size(); n++){
                     playerDijkstra.dijkstra(lonelyVertex.get(n).getId());
+
+                    //after performing dijkstra, run through every other vertex until the
+                    //farthest one from the source is found. If it is the new longest track
+                    //save the player who owns it and its size.
                     for(Vertex vertex: playerGraph.getVertexes()){
                         if(vertex.getDistance() != 100000000 && vertex.getDistance() > longestDistance){
                             longestDistance = vertex.getDistance();
@@ -186,9 +239,13 @@ public class TTRLocalGame extends LocalGame implements Serializable {
                         }
                     }
                 }
+                //clear the list of edges to prepare for the next player.
                 myEdgeList.clear();
             }
+
+           //whichever player has the longest continuous track, give them bonus points.
             mainState.setScore(mainState.getScores()[longest] + 10, longest);
+
             for (int j = 0; j < mainState.getScores().length; j++) {
                 if (mainState.getScores()[j] > mainState.getScores()[topScorePlayer]) {
                     topScorePlayer = j;
@@ -543,7 +600,7 @@ public class TTRLocalGame extends LocalGame implements Serializable {
                     }
                 }
 
-                mainState.reset = true;
+                mainState.setReset(true);
                 return true;
             }
 

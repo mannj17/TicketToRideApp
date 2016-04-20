@@ -190,7 +190,7 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
                 for (int i = 0; i < numberOfDestCards; i++) {
                     destinationCards[i].setVisibility(View.VISIBLE);
                     DestinationCards tempCard = (DestinationCards) myState.getPlayerDestinationDecks()[this.playerNum].getCards().get(i);
-                    destinationCards[i].setText("" + tempCard.getCity1() + " to " + tempCard.getCity2());
+                    destinationCards[i].setText("" + tempCard.getCity1() + " to " + tempCard.getCity2() + " " + tempCard.getScore());
                 }
                 if (myState.getPlayerID() == this.playerNum) {
                     this.playerTurnTextView.setText("It is your turn!");

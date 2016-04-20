@@ -154,49 +154,49 @@ public class CardColorSelectionDialog extends Dialog implements android.view.Vie
             train1.setClickable(true);
         } else{
             train1.setClickable(false);
-            train1.setAlpha(0.5f);
+            train1.setAlpha(0.0f);
         }
         if(this.usable[1]){
             train2.setClickable(true);
         } else{
             train2.setClickable(false);
-            train2.setAlpha(0.5f);
+            train2.setAlpha(0.0f);
         }
         if(this.usable[2]){
             train3.setClickable(true);
         } else{
             train3.setClickable(false);
-            train3.setAlpha(0.5f);
+            train3.setAlpha(0.0f);
         }
         if(this.usable[3]){
             train4.setClickable(true);
         } else{
             train4.setClickable(false);
-            train4.setAlpha(0.5f);
+            train4.setAlpha(0.0f);
         }
         if(this.usable[4]){
             train5.setClickable(true);
         } else{
             train5.setClickable(false);
-            train5.setAlpha(0.5f);
+            train5.setAlpha(0.0f);
         }
         if(this.usable[5]){
             train6.setClickable(true);
         } else{
             train6.setClickable(false);
-            train6.setAlpha(0.5f);
+            train6.setAlpha(0.0f);
         }
         if(this.usable[6]){
             train7.setClickable(true);
         } else{
             train7.setClickable(false);
-            train7.setAlpha(0.5f);
+            train7.setAlpha(0.0f);
         }
         if(this.usable[7]){
             train8.setClickable(true);
         } else{
             train8.setClickable(false);
-            train8.setAlpha(0.5f);
+            train8.setAlpha(0.0f);
         }
         selectBtn.setOnClickListener(this);
 
@@ -218,7 +218,7 @@ public class CardColorSelectionDialog extends Dialog implements android.view.Vie
                     }
                 }
                 if(colorCounts[position] + useRainbows >= min) {
-                    game.sendAction(new ConfirmSelectionAction(player, trainColors[position], numRainbows));
+                    game.sendAction(new ConfirmSelectionAction(player, trainColors[position], useRainbows));
                     dismiss();
                 }
                 else{

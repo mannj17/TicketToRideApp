@@ -97,9 +97,9 @@ public class DestinationSelectionDialog extends  Dialog implements android.view.
         DestinationCards tempCard1 = (DestinationCards)destinationCards[0];
         DestinationCards tempCard2 = (DestinationCards)destinationCards[1];
         DestinationCards tempCard3 = (DestinationCards)destinationCards[2];
-        routes1.setText("" + tempCard1.getCity1() + " to " + tempCard1.getCity2());
-        routes2.setText("" + tempCard2.getCity1() + " to " + tempCard2.getCity2());
-        routes3.setText("" + tempCard3.getCity1() + " to " + tempCard3.getCity2());
+        routes1.setText("" + tempCard1.getCity1() + " to " + tempCard1.getCity2() + " score: " + tempCard1.getScore());
+        routes2.setText("" + tempCard2.getCity1() + " to " + tempCard2.getCity2() + " score: " + tempCard2.getScore());
+        routes3.setText("" + tempCard3.getCity1() + " to " + tempCard3.getCity2() + " score: " + tempCard3.getScore());
         //set listeners
         ticket1.setOnClickListener(this);
         ticket2.setOnClickListener(this);

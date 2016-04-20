@@ -19,7 +19,7 @@ import teamresistance.tickettoride.Game.infoMsg.GameState;
  * @version March 2016
  */
 public class TTRGameState extends GameState implements Serializable{
-    public boolean reset;
+
     private static final long serialVersionUID = 388245678192016L;
     protected int maxX = 1720;
     protected int maxY = 980;
@@ -87,6 +87,7 @@ public class TTRGameState extends GameState implements Serializable{
     private String selectedCardColor;
     private boolean useRainbow;
     private boolean gameStart;
+    private boolean reset;
     private Boolean isLastRound = false;
     private Boolean isGameOver = false;
 
@@ -2206,11 +2207,10 @@ public class TTRGameState extends GameState implements Serializable{
             playerDestinationDecks[i] = new Deck(original.getPlayerDestinationDecks()[i]);
         }
 
-        myTracks = original.getTracks();/**
-         for(int i = 0; i < original.getTracks().length; i++){
-         myTracks[i] = new Track(original.getTracks()[i]);
-         }**/
+        myTracks = original.getTracks();
 
+        //if a turn was made reset all the necessary values to where they need
+        //to be at the start of someone's turn.
         if(reset){
             trackSpot = -1;
             numRainbows = 0;
@@ -2538,4 +2538,8 @@ public class TTRGameState extends GameState implements Serializable{
     public boolean getGameStart(){ return gameStart; }
 
     public void setGameStart(boolean val){ gameStart = val; }
+
+    public boolean getReset(){ return reset; }
+
+    public void setReset(boolean reset){ this.reset = reset; }
 }
