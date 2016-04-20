@@ -2,6 +2,8 @@ package teamresistance.tickettoride.TTR.Actions;
 
 import android.app.Activity;
 
+import java.io.Serializable;
+
 import teamresistance.tickettoride.Game.GamePlayer;
 import teamresistance.tickettoride.Game.actionMsg.GameAction;
 
@@ -14,7 +16,8 @@ import teamresistance.tickettoride.Game.actionMsg.GameAction;
  * @author Parker Schibel
  * @version March 2016
  */
-public class DrawDestinationCardAction extends GameAction{
+public class DrawDestinationCardAction extends GameAction implements Serializable {
+    private static final long serialVersionUID = 388245564192016L;
     /*
      * Initializing a new action to change the mode
      */

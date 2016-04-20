@@ -1,5 +1,6 @@
 package teamresistance.tickettoride.TTR;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
@@ -11,7 +12,8 @@ import java.util.ArrayList;
  * @author Parker Schibel
  * @version March 2016
  */
-public class Deck {
+public class Deck implements Serializable {
+    private static final long serialVersionUID = 388245564192016L;
     /** Says whether or not the card has been selected */
     private boolean highlight;
     /** Name of the deck. IE: destinationDeck or trainCardDeck or playerHandDeck */

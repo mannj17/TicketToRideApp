@@ -2,6 +2,7 @@ package teamresistance.tickettoride.TTR;
 
 import android.util.Log;
 
+import java.io.Serializable;
 import java.util.Random;
 
 import teamresistance.tickettoride.Game.GamePlayer;
@@ -26,7 +27,8 @@ import teamresistance.tickettoride.TTR.DijkstraAlg.PlayerGraph;
  * @author Parker Schibel
  * @version March 2016
  */
-public class TTRLocalGame extends LocalGame {
+public class TTRLocalGame extends LocalGame implements Serializable {
+    private static final long serialVersionUID = 388245564192016L;
     //instance variables for the TTRLocalGame
     private TTRGameState mainState; //reference to the game state
     private boolean noMoreTrains; //boolean to indicate the start of a game over
@@ -199,6 +201,29 @@ public class TTRLocalGame extends LocalGame {
                 //holds the cards to be moved to the player's hand.
                 else if (((ConfirmSelectionAction) action).getSendDeck() != null
                         && ((ConfirmSelectionAction) action).getRemoveDeck() != null) {
+                    //checks to see if the destination deck is running low
+                    if(mainState.getDestinationCards().size() <= 2)
+                    {
+                        int k = mainState.getDestinationCards().size();
+                        while(k > 0)
+                        {
+                            //adds leftover cards to discard
+                            mainState.getDestinationDiscard().getCards().add(
+                                    mainState.getDestinationCards().getCards().get(k));
+                            //removes cards from deck
+                            mainState.getDestinationCards().getCards().remove(k);
+                            k--;
+                        }
+                        mainState.getDestinationDiscard().shuffle();
+                        for(int m=0; m < mainState.getDestinationDiscard().size();m++)
+                        {
+                            //adds discard into the destination deck
+                            mainState.getDestinationCards().getCards().add(
+                                    mainState.getDestinationDiscard().getCards().get(m));
+                            mainState.getDestinationDiscard().getCards().remove(m);
+
+                        }
+                    }
                     for (int i = 0; i < ((ConfirmSelectionAction) action).getSendDeck().size(); i++) {
                         Card tempCard = ((ConfirmSelectionAction) action).getSendDeck().getCards().get(i);
                         mainState.getPlayerDestinationDecks()[mainState.getPlayerID()].getCards().add(tempCard);
@@ -207,12 +232,12 @@ public class TTRLocalGame extends LocalGame {
                         mainState.getDestinationCards().getCards().remove(
                                 ((ConfirmSelectionAction) action).getRemoveDeck().getCards().get(i));
                     }
-                    if(numStarted == players.length-1){ mainState.setGameStart(true);}
-                    else{ numStarted++; }
+
+                        if(numStarted == players.length-1){ mainState.setGameStart(true);}
+                        else{ numStarted++; }
                     mainState.setDestinationCardsSelected(false);
                     mainState.getDestinationCards().setHighlight(false);
                 }
-
                 //if the player selected some tracks on the map, enter this if statement
                 else if (mainState.getTrackModeSelected()) {
 

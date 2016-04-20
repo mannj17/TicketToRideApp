@@ -1,5 +1,6 @@
 package teamresistance.tickettoride.TTR;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
@@ -27,7 +28,8 @@ import teamresistance.tickettoride.TTR.DijkstraAlg.Vertex;
  * @author Parker Schibel
  * @version April 2016
  */
-public class TTRComputerPlayer extends GameComputerPlayer{
+public class TTRComputerPlayer extends GameComputerPlayer implements Serializable {
+    private static final long serialVersionUID = 388245564192016L;
 
     private boolean isDifficult;
     private Random rand;

@@ -1,5 +1,6 @@
 package teamresistance.tickettoride.TTR.DijkstraAlg;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,7 +22,8 @@ import java.util.List;
  * @author Parker Schibel
  * @version April 2016
  */
-public class DijkstraGraph {
+public class DijkstraGraph implements Serializable {
+    private static final long serialVersionUID = 388245564192016L;
         private final ArrayList<Vertex> vertexes;
         private final ArrayList<Edge> edges;
 

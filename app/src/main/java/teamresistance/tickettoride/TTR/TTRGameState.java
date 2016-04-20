@@ -3,6 +3,7 @@ package teamresistance.tickettoride.TTR;
 import android.graphics.Path;
 import android.graphics.Rect;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import teamresistance.tickettoride.Game.infoMsg.GameState;
@@ -17,9 +18,9 @@ import teamresistance.tickettoride.Game.infoMsg.GameState;
  * @author Parker Schibel
  * @version March 2016
  */
-public class TTRGameState extends GameState {
+public class TTRGameState extends GameState implements Serializable{
     public boolean reset;
-
+    private static final long serialVersionUID = 388245564192016L;
     protected int maxX = 1720;
     protected int maxY = 980;
 

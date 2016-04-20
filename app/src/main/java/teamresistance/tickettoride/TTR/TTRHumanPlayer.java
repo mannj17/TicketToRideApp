@@ -10,8 +10,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
-import org.w3c.dom.Text;
+import java.io.Serializable;
 
 import teamresistance.tickettoride.Game.GameHumanPlayer;
 import teamresistance.tickettoride.Game.GameMainActivity;
@@ -33,7 +32,7 @@ import teamresistance.tickettoride.TTR.Actions.TrackPlaceAction;
  * @author Parker Schibel
  * @version March 2016
  */
-public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListener, View.OnTouchListener {
+public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListener, View.OnTouchListener, Serializable {
     public TTRSurfaceView myBoard;
     public GameMainActivity myActivity;
     public TTRGameState myState;
@@ -41,6 +40,7 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
     private final String[] trainColors = {"Yellow", "Blue", "Orange", "White",
             "Pink", "Black", "Red", "Green", "Rainbow"};
     private Button confirmSelection;
+    private static final long serialVersionUID = 388245564192016L;
     /**
      * TextViews for player's names
      */
@@ -177,19 +177,19 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
                 cpu1FrameLayout.setLayoutParams(lp);
                 cpu2FrameLayout.setVisibility(View.GONE);
                 cpu3FrameLayout.setVisibility(View.GONE);
-                this.humanTextView.setText("" + this.allPlayerNames[0]);
-                this.humanScoreTextview.setText("" + ((TTRGameState) info).getScores()[0]);
+                this.humanTextView.setText("" + this.allPlayerNames[this.playerNum]);
+                this.humanScoreTextview.setText("" + ((TTRGameState) info).getScores()[this.playerNum]);
                 this.humanTrainTokenTextView.setText("" + ((TTRGameState) info).getTrainTokens()[0]);
-                this.playerDestinationCardTextView.setText("Total Cards: " + myState.getPlayerDestinationDecks()[0].size());
+                this.playerDestinationCardTextView.setText("Total Cards: " + myState.getPlayerDestinationDecks()[this.playerNum].size());
                 int numberOfDestCards = 0;
-                if (myState.getPlayerDestinationDecks()[0].size() > 6) {
+                if (myState.getPlayerDestinationDecks()[this.playerNum].size() > 6) {
                     numberOfDestCards = 6;
                 } else {
-                    numberOfDestCards = myState.getPlayerDestinationDecks()[0].size();
+                    numberOfDestCards = myState.getPlayerDestinationDecks()[this.playerNum].size();
                 }
                 for (int i = 0; i < numberOfDestCards; i++) {
                     destinationCards[i].setVisibility(View.VISIBLE);
-                    DestinationCards tempCard = (DestinationCards) myState.getPlayerDestinationDecks()[0].getCards().get(i);
+                    DestinationCards tempCard = (DestinationCards) myState.getPlayerDestinationDecks()[this.playerNum].getCards().get(i);
                     destinationCards[i].setText("" + tempCard.getCity1() + " to " + tempCard.getCity2());
                 }
                 if (myState.getPlayerID() == this.playerNum) {
@@ -247,15 +247,15 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
                     this.faceUpTrainCards[i].setImageResource(R.drawable.rainbow_train);
                 }
             }
-            blackColorCount.setText("" + myState.getTrainColorCount("Black", 0));
-            whiteColorCount.setText("" + myState.getTrainColorCount("White", 0));
-            blueColorCount.setText("" + myState.getTrainColorCount("Blue", 0));
-            redColorCount.setText("" + myState.getTrainColorCount("Red", 0));
-            orangeColorCount.setText("" + myState.getTrainColorCount("Orange", 0));
-            yellowColorCount.setText("" + myState.getTrainColorCount("Yellow", 0));
-            pinkColorCount.setText("" + myState.getTrainColorCount("Pink", 0));
-            greenColorCount.setText("" + myState.getTrainColorCount("Green", 0));
-            rainbowColorCount.setText("" + myState.getTrainColorCount("Rainbow", 0));
+            blackColorCount.setText("" + myState.getTrainColorCount("Black", this.playerNum));
+            whiteColorCount.setText("" + myState.getTrainColorCount("White", this.playerNum));
+            blueColorCount.setText("" + myState.getTrainColorCount("Blue", this.playerNum));
+            redColorCount.setText("" + myState.getTrainColorCount("Red", this.playerNum));
+            orangeColorCount.setText("" + myState.getTrainColorCount("Orange", this.playerNum));
+            yellowColorCount.setText("" + myState.getTrainColorCount("Yellow", this.playerNum));
+            pinkColorCount.setText("" + myState.getTrainColorCount("Pink", this.playerNum));
+            greenColorCount.setText("" + myState.getTrainColorCount("Green", this.playerNum));
+            rainbowColorCount.setText("" + myState.getTrainColorCount("Rainbow", this.playerNum));
             myBoard.postInvalidate();
             if (startGame && myState.getPlayerID() == this.playerNum) {
                 startGame = false;

@@ -1,5 +1,7 @@
 package teamresistance.tickettoride.TTR;
 
+import java.io.Serializable;
+
 /**
  * Train Card class. Contains the train card colors and sets the card to a specific type.
  *
@@ -9,7 +11,8 @@ package teamresistance.tickettoride.TTR;
  * @author Parker Schibel
  * @version March 2016
  */
-public class TrainCards extends Card{
+public class TrainCards extends Card implements Serializable {
+    private static final long serialVersionUID = 388245564192016L;
     //String of names of the different train card colors
     private final String[] trainCarNames = {"Yellow", "Blue", "Orange", "White",
             "Pink", "Black", "Red", "Green",

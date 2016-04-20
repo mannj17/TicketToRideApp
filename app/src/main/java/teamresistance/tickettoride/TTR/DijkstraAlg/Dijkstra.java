@@ -3,6 +3,7 @@ package teamresistance.tickettoride.TTR.DijkstraAlg;
 
 import android.util.Log;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -13,12 +14,6 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * @author Nicholas Larson
- * @author Parker Schibel
- * @author Jess Mann
- * @author Nick Scaciotti
- * @version April 2016
- *
  * Creates the nodes for the dijkstra algorithm
  *
  * 4/17/2016
@@ -31,7 +26,8 @@ import java.util.Set;
  * @version April 2016
  */
 
-public class Dijkstra {
+public class Dijkstra implements Serializable {
+    private static final long serialVersionUID = 388245564192016L;
     private DijkstraGraph myGraph;
     final private int MAX = 100000000;
 

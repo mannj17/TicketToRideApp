@@ -1,5 +1,7 @@
 package teamresistance.tickettoride.TTR.Actions;
 
+import java.io.Serializable;
+
 import teamresistance.tickettoride.Game.GamePlayer;
 import teamresistance.tickettoride.Game.actionMsg.GameAction;
 import teamresistance.tickettoride.TTR.Deck;
@@ -13,7 +15,8 @@ import teamresistance.tickettoride.TTR.Deck;
  * @author Parker Schibel
  * @version April 2016
  */
-public class SendDeck extends GameAction {
+public class SendDeck extends GameAction implements Serializable {
+    private static final long serialVersionUID = 388245564192016L;
     private Deck sendDeck;
 
     /**

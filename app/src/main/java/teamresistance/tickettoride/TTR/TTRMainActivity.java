@@ -9,6 +9,8 @@ import teamresistance.tickettoride.Game.LocalGame;
 import teamresistance.tickettoride.Game.config.GameConfig;
 import teamresistance.tickettoride.Game.config.GamePlayerType;
 import teamresistance.tickettoride.R;
+
+import java.io.Serializable;
 import java.util.ArrayList;
 /**
  *  TTRMainActivity sets the Main Activity of the game
@@ -19,7 +21,8 @@ import java.util.ArrayList;
  * @author Parker Schibel
  * @version March 2016
  */
-public class TTRMainActivity extends GameMainActivity {
+public class TTRMainActivity extends GameMainActivity implements Serializable {
+    private static final long serialVersionUID = 388245564192016L;
 
     public static final int PORT_NUMBER = 4567;
 

@@ -6,6 +6,8 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.SurfaceView;
 
+import java.io.Serializable;
+
 import teamresistance.tickettoride.R;
 
 /**
@@ -18,7 +20,8 @@ import teamresistance.tickettoride.R;
  * @version March 2016
  */
 
-public class TTRSurfaceView extends SurfaceView{
+public class TTRSurfaceView extends SurfaceView implements Serializable {
+    private static final long serialVersionUID = 388245564192016L;
 
     Bitmap boardImage = BitmapFactory.decodeResource(getResources(), R.drawable.game_board);
 

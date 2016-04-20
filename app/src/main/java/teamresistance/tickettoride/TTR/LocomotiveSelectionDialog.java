@@ -9,6 +9,9 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.RadioButton;
 import android.widget.TextView;
+
+import java.io.Serializable;
+
 import teamresistance.tickettoride.Game.Game;
 import teamresistance.tickettoride.R;
 import teamresistance.tickettoride.TTR.Actions.ConfirmSelectionAction;
@@ -31,7 +34,8 @@ import teamresistance.tickettoride.TTR.Actions.ConfirmSelectionAction;
  * @author Parker Schibel
  * @version April 2016
  */
-public class LocomotiveSelectionDialog extends Dialog implements View.OnClickListener{
+public class LocomotiveSelectionDialog extends Dialog implements View.OnClickListener, Serializable {
+    private static final long serialVersionUID = 388245564192016L;
     /** Class Instance Variables */
     private Button selectBtn; //button for user to select
     private Button cancelBtn; //button for cancellation

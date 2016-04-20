@@ -1,5 +1,7 @@
 package teamresistance.tickettoride.TTR.Actions;
 
+import java.io.Serializable;
+
 import teamresistance.tickettoride.Game.GamePlayer;
 import teamresistance.tickettoride.Game.actionMsg.GameAction;
 
@@ -12,7 +14,8 @@ import teamresistance.tickettoride.Game.actionMsg.GameAction;
  * @author Parker Schibel
  * @version March 2016
  */
-public class DrawUpCardAction extends GameAction {
+public class DrawUpCardAction extends GameAction implements Serializable {
+    private static final long serialVersionUID = 388245564192016L;
     private int pos;
     public DrawUpCardAction(GamePlayer player, int pos) {
         super(player);

@@ -1,5 +1,7 @@
 package teamresistance.tickettoride.TTR.DijkstraAlg;
 
+import java.io.Serializable;
+
 /**
  * @author Nicholas Larson
  * @author Parker Schibel
@@ -18,7 +20,8 @@ package teamresistance.tickettoride.TTR.DijkstraAlg;
  * @author Parker Schibel
  * @version April 2016
  */
-public class Edge {
+public class Edge implements Serializable {
+    private static final long serialVersionUID = 388245564192016L;
     private final String city1;
     private final String city2;
     private final Vertex v1;
