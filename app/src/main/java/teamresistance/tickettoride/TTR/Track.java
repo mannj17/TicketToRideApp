@@ -48,19 +48,42 @@ public class Track implements Serializable {
         this.trainTrackNum = trainTrackNum;
         this.trackColor = trackColor;
         this.track2Color = track2color;
-        startCity = firstCity;
-        endCity = secondCity;
-        highlight = false;
-        selected = false;
+        this.startCity = firstCity;
+        this.endCity = secondCity;
+        this.highlight = false;
+        this.selected = false;
         this.trackPath.set(path);
         this.trackPath2.set(path2);
-        touchArea = passedTouchArea;
-        doubleTrack = doubletrackset;
+        this.touchArea = passedTouchArea;
+        this.doubleTrack = doubletrackset;
+        this.selected2 = false;
+        this.highlight2 = false;
+        this.covered2 = false;
+    }
+
+    public Track(Track original){
+        this.trainTrackNum = original.getTrainTrackNum();
+        this.trackColor = original.getTrackColor();
+        this.track2Color = original.getTrack2Color();
+        startCity = original.getStartCity();
+        endCity = original.getEndCity();
+        highlight = false;
+        selected = false;
+        this.trackPath.set(original.getPath());
+        this.trackPath2.set(original.getPath2());
+        this.touchArea = original.getTouchArea();
+        this.doubleTrack = original.getDoubleTrack();
         selected2 = false;
         highlight2 = false;
         covered2 = false;
     }
 
+    public String getTrack2Color(){
+        return track2Color;
+    }
+    public boolean getDoubleTrack(){
+        return doubleTrack;
+    }
     public boolean isDoubleTrack(){
         return this.doubleTrack;
     }
