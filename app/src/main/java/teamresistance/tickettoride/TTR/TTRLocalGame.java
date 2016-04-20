@@ -547,22 +547,37 @@ public class TTRLocalGame extends LocalGame implements Serializable {
 
             //this boolean is used to indicate if a track has already been selected
             boolean alreadySelected = false;
-
+            TrackPlaceAction temp = (TrackPlaceAction) action;
             //if a player has already selected a track change alreadySelected.
                 for (int i = 0; i < mainState.getTracks().length; i++) {
-                    if (mainState.getTracks()[i].getSelected()) {
-                        alreadySelected = true;
+                    if (mainState.getTracks()[i].getSelected()
+                        || mainState.getTracks()[i].getSelected2()) {
+                        if(mainState.getTracks()[i].isDoubleTrack()
+                                && temp.getIndex() == i){
+                            alreadySelected = false;
+                            if(mainState.getTracks()[i].getSelected()){
+                                mainState.getTracks()[i].setSelected(false);
+                                mainState.getTracks()[i].setSelected2(true);
+                            }
+                            else if(mainState.getTracks()[i].getSelected2()){
+                                mainState.getTracks()[i].setSelected(true);
+                                mainState.getTracks()[i].setSelected2(false);
+                            }
+                        }
+                        else {
+                            alreadySelected = true;
+                            mainState.getTracks()[i].setSelected(false);
+                        }
                         currentTrackColor = mainState.getTracks()[i].toString();
                         mainState.setTrackSpot(i);
                     }
                 }
 
             //once the selected track has been found, change the necessary variables in the game state.
-                TrackPlaceAction temp = (TrackPlaceAction) action;
                 int index = temp.getIndex();
                 if(action.getPlayer() instanceof TTRHumanPlayer) {
                     if (mainState.getTracks()[index].getHighlight() &&
-                            !mainState.getTracks()[index].getSelected() && !alreadySelected) {
+                            !mainState.getTracks()[index].getSelected() && !mainState.getTracks()[index].getSelected2()) {
                         mainState.getTracks()[index].setSelected(true);
                         mainState.setPlaceTrainSelected(true);
                         mainState.setSelectedCardColor(temp.getTrackColor());

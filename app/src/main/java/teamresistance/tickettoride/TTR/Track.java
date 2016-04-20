@@ -20,14 +20,20 @@ public class Track implements Serializable {
     private int trainTrackNum = 0;
     private int playerID = -1;
     private String trackColor = "";
-    private boolean selected = false;
-    private boolean highlight = false;
-    private boolean covered = false;
+    private String track2Color = "";
+    private Boolean selected = false;
+    private Boolean highlight = false;
+    private Boolean covered = false;
+    private Boolean selected2 = false;
+    private Boolean highlight2 = false;
+    private Boolean covered2 = false;
     private CustomPath trackPath = new CustomPath();
+    private CustomPath trackPath2 = new CustomPath();
     private Rect touchArea = new Rect();
     private String startCity = "";
     private String endCity = "";
     private boolean selectHighlight = false;
+    private boolean doubleTrack = false;
 
     /**
      * Constructor for track object
@@ -36,15 +42,27 @@ public class Track implements Serializable {
      * @param secondCity collection of paths representing the locations for placed train tokens
      * @param firstCity area around path that is selectable by user
      */
-    public Track(int trainTrackNum, String trackColor, String firstCity, String secondCity, CustomPath path, Rect passedTouchArea){
+    public Track(int trainTrackNum, String trackColor, String firstCity, String secondCity,
+                 CustomPath path, Rect passedTouchArea, boolean doubletrackset, String track2color, 
+                 CustomPath path2){
         this.trainTrackNum = trainTrackNum;
         this.trackColor = trackColor;
+        this.track2Color = track2color;
         startCity = firstCity;
         endCity = secondCity;
         highlight = false;
         selected = false;
-        trackPath.set(path);
+        this.trackPath.set(path);
+        this.trackPath2.set(path2);
         touchArea = passedTouchArea;
+        doubleTrack = doubletrackset;
+        selected2 = false;
+        highlight2 = false;
+        covered2 = false;
+    }
+
+    public boolean isDoubleTrack(){
+        return this.doubleTrack;
     }
 
     /**
@@ -64,6 +82,25 @@ public class Track implements Serializable {
      */
     public Boolean getHighlight(){
         return highlight;
+    }
+
+    /**
+     * Sets whether the track is highlighted or not
+     *
+     * @param val - new value for if track is highlighted
+     */
+    public void setHighlight2(Boolean val){
+        highlight2 = val;
+    }
+
+    /**
+     * Retruns if highlighted
+     *
+     * @return
+     *      Returns true/false if track is highlighted
+     */
+    public Boolean getHighlight2(){
+        return highlight2;
     }
 
     /**
@@ -93,11 +130,27 @@ public class Track implements Serializable {
     }
 
     /**
+     * Retruns the track Path
+     * @return
+     */
+    public CustomPath getPath2(){
+        return trackPath2;
+    }
+    /**
      * Sets the track path
      * @param path - new Path for graphics
      */
     public void setPath(CustomPath path){
         trackPath.set(path);
+    }
+
+    /**
+     * Sets the track path
+     * @param path - new Path for graphics
+     */
+
+    public void setPath2(CustomPath path){
+        trackPath2.set(path);
     }
 
     /**
@@ -114,6 +167,30 @@ public class Track implements Serializable {
      */
     public void setSelected(Boolean val){
         selected = val;
+    }
+
+    /**
+     * Checks if track is selected
+     * @return
+     */
+    public Boolean getSelected2(){
+        return selected2;
+    }
+
+    /**
+     * Sets the tracks new selected value
+     * @param val - new boolean for if selected
+     */
+    public void setSelected2(Boolean val){
+        selected2 = val;
+    }
+
+    /**
+     * Retruns if the track is covered
+     * @return
+     */
+    public Boolean getCovered2(){
+        return covered2;
     }
 
     /**
@@ -136,6 +213,14 @@ public class Track implements Serializable {
         covered = val;
     }
 
+    /**
+     * Sets whether the track is/isn't selected
+     * @param val - new boolean for if covered
+     */
+    public void setCovered2(Boolean val){
+        covered2 = val;
+    }
+
     public void setTrainTrackNum(int trainTrackNum) {
         this.trainTrackNum = trainTrackNum;
     }
@@ -146,6 +231,14 @@ public class Track implements Serializable {
 
     public void setTrackColor(String trackColor) {
         this.trackColor = trackColor;
+    }
+
+    public String getTrackColor2() {
+        return track2Color;
+    }
+
+    public void setTrackColor2(String trackColor) {
+        this.track2Color = trackColor;
     }
 
     public Rect getTouchArea() {

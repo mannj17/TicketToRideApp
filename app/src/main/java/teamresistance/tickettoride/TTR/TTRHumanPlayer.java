@@ -289,15 +289,17 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
                     numberOfCards++;
                 }
             }
-        } else if (tempColor.equals("Gray")) {
+        }
+        else if(tempColor.equals("Gray")){
             return chooseGray(track);
         }
-        if (numberOfCards >= trackLength) {
+        if(numberOfCards >= trackLength){
             return true;
         } else {
             return false;
         }
     }
+
 
     /**
      * Checks to see what gray tracks should be highlighted
@@ -536,6 +538,7 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
                         sendingString = "Black";
                     }
                 }
+
                 game.sendAction(new TrackPlaceAction(this, sendingString, index));
             } else {
                 return false;

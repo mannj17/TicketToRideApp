@@ -85,6 +85,26 @@ public class TTRSurfaceView extends SurfaceView implements Serializable {
                     paint.setStyle(Paint.Style.FILL);
                     canvas.drawPath(track.getPath(), paint);
                 }
+                if(track.isDoubleTrack()){
+                    if (track.getHighlight2()) {
+                        paint.setColor(HIGHLIGHT_COLOR);
+                        paint.setStrokeWidth(5);
+                        paint.setStyle(Paint.Style.STROKE);
+                        canvas.drawPath(track.getPath2(), paint);
+                    }
+                    if (track.getSelected2()) {
+                        paint.setColor(SELECTION_COLOR);
+                        canvas.drawPath(track.getPath2(), paint);
+                    }
+                    if (track.getCovered2()) {
+                        if(track.getPlayerID() == 0){paint.setColor(PLAYER1_COLOR);}
+                        else if(track.getPlayerID() == 1){paint.setColor(PLAYER2_COLOR);}
+                        else if(track.getPlayerID() == 2){paint.setColor(PLAYER3_COLOR);}
+                        else if(track.getPlayerID() == 3){paint.setColor(PLAYER4_COLOR);}
+                        paint.setStyle(Paint.Style.FILL);
+                        canvas.drawPath(track.getPath2(), paint);
+                    }
+                }
             }
         }
     }
@@ -109,6 +129,11 @@ public class TTRSurfaceView extends SurfaceView implements Serializable {
             if(!track.getCovered()){
                 track.setSelected(!highlightMode);
                 track.setHighlight(highlightMode);
+
+                if(track.isDoubleTrack()){
+                    track.setSelected2(!highlightMode);
+                    track.setHighlight2(highlightMode);
+                }
             }
         }
         // Refreshes the view by calling onDraw function
@@ -141,6 +166,7 @@ public class TTRSurfaceView extends SurfaceView implements Serializable {
                     trackZ.setSelected(false);
                 }
                 track.setSelected(true);
+                track.setSelected2(true);
             }
         }
         postInvalidate();
