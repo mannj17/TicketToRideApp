@@ -1,9 +1,6 @@
 package teamresistance.tickettoride.TTR;
 
-import android.util.Log;
-
 import java.io.Serializable;
-import java.util.Random;
 
 import teamresistance.tickettoride.Game.GamePlayer;
 import teamresistance.tickettoride.Game.LocalGame;
@@ -15,7 +12,6 @@ import teamresistance.tickettoride.TTR.Actions.DrawDestinationCardAction;
 import teamresistance.tickettoride.TTR.Actions.DrawDownCardAction;
 import teamresistance.tickettoride.TTR.Actions.DrawUpCardAction;
 import teamresistance.tickettoride.TTR.Actions.TrackPlaceAction;
-import teamresistance.tickettoride.TTR.DijkstraAlg.PlayerGraph;
 
 /**
  * Controls the game, allowing actions to be performed by
@@ -92,8 +88,6 @@ public class TTRLocalGame extends LocalGame implements Serializable {
         //if the final turns are over, find and announce the winner
         if (turnsLeft == 0 && noMoreTrains) {
             /* If final turn over do final turn scoring */
-            PlayerGraph player1Graph = new PlayerGraph();
-            player1Graph.divideTrackByPlayer(mainState.getTracks(),0);
 
             for (int j = 0; j < mainState.getScores().length; j++) {
                 if (mainState.getScores()[j] > mainState.getScores()[topScorePlayer]) {
