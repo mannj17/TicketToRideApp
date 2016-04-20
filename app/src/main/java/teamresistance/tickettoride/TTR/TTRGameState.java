@@ -1908,18 +1908,7 @@ public class TTRGameState extends GameState implements Serializable{
         destinationCards = new Deck(original.destinationCards);
         trainDiscard = new Deck(original.trainDiscard);
         destinationDiscard = new Deck(original.destinationDiscard);
-        if(faceDownTrainCards.size() < 5){
-            if(trainDiscard.size() != 0) {
-                trainDiscard.shuffle();
-                faceDownTrainCards.moveAllCardsTo(faceDownTrainCards, trainDiscard);
-            }
-        }
-        if(destinationCards.size() < 3){
-            if(destinationDiscard.size() != 0) {
-                destinationCards.shuffle();
-                destinationCards.moveAllCardsTo(destinationCards, destinationDiscard);
-            }
-        }
+
         for(int i = 0; i < original.getNumPlayers(); i++){
             trainTokens[i] = original.getTrainTokens()[i];
             scores[i] = original.getScores()[i];
