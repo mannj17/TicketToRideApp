@@ -377,6 +377,7 @@ public class TTRGameState extends GameState implements Serializable{
         onlyDownDeck = original.getOnlyDownDeck();
         useRainbow = original.getUseRainbow();
         gameStart = original.getGameStart();
+        setNames(original.getNames());
         if(gameStart){
             cardModeSelected = original.getCardModeSelected();
             trackModeSelected = original.getTrackModeSelected();

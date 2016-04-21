@@ -324,22 +324,22 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
      * @return boolean
      */
     public boolean chooseGray(Track track) {
-        int rainbowCount = myState.getTrainColorCount("Rainbow", 0);
-        if ((myState.getTrainColorCount("Black", 0) + rainbowCount) >= track.getTrainTrackNum()) {
+        int rainbowCount = myState.getTrainColorCount("Rainbow", this.playerNum);
+        if ((myState.getTrainColorCount("Black", this.playerNum) + rainbowCount) >= track.getTrainTrackNum()) {
             return true;
-        } else if ((myState.getTrainColorCount("White", 0) + rainbowCount) >= track.getTrainTrackNum()) {
+        } else if ((myState.getTrainColorCount("White", this.playerNum) + rainbowCount) >= track.getTrainTrackNum()) {
             return true;
-        } else if ((myState.getTrainColorCount("Blue", 0) + rainbowCount) >= track.getTrainTrackNum()) {
+        } else if ((myState.getTrainColorCount("Blue", this.playerNum) + rainbowCount) >= track.getTrainTrackNum()) {
             return true;
-        } else if ((myState.getTrainColorCount("Red", 0) + rainbowCount) >= track.getTrainTrackNum()) {
+        } else if ((myState.getTrainColorCount("Red", this.playerNum) + rainbowCount) >= track.getTrainTrackNum()) {
             return true;
-        } else if ((myState.getTrainColorCount("Orange", 0) + rainbowCount) >= track.getTrainTrackNum()) {
+        } else if ((myState.getTrainColorCount("Orange", this.playerNum) + rainbowCount) >= track.getTrainTrackNum()) {
             return true;
-        } else if ((myState.getTrainColorCount("Yellow", 0) + rainbowCount) >= track.getTrainTrackNum()) {
+        } else if ((myState.getTrainColorCount("Yellow", this.playerNum) + rainbowCount) >= track.getTrainTrackNum()) {
             return true;
-        } else if ((myState.getTrainColorCount("Pink", 0) + rainbowCount) >= track.getTrainTrackNum()) {
+        } else if ((myState.getTrainColorCount("Pink", this.playerNum) + rainbowCount) >= track.getTrainTrackNum()) {
             return true;
-        } else if ((myState.getTrainColorCount("Green", 0) + rainbowCount) >= track.getTrainTrackNum()) {
+        } else if ((myState.getTrainColorCount("Green", this.playerNum) + rainbowCount) >= track.getTrainTrackNum()) {
             return true;
         } else {
             return false;
