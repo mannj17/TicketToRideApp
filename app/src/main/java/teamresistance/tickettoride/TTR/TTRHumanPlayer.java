@@ -243,21 +243,21 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
                 this.cpu3TrainCardTextView.setText("" + ((TTRGameState) info).getPlayerTrainDecks()[3].getCards().size());
             }
             for (int i = 0; i < myState.getFaceUpTrainCards().size(); i++) {
-                if ((myState.getFaceUpTrainCards().getCards().get(i)).toString() == "Black") {
+                if ((myState.getFaceUpTrainCards().getCards().get(i)).toString().equals("Black")) {
                     faceUpTrainCards[i].setImageResource(R.drawable.black_train);
-                } else if (((TrainCards) myState.getFaceUpTrainCards().getCards().get(i)).toString() == "Pink") {
+                } else if (((TrainCards) myState.getFaceUpTrainCards().getCards().get(i)).toString().equals("Pink")) {
                     faceUpTrainCards[i].setImageResource(R.drawable.pink_train);
-                } else if (((TrainCards) myState.getFaceUpTrainCards().getCards().get(i)).toString() == "Blue") {
+                } else if (((TrainCards) myState.getFaceUpTrainCards().getCards().get(i)).toString().equals("Blue")) {
                     this.faceUpTrainCards[i].setImageResource(R.drawable.blue_train);
-                } else if (((TrainCards) myState.getFaceUpTrainCards().getCards().get(i)).toString() == "Green") {
+                } else if (((TrainCards) myState.getFaceUpTrainCards().getCards().get(i)).toString().equals("Green")) {
                     this.faceUpTrainCards[i].setImageResource(R.drawable.green_train);
-                } else if (((TrainCards) myState.getFaceUpTrainCards().getCards().get(i)).toString() == "Orange") {
+                } else if (((TrainCards) myState.getFaceUpTrainCards().getCards().get(i)).toString().equals("Orange")) {
                     this.faceUpTrainCards[i].setImageResource(R.drawable.orange_train);
-                } else if (((TrainCards) myState.getFaceUpTrainCards().getCards().get(i)).toString() == "Red") {
+                } else if (((TrainCards) myState.getFaceUpTrainCards().getCards().get(i)).toString().equals("Red")) {
                     this.faceUpTrainCards[i].setImageResource(R.drawable.red_train);
-                } else if (((TrainCards) myState.getFaceUpTrainCards().getCards().get(i)).toString() == "White") {
+                } else if (((TrainCards) myState.getFaceUpTrainCards().getCards().get(i)).toString().equals("White")) {
                     this.faceUpTrainCards[i].setImageResource(R.drawable.white_train);
-                } else if (((TrainCards) myState.getFaceUpTrainCards().getCards().get(i)).toString() == "Yellow") {
+                } else if (((TrainCards) myState.getFaceUpTrainCards().getCards().get(i)).toString().equals("Yellow")) {
                     this.faceUpTrainCards[i].setImageResource(R.drawable.yellow_train);
                 } else {
                     this.faceUpTrainCards[i].setImageResource(R.drawable.rainbow_train);

@@ -365,32 +365,17 @@ public class TTRGameState extends GameState implements Serializable{
 
         tempTracks = original.getTracks();
 
-        //if a turn was made reset all the necessary values to where they need
-        //to be at the start of someone's turn.
-        if(reset){
-            trackSpot = -1;
-            numRainbows = 0;
-            selectedTrackColor = "";
-//            isSelectDestinationCards = false;
-            trackModeSelected = false;
-            cardModeSelected = true;
-            destinationCardsSelected = false;
-            trainCardsSelected = false;
-            onlyDownDeck = false;
-            useRainbow = false;
-        }
-        else {
-            trackSpot = original.getTrackSpot();
-            numRainbows = original.getNumRainbows();
-            selectedTrackColor = original.getSelectedTrackColor();
+
+        trackSpot = original.getTrackSpot();
+        numRainbows = original.getNumRainbows();
+        selectedTrackColor = original.getSelectedTrackColor();
 //            isSelectDestinationCards = original.getIsSelectDestinationCards();
-            trackModeSelected = original.getTrackModeSelected();
-            cardModeSelected = original.getCardModeSelected();
-            destinationCardsSelected = original.getDestinationCardsSelected();
-            trainCardsSelected = original.getTrainCardsSelected();
-            onlyDownDeck = original.getOnlyDownDeck();
-            useRainbow = original.getUseRainbow();
-        }
+        trackModeSelected = original.getTrackModeSelected();
+        cardModeSelected = original.getCardModeSelected();
+        destinationCardsSelected = original.getDestinationCardsSelected();
+        trainCardsSelected = original.getTrainCardsSelected();
+        onlyDownDeck = original.getOnlyDownDeck();
+        useRainbow = original.getUseRainbow();
         gameStart = original.getGameStart();
         if(gameStart){
             cardModeSelected = original.getCardModeSelected();
