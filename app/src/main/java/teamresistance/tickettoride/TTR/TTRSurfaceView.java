@@ -33,6 +33,7 @@ public class TTRSurfaceView extends SurfaceView implements Serializable {
     public Boolean isArea1 = false;
     public Boolean isArea2 = false;
     private boolean[] highlights;
+    private boolean[] selected;
     protected int maxX = 1720;
     protected int maxY = 980;
 
@@ -63,7 +64,10 @@ public class TTRSurfaceView extends SurfaceView implements Serializable {
         for(int i = 0; i < highlights.length; i++){
             highlights[i] = false;
         }
-
+        selected = new boolean[78];
+        for(int i = 0; i < selected.length; i++){
+            selected[i] = false;
+        }
 
         /**
          External Citation
@@ -2046,21 +2050,15 @@ public class TTRSurfaceView extends SurfaceView implements Serializable {
 
         for(int i = 0; i < highlights.length; i++){
             if(highlights[i]){
-//                pathTemp.moveTo(maxX * .543f, maxY * .450f);
-//                pathTemp.lineTo(maxX * .533f, maxY * .463f);
-//                pathTemp.lineTo(maxX * .547f, maxY * .511f);
-//                pathTemp.lineTo(maxX * .558f, maxY * .499f);
-//                pathTemp.close();
-//                pathTemp = paths.get(5);
-//                paint.setStrokeWidth(5);
-//                paint.setStyle(Paint.Style.STROKE);
-//                paint.setColor(Color.BLACK);
-//                canvas.drawPath(pathTemp, paint);
                 paint.setColor(HIGHLIGHT_COLOR);
                 paint.setStrokeWidth(5);
                 paint.setStyle(Paint.Style.STROKE);
                 Path temp= paths.get(i);
                 canvas.drawPath(temp, paint);
+            }
+            if(selected[i]){
+                paint.setColor(SELECTION_COLOR);
+                canvas.drawPath(paths.get(i),paint);
             }
         }
 //        for(Track track : myTracks){
@@ -2192,6 +2190,12 @@ public class TTRSurfaceView extends SurfaceView implements Serializable {
     public void setHighlights(boolean[] highlightsEnter){
         for(int i = 0; i < highlightsEnter.length; i++){
             this.highlights[i] = highlightsEnter[i];
+        }
+    }
+
+    public void setSelected(boolean[] selectedEnter){
+        for(int i = 0; i < selectedEnter.length; i++){
+            this.selected[i] = selectedEnter[i];
         }
     }
 }

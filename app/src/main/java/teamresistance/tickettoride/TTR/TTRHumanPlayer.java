@@ -119,6 +119,7 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
 
     private boolean startGame = true;
     private boolean[] highlights;
+    private boolean[] selected;
 
     /*
      * The human player
@@ -139,6 +140,7 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
         if (info instanceof TTRGameState) {
             myState = (TTRGameState) info;
             highlights = new boolean[myState.getTracks().size()];
+            selected = new boolean[myState.getTracks().size()];
             trainDeck = myState.getPlayerTrainDecks()[this.playerNum];
             int playerNum = ((TTRGameState) info).getNumPlayers();
             for (int i = 0; i < myState.getFaceUpTrainCards().size(); i++) {
@@ -174,15 +176,18 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
                     else{
                         highlights[i] = !val;
                     }
+                    if(myState.getTracks().get(i).getSelected()){
+                        selected[i] = true;
+                    }
+                    else{
+                        selected[i] = false;
+                    }
                 }
-//                for (int i = 0; i < size; i++) {
-//                    if (canChoose(myBoard.getTracks()[i]) || !val) {
-//                       // myBoard.getTracks()[i].setHighlight(val);
-//                    }
-//                }
             }
 
             myBoard.setHighlights(highlights);
+            myBoard.setSelected(selected);
+
             if (playerNum >= 2) { //2 is the minimum number of players
                 lp = new LinearLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT, 1);
                 cpu1FrameLayout.setLayoutParams(lp);
@@ -512,8 +517,9 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
 //            }
             String colorString = null;
             if (index != -1) {
-                if(myState.getTracks().get(index).getHighlight()){
+                if(highlights[index]){
                     colorString = myState.getTracks().get(index).getTrackColor();
+                    game.sendAction(new TrackPlaceAction(this, colorString, index));
                 }
 //                String sendingString = myState.getTracks()[index].getTrackColor();
 //                if (myState.getTracks()[index].getTrackColor().equals("Gray")) {
@@ -554,9 +560,9 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
 //                }
             }
             else {
+
                 return false;
             }
-            game.sendAction(new TrackPlaceAction(this, colorString, index));
         }
         return true;
     }

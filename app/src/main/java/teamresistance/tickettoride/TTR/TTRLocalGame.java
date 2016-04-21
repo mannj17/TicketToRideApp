@@ -583,10 +583,12 @@ public class TTRLocalGame extends LocalGame implements Serializable {
                     mainState.setPlaceTrainSelected(false);
                 }
             }
-            if(thisAction.getIndex() != -1){
-                mainState.getTracks().get(thisAction.getIndex()).setSelected(true);
-                mainState.setSelectedTrackColor(thisAction.getTrackColor());
-                mainState.setTrackSpot(thisAction.getIndex());
+            if(action.getPlayer() instanceof TTRHumanPlayer) {
+                if (thisAction.getIndex() != -1) {
+                    mainState.getTracks().get(thisAction.getIndex()).setSelected(true);
+                    mainState.setSelectedTrackColor(thisAction.getTrackColor());
+                    mainState.setTrackSpot(thisAction.getIndex());
+                }
             }
             return true;
 
