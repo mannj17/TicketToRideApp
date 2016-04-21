@@ -19,7 +19,7 @@ public class ConfirmSelectionAction extends GameAction implements Serializable {
     private static final long serialVersionUID = 388780064192016L;
     private Deck sendDeck = null;
     private Deck removeDeck = null;
-    private String chosenColor = null;
+    private String trainColor = null;
     private int useRainbow = 0;
 
     // Default constructor
@@ -42,9 +42,9 @@ public class ConfirmSelectionAction extends GameAction implements Serializable {
     }
 
     //Constructor for choosing cards and how many (if any) rainbow cards
-    public ConfirmSelectionAction(GamePlayer player, String chosenColor, int useRainbow){
+    public ConfirmSelectionAction(GamePlayer player, String trainColor, int useRainbow){
         super(player);
-        this.chosenColor = chosenColor;
+        this.trainColor = trainColor;
         this.useRainbow = useRainbow;
     }
 
@@ -52,7 +52,7 @@ public class ConfirmSelectionAction extends GameAction implements Serializable {
 
     public Deck getRemoveDeck(){return this.removeDeck;}
 
-    public String getChosenColor(){return this.chosenColor;}
+    public String getTrainColor(){return this.trainColor;}
 
     public int getUseRainbow(){return this.useRainbow;}
 }

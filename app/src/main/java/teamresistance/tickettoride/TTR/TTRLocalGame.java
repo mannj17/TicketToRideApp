@@ -4,13 +4,11 @@ import java.io.Serializable;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Random;
 
 import teamresistance.tickettoride.Game.GamePlayer;
 import teamresistance.tickettoride.Game.LocalGame;
 import teamresistance.tickettoride.Game.actionMsg.GameAction;
 import teamresistance.tickettoride.TTR.Actions.ChangeModeAction;
-import teamresistance.tickettoride.TTR.Actions.ChooseDestinationAction;
 import teamresistance.tickettoride.TTR.Actions.ConfirmSelectionAction;
 import teamresistance.tickettoride.TTR.Actions.DrawDestinationCardAction;
 import teamresistance.tickettoride.TTR.Actions.DrawDownCardAction;
@@ -38,7 +36,7 @@ public class TTRLocalGame extends LocalGame implements Serializable {
     private boolean noMoreTrains; //boolean to indicate the start of a game over
     private int turnsLeft; //number of turns left in the game when a game over state is initiated.
     private int topScorePlayer = 0; //position in the array of players of the player with
-                                    //the highest score
+    //the highest score
     private int numStarted;
     private String currentTrackColor = null; //the track color of the currently chosen track.
     private final ArrayList<String> destNames = new ArrayList<String>(Arrays.asList("Denver", "El Paso", "Kansas City",
@@ -73,8 +71,8 @@ public class TTRLocalGame extends LocalGame implements Serializable {
 
     /**
      * Returns if the player can make a move
-     * @param playerIdx
-     * 		the player's player-number (ID)
+     *
+     * @param playerIdx the player's player-number (ID)
      * @return
      */
     @Override
@@ -84,6 +82,7 @@ public class TTRLocalGame extends LocalGame implements Serializable {
 
     /**
      * Returns the end game status
+     *
      * @return
      */
     @Override
@@ -112,8 +111,8 @@ public class TTRLocalGame extends LocalGame implements Serializable {
             int longestDistance = 0;
 
             //add all of the cities to the Vertex list
-            for(int i = 0; i < destNames.size(); i++){
-                temp = new Vertex(destNames.get(i),i);
+            for (int i = 0; i < destNames.size(); i++) {
+                temp = new Vertex(destNames.get(i), i);
                 myVertexList.add(temp);
             }
 
@@ -123,29 +122,29 @@ public class TTRLocalGame extends LocalGame implements Serializable {
 
             //run through all the players to see what destination cards they
             //completed and see who had the longest continuous track.
-            for(int j = 0; j < this.players.length; j++) {
+            for (int j = 0; j < this.players.length; j++) {
 
                 //create an arrayList of Edges that correspond to the
                 //tracks owned by the player.
                 ArrayList<Edge> myEdgeList = new ArrayList<Edge>();
-                for (int i = 0; i < mainState.getTracks().length; i++) {
+                for (int i = 0; i < mainState.getTracks().size(); i++) {
 
                     //used to create the correct Edge
-                    String city1 = mainState.getTracks()[i].getStartCity();
-                    String city2 = mainState.getTracks()[i].getEndCity();
+                    String city1 = mainState.getTracks().get(i).getStartCity();
+                    String city2 = mainState.getTracks().get(i).getEndCity();
 
                     //run through every Vertex on the map and get only the Edges
                     //that the player owns
                     for (Vertex vert : myVertexList) {
                         int spot = vert.getId();
                         if (city1.equals(destNames.get(spot))
-                                && (mainState.getTracks()[i].getPlayerID() == -1
-                                || mainState.getTracks()[i].getPlayerID() == j)
+                                && (mainState.getTracks().get(i).getPlayerID() == -1
+                                || mainState.getTracks().get(i).getPlayerID() == j)
                                 && startCity == null) {
                             startCity = vert;
                         } else if (city2.equals(destNames.get(spot))
-                                && (mainState.getTracks()[i].getPlayerID() == -1
-                                || mainState.getTracks()[i].getPlayerID() == j)
+                                && (mainState.getTracks().get(i).getPlayerID() == -1
+                                || mainState.getTracks().get(i).getPlayerID() == j)
                                 && endCity == null) {
                             endCity = vert;
                         }
@@ -154,8 +153,8 @@ public class TTRLocalGame extends LocalGame implements Serializable {
                     //if both Vertexes for an Edge were found, add it to the list of Edges
                     Edge temporary = null;
                     if (startCity != null && endCity != null) {
-                        temporary = new Edge(mainState.getTracks()[i], startCity, endCity,
-                                mainState.getTracks()[i].getTrainTrackNum());
+                        temporary = new Edge(mainState.getTracks().get(i), startCity, endCity,
+                                mainState.getTracks().get(i).getTrainTrackNum());
                     }
                     startCity = null;
                     endCity = null;
@@ -171,7 +170,7 @@ public class TTRLocalGame extends LocalGame implements Serializable {
 
                 //run through all of the destination cards in the player's hand
                 //to see which they completed and which they did not.
-                for(int k = 0; k < mainState.getPlayerDestinationDecks()[j].getCards().size(); k++){
+                for (int k = 0; k < mainState.getPlayerDestinationDecks()[j].getCards().size(); k++) {
                     int spot1 = -1;
                     int spot2 = -1;
 
@@ -183,11 +182,10 @@ public class TTRLocalGame extends LocalGame implements Serializable {
 
                     //run through every vertex and find the ones that correspond to the current
                     //destination card.
-                    for(int m = 0; m < playerGraph.getVertexes().size(); m++) {
-                        if (playerGraph.getVertexes().get(m).getName().equals(city1)){
+                    for (int m = 0; m < playerGraph.getVertexes().size(); m++) {
+                        if (playerGraph.getVertexes().get(m).getName().equals(city1)) {
                             spot1 = m;
-                        }
-                        else if(playerGraph.getVertexes().get(m).getName().equals(city2)){
+                        } else if (playerGraph.getVertexes().get(m).getName().equals(city2)) {
                             spot2 = m;
                         }
                     }
@@ -196,7 +194,7 @@ public class TTRLocalGame extends LocalGame implements Serializable {
                     playerDijkstra.dijkstra(spot1);
 
                     //only enter if the player has any tracks
-                    if(!playerDijkstra.getMyGraph().getEdges().isEmpty()) {
+                    if (!playerDijkstra.getMyGraph().getEdges().isEmpty()) {
 
                         //if one the spots is the source enter. Then check to see if the second
                         //city on the card still has the maximum distance value. If the distance
@@ -205,15 +203,13 @@ public class TTRLocalGame extends LocalGame implements Serializable {
                         if (playerDijkstra.getMyGraph().getVertexes().get(spot1).getDistance() == 0) {
                             if (playerDijkstra.getMyGraph().getVertexes().get(spot2).getDistance() != 100000000) {
                                 mainState.setScore(mainState.getScores()[j] + lookCard.getScore(), j);
-                            }
-                            else{
+                            } else {
                                 mainState.setScore(mainState.getScores()[j] - lookCard.getScore(), j);
                             }
                         } else if (playerDijkstra.getMyGraph().getVertexes().get(spot2).getDistance() == 0) {
                             if (playerDijkstra.getMyGraph().getVertexes().get(spot1).getDistance() != 100000000) {
                                 mainState.setScore(mainState.getScores()[j] + lookCard.getScore(), j);
-                            }
-                            else{
+                            } else {
                                 mainState.setScore(mainState.getScores()[j] - lookCard.getScore(), j);
                             }
                         }
@@ -226,14 +222,14 @@ public class TTRLocalGame extends LocalGame implements Serializable {
                 ArrayList<Vertex> lonelyVertex = playerDijkstra.getSingleNeighbor();
 
                 //Run through and perform dijkstra on all of the lonely Vertexes
-                for(int n = 0; n < lonelyVertex.size(); n++){
+                for (int n = 0; n < lonelyVertex.size(); n++) {
                     playerDijkstra.dijkstra(lonelyVertex.get(n).getId());
 
                     //after performing dijkstra, run through every other vertex until the
                     //farthest one from the source is found. If it is the new longest track
                     //save the player who owns it and its size.
-                    for(Vertex vertex: playerGraph.getVertexes()){
-                        if(vertex.getDistance() != 100000000 && vertex.getDistance() > longestDistance){
+                    for (Vertex vertex : playerGraph.getVertexes()) {
+                        if (vertex.getDistance() != 100000000 && vertex.getDistance() > longestDistance) {
                             longestDistance = vertex.getDistance();
                             longest = j;
                         }
@@ -243,7 +239,7 @@ public class TTRLocalGame extends LocalGame implements Serializable {
                 myEdgeList.clear();
             }
 
-           //whichever player has the longest continuous track, give them bonus points.
+            //whichever player has the longest continuous track, give them bonus points.
             mainState.setScore(mainState.getScores()[longest] + 10, longest);
 
             for (int j = 0; j < mainState.getScores().length; j++) {
@@ -251,10 +247,9 @@ public class TTRLocalGame extends LocalGame implements Serializable {
                     topScorePlayer = j;
                 }
             }
-            if(topScorePlayer != 0){
-                return("" + this.playerNames[topScorePlayer] + "Wins");
-            }
-            else {
+            if (topScorePlayer != 0) {
+                return ("" + this.playerNames[topScorePlayer] + "Wins");
+            } else {
                 return ("You're Winner!!!");
             }
         }
@@ -285,27 +280,217 @@ public class TTRLocalGame extends LocalGame implements Serializable {
                     mainState.getFaceUpTrainCards().getCards().get(i).setHighlight(false);
                 }
 
-            //if track mode is the selected mode, de-highlight all selected cards
-            //and set the necessary booleans
+                //if track mode is the selected mode, de-highlight all selected cards
+                //and set the necessary booleans
             } else if (mainState.getTrackModeSelected()) {
                 mainState.setCardModeSelected(true);
                 mainState.setTrackModeSelected(false);
-                for(int i = 0; i < mainState.getTracks().length; i++){
-                    mainState.getTracks()[i].setSelected(false);
+                for (int i = 0; i < mainState.getTracks().size(); i++) {
+                    mainState.getTracks().get(i).setSelected(false);
                 }
             }
             return true;
 
-        //If ConfirmSelectionAction is thrown, perform one of these changes to the game state.
+            //If ConfirmSelectionAction is thrown, perform one of these changes to the game state.
         } else if (action instanceof ConfirmSelectionAction) {
+            //if a track has been selected
+            if (!mainState.getGameStart()
+                    && mainState.getTrackModeSelected()
+                    && mainState.getPlaceTrainSelected()
+                    && mainState.getTrackSpot() != -1) {
 
-            if(mainState.getTrainCardsSelected() ||
-               mainState.getPlaceTrainSelected() ||
-               mainState.getDestinationCardsSelected() ||
-               !mainState.getGameStart()){
-                //if the player has chosen some train cards from the face up or face down, move
-                //them into their train card hand.
-                if (mainState.getTrainCardsSelected()) {
+                ConfirmSelectionAction myAction = (ConfirmSelectionAction) action;
+                int trackSpot = mainState.getTrackSpot();
+                String trackColor = mainState.getSelectedTrackColor();
+                //if the track selected was not Gray, run through the player's hand to find
+                //and remove the cards that share the same color as the track
+                if (mainState.getTracks().get(trackSpot).getSelected() &&
+                        trackColor.equals("Gray")) {
+
+                    //cover the track and assign the player's number to the track
+                    mainState.getTracks().get(trackSpot).setCovered(true);
+                    mainState.getTracks().get(trackSpot).setPlayerID(mainState.getPlayerID());
+                    mainState.getTracks().get(trackSpot).setSelected(false);
+                    int num = mainState.getTracks().get(trackSpot).getTrainTrackNum();
+
+                    //the length of the track
+                    int count = mainState.getTracks().get(trackSpot).getTrainTrackNum();
+
+                    //if the player chose to use rainbow cards, remove the corresponding cards
+                    //from their hand and reduce the count for the number of cards used to get
+                    //the track.
+                    if (myAction.getUseRainbow() != 0) {
+                        int numRainbows = myAction.getUseRainbow();
+                        for (int j = 0; j < mainState.getPlayerTrainDecks()[mainState.getPlayerID()].size(); j++) {
+                            String cardColor = mainState.getPlayerTrainDecks()[mainState.getPlayerID()]
+                                    .getCards().get(j).toString();
+                            if (cardColor.equals("Rainbow") && numRainbows != 0 && count != 0) {
+                                mainState.getPlayerTrainDecks()[mainState.getPlayerID()].moveCardTo(
+                                        mainState.getTrainDiscard(),
+                                        mainState.getPlayerTrainDecks()[mainState.getPlayerID()], j);
+                                count--;
+                                numRainbows--;
+                            }
+                        }
+                    }
+
+                    //remove the correct number of cards that match the color of the track. Once
+                    //one card is removed, the count is reduced, which indicates how many more
+                    //cards need to be removed.
+                    for (int j = 0; j < mainState.getPlayerTrainDecks()[mainState.getPlayerID()].size(); j++) {
+                        String cardColor = mainState.getPlayerTrainDecks()[mainState.getPlayerID()]
+                                .getCards().get(j).toString();
+                        if (myAction.getTrainColor().equals(cardColor) && count != 0) {
+                            mainState.getPlayerTrainDecks()[mainState.getPlayerID()].moveCardTo(
+                                    mainState.getTrainDiscard(),
+                                    mainState.getPlayerTrainDecks()[mainState.getPlayerID()], j);
+                            j = 0;
+                            count--;
+                        }
+                    }
+
+                    //depending on the size of the track, assign the correct number of points
+                    //to the player.
+                    switch (num) {
+                        case 1:
+                            mainState.setScore(mainState.getScores()[mainState.getPlayerID()] + 1, mainState.getPlayerID());
+                            mainState.setTrainToken(mainState.getTrainTokens()[mainState.getPlayerID()] - 1, mainState.getPlayerID());
+                            break;
+                        case 2:
+                            mainState.setScore(mainState.getScores()[mainState.getPlayerID()] + 2, mainState.getPlayerID());
+                            mainState.setTrainToken(mainState.getTrainTokens()[mainState.getPlayerID()] - 2, mainState.getPlayerID());
+                            break;
+                        case 3:
+                            mainState.setScore(mainState.getScores()[mainState.getPlayerID()] + 4, mainState.getPlayerID());
+                            mainState.setTrainToken(mainState.getTrainTokens()[mainState.getPlayerID()] - 3, mainState.getPlayerID());
+                            break;
+                        case 4:
+                            mainState.setScore(mainState.getScores()[mainState.getPlayerID()] + 7, mainState.getPlayerID());
+                            mainState.setTrainToken(mainState.getTrainTokens()[mainState.getPlayerID()] - 4, mainState.getPlayerID());
+                            break;
+                        case 5:
+                            mainState.setScore(mainState.getScores()[mainState.getPlayerID()] + 10, mainState.getPlayerID());
+                            mainState.setTrainToken(mainState.getTrainTokens()[mainState.getPlayerID()] - 5, mainState.getPlayerID());
+                            break;
+                        case 6:
+                            mainState.setScore(mainState.getScores()[mainState.getPlayerID()] + 15, mainState.getPlayerID());
+                            mainState.setTrainToken(mainState.getTrainTokens()[mainState.getPlayerID()] - 6, mainState.getPlayerID());
+                            break;
+                    }
+                }
+
+                //if the color of the track is Gray, remove the cards of the chosen card colors
+                //until enough have been removed.
+                else if (mainState.getTracks().get(trackSpot).getSelected()
+                        && !trackColor.equals("Gray")) {
+
+                    //holder for the length of the track to indicate how many cards are needed
+                    int count = mainState.getTracks().get(trackSpot).getTrainTrackNum();
+
+                    //if the player chose to use rainbow cards, remove the corresponding cards
+                    //from their hand and reduce the count for the number of cards used to get
+                    //the track.
+                    if (myAction.getUseRainbow() != 0) {
+                        int takeRainbows = myAction.getUseRainbow();
+                        for (int j = 0; j < mainState.getPlayerTrainDecks()[mainState.getPlayerID()].size(); j++) {
+                            String cardColor = mainState.getPlayerTrainDecks()[mainState.getPlayerID()]
+                                    .getCards().get(j).toString();
+                            if (cardColor.equals("Rainbow") && count != 0 && takeRainbows != 0) {
+                                mainState.getPlayerTrainDecks()[mainState.getPlayerID()].moveCardTo(
+                                        mainState.getTrainDiscard(),
+                                        mainState.getPlayerTrainDecks()[mainState.getPlayerID()], j);
+                                count--;
+                                takeRainbows--;
+                            }
+                        }
+                    }
+
+                    //remove the correct number of cards that match the color of the track. Once
+                    //one card is removed, the count is reduced, which indicates how many more
+                    //cards need to be removed.
+                    if (myAction.getTrainColor() != null) {
+                        for (int j = 0; j < mainState.getPlayerTrainDecks()[mainState.getPlayerID()].size(); j++) {
+                            String cardColor = mainState.getPlayerTrainDecks()[mainState.getPlayerID()]
+                                    .getCards().get(j).toString();
+                            if (myAction.getTrainColor().equals(cardColor) && count != 0) {
+                                mainState.getPlayerTrainDecks()[mainState.getPlayerID()].moveCardTo(
+                                        mainState.getTrainDiscard(),
+                                        mainState.getPlayerTrainDecks()[mainState.getPlayerID()], j);
+                                j = 0;
+                                count--;
+                            }
+                        }
+                    }
+
+                    //cover the track and assign the player's number to the track
+                    mainState.getTracks().get(trackSpot).setCovered(true);
+                    mainState.getTracks().get(trackSpot).setPlayerID(mainState.getPlayerID());
+                    mainState.getTracks().get(trackSpot).setSelected(false);
+                    int num = mainState.getTracks().get(trackSpot).getTrainTrackNum();
+
+                    //depending on the size of the track, assign the correct number of points
+                    //to the player.
+                    switch (num) {
+                        case 1:
+                            mainState.setScore(mainState.getScores()[mainState.getPlayerID()] + 1, mainState.getPlayerID());
+                            mainState.setTrainToken(mainState.getTrainTokens()[mainState.getPlayerID()] - 1, mainState.getPlayerID());
+                            break;
+                        case 2:
+                            mainState.setScore(mainState.getScores()[mainState.getPlayerID()] + 2, mainState.getPlayerID());
+                            mainState.setTrainToken(mainState.getTrainTokens()[mainState.getPlayerID()] - 2, mainState.getPlayerID());
+                            break;
+                        case 3:
+                            mainState.setScore(mainState.getScores()[mainState.getPlayerID()] + 4, mainState.getPlayerID());
+                            mainState.setTrainToken(mainState.getTrainTokens()[mainState.getPlayerID()] - 3, mainState.getPlayerID());
+                            break;
+                        case 4:
+                            mainState.setScore(mainState.getScores()[mainState.getPlayerID()] + 7, mainState.getPlayerID());
+                            mainState.setTrainToken(mainState.getTrainTokens()[mainState.getPlayerID()] - 4, mainState.getPlayerID());
+                            break;
+                        case 5:
+                            mainState.setScore(mainState.getScores()[mainState.getPlayerID()] + 10, mainState.getPlayerID());
+                            mainState.setTrainToken(mainState.getTrainTokens()[mainState.getPlayerID()] - 5, mainState.getPlayerID());
+                            break;
+                        case 6:
+                            mainState.setScore(mainState.getScores()[mainState.getPlayerID()] + 15, mainState.getPlayerID());
+                            mainState.setTrainToken(mainState.getTrainTokens()[mainState.getPlayerID()] - 6, mainState.getPlayerID());
+                            break;
+                    }
+
+                }
+
+            }
+
+            //if some form of card has been selected
+            else if (mainState.getCardModeSelected() || !mainState.getGameStart()) {
+
+                ConfirmSelectionAction myAction = (ConfirmSelectionAction) action;
+                if (mainState.getDestinationCardsSelected()
+                        && ((ConfirmSelectionAction) action).getRemoveDeck() != null
+                        && ((ConfirmSelectionAction) action).getSendDeck() != null) {
+
+                    //move destination cards to players hand they selected
+                    while (!((ConfirmSelectionAction) action).getSendDeck().getCards().isEmpty()) {
+                        mainState.getPlayerDestinationDecks()[mainState.getPlayerID()].moveCardTo(
+                                mainState.getPlayerDestinationDecks()[mainState.getPlayerID()],
+                                ((ConfirmSelectionAction) action).getSendDeck(), 0);
+                        mainState.getDestinationCards().getCards().remove(mainState.getDestinationCards().size() - 1);
+                    }
+
+                    //move destination cards to discard pile if not selected.
+                    while (!((ConfirmSelectionAction) action).getRemoveDeck().getCards().isEmpty()) {
+                        mainState.getDestinationDiscard().moveCardTo(mainState.getDestinationDiscard(),
+                                ((ConfirmSelectionAction) action).getRemoveDeck(), 0);
+                        mainState.getDestinationCards().getCards().remove(mainState.getDestinationCards().size() - 1);
+                    }
+
+                    if (numStarted == players.length - 1) {
+                        mainState.setGameStart(true);
+                    } else {
+                        numStarted++;
+                    }
+                    mainState.getDestinationCards().setHighlight(false);
+                } else if (mainState.getTrainCardsSelected()) {
                     int numFaceDown = 0;
                     if (mainState.getFaceDownTrainCards().getHighlight()) {
                         if (mainState.getOnlyDownDeck()) {
@@ -321,9 +506,6 @@ public class TTRLocalGame extends LocalGame implements Serializable {
                                 mainState.getFaceDownTrainCards());
                     }
 
-                    mainState.getFaceDownTrainCards().setHighlight(false);
-                    mainState.setOnlyDownDeck(false);
-
                     for (int i = mainState.getFaceUpTrainCards().size() - 1; i >= 0; i--) {
                         if (mainState.getFaceUpTrainCards().getCards().get(i).getHighlight()) {
                             mainState.getPlayerTrainDecks()[mainState.getPlayerID()].moveCardTo(
@@ -331,363 +513,162 @@ public class TTRLocalGame extends LocalGame implements Serializable {
                                     mainState.getFaceUpTrainCards(), i);
                         }
                     }
-                    if(mainState.getTrainColorCount("Rainbow", -1) >=3){
-                        for(int i = 0; i < mainState.getFaceUpTrainCards().size(); i++){
-                            mainState.getFaceUpTrainCards().getCards().remove(i);
-                            mainState.getFaceDownTrainCards().moveTopCardTo(
-                                    mainState.getFaceUpTrainCards(), mainState.getFaceDownTrainCards());
-                            mainState.getFaceUpTrainCards().getCards().get(i).setHighlight(false);
-                        }
-                    }
-                    while(mainState.getFaceUpTrainCards().getCards().size() < 5){
+                    while (mainState.getFaceUpTrainCards().getCards().size() < 5) {
                         mainState.getFaceDownTrainCards().moveTopCardTo(
                                 mainState.getFaceUpTrainCards(), mainState.getFaceDownTrainCards());
                     }
                     //resets the state of selected cards
+                    mainState.getFaceDownTrainCards().setHighlight(false);
+                    mainState.setOnlyDownDeck(false);
                     mainState.setTrainCardsSelected(false);
                 }
-
-                //if the player chose to get destination cards, get the deck sent by the action that
-                //holds the cards to be moved to the player's hand.
-                else if (((ConfirmSelectionAction) action).getSendDeck() != null
-                        && ((ConfirmSelectionAction) action).getRemoveDeck() != null) {
-                    //checks to see if the destination deck is running low
-                    if(mainState.getDestinationCards().size() <= 2)
-                    {
-                        int k = mainState.getDestinationCards().size();
-                        while(k > 0)
-                        {
-                            //adds leftover cards to discard
-                            mainState.getDestinationDiscard().getCards().add(
-                                    mainState.getDestinationCards().getCards().get(k));
-                            //removes cards from deck
-                            mainState.getDestinationCards().getCards().remove(k);
-                            k--;
-                        }
-                        mainState.getDestinationDiscard().shuffle();
-                        for(int m=0; m < mainState.getDestinationDiscard().size();m++)
-                        {
-                            //adds discard into the destination deck
-                            mainState.getDestinationCards().getCards().add(
-                                    mainState.getDestinationDiscard().getCards().get(m));
-                            mainState.getDestinationDiscard().getCards().remove(m);
-
-                        }
-                    }
-                    for (int i = 0; i < ((ConfirmSelectionAction) action).getSendDeck().size(); i++) {
-                        Card tempCard = ((ConfirmSelectionAction) action).getSendDeck().getCards().get(i);
-                        mainState.getPlayerDestinationDecks()[mainState.getPlayerID()].getCards().add(tempCard);
-                    }
-                    for (int i = 0; i < ((ConfirmSelectionAction) action).getRemoveDeck().size(); i++) {
-                        mainState.getDestinationCards().getCards().remove(
-                                ((ConfirmSelectionAction) action).getRemoveDeck().getCards().get(i));
-                    }
-
-                        if(numStarted == players.length-1){ mainState.setGameStart(true);}
-                        else{ numStarted++; }
-                    mainState.setDestinationCardsSelected(false);
-                    mainState.getDestinationCards().setHighlight(false);
-                }
-                //if the player selected some tracks on the map, enter this if statement
-                else if (mainState.getTrackModeSelected()) {
-
-                    //run through the track array and find the track that was selected.
-                    for (int i = 0; i < mainState.getTracks().length; i++) {
-
-                        //if the track selected was not Gray, run through the player's hand to find
-                        //and remove the cards that share the same color as the track
-                        if (mainState.getTracks()[i].getSelected() && !mainState.getTracks()[i].getTrackColor().equals("Gray")) {
-
-                            //cover the track and assign the player's number to the track
-                            mainState.getTracks()[i].setCovered(true);
-                            mainState.getTracks()[i].setPlayerID(mainState.getPlayerID());
-                            mainState.getTracks()[i].setSelected(false);
-
-                            //the length of the track
-                            int count = mainState.getTracks()[i].getTrainTrackNum();
-
-                            //if the action says that the player wanted to use rainbow cards, set the
-                            //use rainbow state to true.
-                            if (((ConfirmSelectionAction) action).getUseRainbow() != 0) {
-                                mainState.setUseRainbow(true);
-                            }
-
-                            //if the player chose to use rainbow cards, remove the corresponding cards
-                            //from their hand and reduce the count for the number of cards used to get
-                            //the track.
-                            if (((ConfirmSelectionAction) action).getUseRainbow() != 0) {
-                                int numRainbows = ((ConfirmSelectionAction) action).getUseRainbow();
-                                for (int j = 0; j < mainState.getPlayerTrainDecks()[mainState.getPlayerID()].size(); j++) {
-                                    String cardColor = mainState.getPlayerTrainDecks()[mainState.getPlayerID()]
-                                            .getCards().get(j).toString();
-                                    if (cardColor.equals("Rainbow") && numRainbows != 0 && count != 0) {
-                                        mainState.getPlayerTrainDecks()[mainState.getPlayerID()].moveCardTo(
-                                                mainState.getTrainDiscard(),
-                                                mainState.getPlayerTrainDecks()[mainState.getPlayerID()], j);
-                                        count--;
-                                        numRainbows--;
-                                    }
-                                }
-
-                                //reset the state of useRainbow
-                                mainState.setUseRainbow(false);
-                            }
-
-                            //remove the correct number of cards that match the color of the track. Once
-                            //one card is removed, the count is reduced, which indicates how many more
-                            //cards need to be removed.
-                            for (int j = 0; j < mainState.getPlayerTrainDecks()[mainState.getPlayerID()].size(); j++) {
-                                String trackColor = mainState.getTracks()[i].getTrackColor();
-                                String cardColor = mainState.getPlayerTrainDecks()[mainState.getPlayerID()]
-                                        .getCards().get(j).toString();
-                                if (trackColor.equals(cardColor) && count != 0) {
-                                    mainState.getPlayerTrainDecks()[mainState.getPlayerID()].moveCardTo(
-                                            mainState.getTrainDiscard(),
-                                            mainState.getPlayerTrainDecks()[mainState.getPlayerID()], j);
-                                    j =0;
-                                    //mainState.getPlayerTrainDecks()[mainState.getPlayerID()].getCards().remove(j);
-                                    count--;
-                                }
-                            }
-
-                            //ensure that the track is covered.
-                            mainState.getTracks()[i].setCovered(true);
-                            int num = mainState.getTracks()[i].getTrainTrackNum();
-                            mainState.getTracks()[i].setPlayerID(mainState.getPlayerID());
-                            mainState.getTracks()[i].setSelected(false);
-
-                            //depending on the size of the track, assign the correct number of points
-                            //to the player.
-                            switch (num) {
-                                case 1:
-                                    mainState.setScore(mainState.getScores()[mainState.getPlayerID()] + 1, mainState.getPlayerID());
-                                    mainState.setTrainToken(mainState.getTrainTokens()[mainState.getPlayerID()] - 1, mainState.getPlayerID());
-                                    break;
-                                case 2:
-                                    mainState.setScore(mainState.getScores()[mainState.getPlayerID()] + 2, mainState.getPlayerID());
-                                    mainState.setTrainToken(mainState.getTrainTokens()[mainState.getPlayerID()] - 2, mainState.getPlayerID());
-                                    break;
-                                case 3:
-                                    mainState.setScore(mainState.getScores()[mainState.getPlayerID()] + 4, mainState.getPlayerID());
-                                    mainState.setTrainToken(mainState.getTrainTokens()[mainState.getPlayerID()] - 3, mainState.getPlayerID());
-                                    break;
-                                case 4:
-                                    mainState.setScore(mainState.getScores()[mainState.getPlayerID()] + 7, mainState.getPlayerID());
-                                    mainState.setTrainToken(mainState.getTrainTokens()[mainState.getPlayerID()] - 4, mainState.getPlayerID());
-                                    break;
-                                case 5:
-                                    mainState.setScore(mainState.getScores()[mainState.getPlayerID()] + 10, mainState.getPlayerID());
-                                    mainState.setTrainToken(mainState.getTrainTokens()[mainState.getPlayerID()] - 5, mainState.getPlayerID());
-                                    break;
-                                case 6:
-                                    mainState.setScore(mainState.getScores()[mainState.getPlayerID()] + 15, mainState.getPlayerID());
-                                    mainState.setTrainToken(mainState.getTrainTokens()[mainState.getPlayerID()] - 6, mainState.getPlayerID());
-                                    break;
-                            }
-                        }
-
-                        //if the color of the track is Gray, remove the cards of the chosen card colors
-                        //until enough have been removed.
-                        else if (mainState.getTracks()[i].getSelected() && mainState.getTracks()[i].getTrackColor().equals("Gray")) {
-
-                            //holder for the length of the track to indicate how many cards are needed
-                            int count = mainState.getTracks()[i].getTrainTrackNum();
-
-                            //if the player chose to use rainbow cards, remove the corresponding cards
-                            //from their hand and reduce the count for the number of cards used to get
-                            //the track.
-                            if (((ConfirmSelectionAction) action).getUseRainbow() != 0) {
-                                mainState.setUseRainbow(true);
-                                int takeRainbows = ((ConfirmSelectionAction) action).getUseRainbow();
-                                for (int j = 0; j < mainState.getPlayerTrainDecks()[mainState.getPlayerID()].size(); j++) {
-                                    String cardColor = mainState.getPlayerTrainDecks()[mainState.getPlayerID()]
-                                            .getCards().get(j).toString();
-                                    if (cardColor.equals("Rainbow") && count != 0 && takeRainbows != 0) {
-                                        mainState.getPlayerTrainDecks()[mainState.getPlayerID()].moveCardTo(
-                                                mainState.getTrainDiscard(),
-                                                mainState.getPlayerTrainDecks()[mainState.getPlayerID()], j);
-                                        count--;
-                                        takeRainbows--;
-                                    }
-                                }
-                                mainState.setUseRainbow(false);
-                            }
-
-                            //remove the correct number of cards that match the color of the track. Once
-                            //one card is removed, the count is reduced, which indicates how many more
-                            //cards need to be removed.
-                            if (((ConfirmSelectionAction) action).getChosenColor() != null) {
-                                for (int j = 0; j < mainState.getPlayerTrainDecks()[mainState.getPlayerID()].size(); j++) {
-                                    String trackColor = ((ConfirmSelectionAction) action).getChosenColor();
-                                    String cardColor = mainState.getPlayerTrainDecks()[mainState.getPlayerID()]
-                                            .getCards().get(j).toString();
-                                    if (trackColor.equals(cardColor) && count != 0) {
-                                        mainState.getPlayerTrainDecks()[mainState.getPlayerID()].moveCardTo(
-                                                mainState.getTrainDiscard(),
-                                                mainState.getPlayerTrainDecks()[mainState.getPlayerID()],j);
-                                        //mainState.getPlayerTrainDecks()[mainState.getPlayerID()].getCards().remove(j);
-                                        count--;
-                                    }
-                                }
-                            }
-
-                            //ensure the track that was selected is covered and assigned a player.
-                            mainState.getTracks()[i].setCovered(true);
-                            int num = mainState.getTracks()[i].getTrainTrackNum();
-                            mainState.getTracks()[i].setPlayerID(mainState.getPlayerID());
-                            mainState.getTracks()[i].setSelected(false);
-
-                            //depending on the size of the track, assign the correct number of points
-                            //to the player.
-                            switch (num) {
-                                case 1:
-                                    mainState.setScore(mainState.getScores()[mainState.getPlayerID()] + 1, mainState.getPlayerID());
-                                    mainState.setTrainToken(mainState.getTrainTokens()[mainState.getPlayerID()] - 1, mainState.getPlayerID());
-                                    break;
-                                case 2:
-                                    mainState.setScore(mainState.getScores()[mainState.getPlayerID()] + 2, mainState.getPlayerID());
-                                    mainState.setTrainToken(mainState.getTrainTokens()[mainState.getPlayerID()] - 2, mainState.getPlayerID());
-                                    break;
-                                case 3:
-                                    mainState.setScore(mainState.getScores()[mainState.getPlayerID()] + 4, mainState.getPlayerID());
-                                    mainState.setTrainToken(mainState.getTrainTokens()[mainState.getPlayerID()] - 3, mainState.getPlayerID());
-                                    break;
-                                case 4:
-                                    mainState.setScore(mainState.getScores()[mainState.getPlayerID()] + 7, mainState.getPlayerID());
-                                    mainState.setTrainToken(mainState.getTrainTokens()[mainState.getPlayerID()] - 4, mainState.getPlayerID());
-                                    break;
-                                case 5:
-                                    mainState.setScore(mainState.getScores()[mainState.getPlayerID()] + 10, mainState.getPlayerID());
-                                    mainState.setTrainToken(mainState.getTrainTokens()[mainState.getPlayerID()] - 5, mainState.getPlayerID());
-                                    break;
-                                case 6:
-                                    mainState.setScore(mainState.getScores()[mainState.getPlayerID()] + 15, mainState.getPlayerID());
-                                    mainState.setTrainToken(mainState.getTrainTokens()[mainState.getPlayerID()] - 6, mainState.getPlayerID());
-                                    break;
-                            }
-
-                        }
-                    }
-
-                    //reset the state of the modes in the game state.
-                    mainState.setTrackModeSelected(false);
-                    mainState.setPlaceTrainSelected(false);
-                }
-
-                //reset the mode of the game state so that card mode is selected and track mode is not.
-                mainState.setCardModeSelected(true);
-                mainState.setTrackModeSelected(false);
-                mainState.setPlayerID((mainState.getPlayerID() + 1) % mainState.getNumPlayers());
-
-                if (noMoreTrains) {
-                    turnsLeft--;
-                }
-
-                //deselect all of the games tracks.
-                for (int i = 0; i < mainState.getTracks().length; i++) {
-                    mainState.getTracks()[i].setSelected(false);
-                    mainState.getTracks()[i].setHighlight(false);
-                }
-
-                if(mainState.getTrainColorCount("Rainbow", -1) >=3){
-                    while(!mainState.getFaceUpTrainCards().getCards().isEmpty()){
-                        mainState.getFaceUpTrainCards().getCards().remove(0);
-                    }
-                    for(int i = 0; i < 5; i++){
-                        mainState.getFaceDownTrainCards().moveTopCardTo(
-                                mainState.getFaceUpTrainCards(), mainState.getFaceDownTrainCards());
-                        mainState.getFaceUpTrainCards().getCards().get(i).setHighlight(false);
-                    }
-                }
-
-                mainState.setReset(true);
-                return true;
             }
 
+
+            if (noMoreTrains) {
+                turnsLeft--;
+            }
+
+            //deselect all of the games tracks.
+            for (int i = 0; i < mainState.getTracks().size(); i++) {
+                mainState.getTracks().get(i).setSelected(false);
+                mainState.getTracks().get(i).setHighlight(false);
+            }
+
+            if (mainState.getTrainColorCount("Rainbow", -1) >= 3) {
+                while (!mainState.getFaceUpTrainCards().getCards().isEmpty()) {
+                    mainState.getFaceUpTrainCards().getCards().remove(0);
+                }
+                for (int i = 0; i < 5; i++) {
+                    mainState.getFaceDownTrainCards().moveTopCardTo(
+                            mainState.getFaceUpTrainCards(), mainState.getFaceDownTrainCards());
+                    mainState.getFaceUpTrainCards().getCards().get(i).setHighlight(false);
+                }
+            }
+            if (mainState.getDestinationCards().size() <= 2) {
+                mainState.getDestinationDiscard().shuffle();
+                while (!mainState.getDestinationDiscard().getCards().isEmpty()) {
+                    mainState.getDestinationCards().moveAllCardsTo(
+                            mainState.getDestinationCards(), mainState.getDestinationDiscard());
+                }
+            }
+//            mainState.setReset(true);
+            mainState.setPlayerID((mainState.getPlayerID() + 1) % mainState.getNumPlayers());
+            mainState.setTrackModeSelected(false);
+            mainState.setCardModeSelected(true);
+            if(mainState.getGameStart()) {
+                mainState.setDestinationCardsSelected(false);
+            }
+            else{
+                mainState.setDestinationCardsSelected(true);
+            }
+            mainState.setTrainCardsSelected(false);
+            mainState.setOnlyDownDeck(false);
+            mainState.setPlaceTrainSelected(false);
+            mainState.setTrackSpot(-1);
+            mainState.setSelectedTrackColor("");
+            return true;
         }
 
         //if the player wants to select a track enter this if statement.
         else if (action instanceof TrackPlaceAction) {
 
-            //if the card mode is enabled, return false, saying that the current mode is not legal
-            //for selecting tracks.
-            if (mainState.getCardModeSelected()) {
+            if(mainState.getCardModeSelected()){
                 return false;
             }
-
-            //this boolean is used to indicate if a track has already been selected
-            boolean alreadySelected = false;
-            TrackPlaceAction temp = (TrackPlaceAction) action;
-            //if a player has already selected a track change alreadySelected.
-                for (int i = 0; i < mainState.getTracks().length; i++) {
-                    if (mainState.getTracks()[i].getSelected()
-                        || mainState.getTracks()[i].getSelected2()) {
-                        if(mainState.getTracks()[i].isDoubleTrack()
-                                && temp.getIndex() == i){
-                            alreadySelected = false;
-                            if(mainState.getTracks()[i].getSelected()){
-                                mainState.getTracks()[i].setSelected(false);
-                                mainState.getTracks()[i].setSelected2(true);
-                            }
-                            else if(mainState.getTracks()[i].getSelected2()){
-                                mainState.getTracks()[i].setSelected(true);
-                                mainState.getTracks()[i].setSelected2(false);
-                            }
-                        }
-                        else {
-                            alreadySelected = true;
-                            mainState.getTracks()[i].setSelected(false);
-                        }
-                        currentTrackColor = mainState.getTracks()[i].toString();
-                        mainState.setTrackSpot(i);
-                    }
+            TrackPlaceAction thisAction = (TrackPlaceAction) action;
+            for(int i = 0; i < mainState.getTracks().size(); i++){
+                if(mainState.getTracks().get(i).getSelected()){
+                    mainState.getTracks().get(i).setSelected(false);
+                    mainState.setPlaceTrainSelected(false);
                 }
-
-            //once the selected track has been found, change the necessary variables in the game state.
-                int index = temp.getIndex();
-                if(action.getPlayer() instanceof TTRHumanPlayer) {
-                    if (mainState.getTracks()[index].getHighlight() &&
-                            !mainState.getTracks()[index].getSelected() && !mainState.getTracks()[index].getSelected2()) {
-                        if(mainState.getTracks()[index].isDoubleTrack()){
-                            mainState.getTracks()[index].setSelected(true);
-                            mainState.setPlaceTrainSelected(true);
-                            mainState.setSelectedCardColor(temp.getTrackColor());
-                            mainState.setTrackSpot(index);
-                        }
-                        else {
-                            mainState.getTracks()[index].setSelected(true);
-                            mainState.setPlaceTrainSelected(true);
-                            mainState.setSelectedCardColor(temp.getTrackColor());
-                            mainState.setTrackSpot(index);
-                        }
-                    }
-
-                    //if a track has already been selected, set it's selected variable to false.
-                    else {
-                        if(mainState.getTracks()[index].isDoubleTrack()){
-                            if (mainState.getTracks()[index].getSelected()){
-                                mainState.getTracks()[index].setSelected(false);
-                                mainState.getTracks()[index].setSelected2(true);
-                            }
-                            else if (mainState.getTracks()[index].getSelected2()){
-                                mainState.getTracks()[index].setSelected(true);
-                                mainState.getTracks()[index].setSelected2(false);
-                            }
-                        }
-                        else {
-                            mainState.getTracks()[index].setSelected(false);
-                            mainState.setPlaceTrainSelected(false);
-                            mainState.setSelectedCardColor("");
-                        }
-                    }
-                }
-                else if(action.getPlayer() instanceof TTRComputerPlayer){
-                    mainState.getTracks()[index].setSelected(true);
-                    mainState.setPlaceTrainSelected(true);
-                    mainState.setSelectedCardColor(temp.getTrackColor());
-                    mainState.setTrackSpot(index);
-                }
+            }
+            if(thisAction.getIndex() != -1){
+                mainState.getTracks().get(thisAction.getIndex()).setSelected(true);
+                mainState.setSelectedTrackColor(thisAction.getTrackColor());
+                mainState.setTrackSpot(thisAction.getIndex());
+            }
             return true;
+
+//            //if the card mode is enabled, return false, saying that the current mode is not legal
+//            //for selecting tracks.
+//            if (mainState.getCardModeSelected()) {
+//                return false;
+//            }
+//
+//            //this boolean is used to indicate if a track has already been selected
+//            boolean alreadySelected = false;
+//            TrackPlaceAction temp = (TrackPlaceAction) action;
+//            //if a player has already selected a track change alreadySelected.
+//                for (int i = 0; i < mainState.getTracks().size(); i++) {
+//                    if (mainState.getTracks().get(i).getSelected()
+//                        || mainState.getTracks().get(i).getSelected2()) {
+//                        if(mainState.getTracks().get(i).isDoubleTrack()
+//                                && temp.getIndex() == i){
+//                            alreadySelected = false;
+//                            if(mainState.getTracks().get(i).getSelected()){
+//                                mainState.getTracks().get(i).setSelected(false);
+//                                mainState.getTracks().get(i).setSelected2(true);
+//                            }
+//                            else if(mainState.getTracks().get(i).getSelected2()){
+//                                mainState.getTracks().get(i).setSelected(true);
+//                                mainState.getTracks().get(i).setSelected2(false);
+//                            }
+//                        }
+//                        else {
+//                            alreadySelected = true;
+//                            mainState.getTracks().get(i).setSelected(false);
+//                        }
+//                        currentTrackColor = mainState.getTracks().get(i).toString();
+//                        mainState.setTrackSpot(i);
+//                    }
+//                }
+//
+//            //once the selected track has been found, change the necessary variables in the game state.
+//                int index = temp.getIndex();
+//                if(action.getPlayer() instanceof TTRHumanPlayer) {
+//                    if (mainState.getTracks()[index].getHighlight() &&
+//                            !mainState.getTracks()[index].getSelected() && !mainState.getTracks()[index].getSelected2()) {
+//                        if(mainState.getTracks()[index].isDoubleTrack()){
+//                            mainState.getTracks()[index].setSelected(true);
+//                            mainState.setPlaceTrainSelected(true);
+//                            mainState.setSelectedCardColor(temp.getTrackColor());
+//                            mainState.setTrackSpot(index);
+//                        }
+//                        else {
+//                            mainState.getTracks()[index].setSelected(true);
+//                            mainState.setPlaceTrainSelected(true);
+//                            mainState.setSelectedCardColor(temp.getTrackColor());
+//                            mainState.setTrackSpot(index);
+//                        }
+//                    }
+//
+//                    //if a track has already been selected, set it's selected variable to false.
+//                    else {
+//                        if(mainState.getTracks()[index].isDoubleTrack()){
+//                            if (mainState.getTracks()[index].getSelected()){
+//                                mainState.getTracks()[index].setSelected(false);
+//                                mainState.getTracks()[index].setSelected2(true);
+//                            }
+//                            else if (mainState.getTracks()[index].getSelected2()){
+//                                mainState.getTracks()[index].setSelected(true);
+//                                mainState.getTracks()[index].setSelected2(false);
+//                            }
+//                        }
+//                        else {
+//                            mainState.getTracks()[index].setSelected(false);
+//                            mainState.setPlaceTrainSelected(false);
+//                            mainState.setSelectedCardColor("");
+//                        }
+//                    }
+//                }
+//                else if(action.getPlayer() instanceof TTRComputerPlayer){
+//                    mainState.getTracks()[index].setSelected(true);
+//                    mainState.setPlaceTrainSelected(true);
+//                    mainState.setSelectedCardColor(temp.getTrackColor());
+//                    mainState.setTrackSpot(index);
+//                }
+//            return true;
             }
 
         //if the action is for choosing face up cards, enter this if statement.
@@ -856,11 +837,8 @@ public class TTRLocalGame extends LocalGame implements Serializable {
                 mainState.getDestinationCards().setHighlight(true);
                 mainState.setDestinationCardsSelected(true);
             }
-        } else if (action instanceof ChooseDestinationAction) {
-
-            return true;
         }
-            return true;
+        return true;
     }
 
     /**

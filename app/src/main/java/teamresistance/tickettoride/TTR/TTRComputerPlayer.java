@@ -112,20 +112,20 @@ public class TTRComputerPlayer extends GameComputerPlayer implements Serializabl
 
                     //create all of the edges that other player's don't own and save them
                     //to the list of Edges
-                    for(int i = 0; i < compState.getTracks().length; i++){
-                        String city1 = compState.getTracks()[i].getStartCity();
-                        String city2 = compState.getTracks()[i].getEndCity();
+                    for(int i = 0; i < compState.getTracks().size(); i++){
+                        String city1 = compState.getTracks().get(i).getStartCity();
+                        String city2 = compState.getTracks().get(i).getEndCity();
                         for(Vertex vert: myVertexList){
                             int spot = vert.getId();
                             if(city1.equals(destNames.get(spot))
-                                    && (compState.getTracks()[i].getPlayerID() == -1
-                                    || compState.getTracks()[i].getPlayerID() == this.playerNum)
+                                    && (compState.getTracks().get(i).getPlayerID() == -1
+                                    || compState.getTracks().get(i).getPlayerID() == this.playerNum)
                                     && startCity == null){
                                 startCity = vert;
                             }
                             else if(city2.equals(destNames.get(spot))
-                                    && (compState.getTracks()[i].getPlayerID() == -1
-                                    || compState.getTracks()[i].getPlayerID() == this.playerNum)
+                                    && (compState.getTracks().get(i).getPlayerID() == -1
+                                    || compState.getTracks().get(i).getPlayerID() == this.playerNum)
                                     && endCity == null){
                                 endCity = vert;
                             }
@@ -134,8 +134,8 @@ public class TTRComputerPlayer extends GameComputerPlayer implements Serializabl
 
                         //if the edge exists, add it to the list of edges
                         if(startCity != null && endCity != null) {
-                            temporary = new Edge(compState.getTracks()[i],startCity, endCity,
-                                    compState.getTracks()[i].getTrainTrackNum());
+                            temporary = new Edge(compState.getTracks().get(i),startCity, endCity,
+                                    compState.getTracks().get(i).getTrainTrackNum());
                         }
                         startCity = null;
                         endCity = null;
@@ -310,16 +310,16 @@ public class TTRComputerPlayer extends GameComputerPlayer implements Serializabl
                         //if a track has been found, send the appropriate action.
                         else if(!finishMove){
                             rainbowCount = compState.getTrainColorCount("Rainbow", this.playerNum);
-                            for(int i = 0; i < compState.getTracks().length; i++){
-                                String trainColor = compState.getTracks()[i].getTrackColor();
-                                if(!compState.getTracks()[i].getCovered() && !foundTrack) {
+                            for(int i = 0; i < compState.getTracks().size(); i++){
+                                String trainColor = compState.getTracks().get(i).getTrackColor();
+                                if(!compState.getTracks().get(i).getCovered() && !foundTrack) {
 
                                     //if the track is gray, determine if it can be claimed using
                                     //the appropriate color cards and available rainbow cards.
                                     if (trainColor.equals("Gray")) {
                                         for (int j = 0; j < colors.length; j++) {
                                             if ((compState.getTrainColorCount(colors[j], this.playerNum) + rainbowCount)
-                                                    >= compState.getTracks()[i].getTrainTrackNum()
+                                                    >= compState.getTracks().get(i).getTrainTrackNum()
                                                     && !foundTrack) {
                                                 finishMove = true;
                                                 chosenColor = colors[j];
@@ -334,14 +334,14 @@ public class TTRComputerPlayer extends GameComputerPlayer implements Serializabl
                                     else {
                                         for (int j = 0; j < colors.length - 1; j++) {
                                             if (compState.getTrainColorCount(colors[j], this.playerNum)
-                                                    >= compState.getTracks()[i].getTrainTrackNum()
+                                                    >= compState.getTracks().get(i).getTrainTrackNum()
                                                     && !foundTrack) {
                                                 finishMove = true;
                                                 chosenColor = colors[j];
                                                 foundTrack = true;
                                                 game.sendAction(new TrackPlaceAction(this, chosenColor, i));
                                             } else if ((compState.getTrainColorCount(colors[j], this.playerNum) + rainbowCount)
-                                                    >= compState.getTracks()[i].getTrainTrackNum()
+                                                    >= compState.getTracks().get(i).getTrainTrackNum()
                                                     && !foundTrack) {
                                                 finishMove = true;
                                                 chosenColor = colors[j];
@@ -483,7 +483,6 @@ public class TTRComputerPlayer extends GameComputerPlayer implements Serializabl
 
                 //if selecting destination cards, enter here
                 else{
-
                     //pull three cards from the deck in the game state
                     Deck tempDeck = new Deck("temp");
                     compState.getDestinationCards().moveTopCardTo(tempDeck, compState.getDestinationCards());
@@ -689,26 +688,26 @@ public class TTRComputerPlayer extends GameComputerPlayer implements Serializabl
         Vertex endCity = null;
 
         //Add to the list of edges any edges owned by the player
-        for(int i = 0; i < compState.getTracks().length; i++){
-            String city1 = compState.getTracks()[i].getStartCity();
-            String city2 = compState.getTracks()[i].getEndCity();
+        for(int i = 0; i < compState.getTracks().size(); i++){
+            String city1 = compState.getTracks().get(i).getStartCity();
+            String city2 = compState.getTracks().get(i).getEndCity();
             for(Vertex vert: computerGraph.getVertexes()){
                 int spot = vert.getId();
                 if(city1.equals(destNames.get(spot))
-                        && compState.getTracks()[i].getPlayerID() == this.playerNum
+                        && compState.getTracks().get(i).getPlayerID() == this.playerNum
                         && startCity == null){
                     startCity = vert;
                 }
                 else if(city2.equals(destNames.get(spot))
-                        && compState.getTracks()[i].getPlayerID() == this.playerNum
+                        && compState.getTracks().get(i).getPlayerID() == this.playerNum
                         && endCity == null){
                     endCity = vert;
                 }
             }
             Edge temporary = null;
             if(startCity != null && endCity != null) {
-                temporary = new Edge(compState.getTracks()[i],startCity, endCity,
-                        compState.getTracks()[i].getTrainTrackNum());
+                temporary = new Edge(compState.getTracks().get(i),startCity, endCity,
+                        compState.getTracks().get(i).getTrainTrackNum());
             }
             startCity = null;
             endCity = null;

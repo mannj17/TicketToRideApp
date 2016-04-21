@@ -118,6 +118,7 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
     private LinearLayout.LayoutParams lp;
 
     private boolean startGame = true;
+    private boolean[] highlights;
 
     /*
      * The human player
@@ -137,7 +138,7 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
         //Update all TextViews to Display player details properly
         if (info instanceof TTRGameState) {
             myState = (TTRGameState) info;
-            myBoard.setTracks(myState.getTracks());
+            highlights = new boolean[myState.getTracks().size()];
             trainDeck = myState.getPlayerTrainDecks()[this.playerNum];
             int playerNum = ((TTRGameState) info).getNumPlayers();
             for (int i = 0; i < myState.getFaceUpTrainCards().size(); i++) {
@@ -164,14 +165,24 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
 
             boolean val = myState.getTrackModeSelected();
 
-            int size = myBoard.getTracksLength();
+
             if (myState.getPlayerID() == this.playerNum) {
-                for (int i = 0; i < size; i++) {
-                    if (canChoose(myBoard.getTracks()[i]) || !val) {
-                        myBoard.getTracks()[i].setHighlight(val);
+                for(int i = 0; i < myState.getTracks().size(); i++){
+                    if(canChoose(myState.getTracks().get(i)) || !val){
+                        highlights[i] = val;
+                    }
+                    else{
+                        highlights[i] = !val;
                     }
                 }
+//                for (int i = 0; i < size; i++) {
+//                    if (canChoose(myBoard.getTracks()[i]) || !val) {
+//                       // myBoard.getTracks()[i].setHighlight(val);
+//                    }
+//                }
             }
+
+            myBoard.setHighlights(highlights);
             if (playerNum >= 2) { //2 is the minimum number of players
                 lp = new LinearLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT, 1);
                 cpu1FrameLayout.setLayoutParams(lp);
@@ -439,14 +450,14 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
                     displayDestinationPopup(tempDeck, false);
                 } else if (myState.getTrackSpot() != -1 &&
                         myState.getTrackModeSelected() &&
-                        myState.getTracks()[myState.getTrackSpot()].getTrackColor().equals("Gray")) {
+                        myState.getTracks().get(myState.getTrackSpot()).getTrackColor().equals("Gray")) {
                     Deck tempDeck = myState.getPlayerTrainDecks()[playerNum];
-                    displayCardSelectionPopup(tempDeck, myState.getTracks()[myState.getTrackSpot()]);
+                    displayCardSelectionPopup(tempDeck, myState.getTracks().get(myState.getTrackSpot()));
                 } else if (myState.getTrackSpot() != -1 &&
                         myState.getTrackModeSelected() &&
                         myState.getTrainColorCount("Rainbow", 0) != 0) {
                     Deck tempDeck = myState.getPlayerTrainDecks()[playerNum];
-                    displayLocomotiveSelectionPopup(tempDeck, myState.getTracks()[myState.getTrackSpot()]);
+                    displayLocomotiveSelectionPopup(tempDeck, myState.getTracks().get(myState.getTrackSpot()));
                 } else {
                     game.sendAction(new ConfirmSelectionAction(me, 0));
                 }
@@ -476,7 +487,6 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
                 game.sendAction(new ChangeModeAction(this));
             } else {
                 this.trainCheck.setChecked(true);
-                //
             }
         }
     }
@@ -494,55 +504,59 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
         int x = (int) event.getRawX();
         int y = (int) event.getRawY();
         if (v.getId() == R.id.GameBoard && event.getAction() == MotionEvent.ACTION_DOWN) {
-            int index = -1;
-            for (int i = 0; i < myBoard.getTracks().length; i++) {
-                if (myBoard.getTracks()[i].isTouched(x, y - 191)) {
-                    index = i;
-                }
-            }
+            int index = myBoard.clickedTrack(x,y-191);
+//            for (int i = 0; i < myBoard.getTracks().length; i++) {
+//                if (myBoard.getTracks()[i].isTouched(x, y - 191)) {
+//                    index = i;
+//                }
+//            }
+            String colorString = null;
             if (index != -1) {
-                String sendingString = myState.getTracks()[index].getTrackColor();
-                if (myState.getTracks()[index].getTrackColor().equals("Gray")) {
-                    int redCount = myState.getTrainColorCount("Red", this.playerNum);
-                    int orangeCount = myState.getTrainColorCount("Orange", this.playerNum);
-                    int yellowCount = myState.getTrainColorCount("Yellow", this.playerNum);
-                    int greenCount = myState.getTrainColorCount("Green", this.playerNum);
-                    int blueCount = myState.getTrainColorCount("Blue", this.playerNum);
-                    int pinkCount = myState.getTrainColorCount("Pink", this.playerNum);
-                    int whiteCount = myState.getTrainColorCount("White", this.playerNum);
-                    int blackCount = myState.getTrainColorCount("Black", this.playerNum);
-                    int rainbowCount = myState.getTrainColorCount("Rainbow", this.playerNum);
-                    int min = myState.getTracks()[index].getTrainTrackNum();
-                    if (redCount + rainbowCount >= min) {
-                        sendingString = "Red";
-                    }
-                    if (orangeCount + rainbowCount >= min) {
-                        sendingString = "Orange";
-                    }
-                    if (yellowCount + rainbowCount >= min) {
-                        sendingString = "Yellow";
-                    }
-                    if (greenCount + rainbowCount >= min) {
-                        sendingString = "Green";
-                    }
-                    if (blueCount + rainbowCount >= min) {
-                        sendingString = "Blue";
-                    }
-                    if (pinkCount + rainbowCount >= min) {
-                        sendingString = "Pink";
-                    }
-                    if (whiteCount + rainbowCount >= min) {
-                        sendingString = "White";
-                    }
-                    if (blackCount + rainbowCount >= min) {
-                        sendingString = "Black";
-                    }
+                if(myState.getTracks().get(index).getHighlight()){
+                    colorString = myState.getTracks().get(index).getTrackColor();
                 }
-
-                game.sendAction(new TrackPlaceAction(this, sendingString, index));
-            } else {
+//                String sendingString = myState.getTracks()[index].getTrackColor();
+//                if (myState.getTracks()[index].getTrackColor().equals("Gray")) {
+//                    int redCount = myState.getTrainColorCount("Red", this.playerNum);
+//                    int orangeCount = myState.getTrainColorCount("Orange", this.playerNum);
+//                    int yellowCount = myState.getTrainColorCount("Yellow", this.playerNum);
+//                    int greenCount = myState.getTrainColorCount("Green", this.playerNum);
+//                    int blueCount = myState.getTrainColorCount("Blue", this.playerNum);
+//                    int pinkCount = myState.getTrainColorCount("Pink", this.playerNum);
+//                    int whiteCount = myState.getTrainColorCount("White", this.playerNum);
+//                    int blackCount = myState.getTrainColorCount("Black", this.playerNum);
+//                    int rainbowCount = myState.getTrainColorCount("Rainbow", this.playerNum);
+//                    int min = myState.getTracks()[index].getTrainTrackNum();
+//                    if (redCount + rainbowCount >= min) {
+//                        sendingString = "Red";
+//                    }
+//                    if (orangeCount + rainbowCount >= min) {
+//                        sendingString = "Orange";
+//                    }
+//                    if (yellowCount + rainbowCount >= min) {
+//                        sendingString = "Yellow";
+//                    }
+//                    if (greenCount + rainbowCount >= min) {
+//                        sendingString = "Green";
+//                    }
+//                    if (blueCount + rainbowCount >= min) {
+//                        sendingString = "Blue";
+//                    }
+//                    if (pinkCount + rainbowCount >= min) {
+//                        sendingString = "Pink";
+//                    }
+//                    if (whiteCount + rainbowCount >= min) {
+//                        sendingString = "White";
+//                    }
+//                    if (blackCount + rainbowCount >= min) {
+//                        sendingString = "Black";
+//                    }
+//                }
+            }
+            else {
                 return false;
             }
+            game.sendAction(new TrackPlaceAction(this, colorString, index));
         }
         return true;
     }
