@@ -16,7 +16,8 @@
         android:theme="@style/NoTitleBar" >
 
         <activity android:name="teamresistance.tickettoride.TTR.TTRMainActivity"
-            android:configChanges="keyboard|keyboardHidden|orientation|screenSize" >
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
+            android:screenOrientation="landscape">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
