@@ -409,17 +409,17 @@ public class TTRLocalGame extends LocalGame implements Serializable {
                     //one card is removed, the count is reduced, which indicates how many more
                     //cards need to be removed.
 
-                        for (int j = 0; j < mainState.getPlayerTrainDecks()[mainState.getPlayerID()].size(); j++) {
-                            String cardColor = mainState.getPlayerTrainDecks()[mainState.getPlayerID()]
-                                    .getCards().get(j).toString();
-                            if (myAction.getTrainColor().equals(cardColor) && count != 0) {
-                                mainState.getPlayerTrainDecks()[mainState.getPlayerID()].moveCardTo(
-                                        mainState.getTrainDiscard(),
-                                        mainState.getPlayerTrainDecks()[mainState.getPlayerID()], j);
-                                j = 0;
-                                count--;
-                            }
+                    for (int j = 0; j < mainState.getPlayerTrainDecks()[mainState.getPlayerID()].size(); j++) {
+                        String cardColor = mainState.getPlayerTrainDecks()[mainState.getPlayerID()]
+                                .getCards().get(j).toString();
+                        if (trackColor.equals(cardColor) && count != 0) {
+                            mainState.getPlayerTrainDecks()[mainState.getPlayerID()].moveCardTo(
+                                    mainState.getTrainDiscard(),
+                                    mainState.getPlayerTrainDecks()[mainState.getPlayerID()], j);
+                            j = 0;
+                            count--;
                         }
+                    }
 
 
                     //cover the track and assign the player's number to the track
@@ -513,10 +513,18 @@ public class TTRLocalGame extends LocalGame implements Serializable {
                                     mainState.getFaceUpTrainCards(), i);
                         }
                     }
-                    //TODOkl
+                    //TODO
                     while (mainState.getFaceUpTrainCards().getCards().size() < 5) {
-                        mainState.getFaceDownTrainCards().moveTopCardTo(
-                                mainState.getFaceUpTrainCards(), mainState.getFaceDownTrainCards());
+                        if(mainState.getFaceDownTrainCards().getCards().isEmpty()){
+                            Card blankCard = new Card();
+                            TrainCards blankTrain = (TrainCards)blankCard;
+                            blankTrain.setType("Blank");
+                            mainState.getFaceUpTrainCards().getCards().add(blankTrain);
+                        }
+                        else {
+                            mainState.getFaceDownTrainCards().moveTopCardTo(
+                                    mainState.getFaceUpTrainCards(), mainState.getFaceDownTrainCards());
+                        }
                     }
                     //resets the state of selected cards
                     mainState.getFaceDownTrainCards().setHighlight(false);
