@@ -246,7 +246,6 @@ public class TTRComputerPlayer extends GameComputerPlayer implements Serializabl
                         //if there are tracks the player wants, but they're still in card mode,
                         //change the mode
                         else if(!compState.getTrackModeSelected()){
-                            finishMove = true;
                             game.sendAction(new ChangeModeAction(this));
                         }
 
@@ -512,13 +511,18 @@ public class TTRComputerPlayer extends GameComputerPlayer implements Serializabl
                     //add the cards to the players hand and create an array keeping track of
                     //which cards have been completed
                     Card[] tempCards = new Card[numSelected];
-                    completed = new boolean[numSelected];
-                    int count=0;
+                    completed = new boolean[numSelected + compState.getPlayerDestinationDecks()[this.playerNum].size()];
+                    for(int i = 0; i < compState.getPlayerDestinationDecks()[this.playerNum].size(); i++){
+                        completed[i] = true;
+                    }
+                    int count = compState.getPlayerDestinationDecks()[this.playerNum].size();
+                    int count2 = 0;
                     for(int i = 0; i < tempDeck.size(); i++){
                         if(tempDeck.getCards().get(i).getHighlight()){
-                            tempCards[count] = tempDeck.getCards().get(i);
+                            tempCards[count2] = tempDeck.getCards().get(i);
                             completed[count] = false;
                             count++;
+                            count2++;
                         }
                     }
                     Deck sendDeck = new Deck("Sending", tempCards);

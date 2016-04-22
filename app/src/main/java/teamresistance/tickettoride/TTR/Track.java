@@ -21,9 +21,9 @@ public class Track implements Serializable {
     private int playerID = -1;
     private String trackColor = null;
     //    private String track2Color = "";
-    private Boolean selected = false;
-    private Boolean highlight = false;
-    private Boolean covered = false;
+    private boolean selected = false;
+    private boolean highlight = false;
+    private boolean covered = false;
     //    private Boolean selected2 = false;
 //    private Boolean highlight2 = false;
 //    private Boolean covered2 = false;
@@ -43,16 +43,24 @@ public class Track implements Serializable {
         this.trainTrackNum = trainTrackNum;
         this.trackColor = trackColor;
 //        this.track2Color = track2color;
-        startCity = firstCity;
-        endCity = secondCity;
-        highlight = false;
-        selected = false;
+        this.startCity = firstCity;
+        this.endCity = secondCity;
+        this.highlight = false;
+        this.selected = false;
 //        doubleTrack = doubletrackset;
 //        selected2 = false;
 //        highlight2 = false;
 //        covered2 = false;
     }
 
+    public Track(Track orig){
+        this.trainTrackNum = orig.getTrainTrackNum();
+        this.trackColor = orig.getTrackColor();
+        this.startCity = orig.getStartCity();
+        this.endCity = orig.getEndCity();
+        this.highlight = orig.getHighlight();
+        this.selected = orig.getSelected();
+    }
     public boolean isDoubleTrack(){
         return this.doubleTrack;
     }

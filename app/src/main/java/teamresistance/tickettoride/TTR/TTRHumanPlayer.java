@@ -184,15 +184,15 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
             }
 
             for(int i = 0; i < myState.getTracks().size(); i++){
-                if(myState.getTracks().get(i).getSelected()){
+                if(myState.getSelectedTracks()[i]){
                     selected[i] = true;
                 }
                 else{
                     selected[i] = false;
                 }
-                if(myState.getTracks().get(i).getCovered()){
+                if(myState.getCoveredTracks()[i]){
                     covered[i] = true;
-                    playerIDs[i] = myState.getTracks().get(i).getPlayerID();
+                    playerIDs[i] = myState.getTrackIds()[i];
                 }
                 else{
                     covered[i] = false;
@@ -230,10 +230,10 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
                     this.playerTurnTextView.setText("" + allPlayerNames[myState.getPlayerID()] + "'s turn!");
                 }
                 this.cpu1PlayerTextView.setText("" + this.allPlayerNames[1]);
-                this.cpu1TrainTokenTextView.setText("" + ((TTRGameState) info).getTrainTokens()[1]);
-                this.cpu1ScoreTextview.setText("" + ((TTRGameState) info).getScores()[1]);
-                this.cpu1DestinationCardTextView.setText("" + ((TTRGameState) info).getPlayerDestinationDecks()[1].getCards().size());
-                this.cpu1TrainCardTextView.setText("" + ((TTRGameState) info).getPlayerTrainDecks()[1].getCards().size());
+                this.cpu1TrainTokenTextView.setText("" + ((TTRGameState) info).getTrainTokens()[(this.playerNum + 1) % myState.getNumPlayers()]);
+                this.cpu1ScoreTextview.setText("" + ((TTRGameState) info).getScores()[(this.playerNum + 1) % myState.getNumPlayers()]);
+                this.cpu1DestinationCardTextView.setText("" + ((TTRGameState) info).getPlayerDestinationDecks()[(this.playerNum + 1) % myState.getNumPlayers()].getCards().size());
+                this.cpu1TrainCardTextView.setText("" + ((TTRGameState) info).getPlayerTrainDecks()[(this.playerNum + 1) % myState.getNumPlayers()].getCards().size());
             }
             if (playerNum >= 3) {
                 lp = new LinearLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT, 0.5f);
@@ -241,10 +241,10 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
                 cpu2FrameLayout.setLayoutParams(lp);
                 cpu2FrameLayout.setVisibility(View.VISIBLE);
                 cpu3FrameLayout.setVisibility(View.GONE);
-                this.cpu2PlayerTextView.setText("" + this.allPlayerNames[2]);
-                this.cpu2ScoreTextview.setText("" + ((TTRGameState) info).getScores()[2]);
-                this.cpu2DestinationCardTextView.setText("" + ((TTRGameState) info).getPlayerDestinationDecks()[2].getCards().size());
-                this.cpu2TrainCardTextView.setText("" + ((TTRGameState) info).getPlayerTrainDecks()[2].getCards().size());
+                this.cpu2PlayerTextView.setText("" + this.allPlayerNames[(this.playerNum + 2) % myState.getNumPlayers()]);
+                this.cpu2ScoreTextview.setText("" + ((TTRGameState) info).getScores()[(this.playerNum + 2) % myState.getNumPlayers()]);
+                this.cpu2DestinationCardTextView.setText("" + ((TTRGameState) info).getPlayerDestinationDecks()[(this.playerNum + 2) % myState.getNumPlayers()].getCards().size());
+                this.cpu2TrainCardTextView.setText("" + ((TTRGameState) info).getPlayerTrainDecks()[(this.playerNum + 2) % myState.getNumPlayers()].getCards().size());
             }
             if (playerNum >= 4) {
                 lp = new LinearLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT, 0.33f);
@@ -253,10 +253,10 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
                 cpu3FrameLayout.setLayoutParams(lp);
                 cpu2FrameLayout.setVisibility(View.VISIBLE);
                 cpu3FrameLayout.setVisibility(View.VISIBLE);
-                this.cpu3PlayerTextView.setText("" + this.allPlayerNames[3]);
-                this.cpu3ScoreTextview.setText("" + ((TTRGameState) info).getScores()[3]);
-                this.cpu3DestinationCardTextView.setText("" + ((TTRGameState) info).getPlayerDestinationDecks()[3].getCards().size());
-                this.cpu3TrainCardTextView.setText("" + ((TTRGameState) info).getPlayerTrainDecks()[3].getCards().size());
+                this.cpu3PlayerTextView.setText("" + this.allPlayerNames[(this.playerNum + 3) % myState.getNumPlayers()]);
+                this.cpu3ScoreTextview.setText("" + ((TTRGameState) info).getScores()[(this.playerNum + 3) % myState.getNumPlayers()]);
+                this.cpu3DestinationCardTextView.setText("" + ((TTRGameState) info).getPlayerDestinationDecks()[(this.playerNum + 3) % myState.getNumPlayers()].getCards().size());
+                this.cpu3TrainCardTextView.setText("" + ((TTRGameState) info).getPlayerTrainDecks()[(this.playerNum + 3) % myState.getNumPlayers()].getCards().size());
             }
             for (int i = 0; i < myState.getFaceUpTrainCards().size(); i++) {
                 if ((myState.getFaceUpTrainCards().getCards().get(i)).toString().equals("Black")) {
@@ -480,7 +480,7 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
                     Deck tempDeck = myState.getPlayerTrainDecks()[playerNum];
                     displayLocomotiveSelectionPopup(tempDeck, myState.getTracks().get(myState.getTrackSpot()));
                 } else {
-                    game.sendAction(new ConfirmSelectionAction(me, 0));
+                    game.sendAction(new ConfirmSelectionAction(me, myState.getSelectedTrackColor(), 0));
                 }
             }
         } else if (v.getId() == R.id.Train1) {

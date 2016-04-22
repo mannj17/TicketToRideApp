@@ -51,15 +51,15 @@ public class TTRGameState extends GameState implements Serializable{
     /** The number of players playing the game */
     private int numPlayers = MAX_NUM_PLAYERS;
     /** Says whether or not the player is in track select mode */
-    private Boolean trackModeSelected;
+    private boolean trackModeSelected;
     /** Says whether or not the player is in card select mode */
-    private Boolean cardModeSelected;
+    private boolean cardModeSelected;
     /** Says if the destination card pile has been clicked */
-    private Boolean destinationCardsSelected;
+    private boolean destinationCardsSelected;
     /** Says if either the face down or face up decks have been selected */
-    private Boolean trainCardsSelected;
+    private boolean trainCardsSelected;
     /** Says if the player has clicked on a placeable track */
-    private Boolean placeTrainSelected;
+    private boolean placeTrainSelected;
 //    /** Says if the player needs to be given a pool of destination cards to pick from. Always true at the start since each player needs to choose destination cards. */
 //    private Boolean isSelectDestinationCards;
     /** If the down deck was clicked on and no face up card was selected, this boolean will say to just pull two cards from the down deck */
@@ -70,9 +70,21 @@ public class TTRGameState extends GameState implements Serializable{
     private boolean useRainbow;
     private boolean gameStart;
     private boolean reset;
-    private Boolean isLastRound = false;
-    private Boolean isGameOver = false;
+    private boolean isLastRound = false;
+    private boolean isGameOver = false;
     private boolean[] faceUpCardsHighlight = new boolean[5];
+
+
+
+    private boolean[] selectedTracks;
+
+
+
+    private boolean[] coveredTracks;
+
+
+
+    private int[] trackIds;
 
     //PARALLEL ARRAYS//
     /** Number of trainTokens per player */
@@ -343,6 +355,15 @@ public class TTRGameState extends GameState implements Serializable{
         tempTrack = new Track(1, "Gray", "Omaha", "Kansas City");
         tempTracks.add(tempTrack);
         //tempTrack = new Track(1, "Gray", "Omaha", "Kansas City");
+
+        selectedTracks = new boolean[tempTracks.size()];
+        coveredTracks = new boolean[tempTracks.size()];
+        trackIds = new int[tempTracks.size()];
+        for(int i = 0; i < tempTracks.size(); i++){
+            selectedTracks[i] = false;
+            coveredTracks[i] = false;
+            trackIds[i] = -1;
+        }
     }
     /*
      * Creates a deep copy of the GameState
@@ -383,6 +404,14 @@ public class TTRGameState extends GameState implements Serializable{
         useRainbow = original.getUseRainbow();
         gameStart = original.getGameStart();
         setNames(original.getNames());
+        selectedTracks = new boolean[tempTracks.size()];
+        coveredTracks = new boolean[tempTracks.size()];
+        trackIds = new int[tempTracks.size()];
+        for(int i = 0; i < tempTracks.size(); i++){
+            selectedTracks[i] = tempTracks.get(i).getSelected();
+            coveredTracks[i] = tempTracks.get(i).getCovered();
+            trackIds[i] = tempTracks.get(i).getPlayerID();
+        }
         if(gameStart){
             cardModeSelected = original.getCardModeSelected();
             trackModeSelected = original.getTrackModeSelected();
@@ -602,14 +631,6 @@ public class TTRGameState extends GameState implements Serializable{
         this.placeTrainSelected = placeTrainSelected;
     }
 
-//    public Boolean getIsSelectDestinationCards() {
-//        return isSelectDestinationCards;
-//    }
-//
-//    public void setIsSelectDestinationCards(Boolean isSelectDestinationCards) {
-//        this.isSelectDestinationCards = isSelectDestinationCards;
-//    }
-
     public boolean getOnlyDownDeck() {
         return onlyDownDeck;
     }
@@ -690,5 +711,14 @@ public class TTRGameState extends GameState implements Serializable{
 
     public boolean[] getFaceUpCardsHighlight() {
         return faceUpCardsHighlight;
+    }
+    public int[] getTrackIds() {
+        return trackIds;
+    }
+    public boolean[] getCoveredTracks() {
+        return coveredTracks;
+    }
+    public boolean[] getSelectedTracks() {
+        return selectedTracks;
     }
 }

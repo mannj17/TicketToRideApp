@@ -109,12 +109,12 @@ public class LocomotiveSelectionDialog extends Dialog implements View.OnClickLis
         //set visibility
         if(numRainbows != 0){
             for(int i = numRainbows; i >= 0; i--){
-                if(numCards + i >= min) {
+                if(numCards + i >= min && i < 7) {
                     locomotives[i].setVisibility(View.VISIBLE);
                     locomotives[i].setChecked(true);
                     useRainbows = i;
                 }
-                else{
+                else if(i < 7){
                     locomotives[i].setVisibility(View.GONE);
                 }
             }

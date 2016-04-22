@@ -408,7 +408,7 @@ public class TTRLocalGame extends LocalGame implements Serializable {
                     //remove the correct number of cards that match the color of the track. Once
                     //one card is removed, the count is reduced, which indicates how many more
                     //cards need to be removed.
-                    if (myAction.getTrainColor() != null) {
+
                         for (int j = 0; j < mainState.getPlayerTrainDecks()[mainState.getPlayerID()].size(); j++) {
                             String cardColor = mainState.getPlayerTrainDecks()[mainState.getPlayerID()]
                                     .getCards().get(j).toString();
@@ -420,7 +420,7 @@ public class TTRLocalGame extends LocalGame implements Serializable {
                                 count--;
                             }
                         }
-                    }
+
 
                     //cover the track and assign the player's number to the track
                     mainState.getTracks().get(trackSpot).setCovered(true);
@@ -513,6 +513,7 @@ public class TTRLocalGame extends LocalGame implements Serializable {
                                     mainState.getFaceUpTrainCards(), i);
                         }
                     }
+                    //TODO
                     while (mainState.getFaceUpTrainCards().getCards().size() < 5) {
                         mainState.getFaceDownTrainCards().moveTopCardTo(
                                 mainState.getFaceUpTrainCards(), mainState.getFaceDownTrainCards());
@@ -555,8 +556,8 @@ public class TTRLocalGame extends LocalGame implements Serializable {
             if (mainState.getFaceDownTrainCards().size() <= 10) {
                 mainState.getTrainDiscard().shuffle();
                 while (!mainState.getTrainDiscard().getCards().isEmpty()) {
-                    mainState.getDestinationCards().moveAllCardsTo(
-                            mainState.getFaceUpTrainCards(), mainState.getTrainDiscard());
+                    mainState.getFaceDownTrainCards().moveAllCardsTo(
+                            mainState.getFaceDownTrainCards(), mainState.getTrainDiscard());
                 }
             }
             mainState.setPlayerID((mainState.getPlayerID() + 1) % mainState.getNumPlayers());
@@ -592,95 +593,18 @@ public class TTRLocalGame extends LocalGame implements Serializable {
                     mainState.setPlaceTrainSelected(false);
                 }
             }
-            if(action.getPlayer() instanceof TTRHumanPlayer) {
-                if (thisAction.getIndex() != -1) {
-                    mainState.getTracks().get(thisAction.getIndex()).setSelected(true);
-                    mainState.setSelectedTrackColor(thisAction.getTrackColor());
-                    mainState.setTrackSpot(thisAction.getIndex());
-                    mainState.setPlaceTrainSelected(true);
-                }
+            if (thisAction.getIndex() != -1) {
+                mainState.getTracks().get(thisAction.getIndex()).setSelected(true);
+                mainState.setSelectedTrackColor(thisAction.getTrackColor());
+                mainState.setTrackSpot(thisAction.getIndex());
+                mainState.setPlaceTrainSelected(true);
             }
-            return true;
+            else{
+                mainState.setSelectedTrackColor("");
+                mainState.setTrackSpot(-1);
+            }
 
-//            //if the card mode is enabled, return false, saying that the current mode is not legal
-//            //for selecting tracks.
-//            if (mainState.getCardModeSelected()) {
-//                return false;
-//            }
-//
-//            //this boolean is used to indicate if a track has already been selected
-//            boolean alreadySelected = false;
-//            TrackPlaceAction temp = (TrackPlaceAction) action;
-//            //if a player has already selected a track change alreadySelected.
-//                for (int i = 0; i < mainState.getTracks().size(); i++) {
-//                    if (mainState.getTracks().get(i).getSelected()
-//                        || mainState.getTracks().get(i).getSelected2()) {
-//                        if(mainState.getTracks().get(i).isDoubleTrack()
-//                                && temp.getIndex() == i){
-//                            alreadySelected = false;
-//                            if(mainState.getTracks().get(i).getSelected()){
-//                                mainState.getTracks().get(i).setSelected(false);
-//                                mainState.getTracks().get(i).setSelected2(true);
-//                            }
-//                            else if(mainState.getTracks().get(i).getSelected2()){
-//                                mainState.getTracks().get(i).setSelected(true);
-//                                mainState.getTracks().get(i).setSelected2(false);
-//                            }
-//                        }
-//                        else {
-//                            alreadySelected = true;
-//                            mainState.getTracks().get(i).setSelected(false);
-//                        }
-//                        currentTrackColor = mainState.getTracks().get(i).toString();
-//                        mainState.setTrackSpot(i);
-//                    }
-//                }
-//
-//            //once the selected track has been found, change the necessary variables in the game state.
-//                int index = temp.getIndex();
-//                if(action.getPlayer() instanceof TTRHumanPlayer) {
-//                    if (mainState.getTracks()[index].getHighlight() &&
-//                            !mainState.getTracks()[index].getSelected() && !mainState.getTracks()[index].getSelected2()) {
-//                        if(mainState.getTracks()[index].isDoubleTrack()){
-//                            mainState.getTracks()[index].setSelected(true);
-//                            mainState.setPlaceTrainSelected(true);
-//                            mainState.setSelectedCardColor(temp.getTrackColor());
-//                            mainState.setTrackSpot(index);
-//                        }
-//                        else {
-//                            mainState.getTracks()[index].setSelected(true);
-//                            mainState.setPlaceTrainSelected(true);
-//                            mainState.setSelectedCardColor(temp.getTrackColor());
-//                            mainState.setTrackSpot(index);
-//                        }
-//                    }
-//
-//                    //if a track has already been selected, set it's selected variable to false.
-//                    else {
-//                        if(mainState.getTracks()[index].isDoubleTrack()){
-//                            if (mainState.getTracks()[index].getSelected()){
-//                                mainState.getTracks()[index].setSelected(false);
-//                                mainState.getTracks()[index].setSelected2(true);
-//                            }
-//                            else if (mainState.getTracks()[index].getSelected2()){
-//                                mainState.getTracks()[index].setSelected(true);
-//                                mainState.getTracks()[index].setSelected2(false);
-//                            }
-//                        }
-//                        else {
-//                            mainState.getTracks()[index].setSelected(false);
-//                            mainState.setPlaceTrainSelected(false);
-//                            mainState.setSelectedCardColor("");
-//                        }
-//                    }
-//                }
-//                else if(action.getPlayer() instanceof TTRComputerPlayer){
-//                    mainState.getTracks()[index].setSelected(true);
-//                    mainState.setPlaceTrainSelected(true);
-//                    mainState.setSelectedCardColor(temp.getTrackColor());
-//                    mainState.setTrackSpot(index);
-//                }
-//            return true;
+            return true;
             }
 
         //if the action is for choosing face up cards, enter this if statement.
