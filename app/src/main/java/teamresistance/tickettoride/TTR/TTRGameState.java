@@ -72,6 +72,7 @@ public class TTRGameState extends GameState implements Serializable{
     private boolean reset;
     private Boolean isLastRound = false;
     private Boolean isGameOver = false;
+    private boolean[] faceUpCardsHighlight = new boolean[5];
 
     //PARALLEL ARRAYS//
     /** Number of trainTokens per player */
@@ -110,6 +111,7 @@ public class TTRGameState extends GameState implements Serializable{
         //place five train cards 'face up'
         for(int i = 0; i < 5; i++){
             faceDownTrainCards.moveTopCardTo(faceUpTrainCards, faceDownTrainCards);
+            faceUpCardsHighlight[i] = false;
         }
 
         /** initialize destination deck */
@@ -351,6 +353,9 @@ public class TTRGameState extends GameState implements Serializable{
         playerID = original.getPlayerID();
         faceDownTrainCards = new Deck(original.faceDownTrainCards);
         faceUpTrainCards = new Deck(original.faceUpTrainCards);
+        for(int i = 0; i < original.getFaceUpCardsHighlight().length; i++){
+            faceUpCardsHighlight[i] = original.getFaceUpCardsHighlight()[i];
+        }
         destinationCards = new Deck(original.destinationCards);
         trainDiscard = new Deck(original.trainDiscard);
         destinationDiscard = new Deck(original.destinationDiscard);
@@ -682,4 +687,8 @@ public class TTRGameState extends GameState implements Serializable{
     public boolean getReset(){ return reset; }
 
     public void setReset(boolean reset){ this.reset = reset; }
+
+    public boolean[] getFaceUpCardsHighlight() {
+        return faceUpCardsHighlight;
+    }
 }

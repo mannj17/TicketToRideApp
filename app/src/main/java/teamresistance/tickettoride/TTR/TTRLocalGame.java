@@ -294,7 +294,7 @@ public class TTRLocalGame extends LocalGame implements Serializable {
             //If ConfirmSelectionAction is thrown, perform one of these changes to the game state.
         } else if (action instanceof ConfirmSelectionAction) {
             //if a track has been selected
-            if (!mainState.getGameStart()
+            if (mainState.getGameStart()
                     && mainState.getTrackModeSelected()
                     && mainState.getPlaceTrainSelected()
                     && mainState.getTrackSpot() != -1) {
@@ -507,7 +507,7 @@ public class TTRLocalGame extends LocalGame implements Serializable {
                     }
 
                     for (int i = mainState.getFaceUpTrainCards().size() - 1; i >= 0; i--) {
-                        if (mainState.getFaceUpTrainCards().getCards().get(i).getHighlight()) {
+                        if (mainState.getFaceUpCardsHighlight()[i]) {
                             mainState.getPlayerTrainDecks()[mainState.getPlayerID()].moveCardTo(
                                     mainState.getPlayerTrainDecks()[mainState.getPlayerID()],
                                     mainState.getFaceUpTrainCards(), i);
@@ -552,7 +552,13 @@ public class TTRLocalGame extends LocalGame implements Serializable {
                             mainState.getDestinationCards(), mainState.getDestinationDiscard());
                 }
             }
-//            mainState.setReset(true);
+            if (mainState.getFaceDownTrainCards().size() <= 10) {
+                mainState.getTrainDiscard().shuffle();
+                while (!mainState.getTrainDiscard().getCards().isEmpty()) {
+                    mainState.getDestinationCards().moveAllCardsTo(
+                            mainState.getFaceUpTrainCards(), mainState.getTrainDiscard());
+                }
+            }
             mainState.setPlayerID((mainState.getPlayerID() + 1) % mainState.getNumPlayers());
             mainState.setTrackModeSelected(false);
             mainState.setCardModeSelected(true);
@@ -565,6 +571,9 @@ public class TTRLocalGame extends LocalGame implements Serializable {
             mainState.setTrainCardsSelected(false);
             mainState.setOnlyDownDeck(false);
             mainState.setPlaceTrainSelected(false);
+            for(int i = 0; i < mainState.getFaceUpCardsHighlight().length; i++){
+                mainState.getFaceUpCardsHighlight()[i] = false;
+            }
             mainState.setTrackSpot(-1);
             mainState.setSelectedTrackColor("");
             return true;
@@ -588,6 +597,7 @@ public class TTRLocalGame extends LocalGame implements Serializable {
                     mainState.getTracks().get(thisAction.getIndex()).setSelected(true);
                     mainState.setSelectedTrackColor(thisAction.getTrackColor());
                     mainState.setTrackSpot(thisAction.getIndex());
+                    mainState.setPlaceTrainSelected(true);
                 }
             }
             return true;
@@ -718,27 +728,32 @@ public class TTRLocalGame extends LocalGame implements Serializable {
                 if (mainState.getFaceUpTrainCards().getCards().get(pos).toString().equals("Rainbow")) {
                     if (numHighlights == 0) {
                         mainState.getFaceUpTrainCards().getCards().get(pos).setHighlight(true);
+                        mainState.getFaceUpCardsHighlight()[pos] = true;
                         mainState.setTrainCardsSelected(true);
                     } else {
                         mainState.getFaceUpTrainCards().getCards().get(pos).setHighlight(false);
+                        mainState.getFaceUpCardsHighlight()[pos] = false;
                     }
                 }
 
                 //if its already been highlighted, de-highlight it.
                 else if (mainState.getFaceUpTrainCards().getCards().get(pos).getHighlight()) {
                     mainState.getFaceUpTrainCards().getCards().get(pos).setHighlight(false);
+                    mainState.getFaceUpCardsHighlight()[pos] = false;
                     mainState.setTrainCardsSelected(false);
                 }
 
                 //Otherwise, highlight the card
                 else {
                     mainState.getFaceUpTrainCards().getCards().get(pos).setHighlight(true);
+                    mainState.getFaceUpCardsHighlight()[pos] = true;
                     mainState.setTrainCardsSelected(true);
                 }
             }
             //if the maximum number of cards are highlighted, don't let the card be highlighted.
             else if (mainState.getFaceUpTrainCards().getCards().get(pos).getHighlight()) {
                 mainState.getFaceUpTrainCards().getCards().get(pos).setHighlight(false);
+                mainState.getFaceUpCardsHighlight()[pos] = false;
                 mainState.setTrainCardsSelected(true);
             }
             return true;

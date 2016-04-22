@@ -42,6 +42,7 @@ public class Deck implements Serializable {
         cards = new ArrayList<Card>();
         for (int i =0; i < orig.getCards().size(); i++){
             cards.add(orig.getCards().get(i));
+            cards.get(i).setHighlight(orig.getCards().get(i).getHighlight());
         }
         highlight = orig.getHighlight();
     }

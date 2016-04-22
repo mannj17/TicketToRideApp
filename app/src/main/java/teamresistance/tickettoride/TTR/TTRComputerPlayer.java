@@ -84,6 +84,7 @@ public class TTRComputerPlayer extends GameComputerPlayer implements Serializabl
         currentMove = 0;
         rainbowCount = 0;
         chosenColor = "";
+        trainPosition = -1;
     }
 
     @Override

@@ -34,6 +34,8 @@ public class TTRSurfaceView extends SurfaceView implements Serializable {
     public Boolean isArea2 = false;
     private boolean[] highlights;
     private boolean[] selected;
+    private boolean[] covered;
+    private int[] playerIDs;
     protected int maxX = 1720;
     protected int maxY = 980;
 
@@ -60,14 +62,7 @@ public class TTRSurfaceView extends SurfaceView implements Serializable {
     public TTRSurfaceView(Context context, AttributeSet attrs) {
         super(context, attrs);
         setWillNotCacheDrawing(false);
-        highlights = new boolean[78];
-        for(int i = 0; i < highlights.length; i++){
-            highlights[i] = false;
-        }
-        selected = new boolean[78];
-        for(int i = 0; i < selected.length; i++){
-            selected[i] = false;
-        }
+
 
         /**
          External Citation
@@ -2038,6 +2033,23 @@ public class TTRSurfaceView extends SurfaceView implements Serializable {
         touchRects.add(tempRect);
         pathTemp.reset();
         pathTemp2.reset();
+
+        highlights = new boolean[paths.size()];
+        for(int i = 0; i < highlights.length; i++){
+            highlights[i] = false;
+        }
+        selected = new boolean[paths.size()];
+        for(int i = 0; i < selected.length; i++){
+            selected[i] = false;
+        }
+        covered = new boolean[paths.size()];
+        for(int i = 0; i < covered.length; i++) {
+            covered[i] = false;
+        }
+        playerIDs = new int[paths.size()];
+        for(int i = 0; i < playerIDs.length; i++){
+            playerIDs[i] = -1;
+        }
     }
 
     /*
@@ -2060,49 +2072,15 @@ public class TTRSurfaceView extends SurfaceView implements Serializable {
                 paint.setColor(SELECTION_COLOR);
                 canvas.drawPath(paths.get(i),paint);
             }
+            if(covered[i]) {
+                    if(playerIDs[i] == 0){paint.setColor(PLAYER1_COLOR);}
+                    else if(playerIDs[i] == 1){paint.setColor(PLAYER2_COLOR);}
+                    else if(playerIDs[i] == 2){paint.setColor(PLAYER3_COLOR);}
+                    else if(playerIDs[i] == 3){paint.setColor(PLAYER4_COLOR);}
+                    paint.setStyle(Paint.Style.FILL);
+                    canvas.drawPath(paths.get(i), paint);
+                }
         }
-//        for(Track track : myTracks){
-//            if(track != null) {
-//                if (track.getHighlight()) {
-//                    paint.setColor(HIGHLIGHT_COLOR);
-//                    paint.setStrokeWidth(5);
-//                    paint.setStyle(Paint.Style.STROKE);
-//                    canvas.drawPath(track.getPath(), paint);
-//                }
-//                if (track.getSelected()) {
-//                    paint.setColor(SELECTION_COLOR);
-//                    canvas.drawPath(track.getPath(), paint);
-//                }
-//                if (track.getCovered()) {
-//                    if(track.getPlayerID() == 0){paint.setColor(PLAYER1_COLOR);}
-//                    else if(track.getPlayerID() == 1){paint.setColor(PLAYER2_COLOR);}
-//                    else if(track.getPlayerID() == 2){paint.setColor(PLAYER3_COLOR);}
-//                    else if(track.getPlayerID() == 3){paint.setColor(PLAYER4_COLOR);}
-//                    paint.setStyle(Paint.Style.FILL);
-//                    canvas.drawPath(track.getPath(), paint);
-//                }
-//                if(track.isDoubleTrack()){
-//                    if (track.getHighlight2()) {
-//                        paint.setColor(HIGHLIGHT_COLOR);
-//                        paint.setStrokeWidth(5);
-//                        paint.setStyle(Paint.Style.STROKE);
-//                        canvas.drawPath(track.getPath2(), paint);
-//                    }
-//                    if (track.getSelected2()) {
-//                        paint.setColor(SELECTION_COLOR);
-//                        canvas.drawPath(track.getPath2(), paint);
-//                    }
-//                    if (track.getCovered2()) {
-//                        if(track.getPlayerID() == 0){paint.setColor(PLAYER1_COLOR);}
-//                        else if(track.getPlayerID() == 1){paint.setColor(PLAYER2_COLOR);}
-//                        else if(track.getPlayerID() == 2){paint.setColor(PLAYER3_COLOR);}
-//                        else if(track.getPlayerID() == 3){paint.setColor(PLAYER4_COLOR);}
-//                        paint.setStyle(Paint.Style.FILL);
-//                        canvas.drawPath(track.getPath2(), paint);
-//                    }
-//                }
-//            }
-//        }
     }
     /*
      * Method which draws the board image onto the canvas
@@ -2112,64 +2090,6 @@ public class TTRSurfaceView extends SurfaceView implements Serializable {
         canvas.drawBitmap(boardImage, 0, 0, new Paint());
     }
 
-    /*
-     * Method which enables highlighting track mode
-     * and then refresh the onDraw method to show highlight
-     */
-//    protected void setHighlightTrainMode(){
-//        highlightMode = true;
-//        for(Track track : myTracks) {
-//            if(!track.getCovered()){
-//                track.setSelected(!highlightMode);
-//                track.setHighlight(highlightMode);
-//
-//                if(track.isDoubleTrack()){
-//                    track.setSelected2(!highlightMode);
-//                    track.setHighlight2(highlightMode);
-//                }
-//            }
-//        }
-//        // Refreshes the view by calling onDraw function
-//        postInvalidate();
-//    }
-//
-//    /*
-//     * Method which refreshes the canvas and draws a train
-//     */
-//    protected void drawTrain(){
-//        for(Track track : myTracks){
-//            track.setHighlight(false);
-//            if(track.getSelected()){
-//                track.setCovered(true);
-//            }
-//            track.setSelected(false);
-//        }
-//        highlightMode = false;
-//        // Refreshes the view by calling onDraw function
-//        postInvalidate();
-//    }
-//
-//    /*
-//     * Method which changes from green highlight to blue highlight to indicate selection
-//     */
-//    public void setSelection(int x, int y) {
-//        for(Track track : myTracks){
-//            if(track.isTouched(x, y) && !track.getSelected() && !track.getCovered()){
-//                for(Track trackZ : myTracks) {
-//                    trackZ.setSelected(false);
-//                }
-//                track.setSelected(true);
-//                track.setSelected2(true);
-//            }
-//        }
-//        postInvalidate();
-//    }
-
-//    public int getTracksLength(){
-//        int size = myTracks.length;
-//        return size;
-//    }
-//
     /** Returns the position of the track clicked by the user if within the track selection area
       @param xPos
       @param yPos
@@ -2196,6 +2116,18 @@ public class TTRSurfaceView extends SurfaceView implements Serializable {
     public void setSelected(boolean[] selectedEnter){
         for(int i = 0; i < selectedEnter.length; i++){
             this.selected[i] = selectedEnter[i];
+        }
+    }
+
+    public void setCovered(boolean[] coveredEnter){
+        for(int i = 0; i < coveredEnter.length; i++){
+            this.covered[i] = coveredEnter[i];
+        }
+    }
+
+    public void setPlayerIDs(int[] playerIDsEnter){
+        for(int i = 0; i < playerIDsEnter.length; i++){
+            this.playerIDs[i] = playerIDsEnter[i];
         }
     }
 }

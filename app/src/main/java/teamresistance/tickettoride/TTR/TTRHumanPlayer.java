@@ -120,6 +120,8 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
     private boolean startGame = true;
     private boolean[] highlights;
     private boolean[] selected;
+    private boolean[] covered;
+    private int[] playerIDs;
 
     /*
      * The human player
@@ -141,10 +143,12 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
             myState = (TTRGameState) info;
             highlights = new boolean[myState.getTracks().size()];
             selected = new boolean[myState.getTracks().size()];
+            covered = new boolean[myState.getTracks().size()];
+            playerIDs = new int[myState.getTracks().size()];
             trainDeck = myState.getPlayerTrainDecks()[this.playerNum];
             int playerNum = ((TTRGameState) info).getNumPlayers();
             for (int i = 0; i < myState.getFaceUpTrainCards().size(); i++) {
-                if (myState.getFaceUpTrainCards().getCards().get(i).getHighlight()) {
+                if (myState.getFaceUpCardsHighlight()[i]) {
                     this.faceUpTrainCards[i].setAlpha(0.5f);
                 } else {
                     this.faceUpTrainCards[i].setAlpha(1.0f);
@@ -176,17 +180,29 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
                     else{
                         highlights[i] = !val;
                     }
-                    if(myState.getTracks().get(i).getSelected()){
-                        selected[i] = true;
-                    }
-                    else{
-                        selected[i] = false;
-                    }
                 }
             }
 
+            for(int i = 0; i < myState.getTracks().size(); i++){
+                if(myState.getTracks().get(i).getSelected()){
+                    selected[i] = true;
+                }
+                else{
+                    selected[i] = false;
+                }
+                if(myState.getTracks().get(i).getCovered()){
+                    covered[i] = true;
+                    playerIDs[i] = myState.getTracks().get(i).getPlayerID();
+                }
+                else{
+                    covered[i] = false;
+                    playerIDs[i] = -1;
+                }
+            }
             myBoard.setHighlights(highlights);
             myBoard.setSelected(selected);
+            myBoard.setCovered(covered);
+            myBoard.setPlayerIDs(playerIDs);
 
             if (playerNum >= 2) { //2 is the minimum number of players
                 lp = new LinearLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT, 1);
@@ -443,7 +459,7 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.confirmSelection) {
-            if (myState.getPlayerID() == 0) {
+            if (myState.getPlayerID() == this.playerNum) {
                 final TTRHumanPlayer me = this;
                 if (myState.getDestinationCardsSelected()) {
 
