@@ -513,7 +513,7 @@ public class TTRLocalGame extends LocalGame implements Serializable {
                                     mainState.getFaceUpTrainCards(), i);
                         }
                     }
-                    //TODO
+                    //TODOkl
                     while (mainState.getFaceUpTrainCards().getCards().size() < 5) {
                         mainState.getFaceDownTrainCards().moveTopCardTo(
                                 mainState.getFaceUpTrainCards(), mainState.getFaceDownTrainCards());
