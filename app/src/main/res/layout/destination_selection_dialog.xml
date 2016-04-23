@@ -25,18 +25,22 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:orientation="horizontal" >
+        android:orientation="horizontal"
+        android:background="#3E80B4">
 
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:background="#3E80B4">
 
             <ImageButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ticket_back"
-                android:id="@+id/ticket1" />
+                android:id="@+id/ticket1"
+                android:background="#3E80B4"
+                android:padding="5dp" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -55,7 +59,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ticket_back"
-                android:id="@+id/ticket2" />
+                android:id="@+id/ticket2"
+                android:background="#3E80B4"
+                android:padding="5dp" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -74,7 +80,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ticket_back"
-                android:id="@+id/ticket3" />
+                android:id="@+id/ticket3"
+                android:background="#3E80B4"
+                android:padding="5dp" />
 
             <TextView
                 android:layout_width="wrap_content"

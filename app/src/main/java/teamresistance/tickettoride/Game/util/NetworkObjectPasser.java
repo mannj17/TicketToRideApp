@@ -187,7 +187,7 @@ public abstract class NetworkObjectPasser {
 						out.writeObject(obj);
 						out.flush();
 					} catch (IOException e) {
-						Log.e("NetworkObjectPasser", "could not write object");
+						Log.e("NetworkObjectPasser", "could not write object"+obj.getClass());
 					}
 				}
 			}
@@ -202,6 +202,7 @@ public abstract class NetworkObjectPasser {
 					onReceiveObject(obj);
 				}
 				catch (Exception x) {
+					Log.i("NetworkObjectPasser", "error: "+x.getMessage());
 					break;
 				}
 			}
@@ -248,7 +249,7 @@ public abstract class NetworkObjectPasser {
 						out.writeObject(obj);
 						success = true;
 					} catch (IOException e) {
-						Log.e("NetworkObjectPasser", "could not write object");
+						Log.e("NetworkObjectPasser", "could not write object"+obj.getClass());
 					}
 				}
 				if (!success) {

@@ -35,14 +35,22 @@ public class DijkstraGraph implements Serializable {
     private static final long serialVersionUID = 3803995564192016L;
 
         //all the vertices of the graph
-        private final ArrayList<Vertex> vertexes;
+        private ArrayList<Vertex> vertexes;
         //all the tracks and edges of the graph
-        private final ArrayList<Edge> edges;
+        private ArrayList<Edge> edges;
 
         public DijkstraGraph(ArrayList<Vertex> vertexes, ArrayList<Edge> edges) {
             this.vertexes = vertexes;
             this.edges = edges;
         }
+
+        public void setVertexes(ArrayList<Vertex> vertexes){
+            this.vertexes.addAll(vertexes);
+        }
+
+    public void setEdges(ArrayList<Edge> edges){
+        this.edges.addAll(edges);
+    }
 
         public ArrayList<Vertex> getVertexes() {
             return vertexes;
@@ -55,4 +63,10 @@ public class DijkstraGraph implements Serializable {
         public void removeEdge(int pos){
             vertexes.remove(pos);
         }
+
+    public void clear() {
+        vertexes.clear();
+        edges.clear();
+
+    }
 }

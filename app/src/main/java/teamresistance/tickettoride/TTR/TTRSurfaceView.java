@@ -36,11 +36,16 @@ public class TTRSurfaceView extends SurfaceView implements Serializable {
     private boolean[] selected;
     private boolean[] covered;
     private int[] playerIDs;
+    private boolean[] highlights2;
+    private boolean[] selected2;
+    private boolean[] covered2;
+    private int[] playerIDs2;
     protected int maxX = 1720;
     protected int maxY = 980;
 
     private Path pathTemp = new Path();
     private Path pathTemp2 = new Path();
+    private Path blankPath = null;
     private Rect tempRect;
     /*
      * These ints correspond to hex colors used by this class
@@ -56,6 +61,7 @@ public class TTRSurfaceView extends SurfaceView implements Serializable {
 
     //path initializations
     ArrayList<Path> paths = new ArrayList<Path>();
+    ArrayList<Path> paths2 = new ArrayList<Path>();
     ArrayList<Rect> touchRects = new ArrayList<Rect>();
 
     // TicketToRideSurfaceView constructor
@@ -75,6 +81,8 @@ public class TTRSurfaceView extends SurfaceView implements Serializable {
          address. Therefore, I implemented the suggestion after every path creation.
          */
         //creates a path and a rect for each track
+
+        //0
         tempRect = new Rect((int) (maxX * .0), (int) (maxY * .290), (int) (maxX * .05), (int) (maxY * .8));
         pathTemp.moveTo(maxX * .028f, maxY * .286f);
         pathTemp.lineTo(maxX * .016f, maxY * .333f);
@@ -127,10 +135,12 @@ public class TTRSurfaceView extends SurfaceView implements Serializable {
         pathTemp2.lineTo(maxX * .0365f, maxY * .5285f);
         pathTemp2.close();
         paths.add(new Path(pathTemp));
+        paths2.add(new Path(pathTemp2));
         touchRects.add(tempRect);
         pathTemp.reset();
         pathTemp2.reset();
 
+        //1
         tempRect = new Rect((int) (maxX * .0), (int) (maxY * .6), (int) (maxX * .1), (int) (maxY * .8));
         pathTemp.moveTo(maxX * .029f, maxY * .629f);
         pathTemp.lineTo(maxX * .043f, maxY * .680f);
@@ -163,10 +173,12 @@ public class TTRSurfaceView extends SurfaceView implements Serializable {
         pathTemp2.lineTo(maxX * .087f, maxY * .722f);
         pathTemp2.close();
         paths.add(new Path(pathTemp));
+        paths2.add(new Path(pathTemp2));
         touchRects.add(tempRect);
         pathTemp.reset();
         pathTemp2.reset();
 
+        //2
         tempRect = new Rect((int) (maxX * .11), (int) (maxY * .67), (int) (maxX * .175), (int) (maxY * .755));
         pathTemp.moveTo(maxX * .127f, maxY * .702f);
         pathTemp.lineTo(maxX * .137f, maxY * .707f);
@@ -179,10 +191,12 @@ public class TTRSurfaceView extends SurfaceView implements Serializable {
         pathTemp.lineTo(maxX * .172f, maxY * .694f);
         pathTemp.close();
         paths.add(new Path(pathTemp));
+        paths2.add(blankPath);
         touchRects.add(tempRect);
         pathTemp.reset();
         pathTemp2.reset();
 
+        //3
         tempRect = new Rect((int) (maxX * .91), (int) (maxY * .06), (int) (maxX * .99), (int) (maxY * .18));
         pathTemp.moveTo(maxX * .929f, maxY * .0583f);
         pathTemp.lineTo(maxX * .9537f, maxY * .0951f);
@@ -205,10 +219,12 @@ public class TTRSurfaceView extends SurfaceView implements Serializable {
         pathTemp2.lineTo(maxX * .9702f, maxY * .1505f);
         pathTemp2.close();
         paths.add(new Path(pathTemp));
+        paths2.add(new Path(pathTemp2));
         touchRects.add(tempRect);
         pathTemp.reset();
         pathTemp2.reset();
 
+        //4
         tempRect = new Rect((int) (maxX * .895), (int) (maxY * .08), (int) (maxX * .93), (int) (maxY * .27));
         pathTemp.moveTo(maxX * .899f, maxY * .089f);
         pathTemp.lineTo(maxX * .91f, maxY * .087f);
@@ -226,9 +242,11 @@ public class TTRSurfaceView extends SurfaceView implements Serializable {
         pathTemp.lineTo(maxX * .916f, maxY * .26f);
         pathTemp.close();
         paths.add(new Path(pathTemp));
+        paths2.add(blankPath);
         touchRects.add(tempRect);
         pathTemp.reset();
 
+        //5
         tempRect = new Rect((int) (maxX * .95), (int) (maxY * .18), (int) (maxX * 1.0), (int) (maxY * .29));
         pathTemp.moveTo(maxX * .97f, maxY * .17f);
         pathTemp.lineTo(maxX * .98f, maxY * .175f);
@@ -251,10 +269,12 @@ public class TTRSurfaceView extends SurfaceView implements Serializable {
         pathTemp2.lineTo(maxX * .945f, maxY * .269f);
         pathTemp2.close();
         paths.add(new Path(pathTemp));
+        paths2.add(new Path(pathTemp2));
         touchRects.add(tempRect);
         pathTemp.reset();
         pathTemp2.reset();
 
+        //6
         tempRect = new Rect((int) (maxX * .93), (int) (maxY * .298), (int) (maxX * .96), (int) (maxY * .42));
         pathTemp.moveTo(maxX * .922f, maxY * .3f);
         pathTemp.lineTo(maxX * .935f, maxY * .3f);
@@ -277,10 +297,12 @@ public class TTRSurfaceView extends SurfaceView implements Serializable {
         pathTemp2.lineTo(maxX * .942f, maxY * .416f);
         pathTemp2.close();
         paths.add(new Path(pathTemp));
+        paths2.add(new Path(pathTemp2));
         touchRects.add(tempRect);
         pathTemp.reset();
         pathTemp2.reset();
 
+        //7
         tempRect = new Rect((int) (maxX * .87), (int) (maxY * .43), (int) (maxX * .95), (int) (maxY * .55));
         pathTemp.moveTo(maxX * .923f, maxY * .436f);
         pathTemp.lineTo(maxX * .934f, maxY * .448f);
@@ -303,10 +325,12 @@ public class TTRSurfaceView extends SurfaceView implements Serializable {
         pathTemp2.lineTo(maxX * .889f, maxY * .538f);
         pathTemp2.close();
         paths.add(new Path(pathTemp));
+        paths2.add(new Path(pathTemp2));
         touchRects.add(tempRect);
         pathTemp.reset();
         pathTemp2.reset();
 
+        //8
         tempRect = new Rect((int) (maxX * .875), (int) (maxY * .55), (int) (maxX * .94), (int) (maxY * .655));
         pathTemp.moveTo(maxX * .882f, maxY * .566f);
         pathTemp.lineTo(maxX * .889f, maxY * .551f);
@@ -319,9 +343,11 @@ public class TTRSurfaceView extends SurfaceView implements Serializable {
         pathTemp.lineTo(maxX * .902f, maxY * .64f);
         pathTemp.close();
         paths.add(new Path(pathTemp));
+        paths2.add(blankPath);
         touchRects.add(tempRect);
         pathTemp.reset();
 
+        //9
         tempRect = new Rect((int) (maxX * .89), (int) (maxY * .655), (int) (maxX * .955), (int) (maxY * .91));
         pathTemp.moveTo(maxX * .9f, maxY * .675f);
         pathTemp.lineTo(maxX * .912f, maxY * .675f);
@@ -344,9 +370,11 @@ public class TTRSurfaceView extends SurfaceView implements Serializable {
         pathTemp.lineTo(maxX * .94f, maxY * .905f);
         pathTemp.close();
         paths.add(new Path(pathTemp));
+        paths2.add(blankPath);
         touchRects.add(tempRect);
         pathTemp.reset();
 
+        //10
         tempRect = new Rect((int) (maxX * .8), (int) (maxY * .7), (int) (maxX * .9), (int) (maxY * .8));
         pathTemp.moveTo(maxX * .807f, maxY * .677f);
         pathTemp.lineTo(maxX * .817f, maxY * .67f);
@@ -374,9 +402,11 @@ public class TTRSurfaceView extends SurfaceView implements Serializable {
         pathTemp.lineTo(maxX * .925f, maxY * .91f);
         pathTemp.close();
         paths.add(new Path(pathTemp));
+        paths2.add(blankPath);
         touchRects.add(tempRect);
         pathTemp.reset();
 
+        //11
         tempRect = new Rect((int) (maxX * .81), (int) (maxY * .64), (int) (maxX * .9), (int) (maxY * .685));
         pathTemp.moveTo(maxX * .82f, maxY * .65f);
         pathTemp.lineTo(maxX * .855f, maxY * .652f);
@@ -389,9 +419,11 @@ public class TTRSurfaceView extends SurfaceView implements Serializable {
         pathTemp.lineTo(maxX * .862f, maxY * .673f);
         pathTemp.close();
         paths.add(new Path(pathTemp));
+        paths2.add(blankPath);
         touchRects.add(tempRect);
         pathTemp.reset();
 
+        //12
         tempRect = new Rect((int) (maxX * .8), (int) (maxY * .54), (int) (maxX * .88), (int) (maxY * .65));
         pathTemp.moveTo(maxX * .862f, maxY * .545f);
         pathTemp.lineTo(maxX * .871f, maxY * .556f);
@@ -414,10 +446,12 @@ public class TTRSurfaceView extends SurfaceView implements Serializable {
         pathTemp2.lineTo(maxX * .818f, maxY * .631f);
         pathTemp2.close();
         paths.add(new Path(pathTemp));
+        paths2.add(new Path(pathTemp2));
         touchRects.add(tempRect);
         pathTemp.reset();
         pathTemp2.reset();
 
+        //13
         tempRect = new Rect((int) (maxX * .845), (int) (maxY * .39), (int) (maxX * .865), (int) (maxY * .51));
         pathTemp.moveTo(maxX * .843f, maxY * .393f);
         pathTemp.lineTo(maxX * .855f, maxY * .39f);
@@ -430,10 +464,12 @@ public class TTRSurfaceView extends SurfaceView implements Serializable {
         pathTemp.lineTo(maxX * .86f, maxY * .51f);
         pathTemp.close();
         paths.add(new Path(pathTemp));
+        paths2.add(blankPath);
         touchRects.add(tempRect);
         pathTemp.reset();
         pathTemp2.reset();
 
+        //14
         tempRect = new Rect((int) (maxX * .85), (int) (maxY * .35), (int) (maxX * .93), (int) (maxY * .43));
         pathTemp.moveTo(maxX * .855f, maxY * .38f);
         pathTemp.lineTo(maxX * .858f, maxY * .365f);
@@ -446,10 +482,12 @@ public class TTRSurfaceView extends SurfaceView implements Serializable {
         pathTemp.lineTo(maxX * .919f, maxY * .434f);
         pathTemp.close();
         paths.add(new Path(pathTemp));
+        paths2.add(blankPath);
         touchRects.add(tempRect);
         pathTemp2.reset();
         pathTemp.reset();
 
+        //15
         tempRect = new Rect((int) (maxX * .845), (int) (maxY * .26), (int) (maxX * .925), (int) (maxY * .35));
         pathTemp.moveTo(maxX * .845f, maxY * .33f);
         pathTemp.lineTo(maxX * .875f, maxY * .3f);
@@ -472,10 +510,12 @@ public class TTRSurfaceView extends SurfaceView implements Serializable {
         pathTemp2.lineTo(maxX * .893f, maxY * .322f);
         pathTemp2.close();
         paths.add(new Path(pathTemp));
+        paths2.add(new Path(pathTemp2));
         touchRects.add(tempRect);
         pathTemp.reset();
         pathTemp2.reset();
 
+        //16
         tempRect = new Rect((int) (maxX * .815), (int) (maxY * .2), (int) (maxX * .835), (int) (maxY * .35));
         pathTemp.moveTo(maxX * .824f, maxY * .216f);
         pathTemp.lineTo(maxX * .835f, maxY * .215f);
@@ -488,10 +528,12 @@ public class TTRSurfaceView extends SurfaceView implements Serializable {
         pathTemp.lineTo(maxX * .829f, maxY * .336f);
         pathTemp.close();
         paths.add(new Path(pathTemp));
+        paths2.add(blankPath);
         touchRects.add(tempRect);
         pathTemp.reset();
         pathTemp2.reset();
 
+        //17
         tempRect = new Rect((int) (maxX * .805), (int) (maxY * .06), (int) (maxX * .905), (int) (maxY * .2));
         pathTemp.moveTo(maxX * .83f, maxY * .127f);
         pathTemp.lineTo(maxX * .841f, maxY * .137f);
@@ -509,9 +551,11 @@ public class TTRSurfaceView extends SurfaceView implements Serializable {
         pathTemp.lineTo(maxX * .865f, maxY * .083f);
         pathTemp.close();
         paths.add(new Path(pathTemp));
+        paths2.add(blankPath);
         touchRects.add(tempRect);
         pathTemp.reset();
 
+        //18
         tempRect = new Rect((int) (maxX * .7), (int) (maxY * .04), (int) (maxX * .9), (int) (maxY * .15));
         pathTemp.moveTo(maxX * .737f, maxY * .108f);
         pathTemp.lineTo(maxX * .747f, maxY * .12f);
@@ -539,9 +583,11 @@ public class TTRSurfaceView extends SurfaceView implements Serializable {
         pathTemp.lineTo(maxX * .855f, maxY * .043f);
         pathTemp.close();
         paths.add(new Path(pathTemp));
+        paths2.add(blankPath);
         touchRects.add(tempRect);
         pathTemp.reset();
 
+        //19
         tempRect = new Rect((int) (maxX * .725), (int) (maxY * .8), (int) (maxX * .88), (int) (maxY * .88));
         pathTemp.moveTo(maxX * .755f, maxY * .83f);
         pathTemp.lineTo(maxX * .76f, maxY * .843f);
@@ -574,9 +620,11 @@ public class TTRSurfaceView extends SurfaceView implements Serializable {
         pathTemp.lineTo(maxX * .899f, maxY * .899f);
         pathTemp.close();
         paths.add(new Path(pathTemp));
+        paths2.add(blankPath);
         touchRects.add(tempRect);
         pathTemp.reset();
 
+        //20
         tempRect = new Rect((int) (maxX * .12), (int) (maxY * .79), (int) (maxX * .33), (int) (maxY * .9));
         pathTemp.moveTo(maxX * .130f, maxY * .790f);
         pathTemp.lineTo(maxX * .125f, maxY * .805f);
@@ -609,9 +657,11 @@ public class TTRSurfaceView extends SurfaceView implements Serializable {
         pathTemp.lineTo(maxX * .338f, maxY * .855f);
         pathTemp.close();
         paths.add(new Path(pathTemp));
+        paths2.add(blankPath);
         touchRects.add(tempRect);
         pathTemp.reset();
 
+        //21
         tempRect = new Rect((int) (maxX * .0), (int) (maxY * .1), (int) (maxX * .1), (int) (maxY * .2));
         pathTemp.moveTo(maxX * .072f, maxY * .115f);
         pathTemp.lineTo(maxX * .072f, maxY * .165f);
@@ -624,10 +674,12 @@ public class TTRSurfaceView extends SurfaceView implements Serializable {
         pathTemp2.lineTo(maxX * .07f, maxY * .115f);
         pathTemp2.close();
         paths.add(new Path(pathTemp));
+        paths2.add(new Path(pathTemp2));
         touchRects.add(tempRect);
         pathTemp.reset();
         pathTemp2.reset();
 
+        //22
         tempRect = new Rect((int) (maxX * .0), (int) (maxY * .19), (int) (maxX * .075), (int) (maxY * .279));
         pathTemp.moveTo(maxX * .053f, maxY * .200f);
         pathTemp.lineTo(maxX * .040f, maxY * .252f);
@@ -640,10 +692,12 @@ public class TTRSurfaceView extends SurfaceView implements Serializable {
         pathTemp2.lineTo(maxX * .075f, maxY * .212f);
         pathTemp2.close();
         paths.add(new Path(pathTemp));
+        paths2.add(new Path(pathTemp2));
         touchRects.add(tempRect);
         pathTemp.reset();
         pathTemp2.reset();
 
+        //23
         tempRect = new Rect((int) (maxX * .08), (int) (maxY * .0), (int) (maxX * .2), (int) (maxY * .1));
         pathTemp.moveTo(maxX * .09f, maxY * .08f);
         pathTemp.lineTo(maxX * .091f, maxY * .098f);
@@ -661,9 +715,11 @@ public class TTRSurfaceView extends SurfaceView implements Serializable {
         pathTemp.lineTo(maxX * .198f, maxY * .064f);
         pathTemp.close();
         paths.add(new Path(pathTemp));
+        paths2.add(blankPath);
         touchRects.add(tempRect);
         pathTemp.reset();
 
+        //24
         tempRect = new Rect((int) (maxX * .08), (int) (maxY * .1), (int) (maxX * .22), (int) (maxY * .19));
         pathTemp.moveTo(maxX * .085f, maxY * .181f);
         pathTemp.lineTo(maxX * .085f, maxY * .195f);
@@ -686,9 +742,11 @@ public class TTRSurfaceView extends SurfaceView implements Serializable {
         pathTemp.lineTo(maxX * .203f, maxY * .085f);
         pathTemp.close();
         paths.add(new Path(pathTemp));
+        paths2.add(blankPath);
         touchRects.add(tempRect);
         pathTemp.reset();
 
+        //25
         tempRect = new Rect((int) (maxX * .11), (int) (maxY * .75), (int) (maxX * .23), (int) (maxY * .8));
         pathTemp.moveTo(maxX * .126f, maxY * .760f);
         pathTemp.lineTo(maxX * .128f, maxY * .779f);
@@ -706,9 +764,11 @@ public class TTRSurfaceView extends SurfaceView implements Serializable {
         pathTemp.lineTo(maxX * .238f, maxY * .770f);
         pathTemp.close();
         paths.add(new Path(pathTemp));
+        paths2.add(blankPath);
         touchRects.add(tempRect);
         pathTemp.reset();
 
+        //26
         tempRect = new Rect((int) (maxX * .08), (int) (maxY * .2), (int) (maxX * .31), (int) (maxY * .3));
         pathTemp.moveTo(maxX * .082f, maxY * .205f);
         pathTemp.lineTo(maxX * .081f, maxY * .216f);
@@ -741,9 +801,11 @@ public class TTRSurfaceView extends SurfaceView implements Serializable {
         pathTemp.lineTo(maxX * .304f, maxY * .278f);
         pathTemp.close();
         paths.add(new Path(pathTemp));
+        paths2.add(blankPath);
         touchRects.add(tempRect);
         pathTemp.reset();
 
+        //27
         tempRect = new Rect((int) (maxX * .09), (int) (maxY * .28), (int) (maxX * .33), (int) (maxY * .43));
         pathTemp.moveTo(maxX * .062f, maxY * .270f);
         pathTemp.lineTo(maxX * .060f, maxY * .285f);
@@ -776,9 +838,11 @@ public class TTRSurfaceView extends SurfaceView implements Serializable {
         pathTemp.lineTo(maxX * .241f, maxY * .471f);
         pathTemp.close();
         paths.add(new Path(pathTemp));
+        paths2.add(blankPath);
         touchRects.add(tempRect);
         pathTemp.reset();
 
+        //28
         tempRect = new Rect((int) (maxX * .05), (int) (maxY * .48), (int) (maxX * .25), (int) (maxY * .61));
         pathTemp.moveTo(maxX * .050f, maxY * .575f);
         pathTemp.lineTo(maxX * .052f, maxY * .590f);
@@ -831,10 +895,12 @@ public class TTRSurfaceView extends SurfaceView implements Serializable {
         pathTemp2.lineTo(maxX * .223f, maxY * .503f);
         pathTemp2.close();
         paths.add(new Path(pathTemp));
+        paths2.add(new Path(pathTemp2));
         touchRects.add(tempRect);
         pathTemp.reset();
         pathTemp2.reset();
 
+        //29
         tempRect = new Rect((int) (maxX * .19), (int) (maxY * .51), (int) (maxX * .24), (int) (maxY * .73));
         pathTemp.moveTo(maxX * .194f, maxY * .670f);
         pathTemp.lineTo(maxX * .201f, maxY * .680f);
@@ -852,9 +918,11 @@ public class TTRSurfaceView extends SurfaceView implements Serializable {
         pathTemp.lineTo(maxX * .237f, maxY * .521f);
         pathTemp.close();
         paths.add(new Path(pathTemp));
+        paths2.add(blankPath);
         touchRects.add(tempRect);
         pathTemp.reset();
 
+        //30
         tempRect = new Rect((int) (maxX * .22), (int) (maxY * .0), (int) (maxX * .45), (int) (maxY * .1));
         pathTemp.moveTo(maxX * .224f, maxY * .05f);
         pathTemp.lineTo(maxX * .227f, maxY * .063f);
@@ -887,9 +955,11 @@ public class TTRSurfaceView extends SurfaceView implements Serializable {
         pathTemp.lineTo(maxX * .445f, maxY * .063f);
         pathTemp.close();
         paths.add(new Path(pathTemp));
+        paths2.add(blankPath);
         touchRects.add(tempRect);
         pathTemp.reset();
 
+        //31
         tempRect = new Rect((int) (maxX * .2), (int) (maxY * .09), (int) (maxX * .33), (int) (maxY * .27));
         pathTemp.moveTo(maxX * .228f, maxY * .082f);
         pathTemp.lineTo(maxX * .220f, maxY * .093f);
@@ -912,9 +982,11 @@ public class TTRSurfaceView extends SurfaceView implements Serializable {
         pathTemp.lineTo(maxX * .323f, maxY * .263f);
         pathTemp.close();
         paths.add(new Path(pathTemp));
+        paths2.add(blankPath);
         touchRects.add(tempRect);
         pathTemp.reset();
 
+        //32
         tempRect = new Rect((int) (maxX * .25), (int) (maxY * .3), (int) (maxX * .32), (int) (maxY * .46));
         pathTemp.moveTo(maxX * .251f, maxY * .458f);
         pathTemp.lineTo(maxX * .259f, maxY * .464f);
@@ -932,9 +1004,11 @@ public class TTRSurfaceView extends SurfaceView implements Serializable {
         pathTemp.lineTo(maxX * .308f, maxY * .304f);
         pathTemp.close();
         paths.add(new Path(pathTemp));
+        paths2.add(blankPath);
         touchRects.add(tempRect);
         pathTemp.reset();
 
+        //33
         tempRect = new Rect((int) (maxX * .26), (int) (maxY * .48), (int) (maxX * .37), (int) (maxY * .54));
         pathTemp.moveTo(maxX * .259f, maxY * .483f);
         pathTemp.lineTo(maxX * .258f, maxY * .497f);
@@ -967,9 +1041,11 @@ public class TTRSurfaceView extends SurfaceView implements Serializable {
         pathTemp2.lineTo(maxX * .360f, maxY * .529f);
         pathTemp2.close();
         paths.add(new Path(pathTemp));
+        paths2.add(new Path(pathTemp2));
         touchRects.add(tempRect);
         pathTemp.reset();
 
+        //34
         tempRect = new Rect((int) (maxX * .25), (int) (maxY * .55), (int) (maxX * .38), (int) (maxY * .76));
         pathTemp.moveTo(maxX * .243f, maxY * .773f);
         pathTemp.lineTo(maxX * .252f, maxY * .778f);
@@ -997,9 +1073,11 @@ public class TTRSurfaceView extends SurfaceView implements Serializable {
         pathTemp.lineTo(maxX * .365f, maxY * .556f);
         pathTemp.close();
         paths.add(new Path(pathTemp));
+        paths2.add(blankPath);
         touchRects.add(tempRect);
         pathTemp.reset();
 
+        //35
         tempRect = new Rect((int) (maxX * .25), (int) (maxY * .7), (int) (maxX * .35), (int) (maxY * .78));
         pathTemp.moveTo(maxX * .260f, maxY * .770f);
         pathTemp.lineTo(maxX * .263f, maxY * .781f);
@@ -1017,9 +1095,11 @@ public class TTRSurfaceView extends SurfaceView implements Serializable {
         pathTemp.lineTo(maxX * .360f, maxY * .7f);
         pathTemp.close();
         paths.add(new Path(pathTemp));
+        paths2.add(blankPath);
         touchRects.add(tempRect);
         pathTemp.reset();
 
+        //36
         tempRect = new Rect((int) (maxX * .26), (int) (maxY * .79), (int) (maxX * .36), (int) (maxY * .86));
         pathTemp.moveTo(maxX * .255f, maxY * .789f);
         pathTemp.lineTo(maxX * .250f, maxY * .806f);
@@ -1037,9 +1117,11 @@ public class TTRSurfaceView extends SurfaceView implements Serializable {
         pathTemp.lineTo(maxX * .360f, maxY * .833f);
         pathTemp.close();
         paths.add(new Path(pathTemp));
+        paths2.add(blankPath);
         touchRects.add(tempRect);
         pathTemp.reset();
 
+        //37
         tempRect = new Rect((int) (maxX * .33), (int) (maxY * .08), (int) (maxX * .44), (int) (maxY * .28));
         pathTemp.moveTo(maxX * .328f, maxY * .263f);
         pathTemp.lineTo(maxX * .337f, maxY * .271f);
@@ -1062,9 +1144,11 @@ public class TTRSurfaceView extends SurfaceView implements Serializable {
         pathTemp.lineTo(maxX * .434f, maxY * .092f);
         pathTemp.close();
         paths.add(new Path(pathTemp));
+        paths2.add(blankPath);
         touchRects.add(tempRect);
         pathTemp.reset();
 
+        //38
         tempRect = new Rect((int) (maxX * .32), (int) (maxY * .3), (int) (maxX * .39), (int) (maxY * .51));
         pathTemp.moveTo(maxX * .330f, maxY * .3f);
         pathTemp.lineTo(maxX * .320f, maxY * .307f);
@@ -1087,9 +1171,11 @@ public class TTRSurfaceView extends SurfaceView implements Serializable {
         pathTemp.lineTo(maxX * .382f, maxY * .514f);
         pathTemp.close();
         paths.add(new Path(pathTemp));
+        paths2.add(blankPath);
         touchRects.add(tempRect);
         pathTemp.reset();
 
+        //39
         tempRect = new Rect((int) (maxX * .36), (int) (maxY * .57), (int) (maxX * .39), (int) (maxY * .68));
         pathTemp.moveTo(maxX * .381f, maxY * .572f);
         pathTemp.lineTo(maxX * .370f, maxY * .570f);
@@ -1102,9 +1188,11 @@ public class TTRSurfaceView extends SurfaceView implements Serializable {
         pathTemp.lineTo(maxX * .378f, maxY * .685f);
         pathTemp.close();
         paths.add(new Path(pathTemp));
+        paths2.add(blankPath);
         touchRects.add(tempRect);
         pathTemp.reset();
 
+        //40
         tempRect = new Rect((int) (maxX * .36), (int) (maxY * .71), (int) (maxX * .39), (int) (maxY * .84));
         pathTemp.moveTo(maxX * .375f, maxY * .721f);
         pathTemp.lineTo(maxX * .365f, maxY * .720f);
@@ -1117,9 +1205,11 @@ public class TTRSurfaceView extends SurfaceView implements Serializable {
         pathTemp.lineTo(maxX * .373f, maxY * .832f);
         pathTemp.close();
         paths.add(new Path(pathTemp));
+        paths2.add(blankPath);
         touchRects.add(tempRect);
         pathTemp.reset();
 
+        //41
         tempRect = new Rect((int) (maxX * .33), (int) (maxY * .26), (int) (maxX * .56), (int) (maxY * .32));
         pathTemp.moveTo(maxX * .332f, maxY * .280f);
         pathTemp.lineTo(maxX * .332f, maxY * .297f);
@@ -1152,9 +1242,11 @@ public class TTRSurfaceView extends SurfaceView implements Serializable {
         pathTemp.lineTo(maxX * .559f, maxY * .271f);
         pathTemp.close();
         paths.add(new Path(pathTemp));
+        paths2.add(blankPath);
         touchRects.add(tempRect);
         pathTemp.reset();
 
+        //42
         tempRect = new Rect((int) (maxX * .7), (int) (maxY * .64), (int) (maxX * .81), (int) (maxY * .82));
         pathTemp.moveTo(maxX * .716f, maxY * .784f);
         pathTemp.lineTo(maxX * .726f, maxY * .793f);
@@ -1197,10 +1289,12 @@ public class TTRSurfaceView extends SurfaceView implements Serializable {
         pathTemp2.lineTo(maxX * .773f, maxY * .700f);
         pathTemp2.close();
         paths.add(new Path(pathTemp));
+        paths2.add(new Path(pathTemp2));
         touchRects.add(tempRect);
         pathTemp.reset();
         pathTemp2.reset();
 
+        //43
         tempRect = new Rect((int) (maxX * .755), (int) (maxY * .59), (int) (maxX * .8), (int) (maxY * .645));
         pathTemp.moveTo(maxX * .757f, maxY * .605f);
         pathTemp.lineTo(maxX * .764f, maxY * .586f);
@@ -1208,9 +1302,11 @@ public class TTRSurfaceView extends SurfaceView implements Serializable {
         pathTemp.lineTo(maxX * .788f, maxY * .637f);
         pathTemp.close();
         paths.add(new Path(pathTemp));
+        paths2.add(blankPath);
         touchRects.add(tempRect);
         pathTemp.reset();
 
+        //44
         tempRect = new Rect((int) (maxX * .75), (int) (maxY * .5), (int) (maxX * .875), (int) (maxY * .56));
         pathTemp.moveTo(maxX * .756f, maxY * .565f);
         pathTemp.lineTo(maxX * .789f, maxY * .535f);
@@ -1228,9 +1324,11 @@ public class TTRSurfaceView extends SurfaceView implements Serializable {
         pathTemp.lineTo(maxX * .834f, maxY * .54f);
         pathTemp.close();
         paths.add(new Path(pathTemp));
+        paths2.add(blankPath);
         touchRects.add(tempRect);
         pathTemp.reset();
 
+        //45
         tempRect = new Rect((int) (maxX * .75), (int) (maxY * .42), (int) (maxX * .83), (int) (maxY * .52));
         pathTemp.moveTo(maxX * .754f, maxY * .518f);
         pathTemp.lineTo(maxX * .763f, maxY * .527f);
@@ -1253,9 +1351,11 @@ public class TTRSurfaceView extends SurfaceView implements Serializable {
         pathTemp.lineTo(maxX * .813f, maxY * .432f);
         pathTemp.close();
         paths.add(new Path(pathTemp));
+        paths2.add(blankPath);
         touchRects.add(tempRect);
         pathTemp.reset();
 
+        //46
         tempRect = new Rect((int) (maxX * .7), (int) (maxY * .4), (int) (maxX * .8), (int) (maxY * .5));
         pathTemp.moveTo(maxX * .693f, maxY * .49f);
         pathTemp.lineTo(maxX * .7f, maxY * .505f);
@@ -1283,9 +1383,11 @@ public class TTRSurfaceView extends SurfaceView implements Serializable {
         pathTemp.lineTo(maxX * .793f, maxY * .396f);
         pathTemp.close();
         paths.add(new Path(pathTemp));
+        paths2.add(blankPath);
         touchRects.add(tempRect);
         pathTemp.reset();
 
+        //47
         tempRect = new Rect((int) (maxX * .7), (int) (maxY * .32), (int) (maxX * .825), (int) (maxY * .37));
         pathTemp.moveTo(maxX * .708f, maxY * .345f);
         pathTemp.lineTo(maxX * .745f, maxY * .335f);
@@ -1318,10 +1420,12 @@ public class TTRSurfaceView extends SurfaceView implements Serializable {
         pathTemp2.lineTo(maxX * .793f, maxY * .370f);
         pathTemp2.close();
         paths.add(new Path(pathTemp));
+        paths2.add(new Path(pathTemp2));
         touchRects.add(tempRect);
         pathTemp.reset();
         pathTemp2.reset();
 
+        //48
         tempRect = new Rect((int) (maxX * .715), (int) (maxY * .25), (int) (maxX * .8), (int) (maxY * .32));
         pathTemp.moveTo(maxX * .715f, maxY * .309f);
         pathTemp.lineTo(maxX * .724f, maxY * .32f);
@@ -1344,9 +1448,11 @@ public class TTRSurfaceView extends SurfaceView implements Serializable {
         pathTemp.lineTo(maxX * .79f, maxY * .248f);
         pathTemp.close();
         paths.add(new Path(pathTemp));
+        paths2.add(blankPath);
         touchRects.add(tempRect);
         pathTemp.reset();
 
+        //49
         tempRect = new Rect((int) (maxX * .72), (int) (maxY * .15), (int) (maxX * .81), (int) (maxY * .21));
         pathTemp.moveTo(maxX * .723f, maxY * .165f);
         pathTemp.lineTo(maxX * .76f, maxY * .176f);
@@ -1359,9 +1465,11 @@ public class TTRSurfaceView extends SurfaceView implements Serializable {
         pathTemp.lineTo(maxX * .762f, maxY * .192f);
         pathTemp.close();
         paths.add(new Path(pathTemp));
+        paths2.add(blankPath);
         touchRects.add(tempRect);
         pathTemp.reset();
 
+        //50
         tempRect = new Rect((int) (maxX * .34), (int) (maxY * .31), (int) (maxX * .51), (int) (maxY * .41));
         pathTemp.moveTo(maxX * .344f, maxY * .302f);
         pathTemp.lineTo(maxX * .340f, maxY * .316f);
@@ -1389,9 +1497,11 @@ public class TTRSurfaceView extends SurfaceView implements Serializable {
         pathTemp.lineTo(maxX * .518f, maxY * .416f);
         pathTemp.close();
         paths.add(new Path(pathTemp));
+        paths2.add(blankPath);
         touchRects.add(tempRect);
         pathTemp.reset();
 
+        //51
         tempRect = new Rect((int) (maxX * .39), (int) (maxY * .43), (int) (maxX * .53), (int) (maxY * .52));
         pathTemp.moveTo(maxX * .389f, maxY * .524f);
         pathTemp.lineTo(maxX * .391f, maxY * .534f);
@@ -1414,9 +1524,11 @@ public class TTRSurfaceView extends SurfaceView implements Serializable {
         pathTemp.lineTo(maxX * .527f, maxY * .431f);
         pathTemp.close();
         paths.add(new Path(pathTemp));
+        paths2.add(blankPath);
         touchRects.add(tempRect);
         pathTemp.reset();
 
+        //52
         tempRect = new Rect((int) (maxX * .4), (int) (maxY * .51), (int) (maxX * .56), (int) (maxY * .6));
         pathTemp.moveTo(maxX * .400f, maxY * .541f);
         pathTemp.lineTo(maxX * .399f, maxY * .558f);
@@ -1459,10 +1571,12 @@ public class TTRSurfaceView extends SurfaceView implements Serializable {
         pathTemp2.lineTo(maxX * .543f, maxY * .522f);
         pathTemp2.close();
         paths.add(new Path(pathTemp));
+        paths2.add(new Path(pathTemp2));
         touchRects.add(tempRect);
         pathTemp.reset();
         pathTemp2.reset();
 
+        //53
         tempRect = new Rect((int) (maxX * .38), (int) (maxY * .58), (int) (maxX * .53), (int) (maxY * .67));
         pathTemp.moveTo(maxX * .391f, maxY * .577f);
         pathTemp.lineTo(maxX * .385f, maxY * .586f);
@@ -1485,9 +1599,11 @@ public class TTRSurfaceView extends SurfaceView implements Serializable {
         pathTemp.lineTo(maxX * .521f, maxY * .654f);
         pathTemp.close();
         paths.add(new Path(pathTemp));
+        paths2.add(blankPath);
         touchRects.add(tempRect);
         pathTemp.reset();
 
+        //54
         tempRect = new Rect((int) (maxX * .38), (int) (maxY * .67), (int) (maxX * .5), (int) (maxY * .71));
         pathTemp.moveTo(maxX * .388f, maxY * .695f);
         pathTemp.lineTo(maxX * .389f, maxY * .710f);
@@ -1505,9 +1621,11 @@ public class TTRSurfaceView extends SurfaceView implements Serializable {
         pathTemp.lineTo(maxX * .496f, maxY * .671f);
         pathTemp.close();
         paths.add(new Path(pathTemp));
+        paths2.add(blankPath);
         touchRects.add(tempRect);
         pathTemp.reset();
 
+        //55
         tempRect = new Rect((int) (maxX * .37), (int) (maxY * .71), (int) (maxX * .53), (int) (maxY * .83));
         pathTemp.moveTo(maxX * .381f, maxY * .836f);
         pathTemp.lineTo(maxX * .382f, maxY * .849f);
@@ -1535,9 +1653,11 @@ public class TTRSurfaceView extends SurfaceView implements Serializable {
         pathTemp.lineTo(maxX * .528f, maxY * .678f);
         pathTemp.close();
         paths.add(new Path(pathTemp));
+        paths2.add(blankPath);
         touchRects.add(tempRect);
         pathTemp.reset();
 
+        //56
         tempRect = new Rect((int) (maxX * .66), (int) (maxY * .52), (int) (maxX * .74), (int) (maxY * .6));
         pathTemp.moveTo(maxX * .665f, maxY * .542f);
         pathTemp.lineTo(maxX * .7f, maxY * .557f);
@@ -1550,9 +1670,11 @@ public class TTRSurfaceView extends SurfaceView implements Serializable {
         pathTemp.lineTo(maxX * .699f, maxY * .575f);
         pathTemp.close();
         paths.add(new Path(pathTemp));
+        paths2.add(blankPath);
         touchRects.add(tempRect);
         pathTemp.reset();
 
+        //57
         tempRect = new Rect((int) (maxX * .64), (int) (maxY * .59), (int) (maxX * .75), (int) (maxY * .69));
         pathTemp.moveTo(maxX * .646f, maxY * .662f);
         pathTemp.lineTo(maxX * .678f, maxY * .659f);
@@ -1570,9 +1692,11 @@ public class TTRSurfaceView extends SurfaceView implements Serializable {
         pathTemp.lineTo(maxX * .725f, maxY * .64f);
         pathTemp.close();
         paths.add(new Path(pathTemp));
+        paths2.add(blankPath);
         touchRects.add(tempRect);
         pathTemp.reset();
 
+        //58
         tempRect = new Rect((int) (maxX * .64), (int) (maxY * .68), (int) (maxX * .7), (int) (maxY * .78));
         pathTemp.moveTo(maxX * .638f, maxY * .69f);
         pathTemp.lineTo(maxX * .648f, maxY * .685f);
@@ -1590,9 +1714,11 @@ public class TTRSurfaceView extends SurfaceView implements Serializable {
         pathTemp.lineTo(maxX * .69f, maxY * .85f);
         pathTemp.close();
         paths.add(new Path(pathTemp));
+        paths2.add(blankPath);
         touchRects.add(tempRect);
         pathTemp.reset();
 
+        //59
         tempRect = new Rect((int) (maxX * .61), (int) (maxY * .85), (int) (maxX * .7), (int) (maxY * .9));
         pathTemp.moveTo(maxX * .615f, maxY * .867f);
         pathTemp.lineTo(maxX * .65f, maxY * .86f);
@@ -1605,9 +1731,11 @@ public class TTRSurfaceView extends SurfaceView implements Serializable {
         pathTemp.lineTo(maxX * .655f, maxY * .878f);
         pathTemp.close();
         paths.add(new Path(pathTemp));
+        paths2.add(blankPath);
         touchRects.add(tempRect);
         pathTemp.reset();
 
+        //60
         tempRect = new Rect((int) (maxX * .61), (int) (maxY * .52), (int) (maxX * .7), (int) (maxY * .6));
         pathTemp.moveTo(maxX * .65f, maxY * .53f);
         pathTemp.lineTo(maxX * .658f, maxY * .534f);
@@ -1620,9 +1748,11 @@ public class TTRSurfaceView extends SurfaceView implements Serializable {
         pathTemp.lineTo(maxX * .63f, maxY * .65f);
         pathTemp.close();
         paths.add(new Path(pathTemp));
+        paths2.add(blankPath);
         touchRects.add(tempRect);
         pathTemp.reset();
 
+        //61
         tempRect = new Rect((int) (maxX * .58), (int) (maxY * .68), (int) (maxX * .635), (int) (maxY * .8));
         pathTemp.moveTo(maxX * .573f, maxY * .778f);
         pathTemp.lineTo(maxX * .595f, maxY * .73f);
@@ -1635,9 +1765,11 @@ public class TTRSurfaceView extends SurfaceView implements Serializable {
         pathTemp.lineTo(maxX * .61f, maxY * .73f);
         pathTemp.close();
         paths.add(new Path(pathTemp));
+        paths2.add(blankPath);
         touchRects.add(tempRect);
         pathTemp.reset();
 
+        //62
         tempRect = new Rect((int) (maxX * .54), (int) (maxY * .65), (int) (maxX * .64), (int) (maxY * .685));
         pathTemp.moveTo(maxX * .551f, maxY * .659f);
         pathTemp.lineTo(maxX * .59f, maxY * .658f);
@@ -1650,9 +1782,11 @@ public class TTRSurfaceView extends SurfaceView implements Serializable {
         pathTemp.lineTo(maxX * .591f, maxY * .675f);
         pathTemp.close();
         paths.add(new Path(pathTemp));
+        paths2.add(blankPath);
         touchRects.add(tempRect);
         pathTemp.reset();
 
+        //63
         tempRect = new Rect((int) (maxX * .555), (int) (maxY * .49), (int) (maxX * .65), (int) (maxY * .535));
         pathTemp.moveTo(maxX * .572f, maxY * .518f);
         pathTemp.lineTo(maxX * .605f, maxY * .518f);
@@ -1675,9 +1809,12 @@ public class TTRSurfaceView extends SurfaceView implements Serializable {
         pathTemp2.lineTo(maxX * .612f, maxY * .518f);
         pathTemp2.close();
         paths.add(new Path(pathTemp));
+        paths2.add(new Path(pathTemp2));
         touchRects.add(tempRect);
         pathTemp.reset();
+        pathTemp2.reset();
 
+        //64
         tempRect = new Rect((int) (maxX * .65), (int) (maxY * .39), (int) (maxX * .71), (int) (maxY * .51));
         pathTemp.moveTo(maxX * .682f, maxY * .395f);
         pathTemp.lineTo(maxX * .693f, maxY * .402f);
@@ -1700,6 +1837,7 @@ public class TTRSurfaceView extends SurfaceView implements Serializable {
         pathTemp2.lineTo(maxX * .654f, maxY * .502f);
         pathTemp2.close();
         paths.add(new Path(pathTemp));
+        paths2.add(new Path(pathTemp2));
         touchRects.add(tempRect);
         pathTemp.reset();
         pathTemp2.reset();
@@ -1726,6 +1864,7 @@ public class TTRSurfaceView extends SurfaceView implements Serializable {
         pathTemp.lineTo(maxX * .655f, maxY * .385f);
         pathTemp.close();
         paths.add(new Path(pathTemp));
+        paths2.add(blankPath);
         touchRects.add(tempRect);
         pathTemp.reset();
 
@@ -1751,6 +1890,7 @@ public class TTRSurfaceView extends SurfaceView implements Serializable {
         pathTemp.lineTo(maxX * .542f, maxY * .817f);
         pathTemp.close();
         paths.add(new Path(pathTemp));
+        paths2.add(blankPath);
         touchRects.add(tempRect);
         pathTemp.reset();
 
@@ -1786,6 +1926,7 @@ public class TTRSurfaceView extends SurfaceView implements Serializable {
         pathTemp.lineTo(maxX * .587f, maxY * .889f);
         pathTemp.close();
         paths.add(new Path(pathTemp));
+        paths2.add(blankPath);
         touchRects.add(tempRect);
         pathTemp.reset();
 
@@ -1811,6 +1952,7 @@ public class TTRSurfaceView extends SurfaceView implements Serializable {
         pathTemp.lineTo(maxX * .566f, maxY * .257f);
         pathTemp.close();
         paths.add(new Path(pathTemp));
+        paths2.add(blankPath);
         touchRects.add(tempRect);
         pathTemp.reset();
 
@@ -1826,6 +1968,7 @@ public class TTRSurfaceView extends SurfaceView implements Serializable {
         pathTemp2.lineTo(maxX * .606f, maxY * .856f);
         pathTemp2.close();
         paths.add(new Path(pathTemp));
+        paths2.add(new Path(pathTemp2));
         touchRects.add(tempRect);
         pathTemp.reset();
         pathTemp2.reset();
@@ -1852,6 +1995,7 @@ public class TTRSurfaceView extends SurfaceView implements Serializable {
         pathTemp2.lineTo(maxX * .558f, maxY * .794f);
         pathTemp2.close();
         paths.add(new Path(pathTemp));
+        paths2.add(new Path(pathTemp2));
         touchRects.add(tempRect);
         pathTemp.reset();
         pathTemp2.reset();
@@ -1878,6 +2022,7 @@ public class TTRSurfaceView extends SurfaceView implements Serializable {
         pathTemp2.lineTo(maxX * .544f, maxY * .646f);
         pathTemp2.close();
         paths.add(new Path(pathTemp));
+        paths2.add(new Path(pathTemp2));
         touchRects.add(tempRect);
         pathTemp.reset();
         pathTemp2.reset();
@@ -1899,6 +2044,7 @@ public class TTRSurfaceView extends SurfaceView implements Serializable {
         pathTemp.lineTo(maxX * .65f, maxY * .355f);
         pathTemp.close();
         paths.add(new Path(pathTemp));
+        paths2.add(blankPath);
         touchRects.add(tempRect);
         pathTemp.reset();
 
@@ -1934,6 +2080,7 @@ public class TTRSurfaceView extends SurfaceView implements Serializable {
         pathTemp.lineTo(maxX * .773f, maxY * .232f);
         pathTemp.close();
         paths.add(new Path(pathTemp));
+        paths2.add(blankPath);
         touchRects.add(tempRect);
         pathTemp.reset();
 
@@ -1954,6 +2101,7 @@ public class TTRSurfaceView extends SurfaceView implements Serializable {
         pathTemp.lineTo(maxX * .663f, maxY * .21f);
         pathTemp.close();
         paths.add(new Path(pathTemp));
+        paths2.add(blankPath);
         touchRects.add(tempRect);
         pathTemp.reset();
 
@@ -1989,6 +2137,7 @@ public class TTRSurfaceView extends SurfaceView implements Serializable {
         pathTemp.lineTo(maxX * .659f, maxY * .15f);
         pathTemp.close();
         paths.add(new Path(pathTemp));
+        paths2.add(blankPath);
         touchRects.add(tempRect);
         pathTemp.reset();
 
@@ -2014,6 +2163,7 @@ public class TTRSurfaceView extends SurfaceView implements Serializable {
         pathTemp2.lineTo(maxX * .550f, maxY * .415f);
         pathTemp2.close();
         paths.add(new Path(pathTemp));
+        paths2.add(new Path(pathTemp2));
         touchRects.add(tempRect);
         pathTemp.reset();
         pathTemp2.reset();
@@ -2030,6 +2180,7 @@ public class TTRSurfaceView extends SurfaceView implements Serializable {
         pathTemp2.lineTo(maxX * .569f, maxY * .485f);
         pathTemp2.close();
         paths.add(new Path(pathTemp));
+        paths2.add(new Path(pathTemp2));
         touchRects.add(tempRect);
         pathTemp.reset();
         pathTemp2.reset();
@@ -2049,6 +2200,22 @@ public class TTRSurfaceView extends SurfaceView implements Serializable {
         playerIDs = new int[paths.size()];
         for(int i = 0; i < playerIDs.length; i++){
             playerIDs[i] = -1;
+        }
+        highlights2 = new boolean[paths.size()];
+        for(int i = 0; i < highlights2.length; i++){
+            highlights2[i] = false;
+        }
+        selected2 = new boolean[paths.size()];
+        for(int i = 0; i < selected2.length; i++){
+            selected2[i] = false;
+        }
+        covered2 = new boolean[paths.size()];
+        for(int i = 0; i < covered2.length; i++) {
+            covered2[i] = false;
+        }
+        playerIDs2 = new int[paths.size()];
+        for(int i = 0; i < playerIDs2.length; i++){
+            playerIDs2[i] = -1;
         }
     }
 
@@ -2073,13 +2240,32 @@ public class TTRSurfaceView extends SurfaceView implements Serializable {
                 canvas.drawPath(paths.get(i),paint);
             }
             if(covered[i]) {
-                    if(playerIDs[i] == 0){paint.setColor(PLAYER1_COLOR);}
-                    else if(playerIDs[i] == 1){paint.setColor(PLAYER2_COLOR);}
-                    else if(playerIDs[i] == 2){paint.setColor(PLAYER3_COLOR);}
-                    else if(playerIDs[i] == 3){paint.setColor(PLAYER4_COLOR);}
-                    paint.setStyle(Paint.Style.FILL);
-                    canvas.drawPath(paths.get(i), paint);
-                }
+                if(playerIDs[i] == 0){paint.setColor(PLAYER1_COLOR);}
+                else if(playerIDs[i] == 1){paint.setColor(PLAYER2_COLOR);}
+                else if(playerIDs[i] == 2){paint.setColor(PLAYER3_COLOR);}
+                else if(playerIDs[i] == 3){paint.setColor(PLAYER4_COLOR);}
+                paint.setStyle(Paint.Style.FILL);
+                canvas.drawPath(paths.get(i), paint);
+            }
+            if(highlights2[i]){
+                paint.setColor(HIGHLIGHT_COLOR);
+                paint.setStrokeWidth(5);
+                paint.setStyle(Paint.Style.STROKE);
+                Path temp= paths2.get(i);
+                canvas.drawPath(temp, paint);
+            }
+            if(selected2[i]){
+                paint.setColor(SELECTION_COLOR);
+                canvas.drawPath(paths2.get(i),paint);
+            }
+            if(covered2[i]) {
+                if(playerIDs2[i] == 0){paint.setColor(PLAYER1_COLOR);}
+                else if(playerIDs2[i] == 1){paint.setColor(PLAYER2_COLOR);}
+                else if(playerIDs2[i] == 2){paint.setColor(PLAYER3_COLOR);}
+                else if(playerIDs2[i] == 3){paint.setColor(PLAYER4_COLOR);}
+                paint.setStyle(Paint.Style.FILL);
+                canvas.drawPath(paths2.get(i), paint);
+            }
         }
     }
     /*
@@ -2128,6 +2314,30 @@ public class TTRSurfaceView extends SurfaceView implements Serializable {
     public void setPlayerIDs(int[] playerIDsEnter){
         for(int i = 0; i < playerIDsEnter.length; i++){
             this.playerIDs[i] = playerIDsEnter[i];
+        }
+    }
+
+    public void setHighlights2(boolean[] highlightsEnter){
+        for(int i = 0; i < highlightsEnter.length; i++){
+            this.highlights2[i] = highlightsEnter[i];
+        }
+    }
+
+    public void setSelected2(boolean[] selectedEnter){
+        for(int i = 0; i < selectedEnter.length; i++){
+            this.selected2[i] = selectedEnter[i];
+        }
+    }
+
+    public void setCovered2(boolean[] coveredEnter){
+        for(int i = 0; i < coveredEnter.length; i++){
+            this.covered2[i] = coveredEnter[i];
+        }
+    }
+
+    public void setPlayerIDs2(int[] playerIDsEnter){
+        for(int i = 0; i < playerIDsEnter.length; i++){
+            this.playerIDs2[i] = playerIDsEnter[i];
         }
     }
 }

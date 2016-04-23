@@ -238,4 +238,17 @@ public class Dijkstra implements Serializable {
     public DijkstraGraph getMyGraph(){
         return myGraph;
     }
+
+    public void clear(){
+        myGraph.clear();
+    }
+
+    public boolean isEmpty(){
+        if(myGraph.getVertexes().isEmpty() || myGraph.getEdges().isEmpty()){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
 }

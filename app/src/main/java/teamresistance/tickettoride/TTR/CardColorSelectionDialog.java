@@ -146,6 +146,7 @@ public class CardColorSelectionDialog extends Dialog implements android.view.Vie
         //set default visibility
         if(numRainbows != 0){
             for(int i = 1; i <= numRainbows; i++){
+                if(i < 7)
                 locomotives[i].setVisibility(View.VISIBLE);
             }
         }

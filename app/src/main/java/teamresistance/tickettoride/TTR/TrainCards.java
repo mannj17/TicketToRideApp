@@ -16,7 +16,7 @@ public class TrainCards extends Card implements Serializable {
     //String of names of the different train card colors
     private final String[] trainCarNames = {"Yellow", "Blue", "Orange", "White",
             "Pink", "Black", "Red", "Green",
-            "Rainbow"};
+            "Rainbow", "Blank"};
 
     //instance variables for what color type and if highlighted
     private String type;

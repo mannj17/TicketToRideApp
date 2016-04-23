@@ -111,23 +111,27 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/red_train"
+            android:background="#3E80B4"
             android:id="@+id/train1" />
 
         <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/orange_train"
+            android:background="#3E80B4"
             android:id="@+id/train2" />
 
         <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/yellow_train"
+            android:background="#3E80B4"
             android:id="@+id/train3" />
 
         <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="#3E80B4"
             android:id="@+id/train4"
             android:src="@drawable/green_train" />
     </LinearLayout>
@@ -141,24 +145,28 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/train5"
+            android:background="#3E80B4"
             android:src="@drawable/blue_train" />
 
         <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/train6"
+            android:background="#3E80B4"
             android:src="@drawable/pink_train" />
 
         <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/train7"
+            android:background="#3E80B4"
             android:src="@drawable/white_train" />
 
         <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/train8"
+            android:background="#3E80B4"
             android:src="@drawable/black_train" />
     </LinearLayout>
 
