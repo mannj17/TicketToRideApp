@@ -7,6 +7,7 @@ import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.media.AudioManager;
 import android.media.SoundPool;
+import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
@@ -17,6 +18,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import java.io.Serializable;
 import java.util.HashMap;
+import java.util.Random;
 
 import teamresistance.tickettoride.Game.GameHumanPlayer;
 import teamresistance.tickettoride.Game.GameMainActivity;
@@ -47,8 +49,8 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
             "Pink", "Black", "Red", "Green", "Rainbow"};
     private Button confirmSelection;
     private static final long serialVersionUID = 333245564192016L;
-    protected SoundPool sounds;
-    protected HashMap<Integer, Integer> soundMap;
+    protected SoundPool soundArray;
+    private Random rand = new Random();
 
     /** TextViews for player's names*/
     private TextView cpu1PlayerTextView;
@@ -128,16 +130,9 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
      */
     public TTRHumanPlayer(String name) {
         super(name);
-/*
-        sounds = new SoundPool(1, AudioManager.STREAM_MUSIC, 100);
-        soundMap = new HashMap<Integer, Integer>();
-        soundMap.put(1, sounds.load(this, R.raw.trainwhistle1, 1));
-        AudioManager audioManager = (AudioManager)getSystemService(this.AUDIO_SERVICE);
-        float curVolume = audioManager.getStreamVolume(AudioManager.STREAM_MUSIC);
-        float maxVolume = audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
-        float leftVolume = curVolume/maxVolume;
-        float rightVolume = curVolume/maxVolume;*/
     }
+
+
 
     /**
      * callback method when we get a message (e.g., from the game)
@@ -455,6 +450,7 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
         myActivity = mainActivity;
         myActivity.setContentView(R.layout.activity_ttr_main);
         this.myBoard = (TTRSurfaceView) mainActivity.findViewById(R.id.GameBoard);
+        soundArray = myActivity.sounds;
 
         //Initialize the widget reference member variables
         this.cpu1PlayerTextView = (TextView) myActivity.findViewById(R.id.CPU1Title);
@@ -520,6 +516,8 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
 
         viewPlayerDestinationCards = (Button) myActivity.findViewById(R.id.viewDestinationCards);
         viewPlayerDestinationCards.setOnClickListener(this);
+
+
     }
 
     /**
@@ -527,6 +525,8 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
      */
     @Override
     public void onClick(View v) {
+        Random rand = new Random();
+        //soundArray.play(rand.nextInt(3), myActivity.leftVolume,myActivity.rightVolume, 1, 0, 1.0f);
         if(myState.getPlayerID() == this.playerNum) {
             if (v.getId() == R.id.confirmSelection) {
                 if (myState.getPlayerID() == this.playerNum) {
@@ -544,13 +544,20 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
                             myState.getTracks().get(myState.getTrackSpot()).getTrackColor().equals("Gray")) {
                         Deck tempDeck = myState.getPlayerTrainDecks()[playerNum];
                         displayCardSelectionPopup(tempDeck, myState.getTracks().get(myState.getTrackSpot()));
+                        soundArray.play(rand.nextInt(3), myActivity.leftVolume - .2f,
+                                myActivity.rightVolume - .2f, 1, 0, 1.0f);
                     } else if (myState.getTrackSpot() != -1 &&
                             myState.getTrackModeSelected() &&
                             myState.getTrainColorCount("Rainbow", 0) != 0) {
                         Deck tempDeck = myState.getPlayerTrainDecks()[playerNum];
                         displayLocomotiveSelectionPopup(tempDeck, myState.getTracks().get(myState.getTrackSpot()));
+                        soundArray.play(rand.nextInt(3), myActivity.leftVolume - .2f,
+                                myActivity.rightVolume - .2f, 1, 0, 1.0f);
+
                     } else {
                         game.sendAction(new ConfirmSelectionAction(me, myState.getSelectedTrackColor(), 0));
+                        soundArray.play(rand.nextInt(3), myActivity.leftVolume - .2f,
+                                myActivity.rightVolume - .2f, 1, 0, 1.0f);
                     }
                 }
             } else if (v.getId() == R.id.Train1) {

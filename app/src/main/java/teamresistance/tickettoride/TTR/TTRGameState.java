@@ -101,6 +101,7 @@ public class TTRGameState extends GameState implements Serializable{
                     faceDownTrainCards.add(new TrainCards(i));
                 }
             }
+
         }
         //shuffles newly created deck
         faceDownTrainCards.shuffle();

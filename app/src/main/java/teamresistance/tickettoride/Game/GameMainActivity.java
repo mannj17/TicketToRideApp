@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.res.Configuration;
+import android.media.AudioManager;
+import android.media.SoundPool;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -22,6 +24,7 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import teamresistance.tickettoride.Game.config.GameConfig;
 import teamresistance.tickettoride.Game.config.GamePlayerType;
@@ -41,6 +44,13 @@ import teamresistance.tickettoride.R;
  */
 public abstract class GameMainActivity extends Activity implements
 View.OnClickListener {
+
+	public SoundPool sounds;
+	public HashMap<Integer, Integer> soundMap;
+	public float curVolume;
+	public float maxVolume;
+	public float leftVolume;
+	public float rightVolume;
 
 	/*
 	 * ====================================================================
@@ -171,6 +181,17 @@ View.OnClickListener {
 				MessageBox.popUpMessage(msg, this);
 			}
 		}
+
+		sounds = new SoundPool(1, AudioManager.STREAM_MUSIC, 100);
+		soundMap = new HashMap<Integer, Integer>();
+		soundMap.put(1, sounds.load(this, R.raw.trainwhistle1, 1));
+		soundMap.put(2, sounds.load(this, R.raw.trainwhistle2, 1));
+		soundMap.put(1, sounds.load(this, R.raw.trainwhistle3, 1));
+		AudioManager audioManager = (AudioManager)getSystemService(this.AUDIO_SERVICE);
+		curVolume = audioManager.getStreamVolume(AudioManager.STREAM_MUSIC);
+		maxVolume = audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
+		leftVolume = curVolume/maxVolume;
+		rightVolume = curVolume/maxVolume;
 
 	}// onCreate
 
