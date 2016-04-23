@@ -97,7 +97,7 @@ public class TTRLocalGame extends LocalGame implements Serializable {
         //of turns left.
         for (int i = 0; i < mainState.getTrainTokens().length; i++) {
             if (mainState.getTrainTokens()[i] <= 2 && !mainState.getIsLastRound()) {
-                noMoreTrains = true;
+                mainState.setIsGameOver(true);
                 mainState.setIsLastRound(true);
                 turnsLeft = mainState.getNumPlayers();
             }
@@ -106,7 +106,7 @@ public class TTRLocalGame extends LocalGame implements Serializable {
 
         //TODO
         //if the final turns are over, find and announce the winner
-        if (turnsLeft == 0 && noMoreTrains) {
+        if (turnsLeft == 0 && mainState.getIsGameOver()) {
 
             //ArrayList of all the cities
             myVertexList = new ArrayList<Vertex>();

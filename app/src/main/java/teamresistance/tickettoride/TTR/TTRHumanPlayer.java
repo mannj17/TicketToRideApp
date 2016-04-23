@@ -566,9 +566,10 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
                     this.trainCheck.setChecked(true);
                 }
             }
-        } else if (v.getId() == R.id.viewDestinationCards) {
-            Deck tempDeck = myState.getPlayerDestinationDecks()[playerNum];
-            displayDestinationViewDialog(tempDeck);
+            else if (v.getId() == R.id.viewDestinationCards) {
+                Deck tempDeck = myState.getPlayerDestinationDecks()[playerNum];
+                displayDestinationViewDialog(tempDeck);
+            }
         }
     }
 
@@ -581,28 +582,36 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
      */
     @Override
     public boolean onTouch(View v, MotionEvent event) {
+        if(myState.getPlayerID() == this.playerNum) {
+            int x = (int) event.getRawX();
+            int y = (int) event.getRawY();
+            if (v.getId() == R.id.GameBoard && event.getAction() == MotionEvent.ACTION_DOWN) {
+                int index = myBoard.clickedTrack(x, y - 191);
+                String colorString = null;
+                if (index != -1) {
+                    if (highlights[index] || highlights2[index]) {
+                        if (!highlights[index] && selected2[index]) {
+                            index = -1;
+                        } else if (!highlights2[index] && selected[index]) {
+                            index = -1;
+                        } else {
+                            if (canChoose(myState.getTracks().get(index))) {
+                                colorString = myState.getTracks().get(index).getTrackColor();
+                            } else if (canChoose(myState.getTracks2().get(index))) {
+                                colorString = myState.getTracks2().get(index).getTrackColor();
+                            }
+                        }
+                    }
+                    game.sendAction(new TrackPlaceAction(this, colorString, index));
+                } else {
 
-        int x = (int) event.getRawX();
-        int y = (int) event.getRawY();
-        if (v.getId() == R.id.GameBoard && event.getAction() == MotionEvent.ACTION_DOWN) {
-            int index = myBoard.clickedTrack(x,y-191);
-            String colorString = null;
-            if (index != -1) {
-                if(highlights[index]){
-                    colorString = myState.getTracks().get(index).getTrackColor();
+                    return false;
                 }
-                else if(highlights2[index]){
-                    colorString = myState.getTracks2().get(index).getTrackColor();
-                }
-                game.sendAction(new TrackPlaceAction(this, colorString, index));
-            }
-            else {
-
-                return false;
             }
         }
         return true;
     }
+
 
     /**
      * Pop up for selecting destination cards
