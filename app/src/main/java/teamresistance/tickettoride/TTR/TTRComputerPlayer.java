@@ -838,7 +838,7 @@ public class TTRComputerPlayer extends GameComputerPlayer implements Serializabl
             }
         }
         //dumb AI draws more cards
-        else if (minimum == 1 && !isDifficult) {
+        else if(minimum == 1 && !isDifficult){
             while (numSelected < minimum) {
                 for (int i = 0; i < tempDeck.size(); i++) {
                     if (Math.random() < 0.8) {
