@@ -2,6 +2,9 @@ package teamresistance.tickettoride.TTR;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.graphics.Color;
+import android.graphics.Typeface;
+import android.graphics.drawable.ColorDrawable;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
@@ -41,54 +44,42 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
             "Pink", "Black", "Red", "Green", "Rainbow"};
     private Button confirmSelection;
     private static final long serialVersionUID = 333245564192016L;
-    /**
-     * TextViews for player's names
-     */
+
+    /** TextViews for player's names*/
     private TextView cpu1PlayerTextView;
     private TextView cpu2PlayerTextView;
     private TextView cpu3PlayerTextView;
     private TextView humanTextView;
-    /**
-     * TextViews for player's scores
-     */
+
+    /** TextViews for player's scores*/
     private TextView cpu1ScoreTextview;
     private TextView cpu2ScoreTextview;
     private TextView cpu3ScoreTextview;
     private TextView humanScoreTextview;
-    /**
-     * TextViews for player's trainToken count
-     */
+
+    /**extViews for player's trainToken count */
     private TextView cpu1TrainTokenTextView;
     private TextView cpu2TrainTokenTextView;
     private TextView cpu3TrainTokenTextView;
     private TextView humanTrainTokenTextView;
-    /**
-     * TextViews for player's destination card count
-     */
+
+    /** TextViews for player's destination card count */
     private TextView playerDestinationCardTextView;
-    private TextView playerDestinationCardTextViewCard1;
-    private TextView playerDestinationCardTextViewCard2;
-    private TextView playerDestinationCardTextViewCard3;
-    private TextView playerDestinationCardTextViewCard4;
-    private TextView playerDestinationCardTextViewCard5;
-    private TextView playerDestinationCardTextViewCard6;
-    /**
-     * tells whose turn it is
-     */
+    private Button viewPlayerDestinationCards;
+
+    /** tells whose turn it is */
     private TextView playerTurnTextView;
     private TextView[] destinationCards;
     private TextView cpu1DestinationCardTextView;
     private TextView cpu2DestinationCardTextView;
     private TextView cpu3DestinationCardTextView;
-    /**
-     * TextViews for player's train card count
-     */
+
+    /** TextViews for player's train card count */
     private TextView cpu1TrainCardTextView;
     private TextView cpu2TrainCardTextView;
     private TextView cpu3TrainCardTextView;
-    /**
-     * TextViews for the player deck card colors
-     */
+
+    /** TextViews for the player deck card colors */
     private TextView redColorCount;
     private TextView orangeColorCount;
     private TextView yellowColorCount;
@@ -98,9 +89,8 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
     private TextView blackColorCount;
     private TextView whiteColorCount;
     private TextView rainbowColorCount;
-    /**
-     * Widjets to control what player Stats display/Scaling
-     */
+
+    /** Widjets to control what player Stats display/Scaling */
     private FrameLayout cpu1FrameLayout;
     private FrameLayout cpu2FrameLayout;
     private FrameLayout cpu3FrameLayout;
@@ -212,18 +202,14 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
                 this.humanTextView.setText("" + this.allPlayerNames[this.playerNum]);
                 this.humanScoreTextview.setText("" + ((TTRGameState) info).getScores()[this.playerNum]);
                 this.humanTrainTokenTextView.setText("" + ((TTRGameState) info).getTrainTokens()[this.playerNum]);
-                this.playerDestinationCardTextView.setText("Total Cards: " + myState.getPlayerDestinationDecks()[this.playerNum].size());
+                this.playerDestinationCardTextView.setText("" + myState.getPlayerDestinationDecks()[this.playerNum].size());
                 int numberOfDestCards = 0;
                 if (myState.getPlayerDestinationDecks()[this.playerNum].size() > 6) {
                     numberOfDestCards = 6;
                 } else {
                     numberOfDestCards = myState.getPlayerDestinationDecks()[this.playerNum].size();
                 }
-                for (int i = 0; i < numberOfDestCards; i++) {
-                    destinationCards[i].setVisibility(View.VISIBLE);
-                    DestinationCards tempCard = (DestinationCards) myState.getPlayerDestinationDecks()[this.playerNum].getCards().get(i);
-                    destinationCards[i].setText("" + tempCard.getCity1() + " to " + tempCard.getCity2() + " " + tempCard.getScore());
-                }
+
                 if (myState.getPlayerID() == this.playerNum) {
                     this.playerTurnTextView.setText("It is your turn!");
                 } else {
@@ -394,20 +380,8 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
         this.cpu1DestinationCardTextView = (TextView) myActivity.findViewById(R.id.CPU1DestinationCardCount);
         this.cpu2DestinationCardTextView = (TextView) myActivity.findViewById(R.id.CPU2DestinationCardCount);
         this.cpu3DestinationCardTextView = (TextView) myActivity.findViewById(R.id.CPU3DestinationCardCount);
-        this.playerDestinationCardTextView = (TextView) myActivity.findViewById(R.id.Total_Cards);
-        this.playerDestinationCardTextViewCard1 = (TextView) myActivity.findViewById(R.id.Card_1);
-        this.playerDestinationCardTextViewCard2 = (TextView) myActivity.findViewById(R.id.Card_2);
-        this.playerDestinationCardTextViewCard3 = (TextView) myActivity.findViewById(R.id.Card_3);
-        this.playerDestinationCardTextViewCard4 = (TextView) myActivity.findViewById(R.id.Card_4);
-        this.playerDestinationCardTextViewCard5 = (TextView) myActivity.findViewById(R.id.Card_5);
-        this.playerDestinationCardTextViewCard6 = (TextView) myActivity.findViewById(R.id.Card_6);
+        this.playerDestinationCardTextView = (TextView) myActivity.findViewById(R.id.playerDestinationCardCount);
         this.playerTurnTextView = (TextView) myActivity.findViewById(R.id.Turn_View);
-        destinationCards = new TextView[]{this.playerDestinationCardTextViewCard1,
-                this.playerDestinationCardTextViewCard2,
-                this.playerDestinationCardTextViewCard3,
-                this.playerDestinationCardTextViewCard4,
-                this.playerDestinationCardTextViewCard5,
-                this.playerDestinationCardTextViewCard6};
         this.cpu1TrainCardTextView = (TextView) myActivity.findViewById(R.id.CPU1TrainCardCount);
         this.cpu2TrainCardTextView = (TextView) myActivity.findViewById(R.id.CPU2TrainCardCount);
         this.cpu3TrainCardTextView = (TextView) myActivity.findViewById(R.id.CPU3TrainCardCount);
@@ -451,6 +425,9 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
         this.cardCheck.setOnClickListener(this);
         this.trainCheck.setOnClickListener(this);
         this.myBoard.setOnTouchListener(this);
+
+        viewPlayerDestinationCards = (Button) myActivity.findViewById(R.id.viewDestinationCards);
+        viewPlayerDestinationCards.setOnClickListener(this);
     }
 
     /**
@@ -509,6 +486,9 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
             } else {
                 this.trainCheck.setChecked(true);
             }
+        } else if (v.getId() == R.id.viewDestinationCards) {
+            Deck tempDeck = myState.getPlayerDestinationDecks()[playerNum];
+            displayDestinationViewDialog(tempDeck);
         }
     }
 
@@ -590,7 +570,19 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
      */
     public void displayDestinationPopup(Deck tempDeck, boolean value) {
         DestinationSelectionDialog dsd = new DestinationSelectionDialog(this, value, tempDeck, game);
+        dsd.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         dsd.show();
+    }
+
+    /**
+     * Pop up for selecting destination cards
+     *
+     * @param tempDeck reference to the destination deck
+     */
+    public void displayDestinationViewDialog(Deck tempDeck) {
+        DestinationViewDialog dvd = new DestinationViewDialog(this, tempDeck, game);
+        dvd.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dvd.show();
     }
 
     /**
@@ -602,6 +594,7 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
     public void displayCardSelectionPopup(Deck tempDeck, Track track) {
         CardColorSelectionDialog ccsd = new CardColorSelectionDialog(myActivity, tempDeck, myState,
                 track, game, this);
+        ccsd.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         ccsd.show();
     }
 
@@ -614,6 +607,7 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
     public void displayLocomotiveSelectionPopup(Deck tempDeck, Track track) {
         LocomotiveSelectionDialog lsd = new LocomotiveSelectionDialog(myActivity, tempDeck, myState,
                 track, game, this);
+        lsd.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         lsd.show();
     }
 }
