@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.io.Serializable;
@@ -37,6 +38,8 @@ public class DestinationViewDialog extends Dialog implements android.view.View.O
     private TTRHumanPlayer player; //player used in sending action
     private TTRGameState myState; //TTRGameState
     private Button closeBtn;
+    private ImageView ticket1, ticket2, ticket3, ticket4, ticket5, ticket6, ticket7, ticket8, ticket9;
+    private ImageView[] tickets = {ticket1,ticket2,ticket3,ticket4,ticket5,ticket6,ticket7,ticket8,ticket9};
     private TextView destinationDeckTextView;
     /**
      * Contructor for dialog
@@ -66,6 +69,9 @@ public class DestinationViewDialog extends Dialog implements android.view.View.O
         //set all buttons
         closeBtn = (Button) findViewById(R.id.btn_close);
         closeBtn.setOnClickListener(this);
+
+        tickets[0] = (ImageView)findViewById(R.id.)
+
         //TEXT
         destinationDeckTextView = (TextView) findViewById(R.id.destinationCardDeck);
         destinationDeckTextView.setWidth(500);
