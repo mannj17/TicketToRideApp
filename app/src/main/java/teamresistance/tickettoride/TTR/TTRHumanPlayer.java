@@ -122,6 +122,10 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
     private boolean[] selected;
     private boolean[] covered;
     private int[] playerIDs;
+    private boolean[] highlights2;
+    private boolean[] selected2;
+    private boolean[] covered2;
+    private int[] playerIDs2;
 
     /*
      * The human player
@@ -145,14 +149,35 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
             selected = new boolean[myState.getTracks().size()];
             covered = new boolean[myState.getTracks().size()];
             playerIDs = new int[myState.getTracks().size()];
+            highlights2 = new boolean[myState.getTracks().size()];
+            selected2 = new boolean[myState.getTracks().size()];
+            covered2 = new boolean[myState.getTracks().size()];
+            playerIDs2 = new int[myState.getTracks().size()];
             trainDeck = myState.getPlayerTrainDecks()[this.playerNum];
             int playerNum = ((TTRGameState) info).getNumPlayers();
             for (int i = 0; i < myState.getFaceUpTrainCards().size(); i++) {
-                if (myState.getFaceUpCardsHighlight()[i]) {
+                if(myState.getFaceUpTrainCards().getCards().get(i).toString().equals("Blank")){
+                    this.faceUpTrainCards[i].setClickable(false);
+                }
+                else if (myState.getFaceUpCardsHighlight()[i]) {
                     this.faceUpTrainCards[i].setAlpha(0.5f);
+                    this.faceUpTrainCards[i].setClickable(true);
                 } else {
                     this.faceUpTrainCards[i].setAlpha(1.0f);
+                    this.faceUpTrainCards[i].setClickable(true);
                 }
+            }
+            if(myState.getFaceDownTrainCards().getCards().isEmpty()){
+                this.clickTrain.setClickable(false);
+            }
+            else{
+                this.clickTrain.setClickable(true);
+            }
+            if(myState.getDestinationCards().getCards().isEmpty()){
+                this.clickDestination.setClickable(false);
+            }
+            else{
+                this.clickDestination.setClickable(true);
             }
             if (myState.getFaceDownTrainCards().getHighlight()) {
                 this.clickTrain.setAlpha(0.5f);
@@ -171,38 +196,87 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
 
             boolean val = myState.getTrackModeSelected();
 
-
-            if (myState.getPlayerID() == this.playerNum) {
-                for(int i = 0; i < myState.getTracks().size(); i++){
-                    if(canChoose(myState.getTracks().get(i)) || !val){
-                        highlights[i] = val;
-                    }
-                    else{
-                        highlights[i] = !val;
+            if(myState.getNumPlayers() < 4) {
+                if (myState.getPlayerID() == this.playerNum) {
+                    for (int i = 0; i < myState.getTracks().size(); i++) {
+                        if (canChoose(myState.getTracks().get(i)) || !val) {
+                            highlights[i] = val;
+                            if(myState.getTracks2().get(i).getTrackColor().equals("Blank")){
+                                highlights2[i] = false;
+                            }
+                            else if(canChoose(myState.getTracks2().get(i)) || !val){
+                                highlights2[i] = val;
+                            }
+                        } else {
+                            highlights[i] = !val;
+                            if(myState.getTracks2().get(i).getTrackColor().equals("Blank")){
+                                highlights2[i] = false;
+                            }
+                            else if(canChoose(myState.getTracks2().get(i)) || !val){
+                                highlights2[i] = val;
+                            }
+                            else{
+                                highlights2[i] = !val;
+                            }
+                        }
                     }
                 }
             }
-
-            for(int i = 0; i < myState.getTracks().size(); i++){
-                if(myState.getSelectedTracks()[i]){
-                    selected[i] = true;
+            else{
+                if (myState.getPlayerID() == this.playerNum) {
+                    for (int i = 0; i < myState.getTracks().size(); i++) {
+                        if (canChoose(myState.getTracks().get(i)) || !val) {
+                            highlights[i] = val;
+                        } else {
+                            highlights[i] = !val;
+                        }
+                        if(myState.getTracks2().get(i).getTrackColor().equals("Blank")){
+                            highlights2[i] = false;
+                        }
+                        else if(canChoose(myState.getTracks2().get(i)) || !val){
+                            highlights2[i] = val;
+                        }
+                        else{
+                            highlights2[i] = !val;
+                        }
+                    }
                 }
-                else{
+            }
+            for (int i = 0; i < myState.getTracks().size(); i++) {
+                if (myState.getSelectedTracks()[i]) {
+                    selected[i] = true;
+                } else {
                     selected[i] = false;
                 }
-                if(myState.getCoveredTracks()[i]){
+                if (myState.getCoveredTracks()[i]) {
                     covered[i] = true;
                     playerIDs[i] = myState.getTrackIds()[i];
-                }
-                else{
+                } else {
                     covered[i] = false;
                     playerIDs[i] = -1;
+                }
+                if (myState.getSelectedTracks2()[i]) {
+                    selected2[i] = true;
+                } else {
+                    selected2[i] = false;
+                }
+                if (myState.getCoveredTracks2()[i]) {
+                    covered2[i] = true;
+                    playerIDs2[i] = myState.getTrackIds()[i];
+                } else {
+                    covered2[i] = false;
+                    playerIDs2[i] = -1;
                 }
             }
             myBoard.setHighlights(highlights);
             myBoard.setSelected(selected);
             myBoard.setCovered(covered);
             myBoard.setPlayerIDs(playerIDs);
+
+            myBoard.setHighlights2(highlights2);
+            myBoard.setSelected2(selected2);
+            myBoard.setCovered2(covered2);
+            myBoard.setPlayerIDs2(playerIDs2);
 
             if (playerNum >= 2) { //2 is the minimum number of players
                 lp = new LinearLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT, 1);
@@ -229,7 +303,7 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
                 } else {
                     this.playerTurnTextView.setText("" + allPlayerNames[myState.getPlayerID()] + "'s turn!");
                 }
-                this.cpu1PlayerTextView.setText("" + this.allPlayerNames[1]);
+                this.cpu1PlayerTextView.setText("" + this.allPlayerNames[(this.playerNum + 1) % myState.getNumPlayers()]);
                 this.cpu1TrainTokenTextView.setText("" + ((TTRGameState) info).getTrainTokens()[(this.playerNum + 1) % myState.getNumPlayers()]);
                 this.cpu1ScoreTextview.setText("" + ((TTRGameState) info).getScores()[(this.playerNum + 1) % myState.getNumPlayers()]);
                 this.cpu1DestinationCardTextView.setText("" + ((TTRGameState) info).getPlayerDestinationDecks()[(this.playerNum + 1) % myState.getNumPlayers()].getCards().size());
@@ -242,6 +316,7 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
                 cpu2FrameLayout.setVisibility(View.VISIBLE);
                 cpu3FrameLayout.setVisibility(View.GONE);
                 this.cpu2PlayerTextView.setText("" + this.allPlayerNames[(this.playerNum + 2) % myState.getNumPlayers()]);
+                this.cpu2TrainTokenTextView.setText("" + ((TTRGameState) info).getTrainTokens()[(this.playerNum + 2) % myState.getNumPlayers()]);
                 this.cpu2ScoreTextview.setText("" + ((TTRGameState) info).getScores()[(this.playerNum + 2) % myState.getNumPlayers()]);
                 this.cpu2DestinationCardTextView.setText("" + ((TTRGameState) info).getPlayerDestinationDecks()[(this.playerNum + 2) % myState.getNumPlayers()].getCards().size());
                 this.cpu2TrainCardTextView.setText("" + ((TTRGameState) info).getPlayerTrainDecks()[(this.playerNum + 2) % myState.getNumPlayers()].getCards().size());
@@ -254,6 +329,7 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
                 cpu2FrameLayout.setVisibility(View.VISIBLE);
                 cpu3FrameLayout.setVisibility(View.VISIBLE);
                 this.cpu3PlayerTextView.setText("" + this.allPlayerNames[(this.playerNum + 3) % myState.getNumPlayers()]);
+                this.cpu3TrainTokenTextView.setText("" + ((TTRGameState) info).getTrainTokens()[(this.playerNum + 3) % myState.getNumPlayers()]);
                 this.cpu3ScoreTextview.setText("" + ((TTRGameState) info).getScores()[(this.playerNum + 3) % myState.getNumPlayers()]);
                 this.cpu3DestinationCardTextView.setText("" + ((TTRGameState) info).getPlayerDestinationDecks()[(this.playerNum + 3) % myState.getNumPlayers()].getCards().size());
                 this.cpu3TrainCardTextView.setText("" + ((TTRGameState) info).getPlayerTrainDecks()[(this.playerNum + 3) % myState.getNumPlayers()].getCards().size());
@@ -275,8 +351,10 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
                     this.faceUpTrainCards[i].setImageResource(R.drawable.white_train);
                 } else if (((TrainCards) myState.getFaceUpTrainCards().getCards().get(i)).toString().equals("Yellow")) {
                     this.faceUpTrainCards[i].setImageResource(R.drawable.yellow_train);
-                } else {
+                } else if (((TrainCards) myState.getFaceUpTrainCards().getCards().get(i)).toString().equals("Rainbow")){
                     this.faceUpTrainCards[i].setImageResource(R.drawable.rainbow_train);
+                } else{
+                    this.faceUpTrainCards[i].setAlpha(0.0f);
                 }
             }
             blackColorCount.setText("" + myState.getTrainColorCount("Black", this.playerNum));
@@ -458,56 +536,58 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
      */
     @Override
     public void onClick(View v) {
-        if (v.getId() == R.id.confirmSelection) {
-            if (myState.getPlayerID() == this.playerNum) {
-                final TTRHumanPlayer me = this;
-                if (myState.getDestinationCardsSelected()) {
+        if(myState.getPlayerID() == this.playerNum) {
+            if (v.getId() == R.id.confirmSelection) {
+                if (myState.getPlayerID() == this.playerNum) {
+                    final TTRHumanPlayer me = this;
+                    if (myState.getDestinationCardsSelected()) {
 
-                    Deck tempDeck = new Deck("temp");
-                    myState.getDestinationCards().moveTopCardTo(tempDeck, myState.getDestinationCards());
-                    myState.getDestinationCards().moveTopCardTo(tempDeck, myState.getDestinationCards());
-                    myState.getDestinationCards().moveTopCardTo(tempDeck, myState.getDestinationCards());
+                        Deck tempDeck = new Deck("temp");
+                        myState.getDestinationCards().moveTopCardTo(tempDeck, myState.getDestinationCards());
+                        myState.getDestinationCards().moveTopCardTo(tempDeck, myState.getDestinationCards());
+                        myState.getDestinationCards().moveTopCardTo(tempDeck, myState.getDestinationCards());
 
-                    displayDestinationPopup(tempDeck, false);
-                } else if (myState.getTrackSpot() != -1 &&
-                        myState.getTrackModeSelected() &&
-                        myState.getTracks().get(myState.getTrackSpot()).getTrackColor().equals("Gray")) {
-                    Deck tempDeck = myState.getPlayerTrainDecks()[playerNum];
-                    displayCardSelectionPopup(tempDeck, myState.getTracks().get(myState.getTrackSpot()));
-                } else if (myState.getTrackSpot() != -1 &&
-                        myState.getTrackModeSelected() &&
-                        myState.getTrainColorCount("Rainbow", 0) != 0) {
-                    Deck tempDeck = myState.getPlayerTrainDecks()[playerNum];
-                    displayLocomotiveSelectionPopup(tempDeck, myState.getTracks().get(myState.getTrackSpot()));
-                } else {
-                    game.sendAction(new ConfirmSelectionAction(me, myState.getSelectedTrackColor(), 0));
+                        displayDestinationPopup(tempDeck, false);
+                    } else if (myState.getTrackSpot() != -1 &&
+                            myState.getTrackModeSelected() &&
+                            myState.getTracks().get(myState.getTrackSpot()).getTrackColor().equals("Gray")) {
+                        Deck tempDeck = myState.getPlayerTrainDecks()[playerNum];
+                        displayCardSelectionPopup(tempDeck, myState.getTracks().get(myState.getTrackSpot()));
+                    } else if (myState.getTrackSpot() != -1 &&
+                            myState.getTrackModeSelected() &&
+                            myState.getTrainColorCount("Rainbow", 0) != 0) {
+                        Deck tempDeck = myState.getPlayerTrainDecks()[playerNum];
+                        displayLocomotiveSelectionPopup(tempDeck, myState.getTracks().get(myState.getTrackSpot()));
+                    } else {
+                        game.sendAction(new ConfirmSelectionAction(me, myState.getSelectedTrackColor(), 0));
+                    }
                 }
-            }
-        } else if (v.getId() == R.id.Train1) {
-            game.sendAction(new DrawUpCardAction(this, 0));
-        } else if (v.getId() == R.id.Train2) {
-            game.sendAction(new DrawUpCardAction(this, 1));
-        } else if (v.getId() == R.id.Train3) {
-            game.sendAction(new DrawUpCardAction(this, 2));
-        } else if (v.getId() == R.id.Train4) {
-            game.sendAction(new DrawUpCardAction(this, 3));
-        } else if (v.getId() == R.id.Train5) {
-            game.sendAction(new DrawUpCardAction(this, 4));
-        } else if (v.getId() == R.id.DrawTrainStack) {
-            game.sendAction(new DrawDownCardAction(this));
-        } else if (v.getId() == R.id.DrawTicketStack) {
-            game.sendAction(new DrawDestinationCardAction(this));
-        } else if (v.getId() == R.id.drawCardCheckBox) {
-            if (myState.getTrackModeSelected() && !myState.getCardModeSelected()) {
-                game.sendAction(new ChangeModeAction(this));
-            } else {
-                this.cardCheck.setChecked(true);
-            }
-        } else if (v.getId() == R.id.drawTrainCheckBox) {
-            if (myState.getCardModeSelected() && !myState.getTrackModeSelected()) {
-                game.sendAction(new ChangeModeAction(this));
-            } else {
-                this.trainCheck.setChecked(true);
+            } else if (v.getId() == R.id.Train1) {
+                game.sendAction(new DrawUpCardAction(this, 0));
+            } else if (v.getId() == R.id.Train2) {
+                game.sendAction(new DrawUpCardAction(this, 1));
+            } else if (v.getId() == R.id.Train3) {
+                game.sendAction(new DrawUpCardAction(this, 2));
+            } else if (v.getId() == R.id.Train4) {
+                game.sendAction(new DrawUpCardAction(this, 3));
+            } else if (v.getId() == R.id.Train5) {
+                game.sendAction(new DrawUpCardAction(this, 4));
+            } else if (v.getId() == R.id.DrawTrainStack) {
+                game.sendAction(new DrawDownCardAction(this));
+            } else if (v.getId() == R.id.DrawTicketStack) {
+                game.sendAction(new DrawDestinationCardAction(this));
+            } else if (v.getId() == R.id.drawCardCheckBox) {
+                if (myState.getTrackModeSelected() && !myState.getCardModeSelected()) {
+                    game.sendAction(new ChangeModeAction(this));
+                } else {
+                    this.cardCheck.setChecked(true);
+                }
+            } else if (v.getId() == R.id.drawTrainCheckBox) {
+                if (myState.getCardModeSelected() && !myState.getTrackModeSelected()) {
+                    game.sendAction(new ChangeModeAction(this));
+                } else {
+                    this.trainCheck.setChecked(true);
+                }
             }
         }
     }
@@ -526,54 +606,15 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
         int y = (int) event.getRawY();
         if (v.getId() == R.id.GameBoard && event.getAction() == MotionEvent.ACTION_DOWN) {
             int index = myBoard.clickedTrack(x,y-191);
-//            for (int i = 0; i < myBoard.getTracks().length; i++) {
-//                if (myBoard.getTracks()[i].isTouched(x, y - 191)) {
-//                    index = i;
-//                }
-//            }
             String colorString = null;
             if (index != -1) {
                 if(highlights[index]){
                     colorString = myState.getTracks().get(index).getTrackColor();
-                    game.sendAction(new TrackPlaceAction(this, colorString, index));
                 }
-//                String sendingString = myState.getTracks()[index].getTrackColor();
-//                if (myState.getTracks()[index].getTrackColor().equals("Gray")) {
-//                    int redCount = myState.getTrainColorCount("Red", this.playerNum);
-//                    int orangeCount = myState.getTrainColorCount("Orange", this.playerNum);
-//                    int yellowCount = myState.getTrainColorCount("Yellow", this.playerNum);
-//                    int greenCount = myState.getTrainColorCount("Green", this.playerNum);
-//                    int blueCount = myState.getTrainColorCount("Blue", this.playerNum);
-//                    int pinkCount = myState.getTrainColorCount("Pink", this.playerNum);
-//                    int whiteCount = myState.getTrainColorCount("White", this.playerNum);
-//                    int blackCount = myState.getTrainColorCount("Black", this.playerNum);
-//                    int rainbowCount = myState.getTrainColorCount("Rainbow", this.playerNum);
-//                    int min = myState.getTracks()[index].getTrainTrackNum();
-//                    if (redCount + rainbowCount >= min) {
-//                        sendingString = "Red";
-//                    }
-//                    if (orangeCount + rainbowCount >= min) {
-//                        sendingString = "Orange";
-//                    }
-//                    if (yellowCount + rainbowCount >= min) {
-//                        sendingString = "Yellow";
-//                    }
-//                    if (greenCount + rainbowCount >= min) {
-//                        sendingString = "Green";
-//                    }
-//                    if (blueCount + rainbowCount >= min) {
-//                        sendingString = "Blue";
-//                    }
-//                    if (pinkCount + rainbowCount >= min) {
-//                        sendingString = "Pink";
-//                    }
-//                    if (whiteCount + rainbowCount >= min) {
-//                        sendingString = "White";
-//                    }
-//                    if (blackCount + rainbowCount >= min) {
-//                        sendingString = "Black";
-//                    }
-//                }
+                else if(highlights2[index]){
+                    colorString = myState.getTracks2().get(index).getTrackColor();
+                }
+                game.sendAction(new TrackPlaceAction(this, colorString, index));
             }
             else {
 
