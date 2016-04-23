@@ -5,6 +5,8 @@ import android.content.DialogInterface;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
+import android.media.AudioManager;
+import android.media.SoundPool;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
@@ -14,6 +16,7 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import java.io.Serializable;
+import java.util.HashMap;
 
 import teamresistance.tickettoride.Game.GameHumanPlayer;
 import teamresistance.tickettoride.Game.GameMainActivity;
@@ -44,6 +47,8 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
             "Pink", "Black", "Red", "Green", "Rainbow"};
     private Button confirmSelection;
     private static final long serialVersionUID = 333245564192016L;
+    protected SoundPool sounds;
+    protected HashMap<Integer, Integer> soundMap;
 
     /** TextViews for player's names*/
     private TextView cpu1PlayerTextView;
@@ -123,6 +128,15 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
      */
     public TTRHumanPlayer(String name) {
         super(name);
+/*
+        sounds = new SoundPool(1, AudioManager.STREAM_MUSIC, 100);
+        soundMap = new HashMap<Integer, Integer>();
+        soundMap.put(1, sounds.load(this, R.raw.trainwhistle1, 1));
+        AudioManager audioManager = (AudioManager)getSystemService(this.AUDIO_SERVICE);
+        float curVolume = audioManager.getStreamVolume(AudioManager.STREAM_MUSIC);
+        float maxVolume = audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
+        float leftVolume = curVolume/maxVolume;
+        float rightVolume = curVolume/maxVolume;*/
     }
 
     /**
