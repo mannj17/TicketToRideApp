@@ -17,22 +17,6 @@ import teamresistance.tickettoride.Game.LocalGame;
  * @version April 2016
  */
 public class TTRGameStateTest extends TestCase {
-//  @Test
-//  public void testPlayerGraphs(){
-//      TTRGameState myState = new TTRGameState();
-//      PlayerGraph myGraph = new PlayerGraph();
-//      myState.setNumPlayers(2);
-//      //Give player 1 20 tracks
-//      for (int i = 0; i < 15; i++){
-//          myState.myTracks[i].setCovered(true);
-//          myState.myTracks[i].setPlayerID(0);
-//      }
-//      ArrayList<Track> myTracks = myGraph.divideTrackByPlayer(myState.getTracks(), 0);
-//      myGraph.creteGraph(myTracks, 0);
-//      assertEquals(true, myGraph.isReachable(0, 5));
-//  }
-//}
-
     /**
      * Tests the initial constructor
      * @throws Exception
@@ -47,7 +31,7 @@ public class TTRGameStateTest extends TestCase {
         //cannot have card mode and track mode simultaneously, mutually exclusive
         testState.setCardModeSelected(true);
         assertTrue("card mode not true", testState.getCardModeSelected());
-        assertFalse("track mode not false",testState.getTrackModeSelected());
+        assertFalse("track mode not false", testState.getTrackModeSelected());
     }
     /**
      * Tests the copy constructor, checking various values
@@ -90,14 +74,14 @@ public class TTRGameStateTest extends TestCase {
     @Test
     public void testGameOver() throws Exception {
         TTRGameState testState = new TTRGameState();
-        //TTRLocalGame testLocal = new TTRLocalGame();
+        TTRLocalGame testLocal = new TTRLocalGame();
         testState.setNumPlayers(2);
         testState.setTrainToken(25, 0);
         testState.setTrainToken(15, 1);
-        assertFalse("Game over to soon", testState.getIsGameOver());
+        assertFalse("Game over early", testState.getIsGameOver());
         testState.setTrainToken(1, 1);
         testState.setIsLastRound(true);
-        //testLocal.checkIfGameOver();
+        testLocal.checkIfGameOver();
         //TODO  NOT PASSING
         assertTrue("Game not over", testState.getIsGameOver());
     }
@@ -155,7 +139,7 @@ public class TTRGameStateTest extends TestCase {
         ArrayList testTrack = testState.getTracks();
         int size = testTrack.size();
         for (int k = 0; k < size; k++) {
-            assertNotNull(testTrack.get(k));
+            assertNotNull("tracks have null reference",testTrack.get(k));
         }
     }
 }
