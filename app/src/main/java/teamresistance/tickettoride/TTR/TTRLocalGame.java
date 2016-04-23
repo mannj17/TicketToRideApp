@@ -601,7 +601,7 @@ public class TTRLocalGame extends LocalGame implements Serializable {
             }
 
 
-            if (noMoreTrains) {
+            if (mainState.getIsGameOver()) {
                 turnsLeft--;
             }
 

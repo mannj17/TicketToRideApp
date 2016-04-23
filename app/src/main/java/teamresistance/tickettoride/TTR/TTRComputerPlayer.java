@@ -837,6 +837,18 @@ public class TTRComputerPlayer extends GameComputerPlayer implements Serializabl
                 }
             }
         }
+        else if(minimum == 1 && !isDifficult){
+            while (numSelected < minimum) {
+                for (int i = 0; i < tempDeck.size(); i++) {
+                    if (Math.random() < 0.8) {
+                        if (!tempDeck.getCards().get(i).getHighlight()) {
+                            tempDeck.getCards().get(i).setHighlight(true);
+                            numSelected++;
+                        }
+                    }
+                }
+            }
+        }
         else{
             //find the card that has the shortest distance between the two points, therefore,
             //being the easiest to accomplish
