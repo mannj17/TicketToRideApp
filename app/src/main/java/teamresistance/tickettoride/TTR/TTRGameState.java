@@ -2,7 +2,6 @@ package teamresistance.tickettoride.TTR;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-
 import teamresistance.tickettoride.Game.infoMsg.GameState;
 
 
@@ -34,20 +33,15 @@ public class TTRGameState extends GameState implements Serializable{
 //    private int[] destinationValues = {4, 4, 6, 7, 7, 8, 8, 8, 9, 9, 9, 9, 10, 10, 11, 11, 11, 11,
 //            12, 12, 13, 13, 13, 16, 17, 17, 20, 20, 21, 22};
 
-    /** the face down deck */
+    /** Decks Used by the Game */
     private Deck faceDownTrainCards;
-    /** the five face up cards */
     private Deck faceUpTrainCards;
-    /** The deck of destination cards */
     private Deck destinationCards;
-    /**pool of destination cards for a player to choose from*/
     private Deck destinationPool;
-    /** The pile of discarded train cards */
     private Deck trainDiscard;
-    /** The pile of discarded destination cards */
     private Deck destinationDiscard;
-    /** The pool of destination cards for when a player is selecting new destination cards*/
     private Deck destinationCardsDrawn;
+
     /** Which player's turn it is */
     private int playerID;
     /** The number of players playing the game */
@@ -83,15 +77,10 @@ public class TTRGameState extends GameState implements Serializable{
     private int[] trackIds2;
 
     //PARALLEL ARRAYS//
-    /** Number of trainTokens per player */
     private int[] trainTokens = new int[numPlayers];
-    /** The current score of each player */
     private int[] scores = new int[numPlayers];
-    /** The names of each player */
     private String[] names = new String[numPlayers];
-    /** All of the hands of each player */
     private Deck[] playerTrainDecks = new Deck[numPlayers];
-    /** All of the hands of each player */
     private Deck[] playerDestinationDecks = new Deck[numPlayers];
     private int numRainbows;
 
@@ -156,8 +145,6 @@ public class TTRGameState extends GameState implements Serializable{
         destinationCardsDrawn = new Deck("Destination Cards Drawn");
         destinationPool = new Deck("Destination Card Pool");
         numRainbows = 0;
-
-
 
         //Booleans set to defaults
 //        isSelectDestinationCards = false;
