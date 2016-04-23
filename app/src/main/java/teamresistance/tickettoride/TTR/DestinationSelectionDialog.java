@@ -90,18 +90,11 @@ public class DestinationSelectionDialog extends  Dialog implements android.view.
         ticket1 = (ImageButton) findViewById(R.id.ticket1);
         ticket2 = (ImageButton) findViewById(R.id.ticket2);
         ticket3 = (ImageButton) findViewById(R.id.ticket3);
-        //set all textviews
-        routes1 = (TextView) findViewById(R.id.ticket1_destinations);
-        routes2 = (TextView) findViewById(R.id.ticket2_destinations);
-        routes3 = (TextView) findViewById(R.id.ticket3_destinations);
-        text = (TextView) findViewById(R.id.dsd_text);
         //display text representing destination tickets
         DestinationCards tempCard1 = (DestinationCards)destinationCards[0];
         DestinationCards tempCard2 = (DestinationCards)destinationCards[1];
         DestinationCards tempCard3 = (DestinationCards)destinationCards[2];
-        routes1.setText("" + tempCard1.getCity1() + " to " + tempCard1.getCity2() + " score: " + tempCard1.getScore());
-        routes2.setText("" + tempCard2.getCity1() + " to " + tempCard2.getCity2() + " score: " + tempCard2.getScore());
-        routes3.setText("" + tempCard3.getCity1() + " to " + tempCard3.getCity2() + " score: " + tempCard3.getScore());
+
         //sets image resource of the image buttons
         ticket1.setImageResource(setDestCard(tempCard1.getCity1(), tempCard1.getCity2()));
         ticket2.setImageResource(setDestCard(tempCard2.getCity1(), tempCard2.getCity2()));

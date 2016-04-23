@@ -42,12 +42,6 @@
                 android:background="#3E80B4"
                 android:padding="5dp" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="New Text"
-                android:id="@+id/ticket1_destinations"
-                android:textColor="#ffffff" />
         </LinearLayout>
 
         <LinearLayout
@@ -63,12 +57,6 @@
                 android:background="#3E80B4"
                 android:padding="5dp" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="New Text"
-                android:id="@+id/ticket2_destinations"
-                android:textColor="#ffffff" />
         </LinearLayout>
 
         <LinearLayout
@@ -84,12 +72,6 @@
                 android:background="#3E80B4"
                 android:padding="5dp" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="New Text"
-                android:id="@+id/ticket3_destinations"
-                android:textColor="#ffffff" />
         </LinearLayout>
 
     </LinearLayout>

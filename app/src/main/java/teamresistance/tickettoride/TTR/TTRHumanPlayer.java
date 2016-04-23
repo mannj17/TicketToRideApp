@@ -389,7 +389,8 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
         else if(tempColor.equals("Gray")){
             return chooseGray(track);
         }
-        if(numberOfCards >= trackLength){
+        if(numberOfCards >= trackLength &&
+                myState.getTrainTokens()[this.playerNum] >= track.getTrainTrackNum()){
             return true;
         } else {
             return false;
