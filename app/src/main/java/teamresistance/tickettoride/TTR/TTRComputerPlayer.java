@@ -823,70 +823,10 @@ public class TTRComputerPlayer extends GameComputerPlayer implements Serializabl
         }
         int numSelected = 0;
 
-        //select destination cards at the beginning. If the player is smart, take all three,
-        // if dumb take random cards
-        if(minimum == 2) {
-            while (numSelected < minimum) {
-                for (int i = 0; i < tempDeck.size(); i++) {
-                    if (Math.random() < 0.8 || isDifficult) {
-                        if (!tempDeck.getCards().get(i).getHighlight()) {
-                            tempDeck.getCards().get(i).setHighlight(true);
-                            numSelected++;
-                        }
-                    }
-                }
-            }
-        }
-        else{
-            //find the card that has the shortest distance between the two points, therefore,
-            //being the easiest to accomplish
-            int shortestCard = 0;
-            int shortestDistance = -1;
+        //randomly select destination cards until the minimum number has been selected
+        while (numSelected < minimum) {
             for (int i = 0; i < tempDeck.size(); i++) {
-
-            //if it has not been reached, run through and find the two destinations in terms
-            //of the destNames list.
-                DestinationCards lookCard = (DestinationCards) tempDeck.getCards().get(i);
-                String city1 = lookCard.getCity1();
-                String city2 = lookCard.getCity2();
-                int cityPos1 = -1;
-                int cityPos2 = -1;
-                for (int j = 0; j < destNames.size(); j++) {
-                    if (city1.equals(destNames.get(j))) {
-                        cityPos1 = j;
-                    } else if (city2.equals(destNames.get(j))) {
-                        cityPos2 = j;
-                    }
-                }
-
-                //once the destinations have been found, perform dijkstra on the first city
-                compDijkstra.dijkstra(cityPos1);
-
-                int distance = compDijkstra.getMyGraph().getVertexes().get(cityPos2).getDistance();
-
-                //if the distance between city1 and city2 is smaller than the last, save
-                //the new card to try and accomplish
-                if (shortestDistance == -1 && distance < compState.getTrainTokens()[this.playerNum]) {
-                    if(distance < shortestDistance)
-                    shortestDistance = distance;
-                    shortestCard = i;
-                }
-            }
-
-            if(shortestDistance == -1){
-                DestinationCards lookCard = (DestinationCards)tempDeck.getCards().get(0);
-                int smallestScore = lookCard.getScore();
-                shortestCard = 0;
-                for(int i = 0; i < tempDeck.size(); i++){
-                    lookCard = (DestinationCards)tempDeck.getCards().get(i);
-                    if(smallestScore > lookCard.getScore()){
-                        smallestScore = lookCard.getScore();
-                        shortestCard = i;
-                    }
-                }
-            }
-            for (int i = 0; i < tempDeck.size(); i++) {
-                if (i == shortestCard) {
+                if (Math.random() < 0.8) {
                     if (!tempDeck.getCards().get(i).getHighlight()) {
                         tempDeck.getCards().get(i).setHighlight(true);
                         numSelected++;
@@ -921,5 +861,9 @@ public class TTRComputerPlayer extends GameComputerPlayer implements Serializabl
         currentMove = 0;
         foundTrack = false;
         game.sendAction(new ConfirmSelectionAction(this, sendDeck, tempDeck));
+    }
+
+    public void getRandomTrack(){
+
     }
 }

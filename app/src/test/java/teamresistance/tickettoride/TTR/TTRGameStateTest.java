@@ -66,7 +66,6 @@ public class TTRGameStateTest extends TestCase {
      *
      * @throws Exception
      */
-    //TODO-- not working as it should
     @Test
     public void testGameOver() throws Exception
     {
@@ -76,14 +75,14 @@ public class TTRGameStateTest extends TestCase {
             testState.setNumPlayers(2);
             assertFalse("Game over to soon", testState.getIsGameOver());
             testState.setTrainToken(1, 1);
-            testState.setIsLastRound(false);
+           //testState.setIsLastRound(true);
             //testLocal.checkIfGameOver();
-           //TODO assertTrue("Game not over", testState.getIsGameOver());
+            //TODO  NOT PASSING
+            assertTrue("Game not over", testState.getIsGameOver());
     }
 
     /**
-     * Checks to see if the destination deck is
-     * null
+     * test the destination deck
      * @throws Exception
      */
     @Test
@@ -91,10 +90,26 @@ public class TTRGameStateTest extends TestCase {
     {
         TTRGameState testState = new TTRGameState();
         Deck testDeck = testState.getDestinationCards();
-        int size = testState.getDestinationCards().size();
-        for(int k =0; k < size; k++)
+        int size = testDeck.size();
+        for(int k =0; k<size; k++)
         {
-            assertNotNull("Destination Null", testDeck.getCards().get(k));
+            assertNotNull("Destination deck has null reference",testDeck.getCards().get(k));
+        }
+    }
+
+    /**
+     * Checks to see if train card deck is null
+     * @throws Exception
+     */
+    @Test
+    public void testTrainCardDeck() throws Exception
+    {
+        TTRGameState testState = new TTRGameState();
+        Deck testDeck = testState.getFaceDownTrainCards();
+        int size = testDeck.size();
+        for(int j =0; j < size; j++)
+        {
+                assertNotNull("train card deck has null reference", testDeck.getCards().get(j));
         }
     }
 }
