@@ -102,7 +102,7 @@ public class TTRLocalGame extends LocalGame implements Serializable {
                 turnsLeft = mainState.getNumPlayers();
             }
         }
-        //if the start of a game over has been initiated, reduce the number of turns.
+        //if the start of a game over has been initiated, reduce the number of turns.l
 
         //TODO
         //if the final turns are over, find and announce the winner
