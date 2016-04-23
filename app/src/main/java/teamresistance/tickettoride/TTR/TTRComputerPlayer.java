@@ -822,10 +822,10 @@ public class TTRComputerPlayer extends GameComputerPlayer implements Serializabl
             minimum = 2;
         }
         int numSelected = 0;
-        
+
         //select destination cards at the beginning. If the player is smart, take all three,
         // if dumb take random cards
-        if(minimum == 2) {
+        if (minimum == 2) {
             while (numSelected < minimum) {
                 for (int i = 0; i < tempDeck.size(); i++) {
                     if (Math.random() < 0.8 || isDifficult) {
@@ -838,7 +838,7 @@ public class TTRComputerPlayer extends GameComputerPlayer implements Serializabl
             }
         }
         //dumb AI draws more cards
-        else if(minimum == 1 && !isDifficult){
+        else if (minimum == 1 && !isDifficult) {
             while (numSelected < minimum) {
                 for (int i = 0; i < tempDeck.size(); i++) {
                     if (Math.random() < 0.8) {
@@ -849,16 +849,15 @@ public class TTRComputerPlayer extends GameComputerPlayer implements Serializabl
                     }
                 }
             }
-        }
-        else{
+        } else {
             //find the card that has the shortest distance between the two points, therefore,
             //being the easiest to accomplish
             int shortestCard = 0;
             int shortestDistance = -1;
             for (int i = 0; i < tempDeck.size(); i++) {
 
-            //if it has not been reached, run through and find the two destinations in terms
-            //of the destNames list.
+                //if it has not been reached, run through and find the two destinations in terms
+                //of the destNames list.
                 DestinationCards lookCard = (DestinationCards) tempDeck.getCards().get(i);
                 String city1 = lookCard.getCity1();
                 String city2 = lookCard.getCity2();
@@ -880,19 +879,19 @@ public class TTRComputerPlayer extends GameComputerPlayer implements Serializabl
                 //if the distance between city1 and city2 is smaller than the last, save
                 //the new card to try and accomplish
                 if (shortestDistance == -1 && distance < compState.getTrainTokens()[this.playerNum]) {
-                    if(distance < shortestDistance)
-                    shortestDistance = distance;
+                    if (distance < shortestDistance)
+                        shortestDistance = distance;
                     shortestCard = i;
                 }
             }
 
-            if(shortestDistance == -1){
-                DestinationCards lookCard = (DestinationCards)tempDeck.getCards().get(0);
+            if (shortestDistance == -1) {
+                DestinationCards lookCard = (DestinationCards) tempDeck.getCards().get(0);
                 int smallestScore = lookCard.getScore();
                 shortestCard = 0;
-                for(int i = 0; i < tempDeck.size(); i++){
-                    lookCard = (DestinationCards)tempDeck.getCards().get(i);
-                    if(smallestScore > lookCard.getScore()){
+                for (int i = 0; i < tempDeck.size(); i++) {
+                    lookCard = (DestinationCards) tempDeck.getCards().get(i);
+                    if (smallestScore > lookCard.getScore()) {
                         smallestScore = lookCard.getScore();
                         shortestCard = i;
                     }
@@ -934,5 +933,5 @@ public class TTRComputerPlayer extends GameComputerPlayer implements Serializabl
         currentMove = 0;
         foundTrack = false;
         game.sendAction(new ConfirmSelectionAction(this, sendDeck, tempDeck));
-    
+    }
 }
