@@ -102,11 +102,88 @@ public class DestinationSelectionDialog extends  Dialog implements android.view.
         routes1.setText("" + tempCard1.getCity1() + " to " + tempCard1.getCity2() + " score: " + tempCard1.getScore());
         routes2.setText("" + tempCard2.getCity1() + " to " + tempCard2.getCity2() + " score: " + tempCard2.getScore());
         routes3.setText("" + tempCard3.getCity1() + " to " + tempCard3.getCity2() + " score: " + tempCard3.getScore());
+        //sets image resource of the image buttons
+        ticket1.setImageResource(setDestCard(tempCard1.getCity1(), tempCard1.getCity2()));
+        ticket2.setImageResource(setDestCard(tempCard2.getCity1(), tempCard2.getCity2()));
+        ticket3.setImageResource(setDestCard(tempCard3.getCity1(), tempCard3.getCity2()));
         //set listeners
         ticket1.setOnClickListener(this);
         ticket2.setOnClickListener(this);
         ticket3.setOnClickListener(this);
         selectBtn.setOnClickListener(this);
+
+    }
+
+    /**
+     * Returns the resource id for the destination ticket images
+     * @param firstCity
+     * @param secondCity
+     * @return
+     */
+    public int setDestCard(String firstCity, String secondCity){
+        if(firstCity.equals("Winnipeg") && secondCity.equals("Little Rock")){
+            return R.drawable.winnipeg_littlerock;
+        } else if(firstCity.equals("Winnipeg") && secondCity.equals("Houston")){
+            return R.drawable.winnipeg_houston;
+        } else if(firstCity.equals("Vancouver") && secondCity.equals("Santa Fe")){
+            return R.drawable.vancouver_santafe;
+        } else if(firstCity.equals("Vancouver") && secondCity.equals("Montreal")){
+            return R.drawable.vancouver_montreal;
+        } else if(firstCity.equals("Toronto") && secondCity.equals("Miami")){
+            return R.drawable.toronto_miami;
+        } else if(firstCity.equals("Seattle") && secondCity.equals("New York")){
+            return R.drawable.seattle_newyork;
+        } else if(firstCity.equals("Seattle") && secondCity.equals("Los Angeles")){
+            return R.drawable.seattle_losangeles;
+        } else if(firstCity.equals("Sault Ste Marie") && secondCity.equals("Oklahoma City")){
+            return R.drawable.saultstemarie_oklahomacity;
+        } else if(firstCity.equals("Sault Ste Marie") && secondCity.equals("Nashville")){
+            return R.drawable.saultstemarie_nashville;
+        } else if(firstCity.equals("San Francisco") && secondCity.equals("Atlanta")){
+            return R.drawable.sanfrancisco_atlanta;
+        } else if(firstCity.equals("Portland") && secondCity.equals("Phoenix")){
+            return R.drawable.portland_phoenix;
+        } else if(firstCity.equals("Portland") && secondCity.equals("Nashville")){
+            return R.drawable.portland_nashville;
+        } else if(firstCity.equals("New York") && secondCity.equals("Atlanta")){
+            return R.drawable.newyork_atlanta;
+        } else if(firstCity.equals("Montreal") && secondCity.equals("New Orleans")){
+            return R.drawable.montreal_neworleans;
+        } else if(firstCity.equals("Montreal") && secondCity.equals("Atlanta")){
+            return R.drawable.montreal_atlanta;
+        } else if(firstCity.equals("Los Angeles") && secondCity.equals("New York")){
+            return R.drawable.losangeles_newyork;
+        } else if(firstCity.equals("Los Angeles") && secondCity.equals("Miami")){
+            return R.drawable.losangeles_miami;
+        } else if(firstCity.equals("Los Angeles") && secondCity.equals("Chicago")){
+            return R.drawable.losangeles_chicago;
+        } else if(firstCity.equals("Kansas City") && secondCity.equals("Houston")){
+            return R.drawable.kansascity_houston;
+        } else if(firstCity.equals("Helena") && secondCity.equals("Los Angeles")){
+            return R.drawable.helena_losangeles;
+        } else if(firstCity.equals("Duluth") && secondCity.equals("Houston")){
+            return R.drawable.duluth_houston;
+        } else if(firstCity.equals("Duluth") && secondCity.equals("El Paso")){
+            return R.drawable.duluth_elpaso;
+        } else if(firstCity.equals("Denver") && secondCity.equals("Pittsburgh")){
+            return R.drawable.denver_pittsburgh;
+        } else if(firstCity.equals("Denver") && secondCity.equals("El Paso")){
+            return R.drawable.denver_elpaso;
+        } else if(firstCity.equals("Dallas") && secondCity.equals("New York")){
+            return R.drawable.dallas_newyork;
+        } else if(firstCity.equals("Chicago") && secondCity.equals("Santa Fe")){
+            return R.drawable.chicago_santafe;
+        } else if(firstCity.equals("Chicago") && secondCity.equals("New Orleans")){
+            return R.drawable.chicago_neworleans;
+        } else if(firstCity.equals("Calgary") && secondCity.equals("Salt Lake City")){
+            return R.drawable.calgary_saltlakecity;
+        } else if(firstCity.equals("Calgary") && secondCity.equals("Phoenix")){
+            return R.drawable.calgary_phoenix;
+        } else if(firstCity.equals("Boston") && secondCity.equals("Miami")){
+            return R.drawable.boston_miami;
+        } else {
+            return R.drawable.ticket_back;
+        }
     }
 
     /**
