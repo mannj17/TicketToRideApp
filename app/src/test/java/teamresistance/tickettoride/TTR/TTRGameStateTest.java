@@ -8,7 +8,13 @@ import java.util.ArrayList;
 import teamresistance.tickettoride.Game.LocalGame;
 
 /**
- * Created by Jess on 3/30/2016.
+ *  TTRGameState creates the GameState
+ *
+ * @author Nick Scacciotti
+ * @author Nick Larson
+ * @author Jess Mann
+ * @author Parker Schibel
+ * @version April 2016
  */
 public class TTRGameStateTest extends TestCase {
 //  @Test
@@ -28,7 +34,7 @@ public class TTRGameStateTest extends TestCase {
 //}
 
     /**
-     * Tests the copy constructor, checking some values
+     * Tests the copy constructor, checking various values
      * @throws Exception
      */
     @Test
@@ -70,13 +76,14 @@ public class TTRGameStateTest extends TestCase {
     public void testGameOver() throws Exception
     {
             TTRGameState testState = new TTRGameState();
-            //TTRLocalGame testLocal = new TTRLocalGame();
-
+            TTRLocalGame testLocal = new TTRLocalGame();
             testState.setNumPlayers(2);
+            testState.setTrainToken(25, 0);
+            testState.setTrainToken(15, 1);
             assertFalse("Game over to soon", testState.getIsGameOver());
             testState.setTrainToken(1, 1);
-           //testState.setIsLastRound(true);
-            //testLocal.checkIfGameOver();
+            //testState.setIsLastRound(true);
+            testLocal.checkIfGameOver();
             //TODO  NOT PASSING
             assertTrue("Game not over", testState.getIsGameOver());
     }
@@ -110,6 +117,34 @@ public class TTRGameStateTest extends TestCase {
         for(int j =0; j < size; j++)
         {
                 assertNotNull("train card deck has null reference", testDeck.getCards().get(j));
+        }
+    }
+
+    /**
+     * Checks to see that the discard deck starts out empty
+     * @throws Exception
+     */
+    @Test
+    public void testDiscardTrainCards() throws Exception
+    {
+        TTRGameState testState = new TTRGameState();
+        Deck testDeck = testState.getTrainDiscard();
+        assertTrue("Train discard should be empty (size 0) at start of game", testDeck.size() == 0);
+    }
+
+    /**
+     * Checks to see if the tracks have been initialized
+     * @throws Exception
+     */
+    @Test
+    public void testTrack() throws Exception
+    {
+        TTRGameState testState = new TTRGameState();
+        ArrayList testTrack = testState.getTracks();
+        int size = testTrack.size();
+        for(int k = 0; k < size; k++)
+        {
+            assertNotNull(testTrack.get(k));
         }
     }
 }
