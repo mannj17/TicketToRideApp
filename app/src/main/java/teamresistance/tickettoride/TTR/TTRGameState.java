@@ -956,7 +956,6 @@ public class TTRGameState extends GameState implements Serializable{
     public boolean[] getSelectedTracks() {
         return selectedTracks;
     }
-
     public int[] getTrackIds2() {
         return trackIds2;
     }

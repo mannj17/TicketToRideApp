@@ -822,7 +822,7 @@ public class TTRComputerPlayer extends GameComputerPlayer implements Serializabl
             minimum = 2;
         }
         int numSelected = 0;
-
+        
         //select destination cards at the beginning. If the player is smart, take all three,
         // if dumb take random cards
         if(minimum == 2) {
@@ -934,5 +934,5 @@ public class TTRComputerPlayer extends GameComputerPlayer implements Serializabl
         currentMove = 0;
         foundTrack = false;
         game.sendAction(new ConfirmSelectionAction(this, sendDeck, tempDeck));
-    }
+    
 }
