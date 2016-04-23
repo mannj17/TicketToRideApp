@@ -176,7 +176,7 @@ public class TTRGameState extends GameState implements Serializable{
         tempTrack= new Track(3, "Yellow", "San Francisco", "Los Angeles");
         trackSet1.add(tempTrack);
         tempTrack = new Track(3, "Pink", "San Francisco", "Los Angeles");
-        trackSet2.add(blankTrack);
+        trackSet2.add(tempTrack);
 
         //2
         tempTrack= new Track(2, "Gray", "Los Angeles", "Las Vegas");
