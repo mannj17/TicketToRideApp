@@ -70,16 +70,16 @@ public class DestinationViewDialog extends Dialog implements android.view.View.O
         closeBtn = (Button) findViewById(R.id.btn_close);
         closeBtn.setOnClickListener(this);
 
-        tickets[0] = (ImageView)findViewById(R.id.)
-
-        //TEXT
-        destinationDeckTextView = (TextView) findViewById(R.id.destinationCardDeck);
-        destinationDeckTextView.setWidth(500);
-        for(int i = 0; i < destinationCards.getCards().size(); i++){
-            destinationDeckTextView.setText(destinationDeckTextView.getText() + " \n" + ((DestinationCards)destinationCards.getCards().get(i)).getCity1() + " to "
-                    + ((DestinationCards)destinationCards.getCards().get(i)).getCity2()
-                    + " score: " + ((DestinationCards)destinationCards.getCards().get(i)).getScore());
-        }
+//        tickets[0] = (ImageView)findViewById(null)
+//
+//        //TEXT
+//        destinationDeckTextView = (TextView) findViewById(null);
+//        destinationDeckTextView.setWidth(500);
+//        for(int i = 0; i < destinationCards.getCards().size(); i++){
+//            destinationDeckTextView.setText(destinationDeckTextView.getText() + " \n" + ((DestinationCards)destinationCards.getCards().get(i)).getCity1() + " to "
+//                    + ((DestinationCards)destinationCards.getCards().get(i)).getCity2()
+//                    + " score: " + ((DestinationCards)destinationCards.getCards().get(i)).getScore());
+//        }
 
     }
 
