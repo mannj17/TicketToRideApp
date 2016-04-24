@@ -144,11 +144,13 @@ public class TTRLocalGame extends LocalGame implements Serializable {
                     for (Vertex vert : myVertexList) {
                         int spot = vert.getId();
                         if (city1.equals(vert.getName())
-                                && mainState.getTracks().get(i).getPlayerID() == j
+                                && (mainState.getTracks().get(i).getPlayerID() == j
+                                || mainState.getTracks2().get(i).getPlayerID() == j)
                                 && startCity == null) {
                             startCity = vert;
                         } else if (city2.equals(vert.getName())
-                                && mainState.getTracks().get(i).getPlayerID() == j
+                                && (mainState.getTracks().get(i).getPlayerID() == j
+                                || mainState.getTracks2().get(i).getPlayerID() == j)
                                 && endCity == null) {
                             endCity = vert;
                         }
