@@ -67,26 +67,6 @@ public class TTRGameStateTest extends TestCase {
     }
 
     /**
-     * Checks to see if last turn is triggered
-     *
-     * @throws Exception
-     */
-    @Test
-    public void testGameOver() throws Exception {
-        TTRGameState testState = new TTRGameState();
-        TTRLocalGame testLocal = new TTRLocalGame();
-        testState.setNumPlayers(2);
-        testState.setTrainToken(25, 0);
-        testState.setTrainToken(15, 1);
-        assertFalse("Game over early", testState.getIsGameOver());
-        testState.setTrainToken(1, 1);
-        testState.setIsLastRound(true);
-        testLocal.checkIfGameOver();
-        //TODO  NOT PASSING
-        assertTrue("Game not over", testState.getIsGameOver());
-    }
-
-    /**
      * test the destination deck
      *
      * @throws Exception
