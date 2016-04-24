@@ -624,7 +624,9 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
                 int index = myBoard.clickedTrack(x, y - 191);
                 String colorString = null;
                 if (index != -1) {
-                    if (highlights[index] || highlights2[index]) {
+                    if ((highlights[index] || highlights2[index]) &&
+                            myState.getTrainTokens()[this.playerNum] >
+                                myState.getTracks().get(index).getTrainTrackNum()) {
                         if (!highlights[index] && selected2[index]) {
                             index = -1;
                         } else if (!highlights2[index] && selected[index]) {

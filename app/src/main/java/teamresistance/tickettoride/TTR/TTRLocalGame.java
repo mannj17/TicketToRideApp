@@ -762,13 +762,15 @@ public class TTRLocalGame extends LocalGame implements Serializable {
                             mainState.getTracks().get(currentSelected).setSelected(false);
                             mainState.getTracks2().get(currentSelected).setSelected(false);
                         }
-                        if(mainState.getTracks().get(thisAction.getIndex()).getTrackColor().equals(thisAction.getTrackColor())) {
+                        if(mainState.getTracks().get(thisAction.getIndex()).getTrackColor().equals(thisAction.getTrackColor())
+                                || mainState.getTracks2().get(thisAction.getIndex()).getCovered()) {
                             mainState.getTracks().get(thisAction.getIndex()).setSelected(true);
                             mainState.setSelectedTrackColor(mainState.getTracks().get(thisAction.getIndex()).getTrackColor());
                             mainState.setTrackSpot(thisAction.getIndex());
                             mainState.setPlaceTrainSelected(true);
                         }
-                        else if(mainState.getTracks2().get(thisAction.getIndex()).getTrackColor().equals(thisAction.getTrackColor())){
+                        else if(mainState.getTracks2().get(thisAction.getIndex()).getTrackColor().equals(thisAction.getTrackColor())
+                                || mainState.getTracks().get(thisAction.getIndex()).getCovered()){
                             mainState.getTracks2().get(thisAction.getIndex()).setSelected(true);
                             mainState.setSelectedTrackColor(mainState.getTracks2().get(thisAction.getIndex()).getTrackColor());
                             mainState.setTrackSpot(thisAction.getIndex());
