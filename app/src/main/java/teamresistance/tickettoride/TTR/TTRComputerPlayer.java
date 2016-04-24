@@ -109,13 +109,13 @@ public class TTRComputerPlayer extends GameComputerPlayer implements Serializabl
         if (info instanceof GameState) {
             compState = (TTRGameState) info;
             if (compState.getPlayerID() == this.playerNum) {
-                this.sleep(3000); //allows the user to see what's happening at a slower pace
+                this.sleep(5000); //allows the user to see what's happening at a slower pace
 
                 //only enter here if the player is smart, the game has started, and the player does
                 //not need more destination cards
                 if (isDifficult && compState.getGameStart() && !destinations) {
 
-                    if (computerGraph == null) {
+                    //if (computerGraph == null) {
                         //create lists of vertexes and edges not owned by other players
                         Vertex temp = null;
 
@@ -164,25 +164,25 @@ public class TTRComputerPlayer extends GameComputerPlayer implements Serializabl
                         computerGraph = new DijkstraGraph(myVertexList, myEdgeList);
                         //create a dijkstra object to assist in evaluating the Graph
                         compDijkstra = new Dijkstra(computerGraph);
-                    }
+                    //}
 
-                    int unClaimedTracks = 0;
-                    for (int i = 0; i < compState.getTracks().size(); i++) {
-                        String city1 = compState.getTracks().get(i).getStartCity();
-                        String city2 = compState.getTracks().get(i).getEndCity();
-                        if (compState.getTracks().get(i).getPlayerID() != -1 &&
-                                compState.getTracks().get(i).getPlayerID() != this.playerNum) {
-                            if ((compDijkstra.getMyGraph().getEdges().get(unClaimedTracks).getV1().getName().equals(city1)
-                                    && compDijkstra.getMyGraph().getEdges().get(unClaimedTracks).getV2().getName().equals(city2))
-                                    || (compDijkstra.getMyGraph().getEdges().get(unClaimedTracks).getV1().getName().equals(city1)
-                                    && compDijkstra.getMyGraph().getEdges().get(unClaimedTracks).getV2().getName().equals(city2))) {
-                                compDijkstra.getMyGraph().removeEdge(unClaimedTracks);
-                            }
-                        }
-                        else{
-                            unClaimedTracks++;
-                        }
-                    }
+                    //int unClaimedTracks = 0;
+//                    for (int i = 0; i < compState.getTracks().size(); i++) {
+//                        String city1 = compState.getTracks().get(i).getStartCity();
+//                        String city2 = compState.getTracks().get(i).getEndCity();
+//                        if (compState.getTracks().get(i).getPlayerID() != -1 &&
+//                                compState.getTracks().get(i).getPlayerID() != this.playerNum) {
+//                            if ((compDijkstra.getMyGraph().getEdges().get(unClaimedTracks).getV1().getName().equals(city1)
+//                                    && compDijkstra.getMyGraph().getEdges().get(unClaimedTracks).getV2().getName().equals(city2))
+//                                    || (compDijkstra.getMyGraph().getEdges().get(unClaimedTracks).getV1().getName().equals(city1)
+//                                    && compDijkstra.getMyGraph().getEdges().get(unClaimedTracks).getV2().getName().equals(city2))) {
+//                                compDijkstra.getMyGraph().removeEdge(unClaimedTracks);
+//                            }
+//                        }
+//                        else{
+//                            unClaimedTracks++;
+//                        }
+//                    }
                     if(compState.getFaceDownTrainCards().getCards().isEmpty()){
                         getRandomTrack();
                     }
@@ -192,6 +192,8 @@ public class TTRComputerPlayer extends GameComputerPlayer implements Serializabl
                     }
                     if (compState.getFaceDownTrainCards().getCards().isEmpty()) {
                         if(!compState.getTrackModeSelected()){
+                            compDijkstra.clear();
+                            computerGraph.clear();
                             game.sendAction(new ChangeModeAction(this));
                         }
                         else {
@@ -212,6 +214,8 @@ public class TTRComputerPlayer extends GameComputerPlayer implements Serializabl
                                                 finishMove = true;
                                                 chosenColor = colors[j];
                                                 foundTrack = true;
+                                                compDijkstra.clear();
+                                                computerGraph.clear();
                                                 game.sendAction(new TrackPlaceAction(this, chosenColor, i));
                                             }
                                         }
@@ -227,6 +231,8 @@ public class TTRComputerPlayer extends GameComputerPlayer implements Serializabl
                                                 finishMove = true;
                                                 chosenColor = colors[j];
                                                 foundTrack = true;
+                                                compDijkstra.clear();
+                                                computerGraph.clear();
                                                 game.sendAction(new TrackPlaceAction(this, chosenColor, i));
                                             } else if ((compState.getTrainColorCount(colors[j], this.playerNum) + rainbowCount)
                                                     >= compState.getTracks().get(i).getTrainTrackNum()
@@ -234,6 +240,8 @@ public class TTRComputerPlayer extends GameComputerPlayer implements Serializabl
                                                 finishMove = true;
                                                 chosenColor = colors[j];
                                                 foundTrack = true;
+                                                compDijkstra.clear();
+                                                computerGraph.clear();
                                                 game.sendAction(new TrackPlaceAction(this, chosenColor, i));
                                             }
                                         }
@@ -245,6 +253,8 @@ public class TTRComputerPlayer extends GameComputerPlayer implements Serializabl
                             if (!finishMove) {
                                 noTracks = true;
                                 moveStarted = false;
+                                compDijkstra.clear();
+                                computerGraph.clear();
                                 game.sendAction(new ChangeModeAction(this));
                             }
                         }
@@ -301,6 +311,8 @@ public class TTRComputerPlayer extends GameComputerPlayer implements Serializabl
 
                             //if a card in the face up deck was found that the player wants, select it
                             if (spot != -1) {
+                                compDijkstra.clear();
+                                computerGraph.clear();
                                 game.sendAction(new DrawUpCardAction(this, spot));
                             }
 
@@ -317,10 +329,14 @@ public class TTRComputerPlayer extends GameComputerPlayer implements Serializabl
                                 //the face down card
                                 if (spot != -1 && numSelected == 0) {
                                     finishMove = true;
+                                    compDijkstra.clear();
+                                    computerGraph.clear();
                                     game.sendAction(new DrawUpCardAction(this, spot));
                                 } else {
                                     moveStarted = false;
                                     finishMove = false;
+                                    compDijkstra.clear();
+                                    computerGraph.clear();
                                     game.sendAction(new DrawDownCardAction(this));
                                 }
                             }
@@ -329,6 +345,8 @@ public class TTRComputerPlayer extends GameComputerPlayer implements Serializabl
                             else {
                                 moveStarted = false;
                                 finishMove = false;
+                                compDijkstra.clear();
+                                computerGraph.clear();
                                 game.sendAction(new ConfirmSelectionAction(this));
                             }
                         }
@@ -336,19 +354,23 @@ public class TTRComputerPlayer extends GameComputerPlayer implements Serializabl
                         //if there are tracks the player wants, but they're still in card mode,
                         //change the mode
                         else if (!compState.getTrackModeSelected()) {
+                            compDijkstra.clear();
+                            computerGraph.clear();
                             game.sendAction(new ChangeModeAction(this));
                         }
 
                         //if the player is in the correct mode, select a track that the player wants
                         else {
                             finishMove = true;
+                            compDijkstra.clear();
+                            computerGraph.clear();
                             game.sendAction(new TrackPlaceAction(this, trackColor, trainPosition));
                         }
                     }
 
                     //confirmSelectionActions
                     else {
-                        this.sleep(3000);
+                        this.sleep(1000);
                         for (int i = 0; i < neededCards.length; i++) {
                             neededCards[i] = false;
                         }
@@ -358,14 +380,20 @@ public class TTRComputerPlayer extends GameComputerPlayer implements Serializabl
                         if (noTracks) {
                             moveStarted = false;
                             finishMove = false;
+                            compDijkstra.clear();
+                            computerGraph.clear();
                             game.sendAction(new ConfirmSelectionAction(this));
                         } else if (destinations) {
                             if(compState.getDestinationCards().size() > 2) {
+                                compDijkstra.clear();
+                                computerGraph.clear();
                                 game.sendAction(new DrawDestinationCardAction(this));
                             }
                             else{
                                 noMoreDests = true;
                                 if(!compState.getFaceDownTrainCards().getCards().isEmpty()) {
+                                    compDijkstra.clear();
+                                    computerGraph.clear();
                                     game.sendAction(new DrawDownCardAction(this));
                                 }
                                 else{
@@ -380,8 +408,12 @@ public class TTRComputerPlayer extends GameComputerPlayer implements Serializabl
                             foundTrack = false;
                             //take a track
                             if (trackColor.equals("Gray")) {
+                                compDijkstra.clear();
+                                computerGraph.clear();
                                 game.sendAction(new ConfirmSelectionAction(this, chosenColor, trainHand[8]));
                             } else {
+                                compDijkstra.clear();
+                                computerGraph.clear();
                                 game.sendAction(new ConfirmSelectionAction(this, trainHand[8]));
                             }
                         }

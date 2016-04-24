@@ -83,6 +83,7 @@ public class TTRGameState extends GameState implements Serializable{
     private Deck[] playerTrainDecks = new Deck[numPlayers];
     private Deck[] playerDestinationDecks = new Deck[numPlayers];
     private int numRainbows;
+    private int numCardsTaken;
 
     /*
      * Initializes a new GameState
@@ -592,6 +593,7 @@ public class TTRGameState extends GameState implements Serializable{
             coveredTracks2[i] = false;
             trackIds2[i] = -1;
         }
+        numCardsTaken = 0;
     }
     /*
      * Creates a deep copy of the GameState
@@ -638,6 +640,7 @@ public class TTRGameState extends GameState implements Serializable{
         selectedTracks2 = new boolean[trackSet2.size()];
         coveredTracks2 = new boolean[trackSet2.size()];
         trackIds2 = new int[trackSet2.size()];
+        numCardsTaken = original.getNumCardsTaken();
         for(int i = 0; i < trackSet1.size(); i++){
             selectedTracks[i] = trackSet1.get(i).getSelected();
             coveredTracks[i] = trackSet1.get(i).getCovered();
@@ -966,4 +969,7 @@ public class TTRGameState extends GameState implements Serializable{
     public boolean[] getSelectedTracks2() {
         return selectedTracks2;
     }
+
+    public void setNumCardsTaken(int numCardsTaken){ this.numCardsTaken = numCardsTaken; }
+    public int getNumCardsTaken() { return numCardsTaken; }
 }
