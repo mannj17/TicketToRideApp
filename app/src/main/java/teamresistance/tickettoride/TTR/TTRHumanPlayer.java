@@ -620,9 +620,6 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
                         } else if (!highlights2[index] && selected[index]) {
                             index = -1;
                         }
-                        else if(!highlights[index]) {
-                            index = -1;
-                        }
                         else{
                             if (canChoose(myState.getTracks().get(index))) {
                                 colorString = myState.getTracks().get(index).getTrackColor();
