@@ -159,15 +159,19 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
             }
             if(myState.getFaceDownTrainCards().getCards().isEmpty()){
                 this.clickTrain.setClickable(false);
+                this.clickTrain.setVisibility(View.INVISIBLE);
             }
             else{
                 this.clickTrain.setClickable(true);
+                this.clickTrain.setVisibility(View.VISIBLE);
             }
-            if(myState.getDestinationCards().getCards().isEmpty()){
+            if(myState.getDestinationCards().getCards().size() < 3){
                 this.clickDestination.setClickable(false);
+                this.clickDestination.setVisibility(View.INVISIBLE);
             }
             else{
                 this.clickDestination.setClickable(true);
+                this.clickDestination.setVisibility(View.VISIBLE);
             }
             if (myState.getFaceDownTrainCards().getHighlight()) {
                 this.clickTrain.setAlpha(0.5f);
@@ -594,13 +598,20 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
                             index = -1;
                         } else if (!highlights2[index] && selected[index]) {
                             index = -1;
-                        } else {
+                        }
+                        else if(!highlights[index]) {
+                            index = -1;
+                        }
+                        else{
                             if (canChoose(myState.getTracks().get(index))) {
                                 colorString = myState.getTracks().get(index).getTrackColor();
                             } else if (canChoose(myState.getTracks2().get(index))) {
                                 colorString = myState.getTracks2().get(index).getTrackColor();
                             }
                         }
+                    }
+                    else {
+                        index = -1;
                     }
                     game.sendAction(new TrackPlaceAction(this, colorString, index));
                 } else {

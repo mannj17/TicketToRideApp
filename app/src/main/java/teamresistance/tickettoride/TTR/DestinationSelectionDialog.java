@@ -189,18 +189,24 @@ public class DestinationSelectionDialog extends  Dialog implements android.view.
             if(selected >= min){
                 //confirm minimum number of cards selected before confrim
                 Card[] tempCards = new Card[selected];
+                Card[] deleteCards = new Card[3-selected];
                 int count = 0;
+                int deleteCount = 0;
                 for(int i = 0; i < 3; i++){
                     if(destinationCards[i].getHighlight()){
                         tempCards[count] = destinationCards[i];
                         count++;
+                    }
+                    else{
+                        deleteCards[deleteCount] = destinationCards[i];
+                        deleteCount++;
                     }
                 }
                 destinationCards[0].setHighlight(false);
                 destinationCards[1].setHighlight(false);
                 destinationCards[2].setHighlight(false);
                 Deck sendDeck = new Deck("deck with added cards", tempCards);
-                Deck removeDeck = new Deck("Cards to be removed", destinationCards);
+                Deck removeDeck = new Deck("Cards to be removed", deleteCards);
                 game.sendAction(new ConfirmSelectionAction(player, sendDeck, removeDeck));
                 dismiss();
             } else { //display error

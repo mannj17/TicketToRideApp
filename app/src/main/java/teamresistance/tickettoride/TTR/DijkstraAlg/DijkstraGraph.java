@@ -61,7 +61,7 @@ public class DijkstraGraph implements Serializable {
         }
 
         public void removeEdge(int pos){
-            vertexes.remove(pos);
+            edges.remove(pos);
         }
 
     public void clear() {
