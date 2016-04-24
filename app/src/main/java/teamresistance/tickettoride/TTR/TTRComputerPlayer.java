@@ -114,8 +114,6 @@ public class TTRComputerPlayer extends GameComputerPlayer implements Serializabl
                 //only enter here if the player is smart, the game has started, and the player does
                 //not need more destination cards
                 if (isDifficult && compState.getGameStart() && !destinations) {
-
-                    //if (computerGraph == null) {
                         //create lists of vertexes and edges not owned by other players
                         Vertex temp = null;
 
@@ -164,25 +162,7 @@ public class TTRComputerPlayer extends GameComputerPlayer implements Serializabl
                         computerGraph = new DijkstraGraph(myVertexList, myEdgeList);
                         //create a dijkstra object to assist in evaluating the Graph
                         compDijkstra = new Dijkstra(computerGraph);
-                    //}
 
-                    //int unClaimedTracks = 0;
-//                    for (int i = 0; i < compState.getTracks().size(); i++) {
-//                        String city1 = compState.getTracks().get(i).getStartCity();
-//                        String city2 = compState.getTracks().get(i).getEndCity();
-//                        if (compState.getTracks().get(i).getPlayerID() != -1 &&
-//                                compState.getTracks().get(i).getPlayerID() != this.playerNum) {
-//                            if ((compDijkstra.getMyGraph().getEdges().get(unClaimedTracks).getV1().getName().equals(city1)
-//                                    && compDijkstra.getMyGraph().getEdges().get(unClaimedTracks).getV2().getName().equals(city2))
-//                                    || (compDijkstra.getMyGraph().getEdges().get(unClaimedTracks).getV1().getName().equals(city1)
-//                                    && compDijkstra.getMyGraph().getEdges().get(unClaimedTracks).getV2().getName().equals(city2))) {
-//                                compDijkstra.getMyGraph().removeEdge(unClaimedTracks);
-//                            }
-//                        }
-//                        else{
-//                            unClaimedTracks++;
-//                        }
-//                    }
                     if(compState.getFaceDownTrainCards().getCards().isEmpty()){
                         getRandomTrack();
                     }
@@ -434,7 +414,8 @@ public class TTRComputerPlayer extends GameComputerPlayer implements Serializabl
                     }
 
                     //enter here if the move is to place tracks
-                    if (currentMove > 75) {
+                    if (currentMove > 60 ||
+                        compState.getPlayerTrainDecks()[this.playerNum].getCards().size() > 25) {
                         getRandomTrack();
                     }
                     //enter here if drawing cards from down deck

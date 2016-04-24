@@ -211,15 +211,18 @@ public class CardColorSelectionDialog extends Dialog implements android.view.Vie
     @Override
     public void onClick(View v) {
         if(v.getId() == R.id.btn_select){
-            if(selected){
+            if(selected || useRainbows >= min){
                 int position = -1;
                 for(int i = 0; i < trainColors.length; i++){
                     if(highlighted[i]){
                         position = i;
                     }
                 }
-                if(colorCounts[position] + useRainbows >= min
-                        || useRainbows == min) {
+                if(useRainbows >= min){
+                    game.sendAction(new ConfirmSelectionAction(player, trainColors[0], useRainbows));
+                    dismiss();
+                }
+                else if((colorCounts[position] + useRainbows) >= min) {
                     game.sendAction(new ConfirmSelectionAction(player, trainColors[position], useRainbows));
                     dismiss();
                 }
