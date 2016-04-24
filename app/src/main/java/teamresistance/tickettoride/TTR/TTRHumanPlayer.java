@@ -228,7 +228,9 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
             else{
                 if (myState.getPlayerID() == this.playerNum) {
                     for (int i = 0; i < myState.getTracks().size(); i++) {
-                        if (canChoose(myState.getTracks().get(i)) || !val) {
+                        if ((canChoose(myState.getTracks().get(i)) || !val)
+                                && myState.getTrainTokens()[this.playerNum]
+                                >= myState.getTracks().get(i).getTrainTrackNum()) {
                             highlights[i] = val;
                         } else {
                             highlights[i] = !val;
@@ -236,7 +238,9 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
                         if(myState.getTracks2().get(i).getTrackColor().equals("Blank")){
                             highlights2[i] = false;
                         }
-                        else if(canChoose(myState.getTracks2().get(i)) || !val){
+                        else if((canChoose(myState.getTracks2().get(i)) || !val)
+                                && myState.getTrainTokens()[this.playerNum]
+                                >= myState.getTracks().get(i).getTrainTrackNum()){
                             highlights2[i] = val;
                         }
                         else{
@@ -606,6 +610,10 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
                 displayDestinationViewDialog(tempDeck);
             }
         }
+        else if (v.getId() == R.id.viewDestinationCards) {
+            Deck tempDeck = myState.getPlayerDestinationDecks()[playerNum];
+            displayDestinationViewDialog(tempDeck);
+        }
     }
 
     /**
@@ -625,7 +633,7 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
                 String colorString = null;
                 if (index != -1) {
                     if ((highlights[index] || highlights2[index]) &&
-                            myState.getTrainTokens()[this.playerNum] >
+                            myState.getTrainTokens()[this.playerNum] >=
                                 myState.getTracks().get(index).getTrainTrackNum()) {
                         if (!highlights[index] && selected2[index]) {
                             index = -1;
