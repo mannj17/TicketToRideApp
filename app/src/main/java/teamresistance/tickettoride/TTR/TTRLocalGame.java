@@ -254,8 +254,7 @@ public class TTRLocalGame extends LocalGame implements Serializable {
                 }
             }
 
-            return ("" + this.playerNames[topScorePlayer] + " Wins with " + mainState.getScores()[topScorePlayer] + "points!");
-
+            return ("" + this.playerNames[topScorePlayer] + " wins with " + mainState.getScores()[topScorePlayer] + "points!");
         }
         return null;
     }
@@ -949,6 +948,7 @@ public class TTRLocalGame extends LocalGame implements Serializable {
         }
         return true;
     }
+    public void setTurnsLeft(int turnsLeft) {this.turnsLeft = turnsLeft;}
 
     /**
      * Sets the players in the game state
