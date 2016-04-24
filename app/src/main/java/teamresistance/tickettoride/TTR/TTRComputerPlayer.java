@@ -385,8 +385,6 @@ public class TTRComputerPlayer extends GameComputerPlayer implements Serializabl
                             game.sendAction(new ConfirmSelectionAction(this));
                         } else if (destinations) {
                             if(compState.getDestinationCards().size() > 2) {
-                                compDijkstra.clear();
-                                computerGraph.clear();
                                 game.sendAction(new DrawDestinationCardAction(this));
                             }
                             else{
