@@ -596,7 +596,7 @@ public class TTRLocalGame extends LocalGame implements Serializable {
                         mainState.getDestinationCards().getCards().remove(mainState.getDestinationCards().size() - 1);
                     }
 
-                    //move destination cards to discard pile if not selected.
+                    //move destination cards to discard pile if not selected. 1
                     while (!((ConfirmSelectionAction) action).getRemoveDeck().getCards().isEmpty()) {
                         mainState.getDestinationDiscard().moveCardTo(mainState.getDestinationDiscard(),
                                 ((ConfirmSelectionAction) action).getRemoveDeck(), 0);
