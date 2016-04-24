@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Random;
 
 import teamresistance.tickettoride.Game.GamePlayer;
 import teamresistance.tickettoride.Game.LocalGame;
@@ -737,7 +738,8 @@ public class TTRLocalGame extends LocalGame implements Serializable {
                 }
                 else{
                     if(mainState.getTracks().get(thisAction.getIndex()).getSelected()) {
-                        if (mainState.getTracks().get(thisAction.getIndex()).getTrackColor().equals(thisAction.getTrackColor())) {
+                        if (mainState.getTracks().get(thisAction.getIndex()).getTrackColor().equals(thisAction.getTrackColor())
+                                || mainState.getTracks().get(thisAction.getIndex()).getCovered()) {
                             mainState.getTracks().get(thisAction.getIndex()).setSelected(false);
                             mainState.getTracks2().get(thisAction.getIndex()).setSelected(true);
                             mainState.setSelectedTrackColor(mainState.getTracks2().get(thisAction.getIndex()).getTrackColor());
@@ -746,7 +748,8 @@ public class TTRLocalGame extends LocalGame implements Serializable {
                         }
                     }
                     else if(mainState.getTracks2().get(thisAction.getIndex()).getSelected()){
-                        if(mainState.getTracks2().get(thisAction.getIndex()).getTrackColor().equals(thisAction.getTrackColor())) {
+                        if(mainState.getTracks2().get(thisAction.getIndex()).getTrackColor().equals(thisAction.getTrackColor())
+                                || mainState.getTracks2().get(thisAction.getIndex()).getCovered()) {
                             mainState.getTracks2().get(thisAction.getIndex()).setSelected(false);
                             mainState.getTracks().get(thisAction.getIndex()).setSelected(true);
                             mainState.setSelectedTrackColor(mainState.getTracks().get(thisAction.getIndex()).getTrackColor());
@@ -948,9 +951,9 @@ public class TTRLocalGame extends LocalGame implements Serializable {
     public void start(GamePlayer[] players) {
         //Sets gameState's numPlayer and play order
         mainState.setNumPlayers(players.length);
-//        Random rand = new Random();
-//        rand.setSeed(System.currentTimeMillis());
-//        mainState.setPlayerID(rand.nextInt(players.length));
+        Random rand = new Random();
+        rand.setSeed(System.currentTimeMillis());
+        mainState.setPlayerID(rand.nextInt(players.length));
         super.start(players);
     }
 }

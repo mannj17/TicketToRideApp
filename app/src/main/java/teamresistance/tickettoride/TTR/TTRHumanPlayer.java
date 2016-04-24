@@ -258,6 +258,12 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
                     covered[i] = false;
                     playerIDs[i] = -1;
                 }
+                if(myState.getTrackIds()[i] != -1){
+                    playerIDs[i] = myState.getTrackIds()[i];
+                }
+                else{
+                    playerIDs[i] = -1;
+                }
                 if (myState.getSelectedTracks2()[i]) {
                     selected2[i] = true;
                 } else {
@@ -265,9 +271,13 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
                 }
                 if (myState.getCoveredTracks2()[i]) {
                     covered2[i] = true;
-                    playerIDs2[i] = myState.getTrackIds()[i];
                 } else {
                     covered2[i] = false;
+                }
+                if(myState.getTrackIds2()[i] != -1){
+                    playerIDs2[i] = myState.getTrackIds2()[i];
+                }
+                else{
                     playerIDs2[i] = -1;
                 }
             }
@@ -621,9 +631,9 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
                             index = -1;
                         }
                         else{
-                            if (canChoose(myState.getTracks().get(index))) {
+                            if (canChoose(myState.getTracks().get(index)) && !covered[index]) {
                                 colorString = myState.getTracks().get(index).getTrackColor();
-                            } else if (canChoose(myState.getTracks2().get(index))) {
+                            } else if (canChoose(myState.getTracks2().get(index)) && !covered[index]) {
                                 colorString = myState.getTracks2().get(index).getTrackColor();
                             }
                         }

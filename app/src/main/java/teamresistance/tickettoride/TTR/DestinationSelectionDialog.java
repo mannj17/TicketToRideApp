@@ -39,7 +39,6 @@ public class DestinationSelectionDialog extends  Dialog implements android.view.
     private TTRGameState myState; //TTRGameState
     private Button selectBtn; //button for user to select their choices
     private ImageButton ticket1, ticket2, ticket3; //imagebuttons for tickets user can click
-    private TextView routes1, routes2, routes3; //text views represeing routes listed on tickets
     private int min; //int representing minimum number of cards user must select
     private int selected; //boolean set when select is clicked
     private TextView text; //textview to display any errors/messages to user
@@ -90,6 +89,8 @@ public class DestinationSelectionDialog extends  Dialog implements android.view.
         ticket1 = (ImageButton) findViewById(R.id.ticket1);
         ticket2 = (ImageButton) findViewById(R.id.ticket2);
         ticket3 = (ImageButton) findViewById(R.id.ticket3);
+        text = (TextView)findViewById(R.id.dsd_text);
+
         //display text representing destination tickets
         DestinationCards tempCard1 = (DestinationCards)destinationCards[0];
         DestinationCards tempCard2 = (DestinationCards)destinationCards[1];
@@ -210,7 +211,7 @@ public class DestinationSelectionDialog extends  Dialog implements android.view.
                 game.sendAction(new ConfirmSelectionAction(player, sendDeck, removeDeck));
                 dismiss();
             } else { //display error
-                text.setText("Please select at least the minimum number of ticket cards.");
+                text.setText("Please select at least the minimum number of ticket cards: " + min );
             }
         }
         /**  Control for highlighting (aka selecting) the cards */

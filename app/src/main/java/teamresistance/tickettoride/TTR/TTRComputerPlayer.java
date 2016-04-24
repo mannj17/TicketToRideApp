@@ -109,7 +109,7 @@ public class TTRComputerPlayer extends GameComputerPlayer implements Serializabl
         if (info instanceof GameState) {
             compState = (TTRGameState) info;
             if (compState.getPlayerID() == this.playerNum) {
-                this.sleep(2000); //allows the user to see what's happening at a slower pace
+                this.sleep(3000); //allows the user to see what's happening at a slower pace
 
                 //only enter here if the player is smart, the game has started, and the player does
                 //not need more destination cards
@@ -348,7 +348,7 @@ public class TTRComputerPlayer extends GameComputerPlayer implements Serializabl
 
                     //confirmSelectionActions
                     else {
-                        this.sleep(2000);
+                        this.sleep(3000);
                         for (int i = 0; i < neededCards.length; i++) {
                             neededCards[i] = false;
                         }

@@ -56,6 +56,7 @@ public class TTRSurfaceView extends SurfaceView implements Serializable {
     final int PLAYER4_COLOR = 0xFFFFFF00;
     final int HIGHLIGHT_COLOR = 0xFF00FF00;
     final int SELECTION_COLOR = 0xFF00ffff;
+    final int OUTLINE_COLOR = 0xFF000000;
 
     private Paint paint = new Paint();
 
@@ -2246,6 +2247,10 @@ public class TTRSurfaceView extends SurfaceView implements Serializable {
                 else if(playerIDs[i] == 3){paint.setColor(PLAYER4_COLOR);}
                 paint.setStyle(Paint.Style.FILL);
                 canvas.drawPath(paths.get(i), paint);
+                paint.setColor(OUTLINE_COLOR);
+                paint.setStrokeWidth(10);
+                paint.setStyle(Paint.Style.STROKE);
+                canvas.drawPath(paths.get(i),paint);
             }
             if(highlights2[i]){
                 paint.setColor(HIGHLIGHT_COLOR);
@@ -2265,6 +2270,10 @@ public class TTRSurfaceView extends SurfaceView implements Serializable {
                 else if(playerIDs2[i] == 3){paint.setColor(PLAYER4_COLOR);}
                 paint.setStyle(Paint.Style.FILL);
                 canvas.drawPath(paths2.get(i), paint);
+                paint.setColor(OUTLINE_COLOR);
+                paint.setStrokeWidth(10);
+                paint.setStyle(Paint.Style.STROKE);
+                canvas.drawPath(paths2.get(i),paint);
             }
         }
     }
