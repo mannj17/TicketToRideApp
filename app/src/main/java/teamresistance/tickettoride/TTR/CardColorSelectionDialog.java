@@ -218,7 +218,8 @@ public class CardColorSelectionDialog extends Dialog implements android.view.Vie
                         position = i;
                     }
                 }
-                if(colorCounts[position] + useRainbows >= min) {
+                if(colorCounts[position] + useRainbows >= min
+                        || useRainbows == min) {
                     game.sendAction(new ConfirmSelectionAction(player, trainColors[position], useRainbows));
                     dismiss();
                 }
