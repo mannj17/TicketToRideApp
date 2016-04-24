@@ -1045,6 +1045,7 @@ public class TTRSurfaceView extends SurfaceView implements Serializable {
         paths2.add(new Path(pathTemp2));
         touchRects.add(tempRect);
         pathTemp.reset();
+        pathTemp2.reset();
 
         //34
         tempRect = new Rect((int) (maxX * .25), (int) (maxY * .55), (int) (maxX * .38), (int) (maxY * .76));
