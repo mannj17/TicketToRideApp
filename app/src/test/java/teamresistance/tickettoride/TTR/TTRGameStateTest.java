@@ -8,57 +8,62 @@ import java.util.ArrayList;
 import teamresistance.tickettoride.Game.LocalGame;
 
 /**
- * Created by Jess on 3/30/2016.
+ *  TTRGameState creates the GameState
+ *
+ * @author Nick Scacciotti
+ * @author Nick Larson
+ * @author Jess Mann
+ * @author Parker Schibel
+ * @version April 2016
  */
 public class TTRGameStateTest extends TestCase {
-//  @Test
-//  public void testPlayerGraphs(){
-//      TTRGameState myState = new TTRGameState();
-//      PlayerGraph myGraph = new PlayerGraph();
-//      myState.setNumPlayers(2);
-//      //Give player 1 20 tracks
-//      for (int i = 0; i < 15; i++){
-//          myState.myTracks[i].setCovered(true);
-//          myState.myTracks[i].setPlayerID(0);
-//      }
-//      ArrayList<Track> myTracks = myGraph.divideTrackByPlayer(myState.getTracks(), 0);
-//      myGraph.creteGraph(myTracks, 0);
-//      assertEquals(true, myGraph.isReachable(0, 5));
-//  }
-//}
-
     /**
-     * Tests the copy constructor, checking some values
+     * Tests the initial constructor
      * @throws Exception
      */
     @Test
-    public void testCopyConstructor() throws Exception
+    public void testTTRStateConstructor() throws Exception
     {
-            TTRGameState testState = new TTRGameState();
-            testState.setNumPlayers(3);
-            TTRGameState copyState = new TTRGameState(testState);
-            assertTrue("Number of Players", testState.getNumPlayers() == copyState.getNumPlayers());
-            assertNotNull("Face Down Deck", copyState.getFaceDownTrainCards());
-            assertNotNull("Destination Deck", copyState.getDestinationCards());
-            assertNotNull("Face Up Deck", copyState.getFaceUpTrainCards());
-            assertNotNull("trackSets", copyState.getTracks());
+        TTRGameState testState = new TTRGameState();
+        testState.setNumPlayers(3);
+        assertTrue("3 players not initialized", testState.getNumPlayers() == 3);
+        assertNotNull("", testState.getDestinationCards());
+        //cannot have card mode and track mode simultaneously, mutually exclusive
+        testState.setCardModeSelected(true);
+        assertTrue("card mode not true", testState.getCardModeSelected());
+        assertFalse("track mode not false", testState.getTrackModeSelected());
+    }
+    /**
+     * Tests the copy constructor, checking various values
+     *
+     * @throws Exception
+     */
+    @Test
+    public void testCopyConstructor() throws Exception {
+        TTRGameState testState = new TTRGameState();
+        testState.setNumPlayers(3);
+        TTRGameState copyState = new TTRGameState(testState);
+        assertTrue("Number of Players", testState.getNumPlayers() == copyState.getNumPlayers());
+        assertNotNull("Face Down Deck", copyState.getFaceDownTrainCards());
+        assertNotNull("Destination Deck", copyState.getDestinationCards());
+        assertNotNull("Face Up Deck", copyState.getFaceUpTrainCards());
+        assertTrue("trackSets", copyState.getTracks() == testState.getTracks());
     }
 
     /**
      * Checks the face up deck at game start
+     *
      * @throws Exception
      */
     @Test
-    public void testDrawFaceUpCards() throws Exception
-    {
-            TTRGameState testState = new TTRGameState();
-            Deck testDeck = testState.getFaceUpTrainCards();
-            int size = testDeck.size();
-            assertTrue("Not 5 cards", size == 5);
-            for (int k =0; k<size; k++)
-            {
+    public void testFaceUpDeck() throws Exception {
+        TTRGameState testState = new TTRGameState();
+        Deck testDeck = testState.getFaceUpTrainCards();
+        int size = testDeck.size();
+        assertTrue("Not 5 cards", size == 5);
+        for (int k = 0; k < size; k++) {
             assertNotNull("Face Up Deck Draw Cards", testDeck.getCards().get(k));
-            }
+        }
     }
 
     /**
@@ -67,49 +72,74 @@ public class TTRGameStateTest extends TestCase {
      * @throws Exception
      */
     @Test
-    public void testGameOver() throws Exception
-    {
-            TTRGameState testState = new TTRGameState();
-            //TTRLocalGame testLocal = new TTRLocalGame();
-
-            testState.setNumPlayers(2);
-            assertFalse("Game over to soon", testState.getIsGameOver());
-            testState.setTrainToken(1, 1);
-           //testState.setIsLastRound(true);
-            //testLocal.checkIfGameOver();
-            //TODO  NOT PASSING
-            assertTrue("Game not over", testState.getIsGameOver());
+    public void testGameOver() throws Exception {
+        TTRGameState testState = new TTRGameState();
+        TTRLocalGame testLocal = new TTRLocalGame();
+        testState.setNumPlayers(2);
+        testState.setTrainToken(25, 0);
+        testState.setTrainToken(15, 1);
+        assertFalse("Game over early", testState.getIsGameOver());
+        testState.setTrainToken(1, 1);
+        testState.setIsLastRound(true);
+        testLocal.checkIfGameOver();
+        //TODO  NOT PASSING
+        assertTrue("Game not over", testState.getIsGameOver());
     }
 
     /**
      * test the destination deck
+     *
      * @throws Exception
      */
     @Test
-    public void testDestinationDeck() throws Exception
-    {
+    public void testDestinationDeck() throws Exception {
         TTRGameState testState = new TTRGameState();
         Deck testDeck = testState.getDestinationCards();
         int size = testDeck.size();
-        for(int k =0; k<size; k++)
-        {
-            assertNotNull("Destination deck has null reference",testDeck.getCards().get(k));
+        for (int k = 0; k < size; k++) {
+            assertNotNull("Destination deck has null reference", testDeck.getCards().get(k));
         }
     }
 
     /**
      * Checks to see if train card deck is null
+     *
      * @throws Exception
      */
     @Test
-    public void testTrainCardDeck() throws Exception
-    {
+    public void testTrainCardDeck() throws Exception {
         TTRGameState testState = new TTRGameState();
         Deck testDeck = testState.getFaceDownTrainCards();
         int size = testDeck.size();
-        for(int j =0; j < size; j++)
-        {
-                assertNotNull("train card deck has null reference", testDeck.getCards().get(j));
+        for (int j = 0; j < size; j++) {
+            assertNotNull("train card deck has null reference", testDeck.getCards().get(j));
+        }
+    }
+
+    /**
+     * Checks to see that the discard deck starts out empty
+     *
+     * @throws Exception
+     */
+    @Test
+    public void testDiscardTrainCards() throws Exception {
+        TTRGameState testState = new TTRGameState();
+        Deck testDeck = testState.getTrainDiscard();
+        assertTrue("Train discard should be empty (size 0) at start of game", testDeck.size() == 0);
+    }
+
+    /**
+     * Checks to see if the tracks have been initialized
+     *
+     * @throws Exception
+     */
+    @Test
+    public void testTrack() throws Exception {
+        TTRGameState testState = new TTRGameState();
+        ArrayList testTrack = testState.getTracks();
+        int size = testTrack.size();
+        for (int k = 0; k < size; k++) {
+            assertNotNull("tracks have null reference",testTrack.get(k));
         }
     }
 }
