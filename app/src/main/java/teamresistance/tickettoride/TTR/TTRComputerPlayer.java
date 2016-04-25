@@ -48,14 +48,14 @@ public class TTRComputerPlayer extends GameComputerPlayer implements Serializabl
             "White", "Black", "Rainbow"};
 
     //list of all destinations to assist with determining which destination route to attempt and complete
-    private final ArrayList<String> destNames = new ArrayList<String>(Arrays.asList("Denver", "El Paso", "Kansas City",
+    private final String[] destNames ={"Denver", "El Paso", "Kansas City",
             "Houston", "New York", "Atlanta", "Chicago", "New Orleans", "Calgary",
             "Salt Lake City", "Helena", "Los Angeles", "Duluth", "Sault Ste Marie",
             "Nashville", "Montreal", "Oklahoma City", "Seattle", "Santa Fe",
             "Toronto", "Miami", "Portland", "Phoenix", "Dallas",
             "Pittsburgh", "Winnipeg", "Little Rock", "Boston", "Vancouver",
             "San Francisco", "Las Vegas", "Washington", "Raleigh", "Charleston",
-            "Saint Louis", "Omaha"));
+            "Saint Louis", "Omaha"};
     private boolean destinations; //boolean that says if the player needs to draw more destination cards
     private boolean foundTrack;   //boolean that says if a track to be taken has been found for the dumb AI
     private boolean newRoute;
@@ -97,12 +97,13 @@ public class TTRComputerPlayer extends GameComputerPlayer implements Serializabl
         rainbowCount = 0;
         chosenColor = "";
         trainPosition = -1;
-        myEdgeList = new ArrayList<>();
-        myVertexList = new ArrayList<>();
-        neededTracks = new ArrayList<>();
-        getTracks = new ArrayList<>();
-        reachEdgeList = new ArrayList<>();
+        myEdgeList = new ArrayList<Edge>();
+        myVertexList = new ArrayList<Vertex>();
+        neededTracks = new ArrayList<Track>();
+        getTracks = new ArrayList<Edge>();
+        reachEdgeList = new ArrayList<Edge>();
     }
+
     @Override
     protected void receiveInfo(GameInfo info) {
         if (info instanceof GameState) {
@@ -117,8 +118,8 @@ public class TTRComputerPlayer extends GameComputerPlayer implements Serializabl
                         Vertex temp = null;
 
                         //Create a Vertex for every city on the map
-                        for (int i = 0; i < destNames.size(); i++) {
-                            temp = new Vertex(destNames.get(i), i);
+                        for (int i = 0; i < destNames.length; i++) {
+                            temp = new Vertex(destNames[i], i);
                             myVertexList.add(temp);
                         }
                         Vertex startCity = null;
@@ -131,12 +132,12 @@ public class TTRComputerPlayer extends GameComputerPlayer implements Serializabl
                             String city2 = compState.getTracks().get(i).getEndCity();
                             for (Vertex vert : myVertexList) {
                                 int spot = vert.getId();
-                                if (city1.equals(destNames.get(spot))
+                                if (city1.equals(destNames[spot])
                                         && (compState.getTracks().get(i).getPlayerID() == -1
                                         || compState.getTracks().get(i).getPlayerID() == this.playerNum)
                                         && startCity == null) {
                                     startCity = vert;
-                                } else if (city2.equals(destNames.get(spot))
+                                } else if (city2.equals(destNames[spot])
                                         && (compState.getTracks().get(i).getPlayerID() == -1
                                         || compState.getTracks().get(i).getPlayerID() == this.playerNum)
                                         && endCity == null) {
@@ -648,10 +649,10 @@ public class TTRComputerPlayer extends GameComputerPlayer implements Serializabl
                     String city2 = lookCard.getCity2();
                     int cityPos1 = -1;
                     int cityPos2 = -1;
-                    for (int j = 0; j < destNames.size(); j++) {
-                        if (city1.equals(destNames.get(j))) {
+                    for (int j = 0; j < destNames.length; j++) {
+                        if (city1.equals(destNames[j])) {
                             cityPos1 = j;
-                        } else if (city2.equals(destNames.get(j))) {
+                        } else if (city2.equals(destNames[j])) {
                             cityPos2 = j;
                         }
                     }
@@ -676,10 +677,10 @@ public class TTRComputerPlayer extends GameComputerPlayer implements Serializabl
             String city2 = currentCard.getCity2();
             int cityPos1 = -1;
             int cityPos2 = -1;
-            for (int j = 0; j < destNames.size(); j++) {
-                if (city1.equals(destNames.get(j))) {
+            for (int j = 0; j < destNames.length; j++) {
+                if (city1.equals(destNames[j])) {
                     cityPos1 = j;
-                } else if (city2.equals(destNames.get(j))) {
+                } else if (city2.equals(destNames[j])) {
                     cityPos2 = j;
                 }
             }
@@ -781,11 +782,11 @@ public class TTRComputerPlayer extends GameComputerPlayer implements Serializabl
                 String city2 = compState.getTracks().get(i).getEndCity();
                 for (Vertex vert : computerGraph.getVertexes()) {
                     int spot = vert.getId();
-                    if (city1.equals(destNames.get(spot))
+                    if (city1.equals(destNames[spot])
                             && compState.getTracks().get(i).getPlayerID() == this.playerNum
                             && startCity == null) {
                         startCity = vert;
-                    } else if (city2.equals(destNames.get(spot))
+                    } else if (city2.equals(destNames[spot])
                             && compState.getTracks().get(i).getPlayerID() == this.playerNum
                             && endCity == null) {
                         endCity = vert;
@@ -863,7 +864,7 @@ public class TTRComputerPlayer extends GameComputerPlayer implements Serializabl
 
         //depending on if its the start or middle of the game, the minimum number
         //of cards to select must be enforced.
-        int minimum;
+        int minimum = 0;
         if (compState.getGameStart()) {
             minimum = 1;
         } else {
@@ -911,10 +912,10 @@ public class TTRComputerPlayer extends GameComputerPlayer implements Serializabl
                 String city2 = lookCard.getCity2();
                 int cityPos1 = -1;
                 int cityPos2 = -1;
-                for (int j = 0; j < destNames.size(); j++) {
-                    if (city1.equals(destNames.get(j))) {
+                for (int j = 0; j < destNames.length; j++) {
+                    if (city1.equals(destNames[j])) {
                         cityPos1 = j;
-                    } else if (city2.equals(destNames.get(j))) {
+                    } else if (city2.equals(destNames[j])) {
                         cityPos2 = j;
                     }
                 }
@@ -954,6 +955,7 @@ public class TTRComputerPlayer extends GameComputerPlayer implements Serializabl
                 }
             }
         }
+
         //add the cards to the players hand and create an array keeping track of
         //which cards have been completed
         Card[] tempCards = new Card[numSelected];

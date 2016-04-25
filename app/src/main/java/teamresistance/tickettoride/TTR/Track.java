@@ -1,5 +1,8 @@
 package teamresistance.tickettoride.TTR;
 
+import android.graphics.Path;
+import android.graphics.Rect;
+
 import java.io.Serializable;
 
 /**
@@ -9,7 +12,7 @@ import java.io.Serializable;
  * @author Nick Larson
  * @author Jess Mann
  * @author Parker Schibel
- * @version April 2016
+ * @version March 2016
  */
 public class Track implements Serializable {
     private static final long serialVersionUID = 388245564192016L;
@@ -23,6 +26,7 @@ public class Track implements Serializable {
     private String startCity = null;
     private String endCity = null;
     private boolean selectHighlight = false;
+
     /**
      * Constructor for track object
      * @param trainTrackNum the length/number of train cars needed to claim route
@@ -38,6 +42,7 @@ public class Track implements Serializable {
         this.highlight = false;
         this.selected = false;
     }
+
     public Track(Track orig){
         this.trainTrackNum = orig.getTrainTrackNum();
         this.trackColor = orig.getTrackColor();
@@ -46,6 +51,7 @@ public class Track implements Serializable {
         this.highlight = orig.getHighlight();
         this.selected = orig.getSelected();
     }
+
     /**
      * Sets whether the track is highlighted or not
      *
@@ -56,7 +62,7 @@ public class Track implements Serializable {
     }
 
     /**
-     * Returns if highlighted
+     * Retruns if highlighted
      *
      * @return
      *      Returns true/false if track is highlighted
@@ -66,8 +72,8 @@ public class Track implements Serializable {
     }
 
     /**
-     * Returns the track number
-     * @return int train
+     * Returns the tracknumber
+     * @return
      */
     public int getTrainTrackNum(){
         return trainTrackNum;
@@ -76,7 +82,7 @@ public class Track implements Serializable {
 
     /**
      * Checks if track is selected
-     * @return boolean of selected track
+     * @return
      */
     public Boolean getSelected(){
         return selected;
@@ -89,9 +95,10 @@ public class Track implements Serializable {
     public void setSelected(Boolean val){
         selected = val;
     }
+
     /**
-     * Returns if the track is covered
-     * @return boolean if track covered
+     * Retruns if the track is covered
+     * @return
      */
     public Boolean getCovered(){
         return covered;

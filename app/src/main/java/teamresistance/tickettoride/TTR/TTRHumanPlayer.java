@@ -1,8 +1,13 @@
 package teamresistance.tickettoride.TTR;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
+import android.media.AudioManager;
 import android.media.SoundPool;
+import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
@@ -12,6 +17,7 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import java.io.Serializable;
+import java.util.HashMap;
 import java.util.Random;
 
 import teamresistance.tickettoride.Game.GameHumanPlayer;
@@ -39,9 +45,12 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
     public GameMainActivity myActivity;
     public TTRGameState myState;
     private Deck trainDeck;
+    private final String[] trainColors = {"Yellow", "Blue", "Orange", "White",
+            "Pink", "Black", "Red", "Green", "Rainbow"};
     private Button confirmSelection;
     private static final long serialVersionUID = 333245564192016L;
     protected SoundPool soundArray;
+    private Random rand = new Random();
 
     /** TextViews for player's names*/
     private TextView cpu1PlayerTextView;
@@ -122,6 +131,8 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
     public TTRHumanPlayer(String name) {
         super(name);
     }
+
+
 
     /**
      * callback method when we get a message (e.g., from the game)

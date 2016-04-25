@@ -18,7 +18,7 @@ import teamresistance.tickettoride.R;
  * @author Nick Larson
  * @author Jess Mann
  * @author Parker Schibel
- * @version April 2016
+ * @version March 2016
  */
 
 public class TTRSurfaceView extends SurfaceView implements Serializable {
@@ -78,6 +78,7 @@ public class TTRSurfaceView extends SurfaceView implements Serializable {
          address. Therefore, I implemented the suggestion after every path creation.
          */
         //creates a path and a rect for each track
+
         //0
         tempRect = new Rect((int) (maxX * .0), (int) (maxY * .290), (int) (maxX * .05), (int) (maxY * .8));
         pathTemp.moveTo(maxX * .028f, maxY * .286f);
@@ -1891,7 +1892,7 @@ public class TTRSurfaceView extends SurfaceView implements Serializable {
         touchRects.add(tempRect);
         pathTemp.reset();
 
-        tempRect = new Rect((int) (maxX * .38), (int) (maxY * .85), (int) (maxX * .59), (maxY));
+        tempRect = new Rect((int) (maxX * .38), (int) (maxY * .85), (int) (maxX * .59), (int) (maxY));
         pathTemp.moveTo(maxX * .380f, maxY * .867f);
         pathTemp.lineTo(maxX * .375f, maxY * .877f);
         pathTemp.lineTo(maxX * .403f, maxY * .904f);

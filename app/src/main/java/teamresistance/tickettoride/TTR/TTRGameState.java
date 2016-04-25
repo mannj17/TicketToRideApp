@@ -12,15 +12,15 @@ import teamresistance.tickettoride.Game.infoMsg.GameState;
  * @author Nick Larson
  * @author Jess Mann
  * @author Parker Schibel
- * @version April 2016
+ * @version March 2016
  */
 public class TTRGameState extends GameState implements Serializable{
 
     private static final long serialVersionUID = 388245678192016L;
     private Track tempTrack;
     private Track blankTrack = new Track(-1, "Blank", "N/A", "N/A");
-    private ArrayList<Track> trackSet1 = new ArrayList<>();
-    private ArrayList<Track> trackSet2 = new ArrayList<>();
+    private ArrayList<Track> trackSet1 = new ArrayList<Track>();
+    private ArrayList<Track> trackSet2 = new ArrayList<Track>();
 
     int MAX_NUM_PLAYERS = 4;
 
@@ -651,6 +651,7 @@ public class TTRGameState extends GameState implements Serializable{
         }
         return position;
     }
+
     public Deck getFaceDownTrainCards() {
         return faceDownTrainCards;
     }
