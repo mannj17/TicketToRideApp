@@ -568,7 +568,18 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
                             myState.getTrackModeSelected() &&
                             myState.getTrainColorCount("Rainbow", 0) != 0) {
                         Deck tempDeck = myState.getPlayerTrainDecks()[playerNum];
-                        displayLocomotiveSelectionPopup(tempDeck, myState.getTracks().get(myState.getTrackSpot()));
+                        if(!myState.getTracks2().get(myState.getTrackSpot()).getTrackColor().equals("Blank")) {
+                            if(selected2[myState.getTrackSpot()]){
+                                displayLocomotiveSelectionPopup(tempDeck, myState.getTracks2().get(myState.getTrackSpot()));
+                            }
+                            else {
+                                displayLocomotiveSelectionPopup(tempDeck, myState.getTracks().get(myState.getTrackSpot()));
+                            }
+                        }
+                        else{
+                            displayLocomotiveSelectionPopup(tempDeck, myState.getTracks().get(myState.getTrackSpot()));
+
+                        }
                         soundArray.play(rand.nextInt(3), myActivity.leftVolume - .2f,
                                 myActivity.rightVolume - .2f, 1, 0, 1.0f);
 
