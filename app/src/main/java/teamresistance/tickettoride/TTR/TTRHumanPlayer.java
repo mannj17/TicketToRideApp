@@ -599,15 +599,10 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
                 } else {
                     this.trainCheck.setChecked(true);
                 }
-            }
-            else if (v.getId() == R.id.viewDestinationCards) {
+            } else if (v.getId() == R.id.viewDestinationCards) {
                 Deck tempDeck = myState.getPlayerDestinationDecks()[playerNum];
                 displayDestinationViewDialog(tempDeck);
             }
-        }
-        else if (v.getId() == R.id.viewDestinationCards) {
-            Deck tempDeck = myState.getPlayerDestinationDecks()[playerNum];
-            displayDestinationViewDialog(tempDeck);
         }
     }
 
