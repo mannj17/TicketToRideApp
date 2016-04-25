@@ -34,6 +34,10 @@ import teamresistance.tickettoride.TTR.Actions.TrackPlaceAction;
 /**
  * TTRHumanPlayer implements the human player
  *
+ * RESOURCES:
+ * 4/24/16
+ * http://stackoverflow.com/questions/9656853/the-correct-way-to-play-short-sounds-android
+ *
  * @author Nick Scacciotti
  * @author Nick Larson
  * @author Jess Mann
@@ -107,7 +111,6 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
     ArrayList for all of the ImageButtons.
      */
     private ImageButton[] faceUpTrainCards = new ImageButton[5];
-
     private ImageButton clickTrain;
     private ImageButton clickDestination;
     private CheckBox cardCheck;
@@ -131,8 +134,6 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
     public TTRHumanPlayer(String name) {
         super(name);
     }
-
-
 
     /**
      * callback method when we get a message (e.g., from the game)
@@ -530,7 +531,7 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
         viewPlayerDestinationCards = (Button) myActivity.findViewById(R.id.viewDestinationCards);
         viewPlayerDestinationCards.setOnClickListener(this);
 
-        //easter egg sound bits
+        //easter egg sound bits (external citation located in GameMainActivity)
         if(name.equals("his name is")){
             soundArray.play(4, myActivity.leftVolume - .2f,
                     myActivity.rightVolume - .2f, 1, 0, 1.0f);
@@ -538,14 +539,14 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
             soundArray.play(5, myActivity.leftVolume - .2f,
                     myActivity.rightVolume - .2f, 1, 0, 1.0f);
         } else if (name.equals("Ozzy")){
-            soundArray.play(6, myActivity.leftVolume - .4f,
-                    myActivity.rightVolume - .4f, 1, 0, 1.0f);
+            soundArray.play(6, myActivity.leftVolume - .7f,
+                    myActivity.rightVolume - .7f, 1, 0, 1.0f);
         } else if (name.equals("MAUL")){
             soundArray.play(7, myActivity.leftVolume - .2f,
                     myActivity.rightVolume - .2f, 1, 0, 1.0f);
+        } else if (name.equals("Nux")){
+            soundArray.play(8, myActivity.leftVolume + 0.7f, myActivity.rightVolume + 0.7f, 1, 0, 1.0f);
         }
-
-
     }
 
     /**
@@ -554,7 +555,6 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
     @Override
     public void onClick(View v) {
         Random rand = new Random();
-        //soundArray.play(rand.nextInt(3), myActivity.leftVolume,myActivity.rightVolume, 1, 0, 1.0f);
         if(myState.getPlayerID() == this.playerNum) {
             if (v.getId() == R.id.confirmSelection) {
                 if (myState.getPlayerID() == this.playerNum) {
@@ -589,14 +589,12 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
                         }
                         else{
                             displayLocomotiveSelectionPopup(tempDeck, myState.getTracks().get(myState.getTrackSpot()));
-
                         }
                         soundArray.play(rand.nextInt(3)+1, myActivity.leftVolume - .2f,
                                 myActivity.rightVolume - .2f, 1, 0, 1.0f);
 
                     } else {
                         game.sendAction(new ConfirmSelectionAction(me, myState.getSelectedTrackColor(), 0));
-                        
                     }
                 }
             } else if (v.getId() == R.id.Train1) {
@@ -669,7 +667,6 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
                     }
                     game.sendAction(new TrackPlaceAction(this, colorString, index));
                 } else {
-
                     return false;
                 }
             }

@@ -38,6 +38,10 @@ public class Dijkstra implements Serializable {
     private DijkstraGraph myGraph;     //the graph that is being evaluated
     final private int MAX = 100000000; //the maximum distance a Vertex can have
 
+    /**
+     * Constructor for Dijkstra object
+     * @param myGraph
+     */
     public Dijkstra(DijkstraGraph myGraph){
         this.myGraph = myGraph;
     }

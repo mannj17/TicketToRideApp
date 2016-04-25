@@ -202,6 +202,7 @@ View.OnClickListener {
 		soundMap.put(5, sounds.load(this, R.raw.imperial3, 1));
 		soundMap.put(6, sounds.load(this, R.raw.crazytrain, 1));
 		soundMap.put(7, sounds.load(this, R.raw.duel, 1));
+		soundMap.put(8, sounds.load(this, R.raw.nuxollius4, 1));
 		AudioManager audioManager = (AudioManager)getSystemService(this.AUDIO_SERVICE);
 		curVolume = audioManager.getStreamVolume(AudioManager.STREAM_MUSIC);
 		maxVolume = audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC);

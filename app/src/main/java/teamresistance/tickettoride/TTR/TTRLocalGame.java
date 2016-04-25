@@ -253,12 +253,10 @@ public class TTRLocalGame extends LocalGame implements Serializable {
                     topScorePlayer = j;
                 }
             }
-
             return ("" + this.playerNames[topScorePlayer] + " wins with " + mainState.getScores()[topScorePlayer] + "points!");
         }
         return null;
     }
-
 
     /**
      * Returns if the player made a move
