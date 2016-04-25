@@ -343,7 +343,7 @@ public class TTRComputerPlayer extends GameComputerPlayer implements Serializabl
                         //if no tracks were found on one run through, make it so that it will
                         //not enter the code that lets it choose random tracks
                         if (noTracks) {
-                            currentMove = rand.nextInt(75);
+                            currentMove = rand.nextInt(60);
                         } else {
                             currentMove = rand.nextInt(100);
                         }
