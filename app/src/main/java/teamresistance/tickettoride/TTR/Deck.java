@@ -32,6 +32,7 @@ public class Deck implements Serializable {
             cards.add(newCards[i]);
         }
         highlight = false;
+        this.deckName = deckName;
     }
 
     /*
