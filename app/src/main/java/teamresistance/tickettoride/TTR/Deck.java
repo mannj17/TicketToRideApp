@@ -27,7 +27,7 @@ public class Deck implements Serializable {
      * @cards
      */
     public Deck(String deckName, Card[] newCards) {
-        cards = new ArrayList<Card>();
+        cards = new ArrayList<>();
         for (int i = 0; i < newCards.length; i++){
             cards.add(newCards[i]);
         }
@@ -39,7 +39,7 @@ public class Deck implements Serializable {
      * @orig
      */
     public Deck(Deck orig) {
-        cards = new ArrayList<Card>();
+        cards = new ArrayList<>();
         for (int i =0; i < orig.getCards().size(); i++){
             cards.add(orig.getCards().get(i));
             cards.get(i).setHighlight(orig.getCards().get(i).getHighlight());
@@ -51,8 +51,8 @@ public class Deck implements Serializable {
      * Creates empty deck
      */
     public Deck(String deckName) {
-        cards = new ArrayList<Card>();
-        deckName = deckName;
+        cards = new ArrayList<>();
+        this.deckName = deckName;
         highlight = false;
     }
 
@@ -74,8 +74,8 @@ public class Deck implements Serializable {
 
     /**
      * Moves the top cards from one Deck to another
-     * @param targetDeck
-     * @param sourceDeck
+     * @param targetDeck deck to be added to
+     * @param sourceDeck deck cards removed from
      */
     public void moveTopCardTo(Deck targetDeck, Deck sourceDeck) {
         // will hold the card
@@ -101,8 +101,8 @@ public class Deck implements Serializable {
 
     /**
      * Moves the top cards from one Deck to another
-     * @param targetDeck
-     * @param sourceDeck
+     * @param targetDeck deck to have cards added
+     * @param sourceDeck deck having cards removed
      */
     public void moveCardTo(Deck targetDeck, Deck sourceDeck, int position) {
         synchronized (this.cards) {
@@ -116,8 +116,8 @@ public class Deck implements Serializable {
 
     /**
      * Moves all cards from one Deck to another
-     * @param targetDeck
-     * @param sourceDeck
+     * @param targetDeck deck cards are being added to
+     * @param sourceDeck deck cards are being removed from
      */
     public void moveAllCardsTo(Deck targetDeck, Deck sourceDeck) {
         int i = 0;
@@ -140,7 +140,7 @@ public class Deck implements Serializable {
 
     /**
      * Returns the size of cards ArrayList
-     * @return
+     * @return int size of the
      */
     public int size() {
          return cards.size();
@@ -148,7 +148,7 @@ public class Deck implements Serializable {
 
     /**
      * Removes top card
-     * @return
+     * @return card object
      */
     public Card removeTopCard() {
         return null;
@@ -156,7 +156,7 @@ public class Deck implements Serializable {
 
     /**
      * Shows top card of a deck
-     * @return
+     * @return card object
      */
     public Card peekAtTopCard() {
         return cards.get(this.size()-1);
@@ -164,7 +164,7 @@ public class Deck implements Serializable {
 
     /**
      * Returns cards ArrayList
-     * @return
+     * @return card object
      */
     public ArrayList<Card> getCards() {
         return cards;

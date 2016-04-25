@@ -12,26 +12,17 @@ import teamresistance.tickettoride.Game.infoMsg.GameState;
  * @author Nick Larson
  * @author Jess Mann
  * @author Parker Schibel
- * @version March 2016
+ * @version April 2016
  */
 public class TTRGameState extends GameState implements Serializable{
 
     private static final long serialVersionUID = 388245678192016L;
     private Track tempTrack;
     private Track blankTrack = new Track(-1, "Blank", "N/A", "N/A");
-    private ArrayList<Track> trackSet1 = new ArrayList<Track>();
-    private ArrayList<Track> trackSet2 = new ArrayList<Track>();
+    private ArrayList<Track> trackSet1 = new ArrayList<>();
+    private ArrayList<Track> trackSet2 = new ArrayList<>();
 
     int MAX_NUM_PLAYERS = 4;
-//    //The first locations labeled on the destination cards
-//    private int[] destinationCities1 = {1, 3, 4, 7, 9, 11, 13, 14, 16, 14, 18, 7, 13, 20, 22, 24,
-//            1, 27, 27, 29, 30, 9, 16, 12, 31, 22, 30, 12, 12, 18};
-//    //The second locations labeled on the destination cards
-//    private int[] destinationCities2 = {2, 4, 6, 8, 10, 12, 4, 14, 6, 17, 12, 19, 2, 21, 23, 24,
-//            26, 28, 4, 21, 19, 23, 8, 7, 6, 14, 16, 21, 24, 4};
-//    //The score values for each of the destination cards
-//    private int[] destinationValues = {4, 4, 6, 7, 7, 8, 8, 8, 9, 9, 9, 9, 10, 10, 11, 11, 11, 11,
-//            12, 12, 13, 13, 13, 16, 17, 17, 20, 20, 21, 22};
 
     /** Decks Used by the Game */
     private Deck faceDownTrainCards;
@@ -56,8 +47,6 @@ public class TTRGameState extends GameState implements Serializable{
     private boolean trainCardsSelected;
     /** Says if the player has clicked on a placeable track */
     private boolean placeTrainSelected;
-//    /** Says if the player needs to be given a pool of destination cards to pick from. Always true at the start since each player needs to choose destination cards. */
-//    private Boolean isSelectDestinationCards;
     /** If the down deck was clicked on and no face up card was selected, this boolean will say to just pull two cards from the down deck */
     private boolean onlyDownDeck;
     /** The selected track on screen. Set to -1 if no track is selected. */
@@ -662,30 +651,6 @@ public class TTRGameState extends GameState implements Serializable{
         }
         return position;
     }
-//    public int[] getDestinationCities1() {
-//        return destinationCities1;
-//    }
-//
-//    public void setDestinationCities1(int[] destinationCities1) {
-//        this.destinationCities1 = destinationCities1;
-//    }
-//
-//    public int[] getDestinationCities2() {
-//        return destinationCities2;
-//    }
-//
-//    public void setDestinationCities2(int[] destinationCities2) {
-//        this.destinationCities2 = destinationCities2;
-//    }
-//
-//    public int[] getDestinationValues() {
-//        return destinationValues;
-//    }
-//
-//    public void setDestinationValues(int[] destinationValues) {
-//        this.destinationValues = destinationValues;
-//    }
-
     public Deck getFaceDownTrainCards() {
         return faceDownTrainCards;
     }

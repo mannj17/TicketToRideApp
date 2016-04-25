@@ -97,13 +97,12 @@ public class TTRComputerPlayer extends GameComputerPlayer implements Serializabl
         rainbowCount = 0;
         chosenColor = "";
         trainPosition = -1;
-        myEdgeList = new ArrayList<Edge>();
-        myVertexList = new ArrayList<Vertex>();
-        neededTracks = new ArrayList<Track>();
-        getTracks = new ArrayList<Edge>();
-        reachEdgeList = new ArrayList<Edge>();
+        myEdgeList = new ArrayList<>();
+        myVertexList = new ArrayList<>();
+        neededTracks = new ArrayList<>();
+        getTracks = new ArrayList<>();
+        reachEdgeList = new ArrayList<>();
     }
-
     @Override
     protected void receiveInfo(GameInfo info) {
         if (info instanceof GameState) {
@@ -272,7 +271,7 @@ public class TTRComputerPlayer extends GameComputerPlayer implements Serializabl
                             int spot = -1;
                             if (numSelected < 2) {
                                 for (int i = 0; i < neededCards.length; i++) {
-                                    if (neededCards[i] == true) {
+                                    if (neededCards[i]) {
                                         for (int j = 0; j < compState.getFaceUpTrainCards().getCards().size(); j++) {
                                             if (((TrainCards) compState.getFaceUpTrainCards().getCards().get(j)).getType().equals(colors[i])
                                                     && !compState.getFaceUpTrainCards().getCards().get(j).getHighlight()) {
@@ -864,7 +863,7 @@ public class TTRComputerPlayer extends GameComputerPlayer implements Serializabl
 
         //depending on if its the start or middle of the game, the minimum number
         //of cards to select must be enforced.
-        int minimum = 0;
+        int minimum;
         if (compState.getGameStart()) {
             minimum = 1;
         } else {
@@ -955,7 +954,6 @@ public class TTRComputerPlayer extends GameComputerPlayer implements Serializabl
                 }
             }
         }
-
         //add the cards to the players hand and create an array keeping track of
         //which cards have been completed
         Card[] tempCards = new Card[numSelected];

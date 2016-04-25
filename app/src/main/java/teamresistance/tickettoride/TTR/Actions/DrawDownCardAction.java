@@ -12,7 +12,7 @@ import teamresistance.tickettoride.Game.actionMsg.GameAction;
  * @author Nick Larson
  * @author Jess Mann
  * @author Parker Schibel
- * @version March 2016
+ * @version April 2016
  */
 public class DrawDownCardAction extends GameAction implements Serializable {
     private static final long serialVersionUID = 388240786564192016L;

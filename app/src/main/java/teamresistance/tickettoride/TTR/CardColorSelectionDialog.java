@@ -57,12 +57,12 @@ public class CardColorSelectionDialog extends Dialog implements android.view.Vie
 
     /**
      * CardColorSelectionDialog constructor
-     * @param a
-     * @param cards
-     * @param myState
-     * @param track
-     * @param game
-     * @param player
+     * @param a reference to activity
+     * @param cards reference to deck
+     * @param myState reference to game state
+     * @param track reference to track
+     * @param game reference to game
+     * @param player reference to current player
      */
     public CardColorSelectionDialog(Activity a, Deck cards, TTRGameState myState, Track track, Game game, TTRHumanPlayer player) {
         super(player.myActivity);
@@ -97,7 +97,7 @@ public class CardColorSelectionDialog extends Dialog implements android.view.Vie
 
     /**
      * Method called when dialog created, used to initialize all widgets
-     * @param savedInstanceState
+     * @param savedInstanceState reference to current state
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -206,7 +206,7 @@ public class CardColorSelectionDialog extends Dialog implements android.view.Vie
 
     /**
      * Method for handling user clicks inside the dialog box
-     * @param v
+     * @param v reference to view
      */
     @Override
     public void onClick(View v) {
@@ -341,8 +341,8 @@ public class CardColorSelectionDialog extends Dialog implements android.view.Vie
 
     /**
      * Method to check if a train of a certain color exists in the passed in deck
-     * @param trainColor
-     * @return
+     * @param trainColor color
+     * @return int with number of trains of requested color
      */
     public int contains(String trainColor){
         Deck tempDeck = this.trainCards;

@@ -9,7 +9,7 @@ import java.io.Serializable;
  * @author Nick Larson
  * @author Jess Mann
  * @author Parker Schibel
- * @version March 2016
+ * @version April 2016
  */
 public class TrainCards extends Card implements Serializable {
     private static final long serialVersionUID = 777245564192016L;
