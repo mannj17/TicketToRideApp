@@ -32,6 +32,13 @@ public class Edge implements Serializable {
     private final Vertex v2;    //second vertex of the edge, corresponding to the second city
     private final int weight;   //how many tracks are in this edge.
 
+    /**
+     * Constructor for Edge object
+     * @param track
+     * @param v1
+     * @param v2
+     * @param weight
+     */
     public Edge(Track track, Vertex v1, Vertex v2, int weight) {
         this.track = track;
         this.city1 = track.getStartCity();

@@ -17,6 +17,12 @@ import teamresistance.tickettoride.Game.actionMsg.GameAction;
 public class DrawUpCardAction extends GameAction implements Serializable {
     private static final long serialVersionUID = 388970564192016L;
     private int pos;
+
+    /**
+     * Draws a card from a face up deck
+     * @param player
+     * @param pos
+     */
     public DrawUpCardAction(GamePlayer player, int pos) {
         super(player);
         this.pos = pos;

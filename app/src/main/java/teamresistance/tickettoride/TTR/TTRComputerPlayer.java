@@ -343,14 +343,14 @@ public class TTRComputerPlayer extends GameComputerPlayer implements Serializabl
                         //if no tracks were found on one run through, make it so that it will
                         //not enter the code that lets it choose random tracks
                         if (noTracks) {
-                            currentMove = rand.nextInt(45);
+                            currentMove = rand.nextInt(75);
                         } else {
                             currentMove = rand.nextInt(100);
                         }
                     }
 
                     //enter here if the move is to place tracks
-                    if (currentMove > 45 ||
+                    if (currentMove > 60 ||
                         compState.getPlayerTrainDecks()[this.playerNum].getCards().size() > 25) {
                         getRandomTrack();
                     }
@@ -932,7 +932,7 @@ public class TTRComputerPlayer extends GameComputerPlayer implements Serializabl
         currentMove = 0;
         foundTrack = false;
         //don't clear the graph and dijkstra if the game has not started, because they are null.
-        if(compState.getGameStart()){
+        if(compState.getGameStart() && isDifficult){
             compDijkstra.clear();
             computerGraph.clear();
         }
