@@ -192,6 +192,7 @@ View.OnClickListener {
          *      play-short-sounds-android
          *      Solution: I used the code from this post with some modifications
          */
+		//initializes the audio sound bits
 		sounds = new SoundPool(1, AudioManager.STREAM_MUSIC, 100);
 		soundMap = new HashMap<Integer, Integer>();
 		soundMap.put(1, sounds.load(this, R.raw.trainwhistle1, 1));

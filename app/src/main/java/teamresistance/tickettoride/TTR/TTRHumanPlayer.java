@@ -530,7 +530,7 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
         viewPlayerDestinationCards = (Button) myActivity.findViewById(R.id.viewDestinationCards);
         viewPlayerDestinationCards.setOnClickListener(this);
 
-
+        //easter egg sound bits
         if(name.equals("his name is")){
             soundArray.play(4, myActivity.leftVolume - .2f,
                     myActivity.rightVolume - .2f, 1, 0, 1.0f);
