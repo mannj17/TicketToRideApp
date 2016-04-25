@@ -43,9 +43,9 @@ public class DestinationViewDialog extends Dialog implements android.view.View.O
     private TextView destinationDeckTextView;
     /**
      * Contructor for dialog
-     * @param me
-     * @param cards
-     * @param game
+     * @param me reference to player
+     * @param cards reference to cards in hand
+     * @param game game
      */
     public DestinationViewDialog(TTRHumanPlayer me, Deck cards, Game game) {
         super(me.myActivity);
@@ -57,7 +57,7 @@ public class DestinationViewDialog extends Dialog implements android.view.View.O
 
     /**
      * Method called when dialog created, used to initialize all widgets
-     * @param savedInstanceState
+     * @param savedInstanceState referene to current state
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,22 +92,13 @@ public class DestinationViewDialog extends Dialog implements android.view.View.O
         for(int i = count; i < 9; i++){
             tickets[i].setVisibility(View.GONE);
         }
-        //TEXT
-//        destinationDeckTextView = (TextView) findViewById(R.id.destinationCardDeck);
-//        destinationDeckTextView.setWidth(500);
-//        for(int i = 0; i < destinationCards.getCards().size(); i++){
-//            destinationDeckTextView.setText(destinationDeckTextView.getText() + " \n" + ((DestinationCards)destinationCards.getCards().get(i)).getCity1() + " to "
-//                    + ((DestinationCards)destinationCards.getCards().get(i)).getCity2()
-//                    + " score: " + ((DestinationCards)destinationCards.getCards().get(i)).getScore());
-//        }
-
     }
 
     /**
      * Returns the resource id for the destination ticket images
-     * @param firstCity
-     * @param secondCity
-     * @return
+     * @param firstCity string name of city
+     * @param secondCity string name of city
+     * @return int that references edge
      */
     public int setDestCard(String firstCity, String secondCity){
         if(firstCity.equals("Winnipeg") && secondCity.equals("Little Rock")){
@@ -177,7 +168,7 @@ public class DestinationViewDialog extends Dialog implements android.view.View.O
 
     /**
      * Method for handling user clicks inside the dialog box
-     * @param v
+     * @param v reference to the view
      */
     @Override
     public void onClick(View v) {

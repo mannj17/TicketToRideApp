@@ -28,18 +28,16 @@ import teamresistance.tickettoride.TTR.DijkstraAlg.Vertex;
  * @author Nick Larson
  * @author Jess Mann
  * @author Parker Schibel
- * @version March 2016
+ * @version April 2016
  */
 public class TTRLocalGame extends LocalGame implements Serializable {
     private static final long serialVersionUID = 388111564192016L;
     //instance variables for the TTRLocalGame
     private TTRGameState mainState; //reference to the game state
-    private boolean noMoreTrains; //boolean to indicate the start of a game over
     private int turnsLeft; //number of turns left in the game when a game over state is initiated.
     private int topScorePlayer = 0; //position in the array of players of the player with
     //the highest score
     private int numStarted;
-    private String currentTrackColor = null; //the track color of the currently chosen track.
     private final ArrayList<String> destNames = new ArrayList<String>(Arrays.asList("Denver", "El Paso", "Kansas City",
             "Houston", "New York", "Atlanta", "Chicago", "New Orleans", "Calgary",
             "Salt Lake City", "Helena", "Los Angeles", "Duluth", "Sault Ste Marie",
@@ -54,13 +52,11 @@ public class TTRLocalGame extends LocalGame implements Serializable {
     ArrayList<Edge> myEdgeList;
     ArrayList<Vertex> myVertexList;
 
-
     /**
      * TTRLocalGame constructor
      */
     public TTRLocalGame() {
         mainState = new TTRGameState();
-        noMoreTrains = false;
         turnsLeft = 0;
         numStarted = 0;
     }
@@ -80,7 +76,7 @@ public class TTRLocalGame extends LocalGame implements Serializable {
      * Returns if the player can make a move
      *
      * @param playerIdx the player's player-number (ID)
-     * @return
+     * @return true if player can move
      */
     @Override
     protected boolean canMove(int playerIdx) {
@@ -90,7 +86,7 @@ public class TTRLocalGame extends LocalGame implements Serializable {
     /**
      * Returns the end game status
      *
-     * @return
+     * @return string with winner's name and score
      */
     @Override
     protected String checkIfGameOver() {
@@ -264,7 +260,7 @@ public class TTRLocalGame extends LocalGame implements Serializable {
      * Returns if the player made a move
      *
      * @param action The move that the player has sent to the game
-     * @return
+     * @return boolean
      */
     @Override
     protected boolean makeMove(GameAction action) {
@@ -585,7 +581,6 @@ public class TTRLocalGame extends LocalGame implements Serializable {
             //if some form of card has been selected
             else if (mainState.getCardModeSelected() || !mainState.getGameStart()) {
 
-                ConfirmSelectionAction myAction = (ConfirmSelectionAction) action;
                 if (mainState.getDestinationCardsSelected()
                         && ((ConfirmSelectionAction) action).getRemoveDeck() != null
                         && ((ConfirmSelectionAction) action).getSendDeck() != null) {
@@ -948,8 +943,6 @@ public class TTRLocalGame extends LocalGame implements Serializable {
         }
         return true;
     }
-    public void setTurnsLeft(int turnsLeft) {this.turnsLeft = turnsLeft;}
-
     /**
      * Sets the players in the game state
      * @param players

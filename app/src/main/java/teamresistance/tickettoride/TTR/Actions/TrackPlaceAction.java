@@ -19,8 +19,6 @@ public class TrackPlaceAction extends GameAction implements Serializable {
 
     private String trackColor;
     private int index;
-
-
     /*
      * Initializing a new action to change the mode
      * @player

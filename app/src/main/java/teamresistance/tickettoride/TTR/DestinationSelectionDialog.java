@@ -1,8 +1,6 @@
 package teamresistance.tickettoride.TTR;
 
 import android.app.Dialog;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
@@ -48,10 +46,10 @@ public class DestinationSelectionDialog extends  Dialog implements android.view.
 
     /**
      * Contructor for dialog
-     * @param me
-     * @param start
-     * @param cards
-     * @param game
+     * @param me reference to current player
+     * @param start boolean reference to turn
+     * @param cards reference to deck
+     * @param game reference to super-game
      */
     public DestinationSelectionDialog(TTRHumanPlayer me, boolean start, Deck cards, Game game) {
         super(me.myActivity);
@@ -76,7 +74,7 @@ public class DestinationSelectionDialog extends  Dialog implements android.view.
 
     /**
      * Method called when dialog created, used to initialize all widgets
-     * @param savedInstanceState
+     * @param savedInstanceState reference to current state
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -110,9 +108,9 @@ public class DestinationSelectionDialog extends  Dialog implements android.view.
 
     /**
      * Returns the resource id for the destination ticket images
-     * @param firstCity
-     * @param secondCity
-     * @return
+     * @param firstCity string first city
+     * @param secondCity string second city
+     * @return int reference
      */
     public int setDestCard(String firstCity, String secondCity){
         if(firstCity.equals("Winnipeg") && secondCity.equals("Little Rock")){
@@ -182,7 +180,7 @@ public class DestinationSelectionDialog extends  Dialog implements android.view.
 
     /**
      * Method for handling user clicks inside the dialog box
-     * @param v
+     * @param v reference to view
      */
     @Override
     public void onClick(View v) {

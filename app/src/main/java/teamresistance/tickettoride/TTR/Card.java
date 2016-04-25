@@ -7,7 +7,7 @@ import java.io.*;
  * @author Nick Larson
  * @author Jess Mann
  * @author Parker Schibel
- * @version March 2016
+ * @version April 2016
  */
 
 public class Card implements Serializable{

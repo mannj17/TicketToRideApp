@@ -1,6 +1,5 @@
 package teamresistance.tickettoride.TTR.Actions;
 
-import android.app.Activity;
 
 import java.io.Serializable;
 
