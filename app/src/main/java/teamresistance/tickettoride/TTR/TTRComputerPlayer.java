@@ -113,6 +113,8 @@ public class TTRComputerPlayer extends GameComputerPlayer implements Serializabl
                 //only enter here if the player is smart, the game has started, and the player does
                 //not need more destination cards
                 if (isDifficult && compState.getGameStart() && !destinations) {
+
+                    //if (computerGraph == null) {
                         //create lists of vertexes and edges not owned by other players
                         Vertex temp = null;
 
@@ -413,8 +415,7 @@ public class TTRComputerPlayer extends GameComputerPlayer implements Serializabl
                     }
 
                     //enter here if the move is to place tracks
-                    if (currentMove > 60 ||
-                        compState.getPlayerTrainDecks()[this.playerNum].getCards().size() > 25) {
+                    if (currentMove > 75) {
                         getRandomTrack();
                     }
                     //enter here if drawing cards from down deck

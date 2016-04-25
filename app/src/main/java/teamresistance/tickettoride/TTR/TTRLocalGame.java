@@ -288,9 +288,6 @@ public class TTRLocalGame extends LocalGame implements Serializable {
                 mainState.setTrackModeSelected(false);
                 for (int i = 0; i < mainState.getTracks().size(); i++) {
                     mainState.getTracks().get(i).setSelected(false);
-                    if(!mainState.getTracks2().get(i).getTrackColor().equals("None")){
-                        mainState.getTracks2().get(i).setSelected(false);
-                    }
                 }
             }//88
             return true;
@@ -330,8 +327,8 @@ public class TTRLocalGame extends LocalGame implements Serializable {
         }
         else if (action instanceof ConfirmSelectionAction
                 && (mainState.getPlaceTrainSelected()
-                || mainState.getTrainCardsSelected()
-                || mainState.getDestinationCardsSelected())) {
+                || mainState.getTrainCardsSelected())
+                || mainState.getDestinationCardsSelected()) {
             //if a track has been selected
             if (mainState.getGameStart()
                     && mainState.getTrackModeSelected()

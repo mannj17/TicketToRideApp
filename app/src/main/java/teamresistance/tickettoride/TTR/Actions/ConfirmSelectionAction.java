@@ -13,7 +13,7 @@ import teamresistance.tickettoride.TTR.Deck;
  * @author Nick Larson
  * @author Jess Mann
  * @author Parker Schibel
- * @version April 2016
+ * @version March 2016
  */
 public class ConfirmSelectionAction extends GameAction implements Serializable {
     private static final long serialVersionUID = 388780064192016L;
