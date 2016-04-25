@@ -191,9 +191,7 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
             if(myState.getNumPlayers() < 4) {
                 if (myState.getPlayerID() == this.playerNum) {
                     for (int i = 0; i < myState.getTracks().size(); i++) {
-                        if ((canChoose(myState.getTracks().get(i)) || !val)
-                                && myState.getTrainTokens()[this.playerNum]
-                                >= myState.getTracks().get(i).getTrainTrackNum()) {
+                        if (canChoose(myState.getTracks().get(i)) || !val) {
                             highlights[i] = val;
                             if(myState.getTracks2().get(i).getTrackColor().equals("Blank")){
                                 highlights2[i] = false;
@@ -552,18 +550,7 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
                             myState.getTrackModeSelected() &&
                             myState.getTrainColorCount("Rainbow", 0) != 0) {
                         Deck tempDeck = myState.getPlayerTrainDecks()[playerNum];
-                        if(!myState.getTracks2().get(myState.getTrackSpot()).getTrackColor().equals("Blank")) {
-                            if(selected2[myState.getTrackSpot()]){
-                                displayLocomotiveSelectionPopup(tempDeck, myState.getTracks2().get(myState.getTrackSpot()));
-                            }
-                            else {
-                                displayLocomotiveSelectionPopup(tempDeck, myState.getTracks().get(myState.getTrackSpot()));
-                            }
-                        }
-                        else{
-                            displayLocomotiveSelectionPopup(tempDeck, myState.getTracks().get(myState.getTrackSpot()));
-
-                        }
+                        displayLocomotiveSelectionPopup(tempDeck, myState.getTracks().get(myState.getTrackSpot()));
                         soundArray.play(rand.nextInt(3), myActivity.leftVolume - .2f,
                                 myActivity.rightVolume - .2f, 1, 0, 1.0f);
 
@@ -599,10 +586,15 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
                 } else {
                     this.trainCheck.setChecked(true);
                 }
-            } else if (v.getId() == R.id.viewDestinationCards) {
+            }
+            else if (v.getId() == R.id.viewDestinationCards) {
                 Deck tempDeck = myState.getPlayerDestinationDecks()[playerNum];
                 displayDestinationViewDialog(tempDeck);
             }
+        }
+        else if (v.getId() == R.id.viewDestinationCards) {
+            Deck tempDeck = myState.getPlayerDestinationDecks()[playerNum];
+            displayDestinationViewDialog(tempDeck);
         }
     }
 

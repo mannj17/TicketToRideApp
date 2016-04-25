@@ -863,7 +863,7 @@ public class TTRComputerPlayer extends GameComputerPlayer implements Serializabl
 
         //depending on if its the start or middle of the game, the minimum number
         //of cards to select must be enforced.
-        int minimum = 0;
+        int minimum;
         if (compState.getGameStart()) {
             minimum = 1;
         } else {
