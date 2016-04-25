@@ -1,8 +1,13 @@
 package teamresistance.tickettoride.TTR;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
+import android.media.AudioManager;
 import android.media.SoundPool;
+import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
@@ -12,6 +17,7 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import java.io.Serializable;
+import java.util.HashMap;
 import java.util.Random;
 
 import teamresistance.tickettoride.Game.GameHumanPlayer;
@@ -39,9 +45,12 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
     public GameMainActivity myActivity;
     public TTRGameState myState;
     private Deck trainDeck;
+    private final String[] trainColors = {"Yellow", "Blue", "Orange", "White",
+            "Pink", "Black", "Red", "Green", "Rainbow"};
     private Button confirmSelection;
     private static final long serialVersionUID = 333245564192016L;
     protected SoundPool soundArray;
+    private Random rand = new Random();
 
     /** TextViews for player's names*/
     private TextView cpu1PlayerTextView;
@@ -123,6 +132,8 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
         super(name);
     }
 
+
+
     /**
      * callback method when we get a message (e.g., from the game)
      *
@@ -191,7 +202,9 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
             if(myState.getNumPlayers() < 4) {
                 if (myState.getPlayerID() == this.playerNum) {
                     for (int i = 0; i < myState.getTracks().size(); i++) {
-                        if (canChoose(myState.getTracks().get(i)) || !val) {
+                        if ((canChoose(myState.getTracks().get(i)) || !val)
+                                && myState.getTrainTokens()[this.playerNum]
+                                >= myState.getTracks().get(i).getTrainTrackNum()) {
                             highlights[i] = val;
                             if(myState.getTracks2().get(i).getTrackColor().equals("Blank")){
                                 highlights2[i] = false;
@@ -550,7 +563,18 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
                             myState.getTrackModeSelected() &&
                             myState.getTrainColorCount("Rainbow", 0) != 0) {
                         Deck tempDeck = myState.getPlayerTrainDecks()[playerNum];
-                        displayLocomotiveSelectionPopup(tempDeck, myState.getTracks().get(myState.getTrackSpot()));
+                        if(!myState.getTracks2().get(myState.getTrackSpot()).getTrackColor().equals("Blank")) {
+                            if(selected2[myState.getTrackSpot()]){
+                                displayLocomotiveSelectionPopup(tempDeck, myState.getTracks2().get(myState.getTrackSpot()));
+                            }
+                            else {
+                                displayLocomotiveSelectionPopup(tempDeck, myState.getTracks().get(myState.getTrackSpot()));
+                            }
+                        }
+                        else{
+                            displayLocomotiveSelectionPopup(tempDeck, myState.getTracks().get(myState.getTrackSpot()));
+
+                        }
                         soundArray.play(rand.nextInt(3), myActivity.leftVolume - .2f,
                                 myActivity.rightVolume - .2f, 1, 0, 1.0f);
 
@@ -586,15 +610,10 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
                 } else {
                     this.trainCheck.setChecked(true);
                 }
-            }
-            else if (v.getId() == R.id.viewDestinationCards) {
+            } else if (v.getId() == R.id.viewDestinationCards) {
                 Deck tempDeck = myState.getPlayerDestinationDecks()[playerNum];
                 displayDestinationViewDialog(tempDeck);
             }
-        }
-        else if (v.getId() == R.id.viewDestinationCards) {
-            Deck tempDeck = myState.getPlayerDestinationDecks()[playerNum];
-            displayDestinationViewDialog(tempDeck);
         }
     }
 

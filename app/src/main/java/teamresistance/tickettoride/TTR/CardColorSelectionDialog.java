@@ -57,12 +57,12 @@ public class CardColorSelectionDialog extends Dialog implements android.view.Vie
 
     /**
      * CardColorSelectionDialog constructor
-     * @param a reference to activity
-     * @param cards reference to deck
-     * @param myState reference to game state
-     * @param track reference to track
-     * @param game reference to game
-     * @param player reference to current player
+     * @param a
+     * @param cards
+     * @param myState
+     * @param track
+     * @param game
+     * @param player
      */
     public CardColorSelectionDialog(Activity a, Deck cards, TTRGameState myState, Track track, Game game, TTRHumanPlayer player) {
         super(player.myActivity);
@@ -97,7 +97,7 @@ public class CardColorSelectionDialog extends Dialog implements android.view.Vie
 
     /**
      * Method called when dialog created, used to initialize all widgets
-     * @param savedInstanceState reference to current state
+     * @param savedInstanceState
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -206,20 +206,23 @@ public class CardColorSelectionDialog extends Dialog implements android.view.Vie
 
     /**
      * Method for handling user clicks inside the dialog box
-     * @param v reference to view
+     * @param v
      */
     @Override
     public void onClick(View v) {
         if(v.getId() == R.id.btn_select){
-            if(selected){
+            if(selected || useRainbows >= min){
                 int position = -1;
                 for(int i = 0; i < trainColors.length; i++){
                     if(highlighted[i]){
                         position = i;
                     }
                 }
-                if(colorCounts[position] + useRainbows >= min
-                        || useRainbows == min) {
+                if(useRainbows >= min){
+                    game.sendAction(new ConfirmSelectionAction(player, trainColors[0], useRainbows));
+                    dismiss();
+                }
+                else if((colorCounts[position] + useRainbows) >= min) {
                     game.sendAction(new ConfirmSelectionAction(player, trainColors[position], useRainbows));
                     dismiss();
                 }
@@ -338,8 +341,8 @@ public class CardColorSelectionDialog extends Dialog implements android.view.Vie
 
     /**
      * Method to check if a train of a certain color exists in the passed in deck
-     * @param trainColor color
-     * @return int with number of trains of requested color
+     * @param trainColor
+     * @return
      */
     public int contains(String trainColor){
         Deck tempDeck = this.trainCards;

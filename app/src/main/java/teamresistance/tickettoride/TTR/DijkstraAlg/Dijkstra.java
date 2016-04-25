@@ -1,9 +1,17 @@
 package teamresistance.tickettoride.TTR.DijkstraAlg;
 
 
+import android.util.Log;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * Creates the nodes for the dijkstra algorithm
@@ -70,7 +78,7 @@ public class Dijkstra implements Serializable {
     private ArrayList<Edge> getNeighbors(Vertex vertex){
 
         //an arrayList of the edges that connect the vertex to its neighbors
-        ArrayList<Edge> neighbors = new ArrayList<>();
+        ArrayList<Edge> neighbors = new ArrayList<Edge>();
         for(Edge edge: myGraph.getEdges()){
             //if the current edge has vertex as one of its vertexes, add it to the list.
             if(edge.getV1().getName().equals(vertex.getName())
@@ -158,7 +166,7 @@ public class Dijkstra implements Serializable {
      */
     public ArrayList<Vertex> getPath(int source, int destination){
         dijkstra(source);
-        ArrayList<Vertex> path = new ArrayList<>();
+        ArrayList<Vertex> path = new ArrayList<Vertex>();
         Vertex currentVertex = myGraph.getVertexes().get(destination);
 
         //add the destination vertex as the first part of the path

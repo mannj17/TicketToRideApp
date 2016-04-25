@@ -1,10 +1,14 @@
 package teamresistance.tickettoride.TTR;
 
+import android.app.Activity;
+import android.os.Bundle;
+
 import teamresistance.tickettoride.Game.GameMainActivity;
 import teamresistance.tickettoride.Game.GamePlayer;
 import teamresistance.tickettoride.Game.LocalGame;
 import teamresistance.tickettoride.Game.config.GameConfig;
 import teamresistance.tickettoride.Game.config.GamePlayerType;
+import teamresistance.tickettoride.R;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -28,7 +32,7 @@ public class TTRMainActivity extends GameMainActivity implements Serializable {
     @Override
     public GameConfig createDefaultConfig() {
         // Define the allowed player types
-        ArrayList<GamePlayerType> playerTypes = new ArrayList<>();
+        ArrayList<GamePlayerType> playerTypes = new ArrayList<GamePlayerType>();
 
         playerTypes.add(new GamePlayerType("Local Human Player") {
             public GamePlayer createPlayer(String name) {
@@ -67,7 +71,7 @@ public class TTRMainActivity extends GameMainActivity implements Serializable {
 
     /**
      *  Creates a new TTRLocalGame
-     * @return creates local game
+     * @return
      */
     @Override
     public LocalGame createLocalGame() {
