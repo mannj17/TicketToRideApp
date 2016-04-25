@@ -190,7 +190,8 @@ View.OnClickListener {
          *      Resource:
          *      http://stackoverflow.com/questions/9656853/the-correct-way-to-
          *      play-short-sounds-android
-         *      Solution: I used the code from this post with some modifications
+         *      Solution: I used the code from this post with some modifications.  It is a similar
+         *      code used in Nick Scacciotti's PongApp program.
          */
 		//initializes the audio sound bits
 		sounds = new SoundPool(1, AudioManager.STREAM_MUSIC, 100);

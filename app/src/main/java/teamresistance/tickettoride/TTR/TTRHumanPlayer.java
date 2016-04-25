@@ -531,7 +531,19 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
         viewPlayerDestinationCards = (Button) myActivity.findViewById(R.id.viewDestinationCards);
         viewPlayerDestinationCards.setOnClickListener(this);
 
-        //easter egg sound bits (external citation located in GameMainActivity)
+        //easter egg sound bits (see external citation located in GameMainActivity for SoundPool
+        // initialization)
+        /*
+         *  External Citation
+         *      Date: 23 April 2016
+         *      Problem: could not get sound to play/be initialized
+         *
+         *      Resource:
+         *      http://stackoverflow.com/questions/9656853/the-correct-way-to-
+         *      play-short-sounds-android
+         *      Solution: I used the code from this post with some modifications.  It is a similar
+         *      code used in Nick Scacciotti's PongApp program.
+         */
         if(name.equals("his name is")){
             soundArray.play(4, myActivity.leftVolume - .2f,
                     myActivity.rightVolume - .2f, 1, 0, 1.0f);
