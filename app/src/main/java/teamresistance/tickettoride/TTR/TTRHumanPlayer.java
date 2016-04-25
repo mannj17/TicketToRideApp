@@ -191,7 +191,9 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
             if(myState.getNumPlayers() < 4) {
                 if (myState.getPlayerID() == this.playerNum) {
                     for (int i = 0; i < myState.getTracks().size(); i++) {
-                        if (canChoose(myState.getTracks().get(i)) || !val) {
+                        if ((canChoose(myState.getTracks().get(i)) || !val)
+                                && myState.getTrainTokens()[this.playerNum]
+                                >= myState.getTracks().get(i).getTrainTrackNum()) {
                             highlights[i] = val;
                             if(myState.getTracks2().get(i).getTrackColor().equals("Blank")){
                                 highlights2[i] = false;
