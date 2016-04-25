@@ -37,11 +37,7 @@ public class Vertex implements Serializable {
     private boolean known = false;  //if during the algorithm this Vertex has been relaxed
     private int predecessor = -1;   //assists in finding the shortest path.
 
-    /**
-     * Constructor for Vertex object
-     * @param name
-     * @param id
-     */
+
     public Vertex(String name, int id) {
         this.name = name;
         this.id = id;
@@ -77,7 +73,6 @@ public class Vertex implements Serializable {
     public void setPredecessor(int predecessor){
         this.predecessor = predecessor;
     }
-
     @Override
     public String toString() {
         return name;

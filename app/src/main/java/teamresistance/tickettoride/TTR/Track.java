@@ -43,10 +43,6 @@ public class Track implements Serializable {
         this.selected = false;
     }
 
-    /**
-     * Copy constructor for track object
-     * @param orig original track object
-     */
     public Track(Track orig){
         this.trainTrackNum = orig.getTrainTrackNum();
         this.trackColor = orig.getTrackColor();
@@ -148,10 +144,6 @@ public class Track implements Serializable {
         this.endCity = endCity;
     }
 
-    /**
-     * Returns if selected
-     * @return
-     */
     public boolean isSelectHighlight() {
         return selectHighlight;
     }

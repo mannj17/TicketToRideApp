@@ -6,7 +6,7 @@ import teamresistance.tickettoride.Game.GamePlayer;
 import teamresistance.tickettoride.Game.actionMsg.GameAction;
 
 /**
- * Changes the GameAction made to the new playerC
+ * Changes the GameAction made to the new player
  *
  * @author Nick Scacciotti
  * @author Nick Larson
@@ -16,11 +16,6 @@ import teamresistance.tickettoride.Game.actionMsg.GameAction;
  */
 public class ChangeModeAction extends GameAction implements Serializable {
     private static final long serialVersionUID = 3884322323564192016L;
-
-    /**
-     * Changes the GameAction made to the new player
-     * @param player
-     */
     public ChangeModeAction(GamePlayer player) {
         super(player);
     }

@@ -39,11 +39,6 @@ public class DijkstraGraph implements Serializable {
         //all the tracks and edges of the graph
         private ArrayList<Edge> edges;
 
-    /**
-     * Constructor for DijkstraGraph object
-     * @param vertexes
-     * @param edges
-     */
         public DijkstraGraph(ArrayList<Vertex> vertexes, ArrayList<Edge> edges) {
             this.vertexes = vertexes;
             this.edges = edges;
@@ -72,5 +67,6 @@ public class DijkstraGraph implements Serializable {
     public void clear() {
         vertexes.clear();
         edges.clear();
+
     }
 }

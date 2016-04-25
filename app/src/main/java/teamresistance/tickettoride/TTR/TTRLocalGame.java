@@ -116,11 +116,7 @@ public class TTRLocalGame extends LocalGame implements Serializable {
             int longest = 0;
             int longestDistance = 0;
 
-            //add all of the cities to the Vertex list
-            for (int i = 0; i < destNames.size(); i++) {
-                temp = new Vertex(destNames.get(i), i);
-                myVertexList.add(temp);
-            }
+
 
             //placeHolders for the Vertexes to be added to edges
             Vertex startCity = null;
@@ -138,6 +134,11 @@ public class TTRLocalGame extends LocalGame implements Serializable {
                     //used to create the correct Edge
                     String city1 = mainState.getTracks().get(i).getStartCity();
                     String city2 = mainState.getTracks().get(i).getEndCity();
+                    //add all of the cities to the Vertex list
+                    for (int l = 0; l < destNames.size(); l++) {
+                        temp = new Vertex(destNames.get(l), l);
+                        myVertexList.add(temp);
+                    }
 
                     //run through every Vertex on the map and get only the Edges
                     //that the player owns
@@ -241,8 +242,9 @@ public class TTRLocalGame extends LocalGame implements Serializable {
                         }
                     }
                 }
-                //clear the list of edges to prepare for the next player.
+                //clear the list of edges and vertexes to prepare for the next player.
                 myEdgeList.clear();
+                myVertexList.clear();
             }
 
             //whichever player has the longest continuous track, give them bonus points.
@@ -253,10 +255,16 @@ public class TTRLocalGame extends LocalGame implements Serializable {
                     topScorePlayer = j;
                 }
             }
-            return ("" + this.playerNames[topScorePlayer] + " wins with " + mainState.getScores()[topScorePlayer] + "points!");
+            if(players[topScorePlayer] instanceof TTRHumanPlayer){
+                return ("You're Winner!");
+            }
+            else {
+                return ("" + this.playerNames[topScorePlayer] + " wins with " + mainState.getScores()[topScorePlayer] + " points!");
+            }
         }
         return null;
     }
+
 
     /**
      * Returns if the player made a move
@@ -772,7 +780,7 @@ public class TTRLocalGame extends LocalGame implements Serializable {
                             mainState.setPlaceTrainSelected(true);
                         }
                         else if(mainState.getTracks2().get(thisAction.getIndex()).getTrackColor().equals(thisAction.getTrackColor())
-                                || mainState.getTracks().get(thisAction.getIndex()).getCovered()){
+                                || mainState.getTracks().get(thisAction.getIndex()).getCovered()) {
                             mainState.getTracks2().get(thisAction.getIndex()).setSelected(true);
                             mainState.setSelectedTrackColor(mainState.getTracks2().get(thisAction.getIndex()).getTrackColor());
                             mainState.setTrackSpot(thisAction.getIndex());

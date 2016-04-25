@@ -38,9 +38,11 @@ public class DestinationViewDialog extends Dialog implements android.view.View.O
     private TTRHumanPlayer player; //player used in sending action
     private TTRGameState myState; //TTRGameState
     private Button closeBtn;
-    private ImageView ticket1, ticket2, ticket3, ticket4, ticket5, ticket6, ticket7, ticket8, ticket9;
-    private ImageView[] tickets = {ticket1,ticket2,ticket3,ticket4,ticket5,ticket6,ticket7,ticket8,ticket9};
-    private TextView destinationDeckTextView;
+    private Button backBtn;
+    private Button nextBtn;
+    private ImageView ticket1, ticket2, ticket3;
+    private ImageView[] tickets = {ticket1,ticket2,ticket3};
+    private int screenSpot;
     /**
      * Contructor for dialog
      * @param me
@@ -53,6 +55,7 @@ public class DestinationViewDialog extends Dialog implements android.view.View.O
         this.game = game;
         this.myState = me.myState;
         destinationCards = new Deck(cards);
+        this.screenSpot = 0;
     }
 
     /**
@@ -69,38 +72,16 @@ public class DestinationViewDialog extends Dialog implements android.view.View.O
         closeBtn = (Button) findViewById(R.id.btn_close);
         closeBtn.setOnClickListener(this);
 
+        backBtn = (Button) findViewById(R.id.back_button);
+        backBtn.setOnClickListener(this);
+
+        nextBtn = (Button) findViewById(R.id.next_button);
+        nextBtn.setOnClickListener(this);
+
         tickets[0] = (ImageView)findViewById(R.id.ticket1);
         tickets[1] = (ImageView)findViewById(R.id.ticket2);
         tickets[2] = (ImageView)findViewById(R.id.ticket3);
-        tickets[3] = (ImageView)findViewById(R.id.ticket4);
-        tickets[4] = (ImageView)findViewById(R.id.ticket5);
-        tickets[5] = (ImageView)findViewById(R.id.ticket6);
-        tickets[6] = (ImageView)findViewById(R.id.ticket7);
-        tickets[7] = (ImageView)findViewById(R.id.ticket8);
-        tickets[8] = (ImageView)findViewById(R.id.ticket9);
-
-        DestinationCards tempCard;
-
-        int count = 0;
-        for(int i = 0; i < myState.getPlayerDestinationDecks()[myState.getPlayerID()].size(); i++){
-            tempCard = (DestinationCards)myState.getPlayerDestinationDecks()[myState.getPlayerID()].getCards().get(i);
-            tickets[i].setImageResource(setDestCard(tempCard.getCity1(), tempCard.getCity2()));
-            tickets[i].setVisibility(View.VISIBLE);
-            count++;
-        }
-
-        for(int i = count; i < 9; i++){
-            tickets[i].setVisibility(View.GONE);
-        }
-        //TEXT
-//        destinationDeckTextView = (TextView) findViewById(R.id.destinationCardDeck);
-//        destinationDeckTextView.setWidth(500);
-//        for(int i = 0; i < destinationCards.getCards().size(); i++){
-//            destinationDeckTextView.setText(destinationDeckTextView.getText() + " \n" + ((DestinationCards)destinationCards.getCards().get(i)).getCity1() + " to "
-//                    + ((DestinationCards)destinationCards.getCards().get(i)).getCity2()
-//                    + " score: " + ((DestinationCards)destinationCards.getCards().get(i)).getScore());
-//        }
-
+        setImages();
     }
 
     /**
@@ -183,6 +164,53 @@ public class DestinationViewDialog extends Dialog implements android.view.View.O
     public void onClick(View v) {
         if(v.getId() == R.id.btn_close) {
             dismiss();
+        }
+        else if(v.getId() == R.id.back_button){
+            screenSpot--;
+            setImages();
+        }
+        else if(v.getId() == R.id.next_button){
+            screenSpot++;
+            setImages();
+        }
+    }
+
+    public void setImages(){
+        int count = 0;
+        boolean noMoreForward = false;
+            DestinationCards tempCard;
+            for (int i = screenSpot*3; i < (screenSpot*3) + 3; i++) {
+                if(i < myState.getPlayerDestinationDecks()[myState.getPlayerID()].getCards().size()) {
+                    tempCard = (DestinationCards) myState.getPlayerDestinationDecks()[myState.getPlayerID()].getCards().get(i);
+                    //http://stackoverflow.com/questions/2859212/how-to-clear-an-imageview-in-android
+                    tickets[i-(screenSpot*3)].setImageResource(0);
+                    tickets[i-(screenSpot*3)].setImageResource(setDestCard(tempCard.getCity1(), tempCard.getCity2()));
+                    tickets[i-(screenSpot*3)].setVisibility(View.VISIBLE);
+                    count++;
+                }
+                else{
+                    tickets[i-(screenSpot*3)].setVisibility(View.GONE);
+                    noMoreForward = true;
+                }
+                if((i+1) == myState.getPlayerDestinationDecks()[myState.getPlayerID()].getCards().size()){
+                    noMoreForward = true;
+                }
+            }
+        if(noMoreForward){
+            nextBtn.setClickable(false);
+            nextBtn.setAlpha(0.5f);
+        }
+        else{
+            nextBtn.setClickable(true);
+            nextBtn.setAlpha(1.0f);
+        }
+        if(screenSpot == 0){
+            backBtn.setClickable(false);
+            backBtn.setAlpha(0.5f);
+        }
+        else {
+            backBtn.setClickable(true);
+            backBtn.setAlpha(1.0f);
         }
     }
 }

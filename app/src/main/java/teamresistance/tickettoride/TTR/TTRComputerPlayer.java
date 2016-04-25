@@ -68,16 +68,16 @@ public class TTRComputerPlayer extends GameComputerPlayer implements Serializabl
     //train card in the player's hand
     private int trainPosition; //index of the train the player is trying to take.
     private String trackColor; //color of the current track that has been selected
-    private ArrayList<Vertex> myVertexList;
-    private ArrayList<Edge> myEdgeList;
-    private ArrayList<Track> neededTracks;
-    private ArrayList<Edge> reachEdgeList;
-    private ArrayList<Edge> getTracks;
-    private DijkstraGraph tempGraph;
-    private Dijkstra tempD;
-    private int spot1 = -1;
-    private int spot2 = -1;
-    private boolean noMoreDests = false;
+    private ArrayList<Vertex> myVertexList; //ArrayList of the vertexes in the game.
+    private ArrayList<Edge> myEdgeList; //ArrayList of the available edges for the AI in the game.
+    private ArrayList<Track> neededTracks; //ArrayList of the tracks that the AI needs to complete a route.
+    private ArrayList<Edge> reachEdgeList; //ArrayList that represents all of the owned tracks by the AI
+    private ArrayList<Edge> getTracks; //Arraylist of tracks. Used for finding the neededTracks
+    private DijkstraGraph tempGraph; //temporary Graph used to find the best move.
+    private Dijkstra tempD; //temporary Graph used to determine if a destination card has been completed.
+    private int spot1 = -1; //spot of the first city for a destination card.
+    private int spot2 = -1; //spot of the second city for a destination card.
+    private boolean noMoreDests = false; //boolean that lets the computer no there are no more destination cards.
 
     //array of booleans that correspond to whether or not the player needs cards of the colors the
     //indexes correspond to. Works similarly to the trainHand array.
@@ -114,130 +114,62 @@ public class TTRComputerPlayer extends GameComputerPlayer implements Serializabl
                 //only enter here if the player is smart, the game has started, and the player does
                 //not need more destination cards
                 if (isDifficult && compState.getGameStart() && !destinations) {
-                        //create lists of vertexes and edges not owned by other players
-                        Vertex temp = null;
+                    //create lists of vertexes and edges not owned by other players
+                    Vertex temp = null;
 
-                        //Create a Vertex for every city on the map
-                        for (int i = 0; i < destNames.length; i++) {
-                            temp = new Vertex(destNames[i], i);
-                            myVertexList.add(temp);
-                        }
-                        Vertex startCity = null;
-                        Vertex endCity = null;
+                    //Create a Vertex for every city on the map
+                    for (int i = 0; i < destNames.length; i++) {
+                        temp = new Vertex(destNames[i], i);
+                        myVertexList.add(temp);
+                    }
+                    Vertex startCity = null;
+                    Vertex endCity = null;
 
-                        //create all of the edges that other player's don't own and save them
-                        //to the list of Edges
-                        for (int i = 0; i < compState.getTracks().size(); i++) {
-                            String city1 = compState.getTracks().get(i).getStartCity();
-                            String city2 = compState.getTracks().get(i).getEndCity();
-                            for (Vertex vert : myVertexList) {
-                                int spot = vert.getId();
-                                if (city1.equals(destNames[spot])
-                                        && (compState.getTracks().get(i).getPlayerID() == -1
-                                        || compState.getTracks().get(i).getPlayerID() == this.playerNum)
-                                        && startCity == null) {
-                                    startCity = vert;
-                                } else if (city2.equals(destNames[spot])
-                                        && (compState.getTracks().get(i).getPlayerID() == -1
-                                        || compState.getTracks().get(i).getPlayerID() == this.playerNum)
-                                        && endCity == null) {
-                                    endCity = vert;
-                                }
-                            }
-                            Edge temporary = null;
-
-                            //if the edge exists, add it to the list of edges
-                            if (startCity != null && endCity != null) {
-                                temporary = new Edge(compState.getTracks().get(i), startCity, endCity,
-                                        compState.getTracks().get(i).getTrainTrackNum());
-                            }
-                            startCity = null;
-                            endCity = null;
-                            if (!myEdgeList.contains(temporary) && temporary != null) {
-                                myEdgeList.add(temporary);
+                    //create all of the edges(tracks) that other player's don't own and save them
+                    //to the list of Edges
+                    for (int i = 0; i < compState.getTracks().size(); i++) {
+                        String city1 = compState.getTracks().get(i).getStartCity();
+                        String city2 = compState.getTracks().get(i).getEndCity();
+                        for (Vertex vert : myVertexList) {
+                            int spot = vert.getId();
+                            if (city1.equals(destNames[spot])
+                                    && (compState.getTracks().get(i).getPlayerID() == -1
+                                    || compState.getTracks().get(i).getPlayerID() == this.playerNum)
+                                    && startCity == null) {
+                                startCity = vert;
+                            } else if (city2.equals(destNames[spot])
+                                    && (compState.getTracks().get(i).getPlayerID() == -1
+                                    || compState.getTracks().get(i).getPlayerID() == this.playerNum)
+                                    && endCity == null) {
+                                endCity = vert;
                             }
                         }
+                        Edge temporary = null;
 
-                        //create a graph using the Vertexes as well as the edges not owned by other players
-                        computerGraph = new DijkstraGraph(myVertexList, myEdgeList);
-                        //create a dijkstra object to assist in evaluating the Graph
-                        compDijkstra = new Dijkstra(computerGraph);
+                        //if the edge exists, add it to the list of edges
+                        if (startCity != null && endCity != null) {
+                            temporary = new Edge(compState.getTracks().get(i), startCity, endCity,
+                                    compState.getTracks().get(i).getTrainTrackNum());
+                        }
+                        startCity = null;
+                        endCity = null;
+                        if (!myEdgeList.contains(temporary) && temporary != null) {
+                            myEdgeList.add(temporary);
+                        }
+                    }
 
+                    //create a graph using the Vertexes as well as the edges not owned by other players
+                    computerGraph = new DijkstraGraph(myVertexList, myEdgeList);
+                    //create a dijkstra object to assist in evaluating the Graph
+                    compDijkstra = new Dijkstra(computerGraph);
+
+                    //if the face down deck is empty, use up cards by taking a random track.
                     if(compState.getFaceDownTrainCards().getCards().isEmpty()){
                         getRandomTrack();
                     }
                     //if the move has started, find the best move available
                     if (!finishMove && !moveStarted) {
                         findBestMove();
-                    }
-                    if (compState.getFaceDownTrainCards().getCards().isEmpty()) {
-                        if(!compState.getTrackModeSelected()){
-                            compDijkstra.clear();
-                            computerGraph.clear();
-                            game.sendAction(new ChangeModeAction(this));
-                        }
-                        else {
-                            rainbowCount = compState.getTrainColorCount("Rainbow", this.playerNum);
-                            for (int i = 0; i < compState.getTracks().size(); i++)
-
-                            {
-                                String trainColor = compState.getTracks().get(i).getTrackColor();
-                                if (!compState.getTracks().get(i).getCovered() && !foundTrack) {
-
-                                    //if the track is gray, determine if it can be claimed using
-                                    //the appropriate color cards and available rainbow cards.
-                                    if (trainColor.equals("Gray")) {
-                                        for (int j = 0; j < colors.length; j++) {
-                                            if ((compState.getTrainColorCount(colors[j], this.playerNum) + rainbowCount)
-                                                    >= compState.getTracks().get(i).getTrainTrackNum()
-                                                    && !foundTrack) {
-                                                finishMove = true;
-                                                chosenColor = colors[j];
-                                                foundTrack = true;
-                                                compDijkstra.clear();
-                                                computerGraph.clear();
-                                                game.sendAction(new TrackPlaceAction(this, chosenColor, i));
-                                            }
-                                        }
-                                    }
-
-                                    //if the track is not gray, determine if it can be claimed with the
-                                    //current cards in the player's hands.
-                                    else {
-                                        for (int j = 0; j < colors.length - 1; j++) {
-                                            if (compState.getTrainColorCount(colors[j], this.playerNum)
-                                                    >= compState.getTracks().get(i).getTrainTrackNum()
-                                                    && !foundTrack) {
-                                                finishMove = true;
-                                                chosenColor = colors[j];
-                                                foundTrack = true;
-                                                compDijkstra.clear();
-                                                computerGraph.clear();
-                                                game.sendAction(new TrackPlaceAction(this, chosenColor, i));
-                                            } else if ((compState.getTrainColorCount(colors[j], this.playerNum) + rainbowCount)
-                                                    >= compState.getTracks().get(i).getTrainTrackNum()
-                                                    && !foundTrack) {
-                                                finishMove = true;
-                                                chosenColor = colors[j];
-                                                foundTrack = true;
-                                                compDijkstra.clear();
-                                                computerGraph.clear();
-                                                game.sendAction(new TrackPlaceAction(this, chosenColor, i));
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                            //if no tracks were found, change the noTracks boolean to true and
-                            //change modes
-                            if (!finishMove) {
-                                noTracks = true;
-                                moveStarted = false;
-                                compDijkstra.clear();
-                                computerGraph.clear();
-                                game.sendAction(new ChangeModeAction(this));
-                            }
-                        }
                     }
                     //If the move has been started, using booleans to send actions.
                     if (!finishMove && moveStarted) {
@@ -355,7 +287,7 @@ public class TTRComputerPlayer extends GameComputerPlayer implements Serializabl
                             neededCards[i] = false;
                         }
 
-                        //if the player couldn't find any tracks they wanted they could get,
+                        //if the player couldn't find any tracks they wanted that they could get,
                         //take their selected cards.
                         if (noTracks) {
                             moveStarted = false;
@@ -398,7 +330,11 @@ public class TTRComputerPlayer extends GameComputerPlayer implements Serializabl
                     }
                 }
 
-                //if the computer player is dumb and the game has started, enter here.
+                /**
+                 *
+                 * if the computer player is dumb and the game has started, enter here.
+                 *
+                 */
                 else if (!isDifficult && compState.getGameStart() && !destinations) {
 
                     //the dumb AI picks a random move
@@ -407,14 +343,14 @@ public class TTRComputerPlayer extends GameComputerPlayer implements Serializabl
                         //if no tracks were found on one run through, make it so that it will
                         //not enter the code that lets it choose random tracks
                         if (noTracks) {
-                            currentMove = rand.nextInt(75);
+                            currentMove = rand.nextInt(45);
                         } else {
                             currentMove = rand.nextInt(100);
                         }
                     }
 
                     //enter here if the move is to place tracks
-                    if (currentMove > 60 ||
+                    if (currentMove > 45 ||
                         compState.getPlayerTrainDecks()[this.playerNum].getCards().size() > 25) {
                         getRandomTrack();
                     }
@@ -525,6 +461,8 @@ public class TTRComputerPlayer extends GameComputerPlayer implements Serializabl
                         destinations = true;
                         game.sendAction(new DrawDestinationCardAction(this));
                     }
+                    //if there are no more destination cards to select, draw from the face down
+                    //deck. If the face down deck is empty, get a random track
                     else{
                         moveStarted = false;
                         destinations = false;
@@ -536,6 +474,7 @@ public class TTRComputerPlayer extends GameComputerPlayer implements Serializabl
                         }
                     }
                 }
+                //if the player is selecting more destination cards, call the method
                 else {
                     chooseDestinations();
                 }
@@ -568,7 +507,7 @@ public class TTRComputerPlayer extends GameComputerPlayer implements Serializabl
                                 finishMove = true;
                                 chosenColor = colors[j];
                                 foundTrack = true;
-                                game.sendAction(new TrackPlaceAction(this, chosenColor, i));
+                                game.sendAction(new TrackPlaceAction(this, "Gray", i));
                             }
                         }
                     }
@@ -640,8 +579,7 @@ public class TTRComputerPlayer extends GameComputerPlayer implements Serializabl
                 //check to see if the card has been reached already
                 reachable(i);
 
-                //if it has not been reached, run through and find the two destinations in terms
-                //of the destNames list.
+                //if it has not been reached, run through and find the two destinations in terms of the destNames list.
                 if (!completed[i]) {
                     DestinationCards lookCard =
                             (DestinationCards) compState.getPlayerDestinationDecks()[this.playerNum].getCards().get(i);
@@ -805,6 +743,7 @@ public class TTRComputerPlayer extends GameComputerPlayer implements Serializabl
             }
 
             //Create a Graph and Dijkstra object to evaluate if a point is accessible from another
+            ArrayList<Vertex>  tempVertexes = computerGraph.getVertexes();
             tempGraph = new DijkstraGraph(computerGraph.getVertexes(), reachEdgeList);
             tempD = new Dijkstra(tempGraph);
 
@@ -816,6 +755,9 @@ public class TTRComputerPlayer extends GameComputerPlayer implements Serializabl
             String city1 = currentCard.getCity1();
             String city2 = currentCard.getCity2();
             for (int j = 0; j < tempGraph.getVertexes().size(); j++) {
+                if(j >= 36){
+                    Log.i("Error: ", "Will Crash");
+                }
                 if (tempGraph.getVertexes().get(j).getName().equals(city1)) {
                     spot1 = j;
                 } else if (tempGraph.getVertexes().get(j).getName().equals(city2)) {
@@ -845,6 +787,7 @@ public class TTRComputerPlayer extends GameComputerPlayer implements Serializabl
         }
         if (completed[cardPos]) {
             newRoute = true;
+            reachEdgeList.clear();
         }
 
         destinations = true;
@@ -928,7 +871,7 @@ public class TTRComputerPlayer extends GameComputerPlayer implements Serializabl
                 //if the distance between city1 and city2 is smaller than the last, save
                 //the new card to try and accomplish
                 if (shortestDistance == -1 && distance < compState.getTrainTokens()[this.playerNum]) {
-                    if (distance < shortestDistance)
+                    if (distance < shortestDistance || shortestDistance == -1)
                         shortestDistance = distance;
                     shortestCard = i;
                 }
@@ -988,6 +931,11 @@ public class TTRComputerPlayer extends GameComputerPlayer implements Serializabl
         finishMove = false;
         currentMove = 0;
         foundTrack = false;
+        //don't clear the graph and dijkstra if the game has not started, because they are null.
+        if(compState.getGameStart()){
+            compDijkstra.clear();
+            computerGraph.clear();
+        }
         game.sendAction(new ConfirmSelectionAction(this, sendDeck, deleteDeck));
     }
 }

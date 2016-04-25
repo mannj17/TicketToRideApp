@@ -182,28 +182,11 @@ View.OnClickListener {
 			}
 		}
 
-		/*
-         *  External Citation
-         *      Date: 23 April 2016
-         *      Problem: could not get sound to play/be initialized
-         *
-         *      Resource:
-         *      http://stackoverflow.com/questions/9656853/the-correct-way-to-
-         *      play-short-sounds-android
-         *      Solution: I used the code from this post with some modifications.  It is a similar
-         *      code used in Nick Scacciotti's PongApp program.
-         */
-		//initializes the audio sound bits
 		sounds = new SoundPool(1, AudioManager.STREAM_MUSIC, 100);
 		soundMap = new HashMap<Integer, Integer>();
 		soundMap.put(1, sounds.load(this, R.raw.trainwhistle1, 1));
 		soundMap.put(2, sounds.load(this, R.raw.trainwhistle2, 1));
-		soundMap.put(3, sounds.load(this, R.raw.trainwhistle3, 1));
-		soundMap.put(4, sounds.load(this, R.raw.cena1, 1));
-		soundMap.put(5, sounds.load(this, R.raw.imperial3, 1));
-		soundMap.put(6, sounds.load(this, R.raw.crazytrain, 1));
-		soundMap.put(7, sounds.load(this, R.raw.duel, 1));
-		soundMap.put(8, sounds.load(this, R.raw.nuxollius4, 1));
+		soundMap.put(1, sounds.load(this, R.raw.trainwhistle3, 1));
 		AudioManager audioManager = (AudioManager)getSystemService(this.AUDIO_SERVICE);
 		curVolume = audioManager.getStreamVolume(AudioManager.STREAM_MUSIC);
 		maxVolume = audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
