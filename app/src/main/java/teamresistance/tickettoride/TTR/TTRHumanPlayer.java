@@ -520,6 +520,21 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
         viewPlayerDestinationCards.setOnClickListener(this);
 
 
+        if(name.equals("his name is")){
+            soundArray.play(4, myActivity.leftVolume - .2f,
+                    myActivity.rightVolume - .2f, 1, 0, 1.0f);
+        } else if (name.equals("father")){
+            soundArray.play(5, myActivity.leftVolume - .2f,
+                    myActivity.rightVolume - .2f, 1, 0, 1.0f);
+        } else if (name.equals("Ozzy")){
+            soundArray.play(6, myActivity.leftVolume - .4f,
+                    myActivity.rightVolume - .4f, 1, 0, 1.0f);
+        } else if (name.equals("MAUL")){
+            soundArray.play(7, myActivity.leftVolume - .2f,
+                    myActivity.rightVolume - .2f, 1, 0, 1.0f);
+        }
+
+
     }
 
     /**
@@ -546,8 +561,9 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
                             myState.getTracks().get(myState.getTrackSpot()).getTrackColor().equals("Gray")) {
                         Deck tempDeck = myState.getPlayerTrainDecks()[playerNum];
                         displayCardSelectionPopup(tempDeck, myState.getTracks().get(myState.getTrackSpot()));
-                        soundArray.play(rand.nextInt(3), myActivity.leftVolume - .2f,
-                                myActivity.rightVolume - .2f, 1, 0, 1.0f);
+                        soundArray.play(rand.nextInt(3) + 1, myActivity.leftVolume - .2f,
+                                myActivity.rightVolume - .2f, 2, 0, 1.0f);
+                        soundArray.autoResume();
                     } else if (myState.getTrackSpot() != -1 &&
                             myState.getTrackModeSelected() &&
                             myState.getTrainColorCount("Rainbow", 0) != 0) {
@@ -564,13 +580,12 @@ public class TTRHumanPlayer extends GameHumanPlayer implements View.OnClickListe
                             displayLocomotiveSelectionPopup(tempDeck, myState.getTracks().get(myState.getTrackSpot()));
 
                         }
-                        soundArray.play(rand.nextInt(3), myActivity.leftVolume - .2f,
+                        soundArray.play(rand.nextInt(3)+1, myActivity.leftVolume - .2f,
                                 myActivity.rightVolume - .2f, 1, 0, 1.0f);
 
                     } else {
                         game.sendAction(new ConfirmSelectionAction(me, myState.getSelectedTrackColor(), 0));
-                        soundArray.play(rand.nextInt(3), myActivity.leftVolume - .2f,
-                                myActivity.rightVolume - .2f, 1, 0, 1.0f);
+                        
                     }
                 }
             } else if (v.getId() == R.id.Train1) {
