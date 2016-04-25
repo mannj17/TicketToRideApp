@@ -2244,7 +2244,7 @@ public class TTRSurfaceView extends SurfaceView implements Serializable {
                 paint.setStyle(Paint.Style.FILL);
                 canvas.drawPath(paths.get(i), paint);
                 paint.setColor(OUTLINE_COLOR);
-                paint.setStrokeWidth(10);
+                paint.setStrokeWidth(5);
                 paint.setStyle(Paint.Style.STROKE);
                 canvas.drawPath(paths.get(i),paint);
             }
@@ -2267,7 +2267,7 @@ public class TTRSurfaceView extends SurfaceView implements Serializable {
                 paint.setStyle(Paint.Style.FILL);
                 canvas.drawPath(paths2.get(i), paint);
                 paint.setColor(OUTLINE_COLOR);
-                paint.setStrokeWidth(10);
+                paint.setStrokeWidth(5);
                 paint.setStyle(Paint.Style.STROKE);
                 canvas.drawPath(paths2.get(i),paint);
             }
