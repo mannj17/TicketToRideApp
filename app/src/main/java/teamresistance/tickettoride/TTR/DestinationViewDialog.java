@@ -18,11 +18,18 @@ import teamresistance.tickettoride.R;
  *
  * Class that inflates view into dialog for custom handling user view of which destination cards.
  *
- * RESOURCES:
- * 4/11/16
- * http://stackoverflow.com/questions/13341560/how-to-create-a-custom-dialog-box-in-android
- * 4/17/16
- * http://stackoverflow.com/questions/9829453/android-4-0-dialog-gets-canceled-when-touched-outside-of-dialog-window
+ * External Citation
+ * Date: 4/11/16
+ * Problem: Issue setting up dialog boxes
+ * Source: http://stackoverflow.com/questions/13341560/how-to-create-a-custom-dialog-box-in-android
+ * Solution: Followed directions
+ *
+ * External Citation
+ * Date 4/17/16
+ * Problem: Clicking outside of dialog box overrode the box
+ * Source: http://stackoverflow.com/questions/9829453/android-4-0-dialog-gets-canceled-when-
+ * touched-outside-of-dialog-window
+ * Solution: Formatted examples to fit code requirements
  *
  * @author Nick Scacciotti
  * @author Nick Larson
